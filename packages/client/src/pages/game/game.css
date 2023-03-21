@@ -1,0 +1,5 @@
+.game {
+  height: 100%;
+  transform: scale(1.07);
+  image-rendering: pixelated;
+}
