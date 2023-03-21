@@ -1,0 +1,51 @@
+{
+  "imageUrl": "/img/tiles.png",
+
+  "frames": [
+    {
+      "name": "run-up-1",
+      "rect": [126, 0, 16, 16]
+    },
+    {
+      "name": "run-up-2",
+      "rect": [144, 0, 16, 16]
+    },
+    {
+      "name": "run-down-1",
+      "rect": [0, 0, 16, 16]
+    },
+    {
+      "name": "run-down-2",
+      "rect": [0, 0, 16, 16]
+    },
+    {
+      "name": "run-left-1",
+      "rect": [34, 0, 16, 16]
+    },
+    {
+      "name": "run-left-2",
+      "rect": [34, 0, 16, 16]
+    },
+    {
+      "name": "run-right-1",
+      "rect": [94, 0, 16, 16]
+    },
+    {
+      "name": "run-right-2",
+      "rect": [94, 0, 16, 16]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "run-up",
+      "frameLen": 6,
+      "frames": ["run-up-1", "run-up-2"]
+    },
+    {
+      "name": "run-down",
+      "frameLen": 6,
+      "frames": ["run-down-1", "run-down-2"]
+    }
+  ]
+}
