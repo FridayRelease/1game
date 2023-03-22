@@ -21,6 +21,3 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
-function redirect(arg0: string) {
-  throw new Error('Function not implemented.');
-}
