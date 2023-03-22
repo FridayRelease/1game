@@ -16,5 +16,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/ban-ts-comment': 1,
+    'max-len': [2, 280],
   },
-}
+  ignorePatterns: ['dist/', '*.test.ts', '*.test.tsx'],
+};

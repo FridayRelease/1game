@@ -1,0 +1,90 @@
+.button {
+  border: none;
+  background-color: inherit;
+  min-height: 40px;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.button_primary {
+  background-color: var(--primary-bg-500);
+  color: var(--base-bg-white);
+}
+
+.button_primary:hover {
+  background-color: var(--secondary-bg-500);
+  color: var(--base-bg-white);
+}
+
+.button_primary:active {
+  background-color: var(--secondary-bg-600);
+  color: var(--base-bg-white);
+}
+
+.button_secondary {
+  background-color: var(--primary-bg-100);
+  color: var(--primary-bg-800);
+}
+
+.button_secondary:hover {
+  background-color: var(--primary-bg-50);
+  color: var(--primary-bg-800);
+}
+
+.button_secondary:active {
+  background-color: var(--primary-bg-200);
+  color: var(--primary-bg-800);
+}
+
+/* Button with icon */
+.button__icon {
+  border-radius: 25px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.button__icon:hover {
+  background-color: var(--base-bg-100);
+}
+
+.button__icon:active {
+  background-color: var(--base-bg-300);
+}
+
+/* Button small */
+
+.button__small {
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.button__small:not(.button__icon) {
+  min-height: 32px;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.button__large {
+  min-height: 48px;
+  padding: 14px 24px;
+}
+
+.button.button_disabled,
+.button.button_disabled:hover {
+  background-color: var(--base-bg-100);
+  color: var(--base-bg-500);
+  cursor: default;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: none;
+}

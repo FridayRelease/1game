@@ -1,0 +1,29 @@
+:root {
+  --main-font-family: 'Montserrat', sans-serif;
+  --main-bg-success: #1fad58;
+  --main-bg-alert: #cc0007;
+  --main-bg-attention: #f4bf00;
+  --primary-bg-950: #0b0d42;
+  --primary-bg-900: #0e1158;
+  --primary-bg-800: #151a84;
+  --primary-bg-500: #666ce6;
+  --primary-bg-400: #a2a4dd;
+  --primary-bg-300: #c7c9ea;
+  --primary-bg-200: #dadbf1;
+  --primary-bg-100: #ecedf8;
+  --primary-bg-50: #f4f4fb;
+  --secondary-bg-800: #8f6224;
+  --secondary-bg-600: #d19747;
+  --secondary-bg-500: #dbae70; /** basic */
+  --secondary-bg-hover: #e7ba48;
+  --base-bg-900: #303036; /** text */
+  --base-bg-600: #60606c;
+  --base-bg-500: #93939f;
+  --base-bg-400: #afafb6;
+  --base-bg-300: #c9cacf;
+  --base-bg-200: #e4e4e7;
+  --base-bg-100: #ececee;
+  --base-bg-50: #f7f7f8;
+  --base-bg-white: #fff;
+  --avatar-bg-red: #ff845e;
+}
