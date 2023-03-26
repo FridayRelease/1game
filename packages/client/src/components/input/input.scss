@@ -1,0 +1,30 @@
+.input {
+  padding: 20px;
+  font-family: var(--main-font-family);
+  background: var(--main-color-elements);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--main-color-text);
+  outline: none;
+
+  &_error {
+    border: 1px solid var(--main-bg-alert);
+
+    &:active,
+    &:focus  {
+      border: 1px solid var(--main-bg-alert);
+    }
+  }
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  &__error {
+    margin-top: 5px;
+    color: var(--main-bg-alert);
+  }
+}
