@@ -1,0 +1,21 @@
+@use './assets/variables.scss' as variables;
+
+@font-face {
+  font-family: Joystix;
+  font-style: normal;
+  font-weight: normal; /* 400 */
+  src: local('Joystix'), url('./assets/fonts/Joystix/joystix-monospace.ttf') format('truetype');
+}
+
+:root {
+  font: 400 14px/1.2 Inter;
+  box-sizing: border-box;
+  background-color: variables.$bg-color;
+  color: variables.$main-text-color;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
