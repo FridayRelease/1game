@@ -6,6 +6,7 @@ type InputSize = 'large' | 'small' | 'medium';
 interface InputProps {
   testId?: string;
   onClick?: MouseEventHandler;
+  onChange?: (e: any) => void;
   onBlur?: any;
   children?: string;
   className?: string;
