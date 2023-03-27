@@ -10,11 +10,11 @@ export default {
   },
   moduleNameMapper: {
     '\\.(css|scss|less)$': 'identity-obj-proxy',
-    "^@/(.*)$": "<rootDir>/src/$1",
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
-    "^.+\\.(js|jsx)$": "babel-jest",
-  }
+    '^.+\\.(js|jsx)$': 'babel-jest',
+  },
 };

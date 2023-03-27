@@ -1,6 +1,6 @@
-import { FormEvent, useMemo, useState } from 'react'
-import { validatorInstance } from '@/features/validation/validator'
-import { clearObject, isEmptyObject } from '@/utils/functions'
+import { FormEvent, useMemo, useState } from 'react';
+import { validatorInstance } from '@/features/validation/validator';
+import { clearObject, isEmptyObject } from '@/utils/functions';
 
 interface IProps {
   initValues?: Record<string, any>;
@@ -18,51 +18,62 @@ const useForm = (props: IProps) => {
   const getFieldProps = (field: string): Record<string, string> => ({
     name: field,
     value: getFieldValue(field),
-  })
+  });
 
   const getFieldError = (field: string): string => {
-    return getFieldTouched(field) ? validatorInstance.checkCorrect(values[field] ?? '', validationSchema[field]) : ''
+    return getFieldTouched(field)
+      ? validatorInstance.checkCorrect(
+          values[field] ?? '',
+          validationSchema[field]
+        )
+      : '';
   };
 
   const getFieldTouched = (field: string): boolean => !!touched[field] ?? false;
 
   const setValueField = (field: string, value: string | number): void => {
-    setValues((prev) => ({
+    setValues(prev => ({
       ...prev,
-      [field]: value
-    }))
+      [field]: value,
+    }));
   };
 
   const setErrorField = (field: string, value: string | number): void => {
-    setErrors((prev) => ({
+    setErrors(prev => ({
       ...prev,
-      [field]: validatorInstance.checkCorrect(value.toString(), validationSchema[field])
-    }))
+      [field]: validatorInstance.checkCorrect(
+        value.toString(),
+        validationSchema[field]
+      ),
+    }));
   };
 
   const setTouchedField = (field: string, value = true): void => {
     setTouched(prev => ({
       ...prev,
-      [field]: value
-    }))
+      [field]: value,
+    }));
   };
 
   const onChangeForm = (e: FormEvent): void => {
     const elements = e.target as HTMLInputElement;
-    console.log(elements.name, elements.value)
+    console.log(elements.name, elements.value);
 
     setTouchedField(elements.name);
     setErrorField(elements.name, elements.value);
     setValueField(elements.name, elements.value);
-  }
+  };
 
   /** Функция валидирует все значения формы и устанавливает всем touched: true */
   const validate = (): Record<string, string> => {
     const errors = Object.keys(validationSchema).reduce((acc, key) => {
-      const error = validatorInstance.checkCorrect(values[key] ?? '', validationSchema[key]);
+      const error = validatorInstance.checkCorrect(
+        values[key] ?? '',
+        validationSchema[key]
+      );
       setTouchedField(key);
-      return error ? {...acc, [key]: error} : acc;
-    }, {})
+      return error ? { ...acc, [key]: error } : acc;
+    }, {});
 
     setErrors(errors);
 
@@ -71,10 +82,13 @@ const useForm = (props: IProps) => {
 
   const onBlurInput = (event: Event): void => {
     const elements = event.target as HTMLInputElement;
-    setTouchedField(elements.name)
+    setTouchedField(elements.name);
   };
 
-  const hasError = useMemo(() => isEmptyObject(clearObject(errors)), [errors, values, touched]);
+  const hasError = useMemo(
+    () => isEmptyObject(clearObject(errors)),
+    [errors, values, touched]
+  );
 
   return {
     values,
@@ -87,8 +101,8 @@ const useForm = (props: IProps) => {
     getFieldProps,
     getFieldError,
     getFieldTouched,
-    onBlurInput
-  }
-}
+    onBlurInput,
+  };
+};
 
 export default useForm;

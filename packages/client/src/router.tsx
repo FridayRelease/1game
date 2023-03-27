@@ -3,7 +3,7 @@ import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
-import Registration  from './pages/registration';
+import Registration from './pages/registration';
 
 const router = createBrowserRouter([
   {

@@ -24,7 +24,7 @@
       "@/hook/*": ["src/hook/*"],
       "@/layout/*": ["src/layout/*"],
       "@/utils/*": ["src/utils/*"],
-      "@/api/*": ["src/api/*"],
+      "@/api/*": ["src/api/*"]
     }
   },
   "include": ["src"],

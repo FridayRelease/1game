@@ -7,7 +7,7 @@
  */
 export const isEmptyObject = (obj: Record<string, string>): boolean => {
   return !!Object.keys(obj).length;
-}
+};
 
 /**
  * Функция очищает неглубокий объект от пустых значений
@@ -16,8 +16,10 @@ export const isEmptyObject = (obj: Record<string, string>): boolean => {
  * @param {Record<string, string>} obj
  * @return Record<string, string>
  */
-export const clearObject = (obj: Record<string, string>): Record<string, string> => {
+export const clearObject = (
+  obj: Record<string, string>
+): Record<string, string> => {
   return Object.entries(obj).reduce((acc, [key, value]) => {
     return value ? { ...acc, [key]: value } : acc;
   }, {});
-}
+};

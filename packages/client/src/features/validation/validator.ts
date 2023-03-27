@@ -8,8 +8,7 @@ export type ValidationProps = {
   isPhone?: boolean;
   /** name поля input, для сравнения */
   isRetryPassword?: string;
-}
-
+};
 
 /**
  * Класс для валидации введеных значений формы
@@ -21,17 +20,11 @@ class Validator {
   }
 
   isValidPassword(value: string): boolean {
-    return this.isValidByRegex(
-      [/[0-9a-z-_]{8,40}/i, /[A-Z]+/, /\d+/],
-      value
-    );
+    return this.isValidByRegex([/[0-9a-z-_]{8,40}/i, /[A-Z]+/, /\d+/], value);
   }
 
   isValidEmail(value: string): boolean {
-    return this.isValidByRegex(
-      /[0-9a-z-_.]+@[a-z0-9-]+.[a-z]{2,3}/i,
-      value
-    );
+    return this.isValidByRegex(/[0-9a-z-_.]+@[a-z0-9-]+.[a-z]{2,3}/i, value);
   }
 
   isValidPhone(value: string): boolean {
@@ -43,14 +36,14 @@ class Validator {
 
   isValidByRegex(regex: RegExp | RegExp[], value: string): boolean {
     if (Array.isArray(regex)) {
-      return regex.every((r) => r.test(value));
+      return regex.every(r => r.test(value));
     }
 
     return regex.test(value);
   }
 
   isEmpty(value: string): boolean {
-    return value === "";
+    return value === '';
   }
 
   checkCorrect(value: string, option: ValidationProps = {}): string {
@@ -65,7 +58,7 @@ class Validator {
     }
 
     if (RULES.includes('isUsername') && !this.isValidLogin(value)) {
-      return `Невалидный логин`
+      return `Невалидный логин`;
     }
 
     if (RULES.includes('isEmail') && !this.isValidEmail(value)) {
@@ -81,7 +74,9 @@ class Validator {
     }
 
     if (RULES.includes('isRetryPassword') && option['isRetryPassword']) {
-      const password = document.getElementsByName(option['isRetryPassword'])[0] as HTMLInputElement;
+      const password = document.getElementsByName(
+        option['isRetryPassword']
+      )[0] as HTMLInputElement;
 
       if (password && value !== password['value']) {
         return `Пароли не совпадают`;
@@ -94,4 +89,4 @@ class Validator {
 
 const validatorInstance = new Validator();
 
-export { validatorInstance, Validator }
+export { validatorInstance, Validator };

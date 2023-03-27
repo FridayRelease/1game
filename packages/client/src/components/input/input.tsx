@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC, useMemo } from 'react';
 import { cn } from '@/utils/cn';
 import { InputProps } from './input.types';
 import './input.scss';
@@ -15,7 +15,7 @@ const Input: FC<InputProps> = ({
   name = '',
   placeholder,
   error = '',
-  value
+  value,
 }) => {
   const classNameConcat = useMemo(() => {
     return cn(
@@ -25,11 +25,11 @@ const Input: FC<InputProps> = ({
         input_disabled: !!disabled,
       },
       className
-    )
-  }, [size, disabled, type, error])
+    );
+  }, [size, disabled, type, error]);
 
   return (
-    <div className='input-box'>
+    <div className="input-box">
       <input
         data-testid={testId}
         className={classNameConcat}
@@ -39,14 +39,12 @@ const Input: FC<InputProps> = ({
         type={type}
         value={value}
         placeholder={placeholder}
-        autoComplete="off"
-      >
+        autoComplete="off">
         {children}
       </input>
       {error && <span className="input-box__error">{error}</span>}
     </div>
-
-  )
+  );
 };
 
 Input.displayName = 'Input';

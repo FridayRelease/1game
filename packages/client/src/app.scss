@@ -3,7 +3,7 @@
 :root {
   --main-font-family: 'Inter', sans-serif;
   --main-bg-success: #1fad58;
-  --main-bg-alert: #DE2900;
+  --main-bg-alert: #de2900;
   --main-bg-attention: #f4bf00;
   --primary-bg-950: #0b0d42;
   --primary-bg-900: #0e1158;
@@ -30,7 +30,7 @@
   --avatar-bg-red: #ff845e;
 
   --main-color-bg: #000000;
-  --main-color-bg-hover: #0C0C0C;
+  --main-color-bg-hover: #0c0c0c;
   --main-color-elements: #232323;
   --main-color-text: #ffffff;
   --main-color-text-secondary: #565656;
@@ -44,7 +44,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-
 
 body {
   background: var(--main-color-bg);

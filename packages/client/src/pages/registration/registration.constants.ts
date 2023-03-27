@@ -1,11 +1,11 @@
-import { ValidationProps } from '@/features/validation/validator'
+import { ValidationProps } from '@/features/validation/validator';
 
-const initValues: Record<string, string> = {}
+const initValues: Record<string, string> = {};
 
 const validationSchema: Record<string, ValidationProps> = {
   first_name: {
     required: true,
-    min: 6
+    min: 6,
   },
   second_name: {
     required: true,
@@ -25,9 +25,6 @@ const validationSchema: Record<string, ValidationProps> = {
   login: {
     required: true,
   },
-}
+};
 
-export {
-  initValues,
-  validationSchema
-}
+export { initValues, validationSchema };

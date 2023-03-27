@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, MouseEventHandler } from 'react'
+import { HTMLInputTypeAttribute, MouseEventHandler } from 'react';
 
 type InputType = HTMLInputTypeAttribute;
 type InputSize = 'large' | 'small' | 'medium';
