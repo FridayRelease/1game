@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 import './app.scss';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './store/store';
 
 function App() {
   useEffect(() => {

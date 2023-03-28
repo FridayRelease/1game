@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { RequireAuth } from './features/authentication/require-auth';
+import { RequireAuth } from '@/features/authentication';
 import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';

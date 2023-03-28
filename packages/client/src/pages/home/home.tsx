@@ -1,11 +1,14 @@
-import { RootState } from '@/store';
+import { userSelectors } from '@/features/authentication';
 import { useSelector } from 'react-redux';
 
 function Home() {
-  const hello = useSelector((state: RootState) => state.userReducer.hello);
+  const user = useSelector(userSelectors.user);
 
   return (
-    <div className="App">Вот тут будет жить ваше приложение :){hello}</div>
+    <div className="App">
+      Вот тут будет жить ваше приложение :)
+      <h2>{user.info?.first_name}</h2>
+    </div>
   );
 }
 

@@ -1,6 +1,10 @@
 import { ValidationProps } from '@/features/validation/validator';
+import { IUserSigninRequest } from '@/types/user';
 
-const initValues: Record<string, string> = {};
+const initValues: IUserSigninRequest = {
+  login: '',
+  password: '',
+};
 
 const validationSchema: Record<string, ValidationProps> = {
   login: {

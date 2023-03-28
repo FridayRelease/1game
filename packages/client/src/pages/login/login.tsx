@@ -1,15 +1,15 @@
 import { FC, FormEvent } from 'react';
-import useForm from '@/hook/useValidate';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import Button from '@/components/button/button';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Input from '@/components/input/input';
+import { userActions, useForm } from '@/features/authentication';
+import { IUserSigninRequest } from '@/types/user';
 import { initValues, validationSchema } from './login.constants';
 import Logotype from '../../assets/images/logotype.png';
 import './login.scss';
-import { Link, useNavigate } from 'react-router-dom';
-import { login } from '@/controllers/user';
-import { useDispatch } from 'react-redux';
-import { IUserLoginRequest } from '@/types/user';
 
 /**
  * Страница аутентификации пользователя
@@ -37,7 +37,12 @@ const Login: FC = () => {
     const valid = validate();
     console.log('valid: ', valid);
 
-    login(dispatch, navigate)(values as IUserLoginRequest);
+    dispatch(
+      userActions.signin({
+        props: values as IUserSigninRequest,
+        navigate,
+      })
+    );
   };
 
   return (
@@ -75,7 +80,7 @@ const Login: FC = () => {
                 className="login-form__button">
                 Войти
               </Button>
-              <Link to="/registration" className="login-form__registration">
+              <Link to="/signup" className="login-form__registration">
                 Регистрация
               </Link>
             </div>
