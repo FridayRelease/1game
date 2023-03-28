@@ -3,16 +3,16 @@ import useForm from '@/hook/useValidate';
 import Button from '@/components/button/button';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Input from '@/components/input/input';
-import { initValues, validationSchema } from './registration.constants';
+import { initValues, validationSchema } from './Signup';
 import Logotype from '../../assets/images/logotype.png';
-import './registration.scss';
+import './Signup.scss';
 
 /**
  * Страница регистрации пользователя
  *
  * @category page
  */
-const Registration: FC = () => {
+const Signup: FC = () => {
   const {
     hasError,
     onChangeForm,
@@ -115,6 +115,6 @@ const Registration: FC = () => {
   );
 };
 
-Registration.displayName = 'Registration';
+Signup.displayName = 'Signup';
 
-export default withLayoutMain(Registration);
+export default withLayoutMain(Signup);

@@ -6,6 +6,7 @@ import './input.scss';
 const Input: FC<InputProps> = ({
   testId,
   onClick,
+  onChange,
   onBlur,
   children,
   className,
@@ -33,6 +34,7 @@ const Input: FC<InputProps> = ({
       <input
         data-testid={testId}
         className={classNameConcat}
+        onChange={onChange}
         onClick={onClick}
         onBlur={onBlur}
         name={name}
