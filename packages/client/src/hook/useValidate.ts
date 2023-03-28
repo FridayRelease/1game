@@ -18,7 +18,7 @@ const useForm = (props: IProps) => {
   const getFieldProps = (field: string): Record<string, any> => ({
     name: field,
     value: getFieldValue(field),
-    onChange: (e: Event) => onChange(e)
+    onChange: (e: Event) => onChange(e),
   });
 
   const getFieldError = (field: string): string => {
@@ -57,12 +57,12 @@ const useForm = (props: IProps) => {
   };
 
   const onChange = (e: Event): void => {
-    const elements = e.target as HTMLInputElement
+    const elements = e.target as HTMLInputElement;
 
     setTouchedField(elements.name);
     setErrorField(elements.name, elements.value);
     setValueField(elements.name, elements.value);
-  }
+  };
 
   const onChangeForm = (e: FormEvent): void => {
     const elements = e.target as HTMLInputElement;
