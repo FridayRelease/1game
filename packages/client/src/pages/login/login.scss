@@ -1,0 +1,50 @@
+.login {
+  height: 90vh;
+  display: flex;
+
+  &__title {
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__box {
+    text-align: center;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__logotype {
+    margin-bottom: 40px;
+  }
+}
+
+.login-form {
+  &__registration {
+    color: var(--main-color-text);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+
+    &:hover {
+      color: var(--main-color-text);
+      text-decoration: underline;
+    }
+  }
+
+  &__box {
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    width: 100%;
+    padding: 17px 0;
+  }
+
+  &__input-box {
+    margin-bottom: 20px;
+  }
+}
