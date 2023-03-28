@@ -11,7 +11,7 @@ export interface IMenuItem {
   className: string;
   title: string;
   data: IMenuData[];
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export interface IMenuData {

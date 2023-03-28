@@ -1,4 +1,4 @@
-.profile {
+.profile-edit {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,12 +32,6 @@
 
     &:not(:last-child) {
       margin-bottom: 24px;
-    }
-  }
-
-  &__password {
-    .profile__label {
-      margin-bottom: 4px;
     }
   }
 }

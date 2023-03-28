@@ -3,17 +3,9 @@ import Avatar from '@/components/avatar';
 import Menu from './menu';
 import Button from '@/components/button/button';
 import { useNavigate } from 'react-router-dom';
-import { IMockUser, IMenuData, IMenuItem } from './profile.interface';
+import { IMenuData, IMenuItem } from './profile.interface';
+import mockUser from './mock';
 import './profile.scss';
-
-const mockUser: IMockUser = {
-  name: 'Иван',
-  secondName: 'Иванов',
-  login: 'Иванушка',
-  phone: '+7 (999) 999-99-99',
-  chatName: 'Просто Иван',
-  password: 'dfeienbdfefief',
-};
 
 const userMenuData: IMenuData[] = [
   { key: 'Имя', value: mockUser.name },
@@ -32,13 +24,13 @@ const Profile: FC = () => {
 
   const menus: IMenuItem[] = [
     {
-      className: 'profile__edit profile__data',
+      className: 'profile__menu profile__data',
       title: 'Редактировать профиль',
       data: userMenuData,
       onClick: () => navigate('/edit/profile'),
     },
     {
-      className: 'profile__edit profile__password',
+      className: 'profile__menu profile__password',
       title: 'Редактировать пароль',
       data: userMenuPassword,
       onClick: () => navigate('/edit/password'),
@@ -56,7 +48,7 @@ const Profile: FC = () => {
             className={className}
             title={title}
             onClick={onClick}>
-            <div className="profile__edit-content">
+            <div className="profile__menu-content">
               <dl>
                 {data.map(({ key, value }) => (
                   <React.Fragment key={key}>
