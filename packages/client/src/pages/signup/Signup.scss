@@ -1,0 +1,55 @@
+.registration {
+  height: 90vh;
+  display: flex;
+
+  &__title {
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__box {
+    max-width: 800px;
+    width: 800px;
+    text-align: center;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__logotype {
+    margin-bottom: 40px;
+  }
+}
+
+.registration-form {
+  text-align: left;
+
+  &__remember-password {
+    color: var(--main-color-text-secondary);
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+
+    &:hover {
+      color: var(--main-color-text);
+      text-decoration: underline;
+    }
+  }
+
+  &__box {
+    margin-bottom: 20px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px 20px;
+  }
+
+  &__button {
+    margin-top: 40px;
+  }
+}

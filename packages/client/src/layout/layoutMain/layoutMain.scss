@@ -1,0 +1,16 @@
+.layout-main {
+  padding: 20px;
+
+  &__label {
+    text-align: center;
+  }
+
+  &__link {
+    color: var(--main-color-text);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
