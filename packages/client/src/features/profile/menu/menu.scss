@@ -1,0 +1,39 @@
+.profile-menu {
+  --button-background-color: var(--main-color-elements);
+  --button-background-color-hover: var(--main-bg-alert);
+
+  display: flex;
+  flex-direction: column;
+  width: 338px;
+  min-height: 139px;
+  border-radius: 20px;
+  background-color: var(--main-color-bg-hover);
+  overflow: hidden;
+
+  &__button {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    margin-top: auto;
+    font-size: 14px;
+    line-height: 17px;
+    font-family: Inter, Arial, sans-serif;
+    color: var(--base-bg-white);
+    border: none;
+    background-color: var(--button-background-color);
+    cursor: pointer;
+
+    &--error {
+      --button-background-color: var(--profile-error);
+    }
+
+    &--success {
+      --button-background-color: var(--profile-success);
+    }
+  }
+}
+
+@media (hover:hover) {
+  .profile-menu__button:hover {
+    background-color: var(--button-background-color-hover);
+  }
+}
