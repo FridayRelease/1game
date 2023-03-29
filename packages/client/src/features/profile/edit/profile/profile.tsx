@@ -1,14 +1,15 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@/components/avatar/avatar';
 import Menu from '@/features/profile/menu';
 import mockUser from '@/features/profile/mock';
 import useForm from '@/hook/useValidate';
 import Input from '@/components/input/input';
-import IMenuEditProfileData from './profile.interface';
 import { ValidationProps } from '@/features/validation/validator';
 import { MenuState, MenuType } from '@/features/profile/menu/menu.interface';
+import IMenuEditProfileData from './profile.interface';
 import './profile.scss';
+import AvatarForm from '../../avatar-form/avatar-form';
 
 const userMenuData: IMenuEditProfileData[] = [
   { key: 'Имя', name: 'first_name', value: mockUser.name },
@@ -55,6 +56,8 @@ const EditProfile: FC = () => {
 
   const navigate = useNavigate();
 
+  const [isEditAvatar, setIsEditAvatar] = useState(false);
+
   const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
     console.log(values);
@@ -62,9 +65,21 @@ const EditProfile: FC = () => {
     navigate('/profile');
   };
 
+  const onStartEditAvatar = () => {
+    setIsEditAvatar(true);
+  };
+
+  const onFinishEditAvatar = () => {
+    setIsEditAvatar(false);
+  };
+
   return (
     <div className="profile-edit">
-      <Avatar editable>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
+      <Avatar
+        editable
+        onClick={
+          onStartEditAvatar
+        }>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
 
       <div className="profile-edit__content">
         <form
@@ -93,6 +108,7 @@ const EditProfile: FC = () => {
           </Menu>
         </form>
       </div>
+      {isEditAvatar && <AvatarForm onClose={onFinishEditAvatar} />}
     </div>
   );
 };

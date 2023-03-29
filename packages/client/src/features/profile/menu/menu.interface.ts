@@ -15,6 +15,7 @@ interface IMenu {
   state?: MenuState;
   type?: MenuType;
   children?: JSX.Element;
+  disabled?: boolean;
   onClick?: () => void;
 }
 

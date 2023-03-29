@@ -5,9 +5,9 @@ import './edit-profile.scss';
 
 const EditProfilePage: FC = () => {
   return (
-    <div className="profile-page">
+    <div className="profile-edit-page">
       <h1 className="visually-hidden">Профиль пользователя</h1>
-      <main className="container profile__container">
+      <main className="container">
         <EditProfile />
       </main>
     </div>

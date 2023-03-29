@@ -5,9 +5,9 @@ import './edit-password.scss';
 
 const EditPasswordPage: FC = () => {
   return (
-    <div className="profile-page">
+    <div className="profile-password-page">
       <h1 className="visually-hidden">Профиль пользователя</h1>
-      <main className="container profile__container">
+      <main className="container">
         <EditPassword />
       </main>
     </div>
