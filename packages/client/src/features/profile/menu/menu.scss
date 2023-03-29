@@ -1,6 +1,7 @@
 .profile-menu {
   --button-background-color: var(--main-color-elements);
   --button-background-color-hover: var(--main-bg-alert);
+  --button-success-background-color-hover: #7bc300;
 
   display: flex;
   flex-direction: column;
@@ -20,7 +21,10 @@
     color: var(--base-bg-white);
     border: none;
     background-color: var(--button-background-color);
-    cursor: pointer;
+
+    &:not(:disabled) {
+      cursor: pointer;
+    }
 
     &--error {
       --button-background-color: var(--profile-error);
@@ -32,8 +36,14 @@
   }
 }
 
-@media (hover:hover) {
-  .profile-menu__button:hover {
-    background-color: var(--button-background-color-hover);
+@media (hover: hover) {
+  .profile-menu__button {
+    &:not(:disabled):hover {
+      background-color: var(--button-background-color-hover);
+    }
+
+    &--success:not(:disabled):hover {
+      background-color: var(--button-success-background-color-hover);
+    }
   }
 }

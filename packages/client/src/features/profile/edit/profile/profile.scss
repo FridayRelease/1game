@@ -15,7 +15,13 @@
 
   &__menu {
     &-content {
+      display: flex;
+      flex-direction: column;
       padding: 47px 39px;
+
+      label:not(:last-child) {
+        margin-bottom: 18px;
+      }
     }
   }
 
