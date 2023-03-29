@@ -1,8 +1,7 @@
-import { SagaReturnType } from 'redux-saga/effects';
 import { NavigateFunction } from 'react-router-dom';
-import { userApi } from '@/api';
+import { IUserDTO } from '@/api/types';
 
-type UserResponseInfo = SagaReturnType<typeof userApi.userInfo>;
+type UserResponseInfo = IUserDTO;
 
 type NavigateSagaProps = {
   navigate: NavigateFunction;

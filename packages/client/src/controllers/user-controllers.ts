@@ -4,15 +4,14 @@ import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
 const userFullInfo = async () => {
   const user = await userApi.userInfo();
 
-  const avatar = await userApi.userAvatar(user.avatar);
-  return { ...user, avatar };
+  return user.data;
 };
 
 const signin = async (info: IUserSigninRequest) => {
   const res = await userApi.signin(info);
 
-  if (res === 'OK') {
-    return res;
+  if (res.data === 'OK') {
+    return res.data;
   }
 
   throw new Error('Произошла ошибка при авторизации');
@@ -21,11 +20,10 @@ const signin = async (info: IUserSigninRequest) => {
 const signup = async (info: IUserSignupRequest) => {
   const res = await userApi.signup(info);
 
-  if (res.id) {
+  if (res.data.id) {
     const user = await userApi.userInfo();
 
-    const avatar = await userApi.userAvatar(user.avatar);
-    return { ...user, avatar };
+    return user.data;
   }
 
   throw new Error('Произошла ошибка при регистрации');
