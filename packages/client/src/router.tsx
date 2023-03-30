@@ -4,10 +4,11 @@ import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
+import { MainUrl, SigninUrl, SignupUrl } from './constant/router';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: MainUrl,
     element: (
       <RequireAuth>
         <Home />
@@ -16,11 +17,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/login',
+    path: SigninUrl,
     element: <Login />,
   },
   {
-    path: '/signup',
+    path: SignupUrl,
     element: <Signup />,
   },
 ]);

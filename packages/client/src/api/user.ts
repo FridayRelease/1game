@@ -1,10 +1,13 @@
-import { PATH } from '@/constant/paths';
 import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
 import { HttpClient } from './http-client';
 import { IUserDTO, SignUpResponseDTO } from '@/api/types';
 
 export class UserApi {
-  private http = new HttpClient(PATH.AUTH);
+  private http;
+
+  constructor(url: string) {
+    this.http = new HttpClient(url);
+  }
 
   signin = async (data: IUserSigninRequest) => {
     // Авторизоваться

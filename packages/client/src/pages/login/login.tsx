@@ -10,6 +10,7 @@ import { IUserSigninRequest } from '@/types/user';
 import { initValues, validationSchema } from './login.constants';
 import Logotype from '../../assets/images/logotype.png';
 import './login.scss';
+import { cn } from '@/utils/cn';
 
 /**
  * Страница аутентификации пользователя
@@ -35,7 +36,7 @@ const Login: FC = () => {
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault();
     const valid = validate();
-    console.log('valid: ', valid);
+    console.log({ valid });
 
     dispatch(
       userActions.signin({
@@ -47,7 +48,7 @@ const Login: FC = () => {
 
   return (
     <div className="login">
-      <main className="main container login__container">
+      <main className={cn('main', 'container', 'login__container')}>
         <div className="login__box">
           <img src={Logotype} alt="Battle city" className="login__logotype" />
 

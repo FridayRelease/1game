@@ -8,10 +8,10 @@ const userFullInfo = async () => {
 };
 
 const signin = async (info: IUserSigninRequest) => {
-  const res = await userApi.signin(info);
+  const { data } = await userApi.signin(info);
 
-  if (res.data === 'OK') {
-    return res.data;
+  if (data === 'OK') {
+    return data;
   }
 
   throw new Error('Произошла ошибка при авторизации');
