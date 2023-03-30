@@ -60,6 +60,7 @@ const useAvatarForm = (onCloseForm: () => void) => {
     canvas.toBlob(async blob => {
       if (blob) {
         const file = new File([blob], 'avatar.jpeg', { type: MIME_TYPE });
+        console.log(file);
 
         setIsLoading(true);
 
