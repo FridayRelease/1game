@@ -7,6 +7,7 @@ import Profile from './pages/profile';
 import EditRouter from './pages/edit-router';
 import EditProfile from './pages/edit-profile';
 import EditPassword from './pages/edit-password';
+import GameOver from './pages/game-over';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         element: <EditPassword />,
       },
     ],
+  },
+  {
+    path: 'gameover',
+    element: <GameOver />,
   },
 ]);
 

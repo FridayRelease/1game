@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+@font-face {
+  font-family: Joystix;
+  font-style: normal;
+  font-weight: normal;
+  src: local('Joystix'),
+    url('./assets/fonts/joystix-monospace.ttf') format('truetype');
+}
+
 :root {
   --main-font-family: 'Inter', sans-serif;
   --main-bg-success: #1fad58;
