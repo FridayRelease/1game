@@ -18,7 +18,7 @@ const Menu: FC<IMenu> = ({
       <button
         className={cn('profile-menu__button', `profile-menu__button--${state}`)}
         type={type === MenuType.SUBMIT ? 'submit' : 'button'}
-        disabled={!!disabled || state === MenuState.ERROR}
+        disabled={disabled ?? state === MenuState.ERROR}
         onClick={onClick}>
         {title}
       </button>

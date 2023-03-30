@@ -11,10 +11,11 @@ const Avatar: FC<IAvatar> = ({
   onClick,
 }) => {
   return (
-    <div className={cn(className, 'avatar-wrapper')}>
+    <div
+      className={cn(className, 'avatar-wrapper', { editable })}
+      onClick={onClick}>
       <div
-        className={cn('avatar', { editable })}
-        onClick={onClick}
+        className="avatar"
         title={
           editable ? `${url ? 'Поменять' : 'Загрузить'} аватар` : undefined
         }>

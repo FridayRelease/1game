@@ -27,11 +27,15 @@
     }
 
     &--error {
-      --button-background-color: var(--profile-error);
+      &:not(:disabled) {
+        --button-background-color: var(--profile-error);
+      }
     }
 
     &--success {
-      --button-background-color: var(--profile-success);
+      &:not(:disabled) {
+        --button-background-color: var(--profile-success);
+      }
     }
   }
 }

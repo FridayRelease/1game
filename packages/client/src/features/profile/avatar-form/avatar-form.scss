@@ -1,12 +1,5 @@
 .avatar-popup {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 340px;
-  height: 257px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  text-align: center;
 
   &__bg {
     position: absolute;
@@ -27,6 +20,14 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
+  }
+
+  &__menu {
+    text-align: center;
+
+    &-content {
+      padding: 47px 39px;
+    }
   }
 
   &__error,
@@ -75,5 +76,15 @@
     width: 100%;
     font-size: 11px;
     line-height: 11px;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  &__editor {
+    margin-top: 47px;
   }
 }
