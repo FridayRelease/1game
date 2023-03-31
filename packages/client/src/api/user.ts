@@ -26,7 +26,7 @@ export class UserApi {
 
   async signout() {
     // Выход
-    return await this.http.post('/logout');
+    return await this.http.post('/auth/logout');
   }
 
   updateData = async (data: IUserUpdateDataRequest) => {
@@ -38,7 +38,10 @@ export class UserApi {
   };
 
   updateAvatar = async (file: File) => {
-    return await this.http.put<IUserDTO>('user/profile/avatar', file);
+    const data = new FormData();
+    data.append('avatar', file);
+
+    return await this.http.put<IUserDTO>('user/profile/avatar', data);
   };
 
   userInfo = async () => {

@@ -119,7 +119,17 @@ const updateAvatar = async (file: File, dispatch: Dispatch<AnyAction>) => {
 };
 
 const signout = (navigate: NavigateFunction, dispatch: Dispatch<AnyAction>) => {
-  dispatch(userActions.signout({ navigate }));
+  const req = async () => {
+    await userApi.signout();
+    dispatch(userActions.signout({ navigate }));
+  };
+
+  const error = {
+    title: 'Что-то пошло не так...',
+    description: 'Попробуйте обновить аватар еще раз',
+  };
+
+  return request(req, error, dispatch);
 };
 
 export { signup, userFullInfo, signin, updateProfileData, updatePassword, updateAvatar, signout };

@@ -23,8 +23,11 @@ export class HttpClient {
   }
 
   public put<T>(url: string, data: AllowedData) {
-    if (data instanceof File) {
-      return axios.put(`${this.prefixUrl}${url}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    if (data instanceof FormData) {
+      return axios.put(`${this.prefixUrl}${url}`, data, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
     }
 
     return this.axios.put<T>(url, data);
