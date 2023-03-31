@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useEffect } from 'react';
+import React, { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IUserDTO } from '@/api/types';
@@ -13,6 +13,7 @@ import { IUserUpdatePasswordRequest } from '@/types/user';
 import { LoadingSelectors } from '@/store/slices/loading-slice';
 import { errorSelectors } from '@/store/slices/error-slice';
 import { userSelectors } from '@/features/authentication';
+import useResetState from '@/hooks/use-reset-state';
 import IMenuEditProfilePassword from './password.interface';
 import './password.scss';
 
@@ -41,6 +42,8 @@ const EditPassword: FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useResetState();
 
   const userState = useSelector(userSelectors.user);
   const { isLoading } = useSelector(LoadingSelectors.all);
@@ -75,6 +78,7 @@ const EditPassword: FC = () => {
                   </label>
                 </React.Fragment>
               ))}
+              {!!error.title.length && <p className="profile-password__upload-error">{error.title}</p>}
             </div>
           </Menu>
         </form>

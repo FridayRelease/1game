@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button/button';
-import { userActions, userSelectors } from '@/features/authentication';
+import { userSelectors } from '@/features/authentication';
 import { IUserDTO } from '@/api/types';
 import { signout } from '@/controllers/user-controllers';
+import useResetState from '@/hooks/use-reset-state';
 import { IMenuData, IMenuItem } from './profile.interface';
 import Menu from './menu';
 import './profile.scss';
@@ -16,6 +17,8 @@ const Profile: FC = () => {
   const userState = useSelector(userSelectors.user);
 
   const { first_name, second_name, login, phone, display_name } = userState.info as IUserDTO;
+
+  useResetState();
 
   const userMenuData: IMenuData[] = [
     { key: 'Имя', value: first_name },

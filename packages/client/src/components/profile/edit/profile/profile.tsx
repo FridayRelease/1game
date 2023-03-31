@@ -14,6 +14,7 @@ import { LoadingSelectors } from '@/store/slices/loading-slice';
 import { errorSelectors } from '@/store/slices/error-slice';
 import { userSelectors } from '@/features/authentication';
 import { IUserDTO } from '@/api/types';
+import useResetState from '@/hooks/use-reset-state';
 import IMenuEditProfileData from './profile.interface';
 import './profile.scss';
 
@@ -45,6 +46,8 @@ const EditProfile: FC = () => {
   const { error } = useSelector(errorSelectors.all);
 
   const { first_name, second_name, login, phone, display_name } = userState.info as IUserDTO;
+
+  useResetState();
 
   const userMenuData: IMenuEditProfileData[] = [
     { key: 'Имя', name: 'first_name', value: first_name },
@@ -102,6 +105,7 @@ const EditProfile: FC = () => {
                   </label>
                 </React.Fragment>
               ))}
+              {!!error.title.length && <p className="profile-edit__upload-error">{error.title}</p>}
             </div>
           </Menu>
         </form>
