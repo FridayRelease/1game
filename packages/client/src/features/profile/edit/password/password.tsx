@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Avatar from '@/components/avatar/avatar';
 import Menu from '@/features/profile/menu';
 import mockUser from '@/features/profile/mock';
-import useForm from '@/hook/useValidate';
+import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
 import { ValidationProps } from '@/features/validation/validator';
 import { MenuState, MenuType } from '@/features/profile/menu/menu.interface';

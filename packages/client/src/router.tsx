@@ -9,7 +9,7 @@ import EditRouter from './pages/edit-router';
 import EditProfile from './pages/edit-profile';
 import EditPassword from './pages/edit-password';
 import GameOver from './pages/game-over';
-import { MainUrl, SigninUrl, SignupUrl } from './constant/router';
+import { MainUrl, SigninUrl, SignupUrl, ProfileUrl } from './constant/router';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: 'profile',
+    path: ProfileUrl,
     element: <Profile />,
   },
   {
