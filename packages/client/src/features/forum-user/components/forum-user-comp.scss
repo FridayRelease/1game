@@ -1,0 +1,82 @@
+.forum-user-comp {
+  max-width: 700px;
+  max-height: 100px;
+  width: 90%;
+  border: var(--base-bg-600) solid 1px;
+  border-radius: 30px;
+  background: var(--base-bg-900);
+  padding: 10px 10px;
+  margin: 10px 10px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+}
+font {
+  font-family: Inter, sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 31px;
+  letter-spacing: 0;
+  text-align: left;
+}
+.forum-message {
+  width: 100%;
+  overflow-wrap: normal; /* не поддерживает IE, Firefox; является копией word-wrap */
+  word-wrap: normal;
+  word-break: normal; /* не поддерживает Opera12.14, значение keep-all не поддерживается IE, Chrome */
+  line-break: auto; /* нет поддержки для русского языка */
+  hyphens: manual; /* значение auto не поддерживается Chrome */
+  color: white;
+}
+.forum-info {
+  width: 100%;
+}
+.forum-user {
+  width: 159px;
+  height: 19px;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #757575;
+}
+.forum-data {
+  width: 123px;
+  height: 19px;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #757575;
+}
+.forum-quantity {
+  width: 12px;
+  height: 19px;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #757575;
+}
+
+.forum-user-comp-column {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+}
+.forum-comp-row {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-items: center;
+}
+.white {
+  color: white;
+}
