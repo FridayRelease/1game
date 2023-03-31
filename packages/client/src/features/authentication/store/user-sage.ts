@@ -9,6 +9,7 @@ import {
   NavigateSagaProps,
   PropsWithNavigator,
 } from './types';
+import { LoginUrl, MainUrl } from '@/constant/router';
 
 function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
   const { navigate } = payload;
@@ -26,7 +27,7 @@ function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
       })
     );
 
-    navigate('/login');
+    navigate(LoginUrl);
   } finally {
     yield put(LoadingActions.setIsLoading(false));
   }
@@ -45,7 +46,7 @@ function* signinSage({
 
     yield put(userActions.setUser(user));
 
-    navigate('/');
+    navigate(MainUrl);
   } catch (error) {
     yield put(
       errorActions.setError({
@@ -70,7 +71,7 @@ function* signupSage({
 
     yield put(userActions.setUser(user));
 
-    navigate('/');
+    navigate(MainUrl);
   } catch (error) {
     if (error instanceof Error) {
       yield put(
