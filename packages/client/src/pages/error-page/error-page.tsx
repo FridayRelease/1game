@@ -5,19 +5,27 @@ export default function ErrorPage() {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
+    const backLink = (
+      <Link to={'/'} className="error-page__link">
+        back
+      </Link>
+    );
+
     if (error.status === 404) {
       return (
         <Error status={error.status} text="Такой страницы не существует.">
-          <Link to={'/'} className="error-page__link">
-            back
-          </Link>
+          {backLink}
         </Error>
       );
     }
 
     // 5xx ошибки
     if (error.status.toString().match(/^5\d\d$/)) {
-      return <Error status={error.status} text="Сервер сейчас не работает." />;
+      return (
+        <Error status={error.status} text="Сервер сейчас не работает.">
+          {backLink}
+        </Error>
+      );
     }
   }
 
