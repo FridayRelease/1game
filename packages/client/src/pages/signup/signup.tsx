@@ -1,11 +1,15 @@
 import { FC, FormEvent } from 'react';
-import useForm from '@/hook/useValidate';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { useForm, userActions } from '@/features/authentication';
 import Button from '@/components/button/button';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Input from '@/components/input/input';
-import { initValues, validationSchema } from './Signup';
+import { initValues, validationSchema } from './signup.constants';
 import Logotype from '../../assets/images/logotype.png';
 import './Signup.scss';
+import { IUserSignupRequest } from '@/types/user';
 
 /**
  * Страница регистрации пользователя
@@ -13,7 +17,11 @@ import './Signup.scss';
  * @category page
  */
 const Signup: FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
+    values,
     hasError,
     onChangeForm,
     getFieldProps,
@@ -28,6 +36,12 @@ const Signup: FC = () => {
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault();
     const valid = validate();
+
+    console.log('valid: ', valid);
+
+    dispatch(
+      userActions.signup({ props: values as IUserSignupRequest, navigate })
+    );
   };
 
   return (
