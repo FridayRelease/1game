@@ -20,15 +20,7 @@ const Signup: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {
-    values,
-    hasError,
-    onChangeForm,
-    getFieldProps,
-    getFieldError,
-    onBlurInput,
-    validate,
-  } = useForm({
+  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput, validate } = useForm({
     initValues,
     validationSchema,
   });
@@ -39,26 +31,16 @@ const Signup: FC = () => {
 
     console.log('valid: ', valid);
 
-    dispatch(
-      userActions.signup({ props: values as IUserSignupRequest, navigate })
-    );
+    dispatch(userActions.signup({ props: values as IUserSignupRequest, navigate }));
   };
 
   return (
     <div className="registration">
       <main className="main container registration__container">
         <div className="registration__box">
-          <img
-            src={Logotype}
-            alt="Battle city"
-            className="registration__logotype"
-          />
+          <img src={Logotype} alt="Battle city" className="registration__logotype" />
 
-          <form
-            onChange={onChangeForm}
-            onSubmit={onSubmitForm}
-            className="registration-form"
-            autoComplete="off">
+          <form onChange={onChangeForm} onSubmit={onSubmitForm} className="registration-form" autoComplete="off">
             <div className="content-box registration-form__box">
               <h1 className="registration__title">Регистрация</h1>
               <div className="registration-form__row">
@@ -115,11 +97,7 @@ const Signup: FC = () => {
                 </a>
               </div>
             </div>
-            <Button
-              disabled={hasError}
-              type="submit"
-              view="primary"
-              className="registration-form__button">
+            <Button disabled={hasError} type="submit" view="primary" className="registration-form__button">
               Отправить
             </Button>
           </form>
