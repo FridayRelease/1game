@@ -38,6 +38,14 @@ export const userSlice = createSlice({
       return state;
     },
 
+    updateData: (state, { payload }: PayloadAction<IUserDTO>) => {
+      state.info = payload;
+    },
+
+    updateAvatar: (state, { payload }: PayloadAction<IUserDTO>) => {
+      state.info = payload;
+    },
+
     setUser: (state, { payload }: PayloadAction<IUserDTO | null>) => {
       state.info = payload;
     },

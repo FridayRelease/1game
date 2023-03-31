@@ -1,5 +1,10 @@
 import { userApi } from '@/api';
-import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
+import {
+  IUserSigninRequest,
+  IUserSignupRequest,
+  IUserUpdateDataRequest,
+  IUserUpdatePasswordRequest,
+} from '@/types/user';
 
 const userFullInfo = async () => {
   const user = await userApi.userInfo();
@@ -29,4 +34,28 @@ const signup = async (info: IUserSignupRequest) => {
   throw new Error('Произошла ошибка при регистрации');
 };
 
-export { signup, userFullInfo, signin };
+const updateData = async (data: IUserUpdateDataRequest) => {
+  const res = await userApi.updateData(data);
+
+  if (res.status === 200) {
+    return res.data;
+  }
+
+  throw new Error('Произошла ошибка при обновлении данных');
+};
+
+const updatePassword = async (data: IUserUpdatePasswordRequest) => {
+  return userApi.updatePassword(data);
+};
+
+const updateAvatar = async (file: File) => {
+  const res = await userApi.updateAvatar(file);
+
+  if (res.status === 200) {
+    return res.data;
+  }
+
+  throw new Error('Произошла ошибка при обновлении пароля');
+};
+
+export { signup, userFullInfo, signin, updateData, updatePassword, updateAvatar };
