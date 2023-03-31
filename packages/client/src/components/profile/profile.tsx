@@ -1,17 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button/button';
-import { userSelectors } from '@/features/authentication';
+import { userActions, userSelectors } from '@/features/authentication';
+import { IUserDTO } from '@/api/types';
 import { IMenuData, IMenuItem } from './profile.interface';
 import Menu from './menu';
 import './profile.scss';
-import { IUserDTO } from '@/api/types';
 
 const Profile: FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userState = useSelector(userSelectors.user);
+
   const { first_name, second_name, login, phone, display_name } = userState.info as IUserDTO;
 
   const userMenuData: IMenuData[] = [
@@ -39,6 +41,10 @@ const Profile: FC = () => {
     },
   ];
 
+  const onClick = useCallback(() => {
+    dispatch(userActions.signout({ navigate }));
+  }, []);
+
   return (
     <div className="profile">
       <Avatar>{`${first_name} ${second_name}`}</Avatar>
@@ -60,7 +66,7 @@ const Profile: FC = () => {
         ))}
       </div>
 
-      <Button type="submit" view="primary">
+      <Button type="submit" view="primary" onClick={onClick}>
         Выйти
       </Button>
     </div>

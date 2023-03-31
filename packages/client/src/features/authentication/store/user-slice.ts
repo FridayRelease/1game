@@ -9,8 +9,21 @@ export interface UserState {
   info: IUserDTO | null;
 }
 
+// const initialState: UserState = {
+//   info: null,
+// };
+
 const initialState: UserState = {
-  info: null,
+  info: {
+    id: 123,
+    first_name: 'Ivan',
+    second_name: 'Ivanov',
+    login: 'Ivan login',
+    display_name: 'Ivan display name',
+    phone: '+79046329933',
+    email: 'ivan@ivanov@mail.ru',
+    avatar: null,
+  },
 };
 
 export const userSlice = createSlice({
@@ -47,6 +60,7 @@ export const userSlice = createSlice({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       { payload }: PayloadAction<NavigateSagaProps>
     ) => {
+      console.log('signout');
       state.info = null;
     },
   },
