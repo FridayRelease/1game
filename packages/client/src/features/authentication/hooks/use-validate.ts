@@ -77,7 +77,7 @@ const useForm = (props: IProps) => {
     return errors;
   };
 
-  const onBlurInput = (event: Event): void => {
+  const onBlurInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     const elements = event.target as HTMLInputElement;
     setTouchedField(elements.name);
   };
