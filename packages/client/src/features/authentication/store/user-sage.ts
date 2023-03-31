@@ -4,11 +4,7 @@ import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
 import { userActions } from './user-slice';
 import { Effect, takeEvery, put, call, takeLatest } from 'redux-saga/effects';
 import { signin, signup, userFullInfo } from '@/controllers/user-controllers';
-import {
-  UserResponseInfo,
-  NavigateSagaProps,
-  PropsWithNavigator,
-} from './types';
+import { UserResponseInfo, NavigateSagaProps, PropsWithNavigator } from './types';
 import { LoginUrl, MainUrl } from '@/constant/router';
 
 function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
@@ -33,9 +29,7 @@ function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
   }
 }
 
-function* signinSage({
-  payload,
-}: Effect<string, PropsWithNavigator<IUserSigninRequest>>) {
+function* signinSage({ payload }: Effect<string, PropsWithNavigator<IUserSigninRequest>>) {
   const { props, navigate } = payload;
   yield put(LoadingActions.setIsLoading(true));
 
@@ -59,9 +53,7 @@ function* signinSage({
   }
 }
 
-function* signupSage({
-  payload,
-}: Effect<string, PropsWithNavigator<IUserSignupRequest>>) {
+function* signupSage({ payload }: Effect<string, PropsWithNavigator<IUserSignupRequest>>) {
   const { props, navigate } = payload;
 
   yield put(LoadingActions.setIsLoading(true));
