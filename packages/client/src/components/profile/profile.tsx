@@ -1,26 +1,28 @@
 import React, { FC } from 'react';
-import Avatar from '@/components/avatar';
-import Menu from './menu';
-import Button from '@/components/button/button';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Avatar from '@/components/avatar';
+import Button from '@/components/button/button';
+import { userSelectors } from '@/features/authentication';
 import { IMenuData, IMenuItem } from './profile.interface';
-import mockUser from './mock';
+import Menu from './menu';
 import './profile.scss';
-
-const userMenuData: IMenuData[] = [
-  { key: 'Имя', value: mockUser.name },
-  { key: 'Фамилия', value: mockUser.secondName },
-  { key: 'Логин', value: mockUser.login },
-  { key: 'Телефон', value: mockUser.phone },
-  { key: 'Имя в чате', value: mockUser.chatName },
-];
-
-const userMenuPassword: IMenuData[] = [
-  { key: 'Пароль', value: mockUser.password.replace(/./g, '*') },
-];
+import { IUserDTO } from '@/api/types';
 
 const Profile: FC = () => {
   const navigate = useNavigate();
+  const userState = useSelector(userSelectors.user);
+  const { first_name, second_name, login, phone, display_name } = userState.info as IUserDTO;
+
+  const userMenuData: IMenuData[] = [
+    { key: 'Имя', value: first_name },
+    { key: 'Фамилия', value: second_name },
+    { key: 'Логин', value: login },
+    { key: 'Телефон', value: phone },
+    { key: 'Имя в чате', value: display_name },
+  ];
+
+  const userMenuPassword: IMenuData[] = [{ key: 'Пароль', value: '********' }];
 
   const menus: IMenuItem[] = [
     {
@@ -39,15 +41,11 @@ const Profile: FC = () => {
 
   return (
     <div className="profile">
-      <Avatar>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
+      <Avatar>{`${first_name} ${second_name}`}</Avatar>
 
       <div className="profile__content">
         {menus.map(({ className, title, data, onClick }) => (
-          <Menu
-            key={title}
-            className={className}
-            title={title}
-            onClick={onClick}>
+          <Menu key={title} className={className} title={title} onClick={onClick}>
             <div className="profile__menu-content">
               <dl>
                 {data.map(({ key, value }) => (

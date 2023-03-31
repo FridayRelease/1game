@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import AvatarEditor from 'react-avatar-editor';
+import { cn } from '@/utils/cn';
 import Menu from '../menu';
 import { MenuState, MenuType } from '../menu/menu.interface';
 import IAvatarForm from './avatar-form.interface';
-import { cn } from '@/utils/cn';
 import CloseButton from './close-button/close-button';
 import useAvatarForm from './hooks/useAvatarForm';
 import './avatar-form.scss';

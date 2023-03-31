@@ -1,4 +1,4 @@
-import { IMenuData } from '@/features/profile/profile.interface';
+import { IMenuData } from '@/components/profile/profile.interface';
 
 interface IMenuEditProfileData extends IMenuData {
   name: string;

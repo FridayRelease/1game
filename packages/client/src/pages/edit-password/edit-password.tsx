@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import EditPassword from '@/features/profile/edit/password';
+import EditPassword from '@/components/profile/edit/password';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import './edit-password.scss';
 

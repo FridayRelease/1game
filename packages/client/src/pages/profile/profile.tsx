@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Profile from '@/features/profile';
+import Profile from '@/components/profile';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import './profile.scss';
 

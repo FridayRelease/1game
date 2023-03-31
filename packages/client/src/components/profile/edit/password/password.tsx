@@ -1,12 +1,12 @@
 import React, { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@/components/avatar/avatar';
-import Menu from '@/features/profile/menu';
-import mockUser from '@/features/profile/mock';
+import Menu from '@/components/profile/menu';
+import mockUser from '@/components/profile/mock';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
 import { ValidationProps } from '@/features/validation/validator';
-import { MenuState, MenuType } from '@/features/profile/menu/menu.interface';
+import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
 import IMenuEditProfilePassword from './password.interface';
 import './password.scss';
 
@@ -31,14 +31,7 @@ const validationSchema: Record<string, ValidationProps> = {
 };
 
 const EditPassword: FC = () => {
-  const {
-    values,
-    hasError,
-    onChangeForm,
-    getFieldProps,
-    getFieldError,
-    onBlurInput,
-  } = useForm({ validationSchema });
+  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({ validationSchema });
 
   const navigate = useNavigate();
 
@@ -54,10 +47,7 @@ const EditPassword: FC = () => {
       <Avatar>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
 
       <div className="profile-password__content">
-        <form
-          onChange={onChangeForm}
-          onSubmit={onSubmitForm}
-          autoComplete="off">
+        <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">
           <Menu
             className="profile-password__menu"
             title="Сохранить"
@@ -68,11 +58,7 @@ const EditPassword: FC = () => {
                 <React.Fragment key={key}>
                   <label className="profile-password__label">
                     {key}
-                    <Input
-                      {...getFieldProps(name)}
-                      error={getFieldError(name)}
-                      onBlur={onBlurInput}
-                    />
+                    <Input {...getFieldProps(name)} error={getFieldError(name)} onBlur={onBlurInput} />
                   </label>
                 </React.Fragment>
               ))}

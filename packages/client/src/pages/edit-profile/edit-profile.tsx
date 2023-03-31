@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import EditProfile from '@/features/profile/edit/profile';
+import EditProfile from '@/components/profile/edit/profile';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import './edit-profile.scss';
 

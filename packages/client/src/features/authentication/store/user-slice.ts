@@ -42,7 +42,11 @@ export const userSlice = createSlice({
       state.info = payload;
     },
 
-    signout: state => {
+    signout: (
+      state,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      { payload }: PayloadAction<NavigateSagaProps>
+    ) => {
       state.info = null;
     },
   },

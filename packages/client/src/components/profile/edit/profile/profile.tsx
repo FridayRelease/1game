@@ -1,14 +1,14 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@/components/avatar/avatar';
-import Menu from '@/features/profile/menu';
-import mockUser from '@/features/profile/mock';
+import Menu from '@/components/profile/menu';
+import mockUser from '@/components/profile/mock';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
 import { ValidationProps } from '@/features/validation/validator';
-import { MenuState, MenuType } from '@/features/profile/menu/menu.interface';
+import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
 import IMenuEditProfileData from './profile.interface';
-import AvatarForm from '@/features/profile/avatar-form';
+import AvatarForm from '@/components/profile/avatar-form';
 import './profile.scss';
 
 const userMenuData: IMenuEditProfileData[] = [
@@ -45,14 +45,10 @@ const validationSchema: Record<string, ValidationProps> = {
 };
 
 const EditProfile: FC = () => {
-  const {
-    values,
-    hasError,
-    onChangeForm,
-    getFieldProps,
-    getFieldError,
-    onBlurInput,
-  } = useForm({ initValues, validationSchema });
+  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({
+    initValues,
+    validationSchema,
+  });
 
   const navigate = useNavigate();
 
@@ -75,17 +71,10 @@ const EditProfile: FC = () => {
 
   return (
     <div className="profile-edit">
-      <Avatar
-        editable
-        onClick={
-          onStartEditAvatar
-        }>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
+      <Avatar editable onClick={onStartEditAvatar}>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
 
       <div className="profile-edit__content">
-        <form
-          onChange={onChangeForm}
-          onSubmit={onSubmitForm}
-          autoComplete="off">
+        <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">
           <Menu
             className="profile-edit__menu"
             title="Сохранить"
@@ -96,11 +85,7 @@ const EditProfile: FC = () => {
                 <React.Fragment key={key}>
                   <label className="profile-edit__label">
                     {key}
-                    <Input
-                      {...getFieldProps(name)}
-                      error={getFieldError(name)}
-                      onBlur={onBlurInput}
-                    />
+                    <Input {...getFieldProps(name)} error={getFieldError(name)} onBlur={onBlurInput} />
                   </label>
                 </React.Fragment>
               ))}

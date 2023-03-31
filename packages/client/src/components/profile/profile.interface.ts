@@ -1,12 +1,3 @@
-export interface IMockUser {
-  name: string;
-  secondName: string;
-  login: string;
-  phone: string;
-  chatName: string;
-  password: string;
-}
-
 export interface IMenuItem {
   className: string;
   title: string;
@@ -16,5 +7,5 @@ export interface IMenuItem {
 
 export interface IMenuData {
   key: string;
-  value: string;
+  value: string | null;
 }

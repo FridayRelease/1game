@@ -18,7 +18,7 @@ const useForm = (props: IProps) => {
   const getFieldProps = (field: string): Record<string, any> => ({
     name: field,
     value: getFieldValue(field),
-    onChange: (e: Event) => onChange(e),
+    onChange: (e: React.FocusEvent<HTMLInputElement>) => onChange(e),
   });
 
   const getFieldError = (field: string): string => {
@@ -48,7 +48,7 @@ const useForm = (props: IProps) => {
     }));
   };
 
-  const onChange = (e: Event): void => {
+  const onChange = (e: React.FocusEvent<HTMLInputElement>): void => {
     const elements = e.target as HTMLInputElement;
 
     setTouchedField(elements.name);
@@ -77,7 +77,7 @@ const useForm = (props: IProps) => {
     return errors;
   };
 
-  const onBlurInput = (event: Event): void => {
+  const onBlurInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     const elements = event.target as HTMLInputElement;
     setTouchedField(elements.name);
   };

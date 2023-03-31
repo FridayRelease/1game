@@ -91,8 +91,6 @@ const updateAvatar = async (file: File) => {
   return request(req, error);
 };
 
-const signout = () => {
-  userActions.signout();
-};
+const { signout } = userActions;
 
 export { signup, userFullInfo, signin, updateData, updatePassword, updateAvatar, signout };
