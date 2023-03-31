@@ -38,7 +38,7 @@ export class UserApi {
   };
 
   updateAvatar = async (file: File) => {
-    return await this.http.put<IUserDTO>('/user/profile/avatar', file);
+    return await this.http.put<IUserDTO>('user/profile/avatar', file);
   };
 
   userInfo = async () => {

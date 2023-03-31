@@ -45,7 +45,7 @@ const EditProfile: FC = () => {
   const { isLoading } = useSelector(LoadingSelectors.all);
   const { error } = useSelector(errorSelectors.all);
 
-  const { first_name, second_name, login, phone, display_name } = userState.info as IUserDTO;
+  const { first_name, second_name, login, phone, display_name, email } = userState.info as IUserDTO;
 
   useResetState();
 
@@ -53,6 +53,7 @@ const EditProfile: FC = () => {
     { key: 'Имя', name: 'first_name', value: first_name },
     { key: 'Фамилия', name: 'second_name', value: second_name },
     { key: 'Логин', name: 'login', value: login },
+    { key: 'Email', name: 'email', value: email },
     { key: 'Телефон', name: 'phone', value: phone },
     { key: 'Имя в чате', name: 'display_name', value: display_name },
   ];

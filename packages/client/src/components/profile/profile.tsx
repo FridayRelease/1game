@@ -16,7 +16,7 @@ const Profile: FC = () => {
   const dispatch = useDispatch();
   const userState = useSelector(userSelectors.user);
 
-  const { first_name, second_name, login, phone, display_name } = userState.info as IUserDTO;
+  const { first_name, second_name, login, phone, display_name, email } = userState.info as IUserDTO;
 
   useResetState();
 
@@ -24,6 +24,7 @@ const Profile: FC = () => {
     { key: 'Имя', value: first_name },
     { key: 'Фамилия', value: second_name },
     { key: 'Логин', value: login },
+    { key: 'Email', value: email },
     { key: 'Телефон', value: phone },
     { key: 'Имя в чате', value: display_name },
   ];

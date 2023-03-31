@@ -9,21 +9,8 @@ export interface UserState {
   info: IUserDTO | null;
 }
 
-// const initialState: UserState = {
-//   info: null,
-// };
-
 const initialState: UserState = {
-  info: {
-    id: 123,
-    first_name: 'Ivan',
-    second_name: 'Ivanov',
-    login: 'Ivan login',
-    display_name: 'Ivan display name',
-    phone: '+79046329933',
-    email: 'ivan@ivanov@mail.ru',
-    avatar: null,
-  },
+  info: null,
 };
 
 export const userSlice = createSlice({

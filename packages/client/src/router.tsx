@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       <RequireAuth>
         <Profile />
       </RequireAuth>
-    )
+    ),
   },
   {
     path: 'edit',
@@ -43,11 +43,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'profile',
-        element: <EditProfile />,
+        element: (
+          <RequireAuth>
+            <EditProfile />
+          </RequireAuth>
+        ),
       },
       {
         path: 'password',
-        element: <EditPassword />,
+        element: (
+          <RequireAuth>
+            <EditPassword />
+          </RequireAuth>
+        ),
       },
     ],
   },
