@@ -11,27 +11,17 @@ import './avatar-form.scss';
 const AVATAR_SIZE = 63;
 
 const AvatarForm: FC<IAvatarForm> = ({ onClose }) => {
-  const {
-    avatarEditorRef,
-    isError,
-    isLoading,
-    uploaded,
-    pathName,
-    onSubmit,
-    onInput,
-  } = useAvatarForm(onClose);
+  const { avatarEditorRef, formRef, isError, isLoading, uploaded, pathName, onSubmit, onInput } =
+    useAvatarForm(onClose);
 
-  const buttonStateWithoutError = pathName
-    ? MenuState.SUCCESS
-    : MenuState.DEFAULT;
-
+  const buttonStateWithoutError = pathName ? MenuState.SUCCESS : MenuState.DEFAULT;
   const buttonState = isError ? MenuState.ERROR : buttonStateWithoutError;
 
   return (
     <div className="avatar-popup-wrapper">
       <div className="avatar-popup__bg" onClick={onClose} />
       <div className="avatar-popup">
-        <form className="avatar-popup__form" onSubmit={onSubmit}>
+        <form ref={formRef} className="avatar-popup__form" onSubmit={onSubmit}>
           <Menu
             className="avatar-popup__menu"
             title="Поменять"
@@ -44,11 +34,7 @@ const AvatarForm: FC<IAvatarForm> = ({ onClose }) => {
                 {uploaded && 'Файл загружен'}
                 {isLoading && 'Загрузка...'}
               </p>
-              {isError && pathName && (
-                <p className="avatar-popup__upload-error">
-                  Ошибка, попробуйте ещё раз
-                </p>
-              )}
+              {isError && pathName && <p className="avatar-popup__upload-error">Ошибка, попробуйте ещё раз</p>}
 
               <label className={cn({ 'avatar-popup__path': !!pathName })}>
                 Выбрать файл на компьютере
@@ -68,13 +54,8 @@ const AvatarForm: FC<IAvatarForm> = ({ onClose }) => {
                 />
               )}
 
-              {isError && !pathName && (
-                <span className="avatar-popup__error">Нужно выбрать файл</span>
-              )}
-              <CloseButton
-                className="avatar-popup__close-button"
-                onClick={onClose}
-              />
+              {isError && !pathName && <span className="avatar-popup__error">Нужно выбрать файл</span>}
+              <CloseButton className="avatar-popup__close-button" onClick={onClose} />
             </div>
           </Menu>
         </form>

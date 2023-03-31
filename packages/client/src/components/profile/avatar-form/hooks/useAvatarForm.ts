@@ -1,16 +1,25 @@
 import { useState, useEffect, useRef, FormEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor';
+import { LoadingSelectors } from '@/store/slices/loading-slice';
+import { errorActions, errorSelectors } from '@/store/slices/error-slice';
+import { updateAvatar } from '@/controllers/user-controllers';
 
 const ESCAPE_KEY = 'Escape';
 const MIME_TYPE = 'image/jpeg';
 
 const useAvatarForm = (onCloseForm: () => void) => {
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector(LoadingSelectors.all);
+  const { error } = useSelector(errorSelectors.all);
+
   const [uploaded, setUploaded] = useState(false);
   const [pathName, setPathName] = useState<string | null>(null);
 
   const avatarEditorRef = useRef<AvatarEditor>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const isError = !!error.title.length;
 
   useEffect(() => {
     document.onkeydown = (evt: KeyboardEvent) => {
@@ -26,29 +35,28 @@ const useAvatarForm = (onCloseForm: () => void) => {
 
   useEffect(() => {
     if (pathName) {
-      setIsError(false);
       setUploaded(false);
+      dispatch(errorActions.resetError());
     }
   }, [pathName]);
 
   useEffect(() => {
     if (uploaded) {
-      setIsLoading(false);
       setPathName(null);
     }
   }, [uploaded]);
 
   useEffect(() => {
-    if (isLoading) {
-      setIsError(false);
+    if (!isLoading && pathName && !isError) {
+      setUploaded(true);
     }
   }, [isLoading]);
 
   useEffect(() => {
-    if (isError) {
-      setIsLoading(false);
+    if (uploaded && formRef.current) {
+      formRef.current.reset();
     }
-  }, [isError]);
+  }, [uploaded]);
 
   const onSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -60,18 +68,8 @@ const useAvatarForm = (onCloseForm: () => void) => {
     canvas.toBlob(async blob => {
       if (blob) {
         const file = new File([blob], 'avatar.jpeg', { type: MIME_TYPE });
-        console.log(file);
 
-        setIsLoading(true);
-
-        // здесь будет запрос
-
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // setUploaded(true);
-        // (evt.target as HTMLFormElement).reset();
-
-        setIsError(true);
+        await updateAvatar(file, dispatch);
       }
     }, MIME_TYPE);
   };
@@ -88,6 +86,7 @@ const useAvatarForm = (onCloseForm: () => void) => {
 
   return {
     avatarEditorRef,
+    formRef,
     isError,
     isLoading,
     uploaded,

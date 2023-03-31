@@ -90,9 +90,10 @@ const EditProfile: FC = () => {
         <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">
           <Menu
             className="profile-edit__menu"
-            title="Сохранить"
-            state={hasError ? MenuState.ERROR : MenuState.SUCCESS}
-            type={MenuType.SUBMIT}>
+            title={isLoading ? 'Загрузка...' : "Сохранить"}
+            state={hasError || error.title.length ? MenuState.ERROR : MenuState.SUCCESS}
+            type={MenuType.SUBMIT}
+            disabled={hasError || isLoading}>
             <div className="profile-edit__menu-content">
               {userMenuData.map(({ key, name }) => (
                 <React.Fragment key={key}>

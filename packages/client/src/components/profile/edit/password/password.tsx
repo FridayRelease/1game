@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@/components/avatar/avatar';
 import Menu from '@/components/profile/menu';
 import mockUser from '@/components/profile/mock';
@@ -40,13 +40,18 @@ const EditPassword: FC = () => {
   const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({ validationSchema });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isLoading } = useSelector(LoadingSelectors.all);
   const { error } = useSelector(errorSelectors.all);
+
+  useEffect(() => {
+    console.log('is loading', isLoading);
+  }, [isLoading]);
 
   const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
 
-    await updatePassword({data: values as IUserUpdatePasswordRequest, navigate});
+    await updatePassword({ data: values as IUserUpdatePasswordRequest, navigate, dispatch });
   };
 
   return (
@@ -57,8 +62,8 @@ const EditPassword: FC = () => {
         <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">
           <Menu
             className="profile-password__menu"
-            title="Сохранить"
-            state={hasError || error ? MenuState.ERROR : MenuState.SUCCESS}
+            title={isLoading ? 'Загрузка...' : 'Сохранить'}
+            state={hasError || error.title.length ? MenuState.ERROR : MenuState.SUCCESS}
             type={MenuType.SUBMIT}
             disabled={hasError || isLoading}>
             <div className="profile-password__menu-content">

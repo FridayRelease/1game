@@ -1,3 +1,5 @@
+import { NavigateFunction } from 'react-router-dom';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { userApi } from '@/api';
 import {
   IUserSigninRequest,
@@ -8,21 +10,18 @@ import {
 import { LoadingActions } from '@/store/slices/loading-slice';
 import { IErrorState, errorActions } from '@/store/slices/error-slice';
 import { userActions } from '@/features/authentication';
-import { NavigateFunction } from 'react-router-dom';
-import { NavigateSagaProps } from '@/features/authentication/store/types';
-import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { ProfileUrl } from '@/constant/router';
 
-const request = async (req: () => Promise<void>, error: IErrorState) => {
-  LoadingActions.setIsLoading(true);
-  errorActions.resetError();
+const request = async (req: () => Promise<void>, error: IErrorState, dispatch: Dispatch<AnyAction>) => {
+  dispatch(LoadingActions.setIsLoading(true));
+  dispatch(errorActions.resetError());
 
   try {
     await req();
   } catch {
-    errorActions.setError(error);
+    dispatch(errorActions.setError(error));
   } finally {
-    LoadingActions.setIsLoading(false);
+    dispatch(LoadingActions.setIsLoading(false));
   }
 };
 
@@ -77,10 +76,18 @@ const updateProfileData = ({
     description: 'Попробуйте обновить данные еще раз',
   };
 
-  return request(req, error);
+  return request(req, error, dispatch);
 };
 
-const updatePassword = async ({ data, navigate }: { data: IUserUpdatePasswordRequest; navigate: NavigateFunction }) => {
+const updatePassword = async ({
+  data,
+  navigate,
+  dispatch,
+}: {
+  data: IUserUpdatePasswordRequest;
+  navigate: NavigateFunction;
+  dispatch: Dispatch<AnyAction>;
+}) => {
   const req = async () => {
     const response = await userApi.updatePassword(data);
 
@@ -94,7 +101,7 @@ const updatePassword = async ({ data, navigate }: { data: IUserUpdatePasswordReq
     description: 'Попробуйте обновить пароль еще раз',
   };
 
-  return request(req, error);
+  return request(req, error, dispatch);
 };
 
 const updateAvatar = async (file: File, dispatch: Dispatch<AnyAction>) => {
@@ -108,7 +115,7 @@ const updateAvatar = async (file: File, dispatch: Dispatch<AnyAction>) => {
     description: 'Попробуйте обновить аватар еще раз',
   };
 
-  return request(req, error);
+  return request(req, error, dispatch);
 };
 
 const signout = (navigate: NavigateFunction, dispatch: Dispatch<AnyAction>) => {
