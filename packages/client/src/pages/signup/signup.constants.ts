@@ -5,7 +5,7 @@ const initValues: Record<string, string> = {};
 const validationSchema: Record<string, ValidationProps> = {
   first_name: {
     required: true,
-    min: 6,
+    min: 3,
   },
   second_name: {
     required: true,

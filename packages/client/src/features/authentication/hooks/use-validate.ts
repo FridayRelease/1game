@@ -18,16 +18,11 @@ const useForm = (props: IProps) => {
   const getFieldProps = (field: string): Record<string, any> => ({
     name: field,
     value: getFieldValue(field),
-    onChange: (e: Event) => onChange(e)
+    onChange: (e: Event) => onChange(e),
   });
 
   const getFieldError = (field: string): string => {
-    return getFieldTouched(field)
-      ? validatorInstance.checkCorrect(
-          values[field] ?? '',
-          validationSchema[field]
-        )
-      : '';
+    return getFieldTouched(field) ? validatorInstance.checkCorrect(values[field] ?? '', validationSchema[field]) : '';
   };
 
   const getFieldTouched = (field: string): boolean => !!touched[field] ?? false;
@@ -42,10 +37,7 @@ const useForm = (props: IProps) => {
   const setErrorField = (field: string, value: string | number): void => {
     setErrors(prev => ({
       ...prev,
-      [field]: validatorInstance.checkCorrect(
-        value.toString(),
-        validationSchema[field]
-      ),
+      [field]: validatorInstance.checkCorrect(value.toString(), validationSchema[field]),
     }));
   };
 
@@ -57,12 +49,12 @@ const useForm = (props: IProps) => {
   };
 
   const onChange = (e: Event): void => {
-    const elements = e.target as HTMLInputElement
+    const elements = e.target as HTMLInputElement;
 
     setTouchedField(elements.name);
     setErrorField(elements.name, elements.value);
     setValueField(elements.name, elements.value);
-  }
+  };
 
   const onChangeForm = (e: FormEvent): void => {
     const elements = e.target as HTMLInputElement;
@@ -75,10 +67,7 @@ const useForm = (props: IProps) => {
   /** Функция валидирует все значения формы и устанавливает всем touched: true */
   const validate = (): Record<string, string> => {
     const errors = Object.keys(validationSchema).reduce((acc, key) => {
-      const error = validatorInstance.checkCorrect(
-        values[key] ?? '',
-        validationSchema[key]
-      );
+      const error = validatorInstance.checkCorrect(values[key] ?? '', validationSchema[key]);
       setTouchedField(key);
       return error ? { ...acc, [key]: error } : acc;
     }, {});
@@ -93,10 +82,7 @@ const useForm = (props: IProps) => {
     setTouchedField(elements.name);
   };
 
-  const hasError = useMemo(
-    () => isEmptyObject(clearObject(errors)),
-    [errors, values, touched]
-  );
+  const hasError = useMemo(() => isEmptyObject(clearObject(errors)), [errors, values, touched]);
 
   return {
     values,
