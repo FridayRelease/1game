@@ -25,9 +25,7 @@ export default defineConfig({
       },
       {
         find: '@/components',
-        replacement: fileURLToPath(
-          new URL('./src/components', import.meta.url)
-        ),
+        replacement: fileURLToPath(new URL('./src/components', import.meta.url)),
       },
       {
         find: '@/api',

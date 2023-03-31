@@ -12,8 +12,4 @@ type PropsWithNavigator<T> = {
   navigate: NavigateFunction;
 };
 
-export {
-  type NavigateSagaProps,
-  type PropsWithNavigator,
-  type UserResponseInfo,
-};
+export { type NavigateSagaProps, type PropsWithNavigator, type UserResponseInfo };
