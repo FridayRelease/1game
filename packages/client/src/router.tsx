@@ -4,7 +4,7 @@ import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
-import { MainUrl, SigninUrl, SignupUrl } from './constant/router';
+import { MainUrl, LoginUrl, SignupUrl } from './constant/router';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: SigninUrl,
+    path: LoginUrl,
     element: <Login />,
   },
   {

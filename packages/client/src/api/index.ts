@@ -1,5 +1,5 @@
 import { UserApi } from './user';
 
-const userApi = new UserApi(process.env.AUTH_API || '/');
+const userApi = new UserApi(import.meta.env.VITE_AUTH_API || '/');
 
 export { userApi };

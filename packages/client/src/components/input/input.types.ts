@@ -6,8 +6,8 @@ type InputSize = 'large' | 'small' | 'medium';
 interface InputProps {
   testId?: string;
   onClick?: MouseEventHandler;
-  onChange?: (e: any) => void;
-  onBlur?: any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   children?: string;
   className?: string;
   size?: InputSize;
