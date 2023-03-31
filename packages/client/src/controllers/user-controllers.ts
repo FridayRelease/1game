@@ -5,6 +5,22 @@ import {
   IUserUpdateDataRequest,
   IUserUpdatePasswordRequest,
 } from '@/types/user';
+import { LoadingActions } from '@/store/slices/loading-slice';
+import { IErrorState, errorActions } from '@/store/slices/error-slice';
+import { userActions } from '@/features/authentication';
+
+const request = async (req: () => Promise<void>, error: IErrorState) => {
+  LoadingActions.setIsLoading(true);
+  errorActions.resetError();
+
+  try {
+    await req();
+  } catch {
+    errorActions.setError(error);
+  } finally {
+    LoadingActions.setIsLoading(false);
+  }
+};
 
 const userFullInfo = async () => {
   const user = await userApi.userInfo();
@@ -34,28 +50,49 @@ const signup = async (info: IUserSignupRequest) => {
   throw new Error('Произошла ошибка при регистрации');
 };
 
-const updateData = async (data: IUserUpdateDataRequest) => {
-  const res = await userApi.updateData(data);
+const updateData = (data: IUserUpdateDataRequest) => {
+  const req = async () => {
+    const res = await userApi.updateData(data);
+    userActions.setUser(res.data);
+  };
 
-  if (res.status === 200) {
-    return res.data;
-  }
+  const error = {
+    title: 'Что-то пошло не так...',
+    description: 'Попробуйте обновить данные еще раз',
+  };
 
-  throw new Error('Произошла ошибка при обновлении данных');
+  return request(req, error);
 };
 
 const updatePassword = async (data: IUserUpdatePasswordRequest) => {
-  return userApi.updatePassword(data);
+  const req = async () => {
+    await userApi.updatePassword(data);
+  };
+
+  const error = {
+    title: 'Что-то пошло не так...',
+    description: 'Попробуйте обновить пароль еще раз',
+  };
+
+  return request(req, error);
 };
 
 const updateAvatar = async (file: File) => {
-  const res = await userApi.updateAvatar(file);
+  const req = async () => {
+    const res = await userApi.updateAvatar(file);
+    userActions.setUser(res.data);
+  };
 
-  if (res.status === 200) {
-    return res.data;
-  }
+  const error = {
+    title: 'Что-то пошло не так...',
+    description: 'Попробуйте обновить аватар еще раз',
+  };
 
-  throw new Error('Произошла ошибка при обновлении пароля');
+  return request(req, error);
 };
 
-export { signup, userFullInfo, signin, updateData, updatePassword, updateAvatar };
+const signout = () => {
+  userActions.signout();
+};
+
+export { signup, userFullInfo, signin, updateData, updatePassword, updateAvatar, signout };

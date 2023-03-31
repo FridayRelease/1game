@@ -93,8 +93,17 @@ function* signupSage({
   }
 }
 
+function* signoutSaga({ payload }: Effect<string, NavigateSagaProps>) {
+  const { navigate } = payload;
+
+  yield put(userActions.setUser(null));
+
+  navigate(LoginUrl);
+}
+
 export default function* userSaga() {
   yield takeLatest('user/auth', userInfoSaga);
   yield takeEvery('user/signup', signupSage);
   yield takeEvery('user/signin', signinSage);
+  yield takeEvery(userActions.signout.type, signoutSaga);
 }
