@@ -1,5 +1,6 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Avatar from '@/components/avatar/avatar';
 import Menu from '@/components/profile/menu';
 import mockUser from '@/components/profile/mock';
@@ -8,6 +9,11 @@ import Input from '@/components/input/input';
 import { ValidationProps } from '@/features/validation/validator';
 import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
 import IMenuEditProfilePassword from './password.interface';
+import { updatePassword } from '@/controllers/user-controllers';
+import { IUserUpdatePasswordRequest } from '@/types/user';
+import { LoadingSelectors } from '@/store/slices/loading-slice';
+import { errorSelectors } from '@/store/slices/error-slice';
+import { ProfileUrl } from '@/constant/router';
 import './password.scss';
 
 const userMenuData: IMenuEditProfilePassword[] = [
@@ -34,12 +40,13 @@ const EditPassword: FC = () => {
   const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({ validationSchema });
 
   const navigate = useNavigate();
+  const { isLoading } = useSelector(LoadingSelectors.all);
+  const { error } = useSelector(errorSelectors.all);
 
   const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
-    console.log(values);
 
-    navigate('/profile');
+    await updatePassword({data: values as IUserUpdatePasswordRequest, navigate});
   };
 
   return (
@@ -51,8 +58,9 @@ const EditPassword: FC = () => {
           <Menu
             className="profile-password__menu"
             title="Сохранить"
-            state={hasError ? MenuState.ERROR : MenuState.SUCCESS}
-            type={MenuType.SUBMIT}>
+            state={hasError || error ? MenuState.ERROR : MenuState.SUCCESS}
+            type={MenuType.SUBMIT}
+            disabled={hasError || isLoading}>
             <div className="profile-password__menu-content">
               {userMenuData.map(({ key, name }) => (
                 <React.Fragment key={key}>

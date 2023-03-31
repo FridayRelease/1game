@@ -10,20 +10,13 @@ import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
 import IMenuEditProfileData from './profile.interface';
 import AvatarForm from '@/components/profile/avatar-form';
 import './profile.scss';
-
-const userMenuData: IMenuEditProfileData[] = [
-  { key: 'Имя', name: 'first_name', value: mockUser.name },
-  { key: 'Фамилия', name: 'second_name', value: mockUser.secondName },
-  { key: 'Логин', name: 'login', value: mockUser.login },
-  { key: 'Телефон', name: 'phone', value: mockUser.phone },
-  { key: 'Имя в чате', name: 'display_name', value: mockUser.chatName },
-];
-
-const initValues = userMenuData.reduce((acc, { name, value }) => {
-  acc[name] = value;
-
-  return acc;
-}, {} as Record<string, string>);
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfileData } from '@/controllers/user-controllers';
+import { IUserUpdateDataRequest } from '@/types/user';
+import { LoadingSelectors } from '@/store/slices/loading-slice';
+import { errorSelectors } from '@/store/slices/error-slice';
+import { userSelectors } from '@/features/authentication';
+import { IUserDTO } from '@/api/types';
 
 const validationSchema: Record<string, ValidationProps> = {
   first_name: {
@@ -45,20 +38,40 @@ const validationSchema: Record<string, ValidationProps> = {
 };
 
 const EditProfile: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const userState = useSelector(userSelectors.user);
+  const { isLoading } = useSelector(LoadingSelectors.all);
+  const { error } = useSelector(errorSelectors.all);
+
+  const { first_name, second_name, login, phone, display_name } = userState.info as IUserDTO;
+
+  const userMenuData: IMenuEditProfileData[] = [
+    { key: 'Имя', name: 'first_name', value: first_name },
+    { key: 'Фамилия', name: 'second_name', value: second_name },
+    { key: 'Логин', name: 'login', value: login },
+    { key: 'Телефон', name: 'phone', value: phone },
+    { key: 'Имя в чате', name: 'display_name', value: display_name },
+  ];
+
+  const initValues = userMenuData.reduce((acc, { name, value }) => {
+    acc[name] = value || '';
+
+    return acc;
+  }, {} as Record<string, string>);
+
   const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({
     initValues,
     validationSchema,
   });
 
-  const navigate = useNavigate();
-
   const [isEditAvatar, setIsEditAvatar] = useState(false);
 
   const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
-    console.log(values);
 
-    navigate('/profile');
+    await updateProfileData({ data: values as IUserUpdateDataRequest, navigate, dispatch });
   };
 
   const onStartEditAvatar = () => {

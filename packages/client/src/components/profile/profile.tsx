@@ -8,6 +8,7 @@ import { IUserDTO } from '@/api/types';
 import { IMenuData, IMenuItem } from './profile.interface';
 import Menu from './menu';
 import './profile.scss';
+import { signout } from '@/controllers/user-controllers';
 
 const Profile: FC = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Profile: FC = () => {
   ];
 
   const onClick = useCallback(() => {
-    dispatch(userActions.signout({ navigate }));
+    signout(navigate, dispatch);
   }, []);
 
   return (

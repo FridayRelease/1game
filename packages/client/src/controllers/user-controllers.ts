@@ -8,6 +8,10 @@ import {
 import { LoadingActions } from '@/store/slices/loading-slice';
 import { IErrorState, errorActions } from '@/store/slices/error-slice';
 import { userActions } from '@/features/authentication';
+import { NavigateFunction } from 'react-router-dom';
+import { NavigateSagaProps } from '@/features/authentication/store/types';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
+import { ProfileUrl } from '@/constant/router';
 
 const request = async (req: () => Promise<void>, error: IErrorState) => {
   LoadingActions.setIsLoading(true);
@@ -50,10 +54,22 @@ const signup = async (info: IUserSignupRequest) => {
   throw new Error('Произошла ошибка при регистрации');
 };
 
-const updateData = (data: IUserUpdateDataRequest) => {
+const updateProfileData = ({
+  data,
+  dispatch,
+  navigate,
+}: {
+  data: IUserUpdateDataRequest;
+  navigate: NavigateFunction;
+  dispatch: Dispatch<AnyAction>;
+}) => {
   const req = async () => {
-    const res = await userApi.updateData(data);
-    userActions.setUser(res.data);
+    const response = await userApi.updateData(data);
+
+    if (response.status === 200) {
+      dispatch(userActions.setUser(response.data));
+      navigate(ProfileUrl);
+    }
   };
 
   const error = {
@@ -64,9 +80,13 @@ const updateData = (data: IUserUpdateDataRequest) => {
   return request(req, error);
 };
 
-const updatePassword = async (data: IUserUpdatePasswordRequest) => {
+const updatePassword = async ({ data, navigate }: { data: IUserUpdatePasswordRequest; navigate: NavigateFunction }) => {
   const req = async () => {
-    await userApi.updatePassword(data);
+    const response = await userApi.updatePassword(data);
+
+    if (response.status === 200) {
+      navigate(ProfileUrl);
+    }
   };
 
   const error = {
@@ -77,10 +97,10 @@ const updatePassword = async (data: IUserUpdatePasswordRequest) => {
   return request(req, error);
 };
 
-const updateAvatar = async (file: File) => {
+const updateAvatar = async (file: File, dispatch: Dispatch<AnyAction>) => {
   const req = async () => {
     const res = await userApi.updateAvatar(file);
-    userActions.setUser(res.data);
+    dispatch(userActions.setUser(res.data));
   };
 
   const error = {
@@ -91,4 +111,8 @@ const updateAvatar = async (file: File) => {
   return request(req, error);
 };
 
-export { signup, userFullInfo, signin, updateData, updatePassword, updateAvatar };
+const signout = (navigate: NavigateFunction, dispatch: Dispatch<AnyAction>) => {
+  dispatch(userActions.signout({ navigate }));
+};
+
+export { signup, userFullInfo, signin, updateProfileData, updatePassword, updateAvatar, signout };
