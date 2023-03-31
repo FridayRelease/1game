@@ -1,22 +1,21 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@/components/avatar/avatar';
 import Menu from '@/components/profile/menu';
-import mockUser from '@/components/profile/mock';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
 import { ValidationProps } from '@/features/validation/validator';
 import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
-import IMenuEditProfileData from './profile.interface';
 import AvatarForm from '@/components/profile/avatar-form';
-import './profile.scss';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateProfileData } from '@/controllers/user-controllers';
 import { IUserUpdateDataRequest } from '@/types/user';
 import { LoadingSelectors } from '@/store/slices/loading-slice';
 import { errorSelectors } from '@/store/slices/error-slice';
 import { userSelectors } from '@/features/authentication';
 import { IUserDTO } from '@/api/types';
+import IMenuEditProfileData from './profile.interface';
+import './profile.scss';
 
 const validationSchema: Record<string, ValidationProps> = {
   first_name: {
@@ -74,23 +73,23 @@ const EditProfile: FC = () => {
     await updateProfileData({ data: values as IUserUpdateDataRequest, navigate, dispatch });
   };
 
-  const onStartEditAvatar = () => {
+  const onStartEditAvatar = useCallback(() => {
     setIsEditAvatar(true);
-  };
+  }, [setIsEditAvatar]);
 
-  const onFinishEditAvatar = () => {
+  const onFinishEditAvatar = useCallback(() => {
     setIsEditAvatar(false);
-  };
+  }, [setIsEditAvatar]);
 
   return (
     <div className="profile-edit">
-      <Avatar editable onClick={onStartEditAvatar}>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
+      <Avatar editable onClick={onStartEditAvatar}>{`${first_name} ${second_name}`}</Avatar>
 
       <div className="profile-edit__content">
         <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">
           <Menu
             className="profile-edit__menu"
-            title={isLoading ? 'Загрузка...' : "Сохранить"}
+            title={isLoading ? 'Загрузка...' : 'Сохранить'}
             state={hasError || error.title.length ? MenuState.ERROR : MenuState.SUCCESS}
             type={MenuType.SUBMIT}
             disabled={hasError || isLoading}>

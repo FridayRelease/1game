@@ -1,19 +1,19 @@
 import React, { FC, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { IUserDTO } from '@/api/types';
 import Avatar from '@/components/avatar/avatar';
 import Menu from '@/components/profile/menu';
-import mockUser from '@/components/profile/mock';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
 import { ValidationProps } from '@/features/validation/validator';
 import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
-import IMenuEditProfilePassword from './password.interface';
 import { updatePassword } from '@/controllers/user-controllers';
 import { IUserUpdatePasswordRequest } from '@/types/user';
 import { LoadingSelectors } from '@/store/slices/loading-slice';
 import { errorSelectors } from '@/store/slices/error-slice';
-import { ProfileUrl } from '@/constant/router';
+import { userSelectors } from '@/features/authentication';
+import IMenuEditProfilePassword from './password.interface';
 import './password.scss';
 
 const userMenuData: IMenuEditProfilePassword[] = [
@@ -41,12 +41,12 @@ const EditPassword: FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const userState = useSelector(userSelectors.user);
   const { isLoading } = useSelector(LoadingSelectors.all);
   const { error } = useSelector(errorSelectors.all);
 
-  useEffect(() => {
-    console.log('is loading', isLoading);
-  }, [isLoading]);
+  const { first_name, second_name } = userState.info as IUserDTO;
 
   const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
@@ -56,7 +56,7 @@ const EditPassword: FC = () => {
 
   return (
     <div className="profile-password">
-      <Avatar>{`${mockUser.name} ${mockUser.secondName}`}</Avatar>
+      <Avatar>{`${first_name} ${second_name}`}</Avatar>
 
       <div className="profile-password__content">
         <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">

@@ -5,10 +5,10 @@ import Avatar from '@/components/avatar';
 import Button from '@/components/button/button';
 import { userActions, userSelectors } from '@/features/authentication';
 import { IUserDTO } from '@/api/types';
+import { signout } from '@/controllers/user-controllers';
 import { IMenuData, IMenuItem } from './profile.interface';
 import Menu from './menu';
 import './profile.scss';
-import { signout } from '@/controllers/user-controllers';
 
 const Profile: FC = () => {
   const navigate = useNavigate();
