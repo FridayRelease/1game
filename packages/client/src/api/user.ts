@@ -1,4 +1,9 @@
-import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
+import {
+  IUserSigninRequest,
+  IUserSignupRequest,
+  IUserUpdateDataRequest,
+  IUserUpdatePasswordRequest,
+} from '@/types/user';
 import { HttpClient } from './http-client';
 import { IUserDTO, SignUpResponseDTO } from '@/api/types';
 
@@ -23,6 +28,18 @@ export class UserApi {
     // Выход
     return await this.http.post('/logout');
   }
+
+  updateData = async (data: IUserUpdateDataRequest) => {
+    return await this.http.put<IUserDTO>('/user/profile', data);
+  };
+
+  updatePassword = async (data: IUserUpdatePasswordRequest) => {
+    return await this.http.put('/user/password', data);
+  };
+
+  updateAvatar = async (file: File) => {
+    return await this.http.put<IUserDTO>('/user/profile/avatar', file);
+  };
 
   userInfo = async () => {
     // Получить информацию о пользователе

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-type AllowedData = FormData | string | object | null;
+type AllowedData = FormData | File | string | object | null;
 
 export class HttpClient {
   private axios;
@@ -20,5 +20,9 @@ export class HttpClient {
 
   public post<T>(url: string, data?: AllowedData) {
     return this.axios.post<T>(url, data);
+  }
+
+  public put<T>(url: string, data: AllowedData) {
+    return this.axios.put<T>(url, data);
   }
 }
