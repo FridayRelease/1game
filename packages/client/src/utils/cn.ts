@@ -16,9 +16,7 @@ function cn(...args: Argument[]): string {
     }
     if (typeof current === 'object' && current !== null) {
       const keys = Object.keys(current).filter(
-        key =>
-          Object.prototype.hasOwnProperty.call(current, key) &&
-          current[key] === true
+        key => Object.prototype.hasOwnProperty.call(current, key) && current[key] === true
       );
       return prev.concat(keys);
     }

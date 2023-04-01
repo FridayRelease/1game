@@ -18,15 +18,7 @@ import { cn } from '@/utils/cn';
  * @category page
  */
 const Login: FC = () => {
-  const {
-    values,
-    hasError,
-    onChangeForm,
-    getFieldProps,
-    getFieldError,
-    onBlurInput,
-    validate,
-  } = useForm({
+  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput, validate } = useForm({
     initValues,
     validationSchema,
   });
@@ -52,11 +44,7 @@ const Login: FC = () => {
         <div className="login__box">
           <img src={Logotype} alt="Battle city" className="login__logotype" />
 
-          <form
-            onChange={onChangeForm}
-            onSubmit={onSubmitForm}
-            className="login-form"
-            autoComplete="off">
+          <form onChange={onChangeForm} onSubmit={onSubmitForm} className="login-form" autoComplete="off">
             <div className="content-box login-form__box">
               <h1 className="login__title">Войдите в аккаунт</h1>
               <Input
@@ -74,11 +62,7 @@ const Login: FC = () => {
                 onBlur={onBlurInput}
                 className="login-form__input-box"
               />
-              <Button
-                disabled={hasError}
-                type="submit"
-                view="primary"
-                className="login-form__button">
+              <Button disabled={hasError} type="submit" view="primary" className="login-form__button">
                 Войти
               </Button>
               <Link to="/signup" className="login-form__registration">

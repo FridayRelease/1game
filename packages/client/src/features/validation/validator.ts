@@ -28,10 +28,7 @@ class Validator {
   }
 
   isValidPhone(value: string): boolean {
-    return this.isValidByRegex(
-      /^\+?[78][-(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/,
-      value
-    );
+    return this.isValidByRegex(/^\+?[78][-(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/, value);
   }
 
   isValidByRegex(regex: RegExp | RegExp[], value: string): boolean {
@@ -74,9 +71,7 @@ class Validator {
     }
 
     if (RULES.includes('isRetryPassword') && option['isRetryPassword']) {
-      const password = document.getElementsByName(
-        option['isRetryPassword']
-      )[0] as HTMLInputElement;
+      const password = document.getElementsByName(option['isRetryPassword'])[0] as HTMLInputElement;
 
       if (password && value !== password['value']) {
         return `Пароли не совпадают`;

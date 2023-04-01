@@ -4,11 +4,8 @@ import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
 import { userActions } from './user-slice';
 import { Effect, takeEvery, put, call, takeLatest } from 'redux-saga/effects';
 import { signin, signup, userFullInfo } from '@/controllers/user-controllers';
-import {
-  UserResponseInfo,
-  NavigateSagaProps,
-  PropsWithNavigator,
-} from './types';
+import { UserResponseInfo, NavigateSagaProps, PropsWithNavigator } from './types';
+import { LoginUrl, MainUrl } from '@/constant/router';
 
 function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
   const { navigate } = payload;
@@ -26,15 +23,13 @@ function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
       })
     );
 
-    navigate('/login');
+    navigate(LoginUrl);
   } finally {
     yield put(LoadingActions.setIsLoading(false));
   }
 }
 
-function* signinSage({
-  payload,
-}: Effect<string, PropsWithNavigator<IUserSigninRequest>>) {
+function* signinSage({ payload }: Effect<string, PropsWithNavigator<IUserSigninRequest>>) {
   const { props, navigate } = payload;
   yield put(LoadingActions.setIsLoading(true));
 
@@ -45,7 +40,7 @@ function* signinSage({
 
     yield put(userActions.setUser(user));
 
-    navigate('/');
+    navigate(MainUrl);
   } catch (error) {
     yield put(
       errorActions.setError({
@@ -58,9 +53,7 @@ function* signinSage({
   }
 }
 
-function* signupSage({
-  payload,
-}: Effect<string, PropsWithNavigator<IUserSignupRequest>>) {
+function* signupSage({ payload }: Effect<string, PropsWithNavigator<IUserSignupRequest>>) {
   const { props, navigate } = payload;
 
   yield put(LoadingActions.setIsLoading(true));
@@ -70,7 +63,7 @@ function* signupSage({
 
     yield put(userActions.setUser(user));
 
-    navigate('/');
+    navigate(MainUrl);
   } catch (error) {
     if (error instanceof Error) {
       yield put(

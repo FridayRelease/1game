@@ -20,9 +20,4 @@ type IUserDTO = {
   avatar: string | null;
 };
 
-export {
-  type ErrorResponse,
-  type StatusResponse,
-  type SignUpResponseDTO,
-  type IUserDTO,
-};
+export { type ErrorResponse, type StatusResponse, type SignUpResponseDTO, type IUserDTO };
