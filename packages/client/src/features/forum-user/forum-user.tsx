@@ -4,7 +4,10 @@ import { Chats } from '../../mock/mock-data-chat';
 import foto from '../../mock/currentUser.jpg';
 import { currentUser } from '../../mock/mock-data-forum';
 import { useParams } from 'react-router-dom';
-
+/**
+ Чат одного пользователя
+ @category page
+ */
 function ForumUser() {
   const { id } = useParams();
   console.log('userId = ', id);

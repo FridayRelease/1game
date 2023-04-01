@@ -1,6 +1,9 @@
 import './forum-user-comp.scss';
 import { chatMessage } from '../../../mock/mock-data-chat';
-
+/**
+ Компонент для отрисовки одного сообщения пользователя
+ @category component
+ */
 function ForumUserComp(mess: chatMessage) {
   const { message, user, data } = mess;
 

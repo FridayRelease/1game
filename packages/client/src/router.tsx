@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: 'forum',
+    path: 'Forum',
     element: (
       <ErrorBoundary>
         <Forum />

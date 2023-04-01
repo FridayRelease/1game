@@ -4,7 +4,10 @@ import ButtonNew from '../../components/button-new/button-new';
 import { Messages, currentUser } from '../../mock/mock-data-forum';
 import foto from '../../mock/currentUser.jpg';
 import plusInRing from '../../assets/images/create.png';
-
+/**
+ Список чатов форума
+ @category page
+ */
 function Forum() {
   const listItems = Messages.map((message, index) => (
     <ForumComp
