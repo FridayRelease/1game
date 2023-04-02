@@ -4,3 +4,4 @@ export const MainUrl = generatePath('/');
 export const ForumUrl = generatePath('/forum');
 export const LoginUrl = generatePath('/login');
 export const SignupUrl = generatePath('/signup');
+export const LeaderboardUrl = generatePath('/leaderboard');

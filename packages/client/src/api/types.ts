@@ -20,4 +20,10 @@ type IUserDTO = {
   avatar: string | null;
 };
 
-export { type ErrorResponse, type StatusResponse, type SignUpResponseDTO, type IUserDTO };
+type LeaderboardListDTO = {
+  id: number;
+  name: string;
+  score: number;
+}[];
+
+export { type ErrorResponse, type StatusResponse, type SignUpResponseDTO, type IUserDTO, type LeaderboardListDTO };

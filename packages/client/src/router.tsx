@@ -4,7 +4,8 @@ import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
-import { MainUrl, LoginUrl, SignupUrl } from './constant/router';
+import { MainUrl, LoginUrl, SignupUrl, LeaderboardUrl } from './constant/router';
+import Leaderboard from './pages/leaderboard';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: SignupUrl,
     element: <Signup />,
+  },
+  {
+    path: LeaderboardUrl,
+    element: <Leaderboard />,
   },
 ]);
 
