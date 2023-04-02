@@ -1,6 +1,6 @@
 interface PositionProps {
   testId?: string;
-  position?: number;
+  position: number;
   className?: string;
 }
 
