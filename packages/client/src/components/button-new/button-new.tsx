@@ -23,12 +23,7 @@ const ButtonNew = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   disabled = false,
 }: ButtonNewProps) => (
-  <button
-    id={id}
-    className={className}
-    onClick={onClick}
-    name={name}
-    type={type}>
+  <button id={id} className={className} onClick={onClick} name={name} type={type}>
     {children}
   </button>
 );

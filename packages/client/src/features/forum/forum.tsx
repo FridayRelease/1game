@@ -45,11 +45,7 @@ function Forum() {
           <label className="red">Ф</label>
           <label className="white">ОРУМ</label>
         </div>
-        <ButtonNew
-          className="forum-button right"
-          children={children}
-          onClick={createChat}
-        />
+        <ButtonNew className="forum-button right" children={children} onClick={createChat} />
       </div>
       <div className="forum-messages row">{listItems}</div>
     </div>

@@ -6,16 +6,15 @@ import { useNavigate } from 'react-router-dom';
  @category component
  */
 
-
 function ForumComp(mess: forumMessage) {
   const { chatId, message, user, data, quantity } = mess;
   const navigate = useNavigate();
-  function goForum (chatId:string | number) {navigate(`/forum/${chatId}`)}
+  function goForum(chatId: string | number) {
+    navigate(`/forum/${chatId}`);
+  }
 
   return (
-    <div
-      className="forum-comp forum-comp-column"
-      onClick={()=>goForum(chatId)}>
+    <div className="forum-comp forum-comp-column" onClick={() => goForum(chatId)}>
       <div className="forum-message">{message}</div>
       <div className="forum-info row">
         <div className="forum-user">{user}</div>
