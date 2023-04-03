@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IUserDTO } from '@/api/types';
-import Avatar from '@/components/avatar/avatar';
+import UserAvatar from '@/components/user-avatar';
 import Menu from '@/components/profile/menu';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
@@ -54,12 +54,14 @@ const EditPassword: FC = () => {
   const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
 
-    await updatePassword({ data: values as IUserUpdatePasswordRequest, navigate, dispatch });
+    const data: IUserUpdatePasswordRequest = {oldPassword: values.old_password, newPassword: values.new_password};
+
+    await updatePassword({ data, navigate, dispatch });
   };
 
   return (
     <div className="profile-password">
-      <Avatar>{`${first_name} ${second_name}`}</Avatar>
+      <UserAvatar>{`${first_name} ${second_name}`}</UserAvatar>
 
       <div className="profile-password__content">
         <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">

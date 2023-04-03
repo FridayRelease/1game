@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Avatar from '@/components/avatar/avatar';
+import UserAvatar from '@/components/user-avatar';
 import Menu from '@/components/profile/menu';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
@@ -87,7 +87,7 @@ const EditProfile: FC = () => {
 
   return (
     <div className="profile-edit">
-      <Avatar editable onClick={onStartEditAvatar}>{`${first_name} ${second_name}`}</Avatar>
+      <UserAvatar editable onClick={onStartEditAvatar}>{`${first_name} ${second_name}`}</UserAvatar>
 
       <div className="profile-edit__content">
         <form onChange={onChangeForm} onSubmit={onSubmitForm} autoComplete="off">

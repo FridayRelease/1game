@@ -23,13 +23,12 @@ export class HttpClient {
   }
 
   public put<T>(url: string, data: AllowedData) {
+    const options = {} as AxiosRequestConfig<any>;
+
     if (data instanceof FormData) {
-      return axios.put(`${this.prefixUrl}${url}`, data, {
-        withCredentials: true,
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      options.headers = { 'Content-Type': 'multipart/form-data' };
     }
 
-    return this.axios.put<T>(url, data);
+    return this.axios.put<T>(url, data, options);
   }
 }

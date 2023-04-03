@@ -1,9 +1,8 @@
-interface IAvatar {
-  avatar: string | null;
+interface IUserAvatar {
   className?: string;
   editable?: boolean;
   children?: string;
   onClick?: () => void;
 }
 
-export default IAvatar;
+export default IUserAvatar;

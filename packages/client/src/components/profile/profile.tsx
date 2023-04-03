@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Avatar from '@/components/avatar';
+import UserAvatar from '@/components/user-avatar';
 import Button from '@/components/button/button';
 import { userSelectors } from '@/features/authentication';
 import { IUserDTO } from '@/api/types';
@@ -10,6 +10,7 @@ import useResetState from '@/hooks/use-reset-state';
 import { IMenuData, IMenuItem } from './profile.interface';
 import Menu from './menu';
 import './profile.scss';
+
 
 const Profile: FC = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Profile: FC = () => {
 
   return (
     <div className="profile">
-      <Avatar>{`${first_name} ${second_name}`}</Avatar>
+      <UserAvatar>{`${first_name} ${second_name}`}</UserAvatar>
 
       <div className="profile__content">
         {menus.map(({ className, title, data, onClick }) => (

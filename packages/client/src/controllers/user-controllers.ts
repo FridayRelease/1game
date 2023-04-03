@@ -11,6 +11,7 @@ import { LoadingActions } from '@/store/slices/loading-slice';
 import { IErrorState, errorActions } from '@/store/slices/error-slice';
 import { userActions } from '@/features/authentication';
 import { ProfileUrl } from '@/constant/router';
+import { Status } from '@/api/types';
 
 const request = async (req: () => Promise<void>, error: IErrorState, dispatch: Dispatch<AnyAction>) => {
   dispatch(LoadingActions.setIsLoading(true));
@@ -65,7 +66,7 @@ const updateProfileData = ({
   const req = async () => {
     const response = await userApi.updateData(data);
 
-    if (response.status === 200) {
+    if (response.status === Status.SUCCESS) {
       dispatch(userActions.setUser(response.data));
       navigate(ProfileUrl);
     }
@@ -91,7 +92,7 @@ const updatePassword = async ({
   const req = async () => {
     const response = await userApi.updatePassword(data);
 
-    if (response.status === 200) {
+    if (response.status === Status.SUCCESS) {
       navigate(ProfileUrl);
     }
   };
@@ -126,7 +127,7 @@ const signout = (navigate: NavigateFunction, dispatch: Dispatch<AnyAction>) => {
 
   const error = {
     title: 'Что-то пошло не так...',
-    description: 'Попробуйте обновить аватар еще раз',
+    description: 'Попробуйте разлогиниться ещё раз',
   };
 
   return request(req, error, dispatch);
