@@ -23,32 +23,32 @@
 .forum-user {
   width: 159px;
   height: 19px;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: #757575;
+  color: var(--dackGrey);
 }
 .forum-data {
   width: 123px;
   height: 19px;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: #757575;
+  color: var(--dackGrey);
 }
 .forum-quantity {
   width: 12px;
   height: 19px;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: #757575;
+  color: var(--dackGrey);
 }
 
 .forum-comp-column {
@@ -64,5 +64,5 @@
   justify-items: center;
 }
 .white {
-  color: white;
+  color: var(--white);
 }

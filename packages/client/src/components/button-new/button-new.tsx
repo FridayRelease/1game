@@ -1,4 +1,3 @@
-import './button-new.scss';
 import { MouseEventHandler, ReactElement } from 'react';
 
 type ButtonType = 'button' | 'submit' | 'reset';

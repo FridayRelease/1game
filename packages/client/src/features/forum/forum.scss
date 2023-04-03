@@ -29,7 +29,7 @@
   width: 208px;
   height: 60px;
   margin-left: 50px;
-  font-family: Joystix, sans-serif;
+  font-family:var(--font-face);
   font-style: normal;
   font-weight: 400;
   font-size: 50px;
@@ -55,7 +55,7 @@
 
 .forum-current-user {
   width: 100%;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -73,7 +73,7 @@
 .label-user {
   width: 32px;
   height: 15px;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 400;
   font-size: 12px;

@@ -14,7 +14,7 @@
   justify-content: space-around;
 }
 font {
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-size: 26px;
   font-weight: 500;
   line-height: 31px;
@@ -36,32 +36,32 @@ font {
 .forum-user {
   width: 159px;
   height: 19px;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: #757575;
+  color: var(--dackGrey);
 }
 .forum-data {
   width: 123px;
   height: 19px;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: #757575;
+  color: var(--dackGrey);
 }
 .forum-quantity {
   width: 12px;
   height: 19px;
-  font-family: Inter, sans-serif;
+  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: #757575;
+  color: var(--dackGrey);
 }
 
 .forum-user-comp-column {
@@ -78,5 +78,5 @@ font {
   justify-items: center;
 }
 .white {
-  color: white;
+  color: var(--white);
 }
