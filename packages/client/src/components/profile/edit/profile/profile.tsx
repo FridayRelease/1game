@@ -50,12 +50,12 @@ const EditProfile: FC = () => {
   useResetState();
 
   const userMenuData: IMenuEditProfileData[] = [
-    { key: 'Имя', name: 'first_name', value: first_name },
-    { key: 'Фамилия', name: 'second_name', value: second_name },
-    { key: 'Логин', name: 'login', value: login },
-    { key: 'Email', name: 'email', value: email },
-    { key: 'Телефон', name: 'phone', value: phone },
-    { key: 'Имя в чате', name: 'display_name', value: display_name },
+    { label: 'Имя', name: 'first_name', value: first_name },
+    { label: 'Фамилия', name: 'second_name', value: second_name },
+    { label: 'Логин', name: 'login', value: login },
+    { label: 'Email', name: 'email', value: email },
+    { label: 'Телефон', name: 'phone', value: phone },
+    { label: 'Имя в чате', name: 'display_name', value: display_name },
   ];
 
   const initValues = userMenuData.reduce((acc, { name, value }) => {
@@ -98,10 +98,10 @@ const EditProfile: FC = () => {
             type={MenuType.SUBMIT}
             disabled={hasError || isLoading}>
             <div className="profile-edit__menu-content">
-              {userMenuData.map(({ key, name }) => (
-                <React.Fragment key={key}>
+              {userMenuData.map(({ label, name }) => (
+                <React.Fragment key={label}>
                   <label className="profile-edit__label">
-                    {key}
+                    {label}
                     <Input {...getFieldProps(name)} error={getFieldError(name)} onBlur={onBlurInput} />
                   </label>
                 </React.Fragment>

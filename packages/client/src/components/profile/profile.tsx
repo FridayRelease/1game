@@ -11,7 +11,6 @@ import { IMenuData, IMenuItem } from './profile.interface';
 import Menu from './menu';
 import './profile.scss';
 
-
 const Profile: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,15 +21,15 @@ const Profile: FC = () => {
   useResetState();
 
   const userMenuData: IMenuData[] = [
-    { key: 'Имя', value: first_name },
-    { key: 'Фамилия', value: second_name },
-    { key: 'Логин', value: login },
-    { key: 'Email', value: email },
-    { key: 'Телефон', value: phone },
-    { key: 'Имя в чате', value: display_name },
+    { label: 'Имя', value: first_name },
+    { label: 'Фамилия', value: second_name },
+    { label: 'Логин', value: login },
+    { label: 'Email', value: email },
+    { label: 'Телефон', value: phone },
+    { label: 'Имя в чате', value: display_name },
   ];
 
-  const userMenuPassword: IMenuData[] = [{ key: 'Пароль', value: '********' }];
+  const userMenuPassword: IMenuData[] = [{ label: 'Пароль', value: '********' }];
 
   const menus: IMenuItem[] = [
     {
@@ -60,9 +59,9 @@ const Profile: FC = () => {
           <Menu key={title} className={className} title={title} onClick={onClick}>
             <div className="profile__menu-content">
               <dl>
-                {data.map(({ key, value }) => (
-                  <React.Fragment key={key}>
-                    <dt className="profile__label">{key}</dt>
+                {data.map(({ label, value }) => (
+                  <React.Fragment key={label}>
+                    <dt className="profile__label">{label}</dt>
                     <dd className="profile__value">{value}</dd>
                   </React.Fragment>
                 ))}

@@ -6,6 +6,6 @@ export interface IMenuItem {
 }
 
 export interface IMenuData {
-  key: string;
+  label: string;
   value: string | null;
 }

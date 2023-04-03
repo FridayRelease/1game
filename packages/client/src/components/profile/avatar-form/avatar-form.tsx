@@ -36,7 +36,7 @@ const AvatarForm: FC<IAvatarForm> = ({ onClose }) => {
               </p>
               {isError && pathName && <p className="avatar-popup__upload-error">Ошибка, попробуйте ещё раз</p>}
 
-              <label className={cn({ 'avatar-popup__path': !!pathName })}>
+              <label>
                 Выбрать файл на компьютере
                 <input type="file" onInput={onInput} accept="image/*" />
               </label>
@@ -50,7 +50,7 @@ const AvatarForm: FC<IAvatarForm> = ({ onClose }) => {
                   height={AVATAR_SIZE * 2}
                   scale={2}
                   color={[255, 255, 255, 0.7]}
-                  borderRadius={(AVATAR_SIZE * 2) / 2}
+                  borderRadius={AVATAR_SIZE}
                 />
               )}
 

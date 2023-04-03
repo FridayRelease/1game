@@ -9,6 +9,7 @@
 
 :root {
   --main-font-family: 'Inter', sans-serif;
+  --game-font-family: 'Joystix', sans-serif;
   --main-bg-success: #1fad58;
   --main-bg-alert: #de2900;
   --main-bg-attention: #f4bf00;
@@ -47,6 +48,8 @@
 
   --main-container: 1440px;
   --main-border-radius: 20px;
+
+  --popup-background-color: rgba(255, 255, 255, 0.4);
 }
 
 * {

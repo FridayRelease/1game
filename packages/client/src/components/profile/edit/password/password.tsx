@@ -18,9 +18,9 @@ import IMenuEditProfilePassword from './password.interface';
 import './password.scss';
 
 const userMenuData: IMenuEditProfilePassword[] = [
-  { key: 'Старый пароль', name: 'old_password' },
-  { key: 'Новый пароль', name: 'new_password' },
-  { key: 'Повторите пароль', name: 'new_password_extra' },
+  { label: 'Старый пароль', name: 'old_password' },
+  { label: 'Новый пароль', name: 'new_password' },
+  { label: 'Повторите пароль', name: 'new_password_extra' },
 ];
 
 const validationSchema: Record<string, ValidationProps> = {
@@ -72,10 +72,10 @@ const EditPassword: FC = () => {
             type={MenuType.SUBMIT}
             disabled={hasError || isLoading}>
             <div className="profile-password__menu-content">
-              {userMenuData.map(({ key, name }) => (
-                <React.Fragment key={key}>
+              {userMenuData.map(({ label, name }) => (
+                <React.Fragment key={label}>
                   <label className="profile-password__label">
-                    {key}
+                    {label}
                     <Input {...getFieldProps(name)} error={getFieldError(name)} onBlur={onBlurInput} />
                   </label>
                 </React.Fragment>

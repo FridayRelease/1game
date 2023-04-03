@@ -12,13 +12,17 @@ const Menu: FC<IMenu> = ({
   disabled,
   onClick,
 }) => {
+  const buttonClassName = cn('profile-menu__button', `profile-menu__button--${state}`);
+  const buttonType = type === MenuType.SUBMIT ? 'submit' : 'button';
+  const buttonDisabled = disabled ?? state === MenuState.ERROR;
+
   return (
     <div className={cn(className, 'profile-menu')}>
       {children}
       <button
-        className={cn('profile-menu__button', `profile-menu__button--${state}`)}
-        type={type === MenuType.SUBMIT ? 'submit' : 'button'}
-        disabled={disabled ?? state === MenuState.ERROR}
+        className={buttonClassName}
+        type={buttonType}
+        disabled={buttonDisabled}
         onClick={onClick}>
         {title}
       </button>

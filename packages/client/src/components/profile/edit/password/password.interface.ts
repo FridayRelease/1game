@@ -1,5 +1,5 @@
 interface IMenuEditProfilePassword {
-  key: string;
+  label: string;
   name: string;
 }
 

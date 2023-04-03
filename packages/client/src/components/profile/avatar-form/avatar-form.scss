@@ -7,7 +7,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: var(--popup-background-color);
   }
 
   &-wrapper {
@@ -60,13 +60,6 @@
     input {
       display: none;
     }
-  }
-
-  &__path {
-    font-size: 14px;
-    line-height: 16px;
-    color: #8d8d8d;
-    text-decoration: none;
   }
 
   &__error {
