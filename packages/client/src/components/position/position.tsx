@@ -1,9 +1,9 @@
 import { PositionProps } from './types';
-import IconCrown from '../icons/crown';
+import { ReactComponent as IconCrown } from '@/assets/images/icons/crown.svg';
 
 const Position = ({ position, className }: PositionProps) => {
   const color = ['gold', 'silver', 'bronze'][position - 1];
-  const content = color ? <IconCrown fillColor={`var(--${color})`} /> : position;
+  const content = color ? <IconCrown fill={`var(--${color})`} /> : position;
 
   return <div className={className}>{content}</div>;
 };
