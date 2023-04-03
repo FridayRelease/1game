@@ -1,4 +1,3 @@
-// import { LeaderboardListProps } from './types';
 import { LeaderboardListDTO } from '@/api/types';
 import Position from '../position';
 import './leaderboard-list.scss';
