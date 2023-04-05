@@ -1,12 +1,7 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
-import { loadSpriteSheet } from '../loaders';
 import { SpriteSheet } from '../spritesheet';
 import { Go } from '../traits/go';
-
-function loadTank(): Promise<() => Entity> {
-  return loadSpriteSheet('tank').then(createTankFactory);
-}
 
 function createTankFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-top');
@@ -47,4 +42,4 @@ function createTankFactory(sprite: SpriteSheet) {
   };
 }
 
-export { loadTank };
+export { createTankFactory };

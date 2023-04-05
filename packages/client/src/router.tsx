@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { RequireAuth } from '@/features/authentication';
-import { Game } from './pages/game';
+import GamePage from './pages/game';
 import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: GameUrl,
-    element: <Game />,
+    element: <GamePage />,
   },
   {
     path: SignupUrl,

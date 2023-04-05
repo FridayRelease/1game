@@ -1,6 +1,9 @@
+import { memo } from 'react';
+
 import { Game } from '../../features/game';
 import './game.css';
-function App() {
+
+function GamePage() {
   return (
     <div className="App">
       <Game />
@@ -8,4 +11,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(GamePage);

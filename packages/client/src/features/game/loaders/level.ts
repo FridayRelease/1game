@@ -1,51 +1,27 @@
 import { Level } from '../level';
 import { createBackgroundLayer, createSpriteLayer } from '../layers';
-import {
-  ITileDto,
-  ILevelDTO,
-  IPattern,
-  IExpandedTile,
-  EntityFactoryCallback,
-} from '../types';
-import { loadJson, loadSpriteSheet } from '../loaders';
+import { IExpandedTile, EntityFactoryCallback } from '../types';
 import { Matrix } from '../math';
 import { SpriteSheet } from '../spritesheet';
+import { ITileDTO, ILevelDTO, IPatternDTO } from '@/api/types';
 
 function setupCollision(levelSpec: ILevelDTO, level: Level) {
-  const mergedTiles = levelSpec.layers.reduce<Array<ITileDto>>(
-    (mergedTiles, layerSpec) => {
-      return mergedTiles.concat(layerSpec.tiles);
-    },
-    []
-  );
+  const mergedTiles = levelSpec.layers.reduce<Array<ITileDTO>>((mergedTiles, layerSpec) => {
+    return mergedTiles.concat(layerSpec.tiles);
+  }, []);
   const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
   level.setCollisionGrid(collisionGrid);
 }
 
-function setupBackgrounds(
-  levelSpec: ILevelDTO,
-  level: Level,
-  backgroundSprites: SpriteSheet
-) {
+function setupBackgrounds(levelSpec: ILevelDTO, level: Level, backgroundSprites: SpriteSheet) {
   levelSpec.layers.forEach(layer => {
-    const backgroundGrid = createBackgroundGrid(
-      layer.tiles,
-      levelSpec.patterns
-    );
-    const backgroundLayer = createBackgroundLayer(
-      level,
-      backgroundGrid,
-      backgroundSprites
-    );
+    const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
+    const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
     level.comp.push(backgroundLayer);
   });
 }
 
-function setupEntities(
-  levelSpec: ILevelDTO,
-  level: Level,
-  entityFactory: Record<string, EntityFactoryCallback>
-) {
+function setupEntities(levelSpec: ILevelDTO, level: Level, entityFactory: Record<string, EntityFactoryCallback>) {
   levelSpec.entities.forEach(({ name, pos: [x, y] }) => {
     const createEntity = entityFactory[name];
     const entity = createEntity();
@@ -57,28 +33,7 @@ function setupEntities(
   level.comp.push(spriteLayer);
 }
 
-function createLevelLoader(
-  entityFactory: Record<string, EntityFactoryCallback>
-) {
-  return function loadLevel(name: string): Promise<Level> {
-    console.log(name);
-    return loadJson<ILevelDTO>(`levels/${name}.json`)
-      .then(levelSpec =>
-        Promise.all([levelSpec, loadSpriteSheet(levelSpec.spriteSheet)])
-      )
-      .then(([levelSpec, backgroundSprites]) => {
-        const level = new Level();
-
-        setupCollision(levelSpec, level);
-        setupBackgrounds(levelSpec, level, backgroundSprites);
-        setupEntities(levelSpec, level, entityFactory);
-
-        return level;
-      });
-  };
-}
-
-function createCollisionGrid(tiles: Array<ITileDto>, patterns: IPattern) {
+function createCollisionGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
   const grid = new Matrix();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
@@ -90,7 +45,7 @@ function createCollisionGrid(tiles: Array<ITileDto>, patterns: IPattern) {
   return grid;
 }
 
-function createBackgroundGrid(tiles: Array<ITileDto>, patterns: IPattern) {
+function createBackgroundGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
   const grid = new Matrix();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
@@ -102,12 +57,7 @@ function createBackgroundGrid(tiles: Array<ITileDto>, patterns: IPattern) {
   return grid;
 }
 
-function* expandSpan(
-  xStart: number,
-  xLen: number,
-  yStart: number,
-  yLen: number
-) {
+function* expandSpan(xStart: number, xLen: number, yStart: number, yLen: number) {
   const xEnd = xStart + xLen;
   const yEnd = yStart + yLen;
 
@@ -138,12 +88,8 @@ function* expandRanges(ranges: Array<Array<number>>) {
   }
 }
 
-function* expandTiles(tiles: Array<ITileDto>, patterns: IPattern) {
-  function* walkTiles(
-    tiles: Array<ITileDto>,
-    offsetX: number,
-    offsetY: number
-  ): Generator<IExpandedTile> {
+function* expandTiles(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
+  function* walkTiles(tiles: Array<ITileDTO>, offsetX: number, offsetY: number): Generator<IExpandedTile> {
     for (const tile of tiles) {
       for (const { x, y } of expandRanges(tile.ranges)) {
         const derivedX = x + offsetX;
@@ -166,4 +112,4 @@ function* expandTiles(tiles: Array<ITileDto>, patterns: IPattern) {
   yield* walkTiles(tiles, 0, 0);
 }
 
-export { createLevelLoader };
+export { setupCollision, setupBackgrounds, setupEntities };
