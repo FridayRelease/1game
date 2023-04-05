@@ -1,0 +1,123 @@
+.forum-user-page {
+  max-width: 1728px;
+  max-height: 1104px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--black);
+}
+.column {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+.forum-title-create {
+  margin-top: 50px;
+  height: 80px;
+}
+.forum-user-messages {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+}
+.forum-title {
+  width: 208px;
+  height: 60px;
+  margin-left: 50px;
+  font-family: var(--font-face);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 60px;
+  /* identical to box height */
+}
+.red {
+  color: var(--red);
+}
+.white {
+  color: white;
+}
+.forum-user-button {
+  box-sizing: border-box;
+  width: 181px;
+  height: 43px;
+  border: 1px solid var(--white);
+  color: var(--white);
+  border-radius: 90px;
+  margin-left: auto;
+  margin-right: 50px;
+  background-color: var(--black);
+}
+
+.forum-user-current-user {
+  width: 100%;
+  background-color: var(--black);
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--wtite);
+  margin-top: 100px;
+}
+.current-user-foto {
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid var(--white);
+}
+.label-user {
+  width: 32px;
+  height: 15px;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--white);
+  margin-left: 20px;
+}
+.forum-create-module {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.ring {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+.forum-user-message {
+  max-width: 800px;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+.forum-user-input {
+  background-color: var(--base-bg-600);
+  max-width: 500px;
+  width: 50%;
+  height: 43px;
+  border: 1px solid var(--white);
+  border-radius: 30px;
+  color: var(--black);
+}
+.forum-user-button {
+  color: var(--white);
+  border: 1px solid var(--white);
+  border-radius: 30px;
+  max-width: 150px;
+  width: 25%;
+  height: 43px;
+}

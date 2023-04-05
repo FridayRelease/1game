@@ -5,6 +5,9 @@ import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
 import { MainUrl, LoginUrl, SignupUrl, LeaderboardUrl } from './constant/router';
+import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
+import Forum from '@/features/forum/forum';
+import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
 
 const router = createBrowserRouter([
@@ -24,6 +27,22 @@ const router = createBrowserRouter([
   {
     path: SignupUrl,
     element: <Signup />,
+  },
+  {
+    path: 'Forum',
+    element: (
+      <ErrorBoundary>
+        <Forum />
+      </ErrorBoundary>
+    ),
+  },
+  {
+    path: 'forum/:id',
+    element: (
+      <ErrorBoundary>
+        <ForumUser />
+      </ErrorBoundary>
+    ),
   },
   {
     path: LeaderboardUrl,
