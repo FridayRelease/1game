@@ -33,6 +33,55 @@ type LeaderboardListDTO = {
   score: number;
 }[];
 
+interface IFrameDTO {
+  name: string;
+  rect: Array<number>;
+}
+
+interface IEntityDTO {
+  name: string;
+  pos: Array<number>;
+}
+
+interface ITileDTO {
+  name?: string;
+  type: string;
+  pattern?: string;
+  ranges: Array<number[]>;
+}
+
+interface ILayerDTO {
+  tiles: Array<ITileDTO>;
+}
+
+interface IPatternDTO {
+  [key: string]: {
+    tiles: Array<ITileDTO>;
+  };
+}
+
+interface ILevelDTO {
+  spriteSheet: string;
+  patterns: IPatternDTO;
+  layers: Array<ILayerDTO>;
+  entities: Array<IEntityDTO>;
+}
+
+interface IAnimationDTO {
+  name: string;
+  frameLen: number;
+  frames: Array<string>;
+}
+
+interface ISpriteSheetDTO {
+  imageUrl: string;
+  tileW: number;
+  tileH: number;
+  tiles?: Array<{ name: string; index: Array<number> }>;
+  frames?: Array<IFrameDTO>;
+  animations?: Array<IAnimationDTO>;
+}
+
 export {
   type ErrorResponse,
   type StatusResponse,
@@ -40,4 +89,9 @@ export {
   type IUserDTO,
   Status,
   type LeaderboardListDTO,
+  type ISpriteSheetDTO,
+  type IEntityDTO,
+  type ITileDTO,
+  type ILevelDTO,
+  type IPatternDTO,
 };

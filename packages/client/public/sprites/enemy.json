@@ -3,49 +3,60 @@
 
   "frames": [
     {
-      "name": "run-up-1",
+      "name": "run-top-1",
       "rect": [126, 0, 16, 16]
     },
     {
-      "name": "run-up-2",
-      "rect": [144, 0, 16, 16]
-    },
-    {
-      "name": "run-down-1",
-      "rect": [0, 0, 16, 16]
-    },
-    {
-      "name": "run-down-2",
-      "rect": [0, 0, 16, 16]
+      "name": "run-top-2",
+      "rect": [142, 0, 16, 16]
     },
     {
       "name": "run-left-1",
-      "rect": [34, 0, 16, 16]
+      "rect": [158, 0, 16, 16]
     },
     {
       "name": "run-left-2",
-      "rect": [34, 0, 16, 16]
+      "rect": [174, 0, 16, 16]
     },
     {
+      "name": "run-bottom-1",
+      "rect": [190, 0, 16, 16]
+    },
+    {
+      "name": "run-bottom-2",
+      "rect": [216, 0, 16, 16]
+    },
+
+    {
       "name": "run-right-1",
-      "rect": [94, 0, 16, 16]
+      "rect": [232, 0, 16, 16]
     },
     {
       "name": "run-right-2",
-      "rect": [94, 0, 16, 16]
+      "rect": [248, 0, 16, 16]
     }
   ],
 
   "animations": [
     {
-      "name": "run-up",
+      "name": "run-enemy-top-1",
       "frameLen": 6,
-      "frames": ["run-up-1", "run-up-2"]
+      "frames": ["run-top-1", "run-top-2"]
     },
     {
-      "name": "run-down",
+      "name": "run-bottom",
       "frameLen": 6,
-      "frames": ["run-down-1", "run-down-2"]
+      "frames": ["run-bottom-1", "run-bottom-2"]
+    },
+    {
+      "name": "run-left",
+      "frameLen": 6,
+      "frames": ["run-left-1", "run-left-2"]
+    },
+    {
+      "name": "run-right",
+      "frameLen": 6,
+      "frames": ["run-right-1", "run-right-2"]
     }
   ]
 }
