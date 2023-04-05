@@ -1,0 +1,50 @@
+.profile-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__content {
+    margin-top: 32px;
+    margin-bottom: 30px;
+    text-align: left;
+
+    .profile__menu:not(:last-child) {
+      margin-bottom: 26px;
+    }
+  }
+
+  &__menu {
+    &-content {
+      display: flex;
+      flex-direction: column;
+      padding: 47px 39px;
+
+      label:not(:last-child) {
+        margin-bottom: 18px;
+      }
+    }
+  }
+
+  &__label {
+    margin-bottom: 2px;
+    font-size: 14px;
+    color: var(--main-color-text-secondary);
+  }
+
+  &__value {
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--main-color-text);
+
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__upload-error {
+    margin: 10px 0 0 0;
+    font-size: 15px;
+    line-height: 20px;
+    color: var(--main-bg-alert);
+  }
+}

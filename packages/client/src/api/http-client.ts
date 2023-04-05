@@ -1,9 +1,9 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-type AllowedData = FormData | string | object | null;
+type AllowedData = FormData | File | string | object | null;
 
 export class HttpClient {
-  private axios;
+  private axios: AxiosInstance;
 
   constructor(private prefixUrl: string, config: AxiosRequestConfig = {}) {
     this.axios = axios.create({
@@ -20,5 +20,15 @@ export class HttpClient {
 
   public post<T>(url: string, data?: AllowedData) {
     return this.axios.post<T>(url, data);
+  }
+
+  public put<T>(url: string, data: AllowedData) {
+    const options = {} as AxiosRequestConfig<any>;
+
+    if (data instanceof FormData) {
+      options.headers = { 'Content-Type': 'multipart/form-data' };
+    }
+
+    return this.axios.put<T>(url, data, options);
   }
 }
