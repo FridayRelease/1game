@@ -3,7 +3,7 @@ import ForumComp from './components/forum-comp';
 import ButtonNew from '../../components/button-new/button-new';
 import { Messages, currentUser } from '../../mock/mock-data-forum';
 import foto from '../../mock/currentUser.jpg';
-import plusInRing from '../../assets/images/create.png';
+import plusInRing from '../../assets/images/create.svg';
 /**
  Список чатов форума
  @category page
