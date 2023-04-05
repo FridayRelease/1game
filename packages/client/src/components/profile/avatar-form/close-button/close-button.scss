@@ -1,0 +1,38 @@
+.close-button {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3px;
+    height: 15px;
+    background-color: var(--base-bg-white);
+    border-radius: 3px;
+    transition: background-color 150ms linear 0ms;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+@media (hover: hover) {
+  .close-button:hover {
+    &::before,
+    &::after {
+      background-color: var(--base-bg-300);
+    }
+  }
+}

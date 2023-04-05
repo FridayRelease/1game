@@ -41,6 +41,15 @@ export const userSlice = createSlice({
     setUser: (state, { payload }: PayloadAction<IUserDTO | null>) => {
       state.info = payload;
     },
+
+    signout: (
+      state,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      { payload }: PayloadAction<NavigateSagaProps>
+    ) => {
+      console.log('signout');
+      state.info = null;
+    },
   },
 });
 

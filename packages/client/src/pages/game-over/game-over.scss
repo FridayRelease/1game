@@ -1,0 +1,27 @@
+.game-over {
+  display: flex;
+  justify-content: center;
+
+  &-page {
+    display: flex;
+    min-height: 90vh;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    font-family: var(--game-font-family);
+  }
+
+  &__content {
+    max-width: 270px;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 40px;
+    margin: 0 0 133px 0;
+  }
+
+  &__hint {
+    font-size: 12px;
+    color: var(--main-bg-alert);
+  }
+}
