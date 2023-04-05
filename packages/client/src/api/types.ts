@@ -27,4 +27,17 @@ enum Status {
   UNEXPECTED_ERROR = 500,
 }
 
-export { type ErrorResponse, type StatusResponse, type SignUpResponseDTO, type IUserDTO, Status };
+type LeaderboardListDTO = {
+  id: number;
+  name: string;
+  score: number;
+}[];
+
+export {
+  type ErrorResponse,
+  type StatusResponse,
+  type SignUpResponseDTO,
+  type IUserDTO,
+  Status,
+  type LeaderboardListDTO,
+};

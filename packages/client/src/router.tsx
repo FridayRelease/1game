@@ -9,10 +9,11 @@ import EditRouter from './pages/edit-router';
 import EditProfile from './pages/edit-profile';
 import EditPassword from './pages/edit-password';
 import GameOver from './pages/game-over';
-import { MainUrl, LoginUrl, SignupUrl, ProfileUrl } from './constant/router';
+import { MainUrl, LoginUrl, SignupUrl, ProfileUrl, LeaderboardUrl } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
+import Leaderboard from './pages/leaderboard';
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
         <ForumUser />
       </ErrorBoundary>
     ),
+  },
+  {
+    path: LeaderboardUrl,
+    element: <Leaderboard />,
   },
 ]);
 

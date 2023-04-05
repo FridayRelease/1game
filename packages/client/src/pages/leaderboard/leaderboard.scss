@@ -1,0 +1,19 @@
+.leaderboard {
+  height: 90vh;
+  display: flex;
+  text-align: center;
+
+  &__logotype {
+    margin-bottom: 40px;
+  }
+
+  &__container {
+    font: 400 30px/1 var(--game-font-family);
+  }
+
+  &__title {
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-align: center;
+  }
+}

@@ -3,7 +3,7 @@ import { cn } from '@/utils/cn';
 import IAvatar from './avatar.interface';
 import './avatar.scss';
 
-const Avatar: FC<IAvatar> = ({avatar, className, children, editable = false, onClick }) => {
+const Avatar: FC<IAvatar> = ({ avatar, className, children, editable = false, onClick }) => {
   return (
     <div className={cn(className, 'avatar-wrapper', { editable })} onClick={onClick}>
       <div className="avatar" title={editable ? `${avatar ? 'Поменять' : 'Загрузить'} аватар` : undefined}>
