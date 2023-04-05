@@ -19,11 +19,7 @@ const Menu: FC<IMenu> = ({
   return (
     <div className={cn(className, 'profile-menu')}>
       {children}
-      <button
-        className={buttonClassName}
-        type={buttonType}
-        disabled={buttonDisabled}
-        onClick={onClick}>
+      <button className={buttonClassName} type={buttonType} disabled={buttonDisabled} onClick={onClick}>
         {title}
       </button>
     </div>

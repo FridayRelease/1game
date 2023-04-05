@@ -54,7 +54,7 @@ const EditPassword: FC = () => {
   const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
 
-    const data: IUserUpdatePasswordRequest = {oldPassword: values.old_password, newPassword: values.new_password};
+    const data: IUserUpdatePasswordRequest = { oldPassword: values.old_password, newPassword: values.new_password };
 
     await updatePassword({ data, navigate, dispatch });
   };

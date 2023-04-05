@@ -7,7 +7,7 @@ const useUserAvatar = () => {
   const userState = useSelector(userSelectors.user);
 
   const { avatar } = userState.info as IUserDTO;
-  const {avatar: src} = useAvatar(avatar);
+  const { avatar: src } = useAvatar(avatar);
 
   return { src };
 };
