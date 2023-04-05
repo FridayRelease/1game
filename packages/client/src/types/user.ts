@@ -12,4 +12,22 @@ interface IUserSignupRequest {
   phone: string;
 }
 
-export { type IUserSigninRequest, type IUserSignupRequest };
+interface IUserUpdateDataRequest {
+  first_name: string;
+  second_name: string;
+  login: string;
+  display_name: string;
+  phone: string;
+}
+
+interface IUserUpdatePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
+}
+
+export {
+  type IUserSigninRequest,
+  type IUserSignupRequest,
+  type IUserUpdateDataRequest,
+  type IUserUpdatePasswordRequest,
+};

@@ -20,4 +20,24 @@ type IUserDTO = {
   avatar: string | null;
 };
 
-export { type ErrorResponse, type StatusResponse, type SignUpResponseDTO, type IUserDTO };
+enum Status {
+  SUCCESS = 200,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  UNEXPECTED_ERROR = 500,
+}
+
+type LeaderboardListDTO = {
+  id: number;
+  name: string;
+  score: number;
+}[];
+
+export {
+  type ErrorResponse,
+  type StatusResponse,
+  type SignUpResponseDTO,
+  type IUserDTO,
+  Status,
+  type LeaderboardListDTO,
+};
