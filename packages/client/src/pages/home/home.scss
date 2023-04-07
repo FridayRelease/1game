@@ -3,9 +3,8 @@
   padding: 20px;
 
   &__header {
-    display: grid;
-    grid-template-columns: 100px 1fr;
     margin: 20px 0 40px;
+    text-align: center;
   }
 
   &__logotype {
