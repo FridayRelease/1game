@@ -15,7 +15,7 @@
   word-break: normal; /* не поддерживает Opera12.14, значение keep-all не поддерживается IE, Chrome */
   line-break: auto; /* нет поддержки для русского языка */
   hyphens: manual; /* значение auto не поддерживается Chrome */
-  color: white;
+  color: var(--main-color-text);
 }
 .forum-info {
   width: 100%;
@@ -28,7 +28,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: var(--dackGrey);
+  color: var(--base-bg-200);
 }
 .forum-data {
   width: 123px;
@@ -38,7 +38,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: var(--dackGrey);
+  color: var(--base-bg-200);
 }
 .forum-quantity {
   width: 12px;
@@ -48,7 +48,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 19px;
-  color: var(--dackGrey);
+  color: var(--base-bg-200);
 }
 
 .forum-comp-column {
@@ -64,5 +64,5 @@
   justify-items: center;
 }
 .white {
-  color: var(--white);
+  color: var(--main-color-text);
 }
