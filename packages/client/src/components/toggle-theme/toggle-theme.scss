@@ -21,9 +21,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  background-color: var(--primary-bg-200);
+  transition: 0.2s;
 }
 
 .slider:before {
@@ -36,27 +35,20 @@
   top: 0;
   bottom: 0;
   margin: auto 0;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  box-shadow: 0 0px 15px #2020203d;
-  background: white url('https://i.ibb.co/FxzBYR9/night.png');
+  transition: 0.2s;
+  box-shadow: 0 0px 15px var(--base-bg-200);
+  background: var(--primary-bg-800) url('../../assets/images/icons/moon.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  background-color: var(--primary-bg-200);
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(24px);
-  -ms-transform: translateX(24px);
   transform: translateX(24px);
-  background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
+  background: var(--main-color-bg) url('../../assets/images/icons/sun.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
