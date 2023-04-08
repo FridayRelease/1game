@@ -5,7 +5,7 @@ import Logotype from '../../assets/images/logotype.png';
 import { cn } from '@/utils/cn';
 import './home.scss';
 import { Link } from 'react-router-dom';
-import { ForumUrl } from '@/constant/router';
+import { ForumUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
 import { ReactComponent as IconProfile } from '@/assets/images/icons/profile.svg';
 import { ReactComponent as IconTrophy } from '@/assets/images/icons/trophy.svg';
 import { ReactComponent as IconForum } from '@/assets/images/icons/forum.svg';
@@ -25,12 +25,12 @@ const Home: FC = () => {
           <h2 className="home__greeting">Привет, {user.info?.first_name}!</h2>
           <h3 className="home__trophy-result">Твой лучший результат: {'123'}</h3>
           <nav className="home__nav">
-            <Link to={'#'} className={cn('home__link', 'home__link__bg-green')}>
+            <Link to={ProfileUrl} className={cn('home__link', 'home__link__bg-green')}>
               <IconProfile className="home__link-icon" fill="var(--main-color-bg)" />
               профиль
             </Link>
 
-            <Link to={'#'} className={cn('home__link', 'home__link__bg-green')}>
+            <Link to={LeaderboardUrl} className={cn('home__link', 'home__link__bg-green')}>
               <IconTrophy className="home__link-icon" stroke="var(--main-color-bg)" />
               доска лидеров
             </Link>
