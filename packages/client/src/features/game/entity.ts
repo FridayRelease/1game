@@ -9,6 +9,7 @@ interface IEntity {
   size: Vec2;
   update: (deltaTime: number) => void;
   obstruct: (side: SIDES) => void;
+  direct: (side: SIDES) => void;
   draw: (ctx: CanvasRenderingContext2D | null) => void;
 }
 
@@ -33,9 +34,21 @@ class Entity implements IEntity {
     this.traits.push(trait);
   }
 
+  collides(canditate: Entity) {
+    this.traits.forEach(trait => {
+      trait.collides(this, canditate);
+    });
+  }
+
   obstruct(side: SIDES) {
     this.traits.forEach(trait => {
       trait.obstruct(this, side);
+    });
+  }
+
+  direct(side: SIDES) {
+    this.traits.forEach(trait => {
+      trait.direct(this, side);
     });
   }
 

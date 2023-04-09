@@ -7,15 +7,17 @@ class Trait {
     this.NAME = name;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update(entity: Entity, deltaTime: number) {
-    throw new Error('Method not implemented.');
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  update(entity: Entity, deltaTime: number) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  obstruct(entity: Entity, side: SIDES) {
-    throw new Error('Method not implemented.');
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  obstruct(entity: Entity, side: SIDES) {}
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  direct(entity: Entity, side: SIDES) {}
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  collides(entity: Entity, canditate: Entity) {}
 }
 
 export { Trait };

@@ -6,8 +6,8 @@ import { Go } from '../traits/go';
 function createEnemyFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-bottom');
 
-  function obstructEnemy(entity: Entity) {
-    return function obstruct(side: SIDES) {
+  function directEnemy(entity: Entity) {
+    return function direct(side: SIDES) {
       const go = entity.getTrait('go') as Go;
       if (go) {
         go.side = side;
@@ -28,6 +28,20 @@ function createEnemyFactory(sprite: SpriteSheet) {
     };
   }
 
+  function obstructEnemy(entity: Entity) {
+    return function obstruct(side: SIDES) {
+      const go = entity.getTrait('go') as Go;
+      if (side === SIDES.LEFT || side === SIDES.RIGHT) {
+        go.directionX = -go.directionX;
+        go.side = side === SIDES.LEFT ? SIDES.RIGHT : SIDES.LEFT;
+      } else {
+        go.directionY = -go.directionY;
+        go.side = side === SIDES.TOP ? SIDES.BOTTOM : SIDES.TOP;
+      }
+      runAnim = sprite.animations.get(`run-${go.side}`);
+    };
+  }
+
   return function createEnemy() {
     const enemy = new Entity();
 
@@ -37,6 +51,7 @@ function createEnemyFactory(sprite: SpriteSheet) {
     (enemy.getTrait('go') as Go).side = SIDES.BOTTOM;
 
     enemy.draw = drawEnemy(enemy);
+    enemy.direct = directEnemy(enemy);
     enemy.obstruct = obstructEnemy(enemy);
 
     return enemy;

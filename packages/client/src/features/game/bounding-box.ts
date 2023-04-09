@@ -11,6 +11,10 @@ class BoundingBox {
     this.offset = offset;
   }
 
+  overlaps(box: BoundingBox) {
+    return this.bottom > box.top && this.top < box.bottom && this.left < box.right && this.right > box.left;
+  }
+
   get bottom(): number {
     return this.pos.y + this.size.y + this.offset.y;
   }

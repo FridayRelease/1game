@@ -3,11 +3,7 @@ import { Level } from './level';
 import { Matrix } from './math';
 import { SpriteSheet } from './spritesheet';
 
-function createBackgroundLayer(
-  level: Level,
-  tiles: Matrix,
-  sprites: SpriteSheet
-) {
+function createBackgroundLayer(level: Level, tiles: Matrix, sprites: SpriteSheet) {
   const buffer = document.createElement('canvas');
   buffer.width = 256;
   buffer.height = 256;
@@ -22,13 +18,7 @@ function createBackgroundLayer(
       if (col) {
         col.forEach((tile, y) => {
           if (sprites.animations.has(tile.name ?? '')) {
-            sprites.drawAnim(
-              tile.name ?? '',
-              ctx,
-              x - startIndex,
-              y,
-              level.totalTime
-            );
+            sprites.drawAnim(tile.name ?? '', ctx, x - startIndex, y, level.totalTime);
           } else {
             sprites.drawTile(tile.name || '', ctx, x - startIndex, y);
           }
@@ -55,14 +45,20 @@ function createSpriteLayer(entities: Set<Entity>) {
 function createCollisionLayer(level: Level) {
   const resolvedTiles: { x: number; y: number }[] = [];
 
+  for (let i = 1; i < 256; i++) {
+    for (let j = 1; j < 256; j++) {
+      resolvedTiles.push({ x: i, y: j });
+    }
+  }
+
   const tileResolver = level.tileCollider?.tiles;
   const tileSize = tileResolver?.tileSize;
 
-  const getByIndexOriginal = tileResolver?.getByIndex;
-  tileResolver.getByIndex = function getByIndexFake(x, y) {
-    resolvedTiles.push({ x, y });
-    return getByIndexOriginal.call(tileResolver, x, y);
-  };
+  // const getByIndexOriginal = tileResolver?.getByIndex;
+  // tileResolver.getByIndex = function getByIndexFake(x, y) {
+  //   resolvedTiles.push({ x, y });
+  //   return getByIndexOriginal.call(tileResolver, x, y);
+  // };
 
   return function drawCollision(ctx: CanvasRenderingContext2D | null) {
     ctx.strokeStyle = 'blue';
@@ -76,12 +72,7 @@ function createCollisionLayer(level: Level) {
     ctx.strokeStyle = 'red';
     level.entities.forEach(entity => {
       ctx.beginPath();
-      ctx.rect(
-        entity.bounds.left,
-        entity.bounds.top,
-        entity.size.x,
-        entity.size.y
-      );
+      ctx.rect(entity.bounds.left, entity.bounds.top, entity.size.x, entity.size.y);
       ctx.stroke();
     });
 

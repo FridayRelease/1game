@@ -1,3 +1,4 @@
+import { SIDES } from './constants';
 import { Entity } from './entity';
 import { Matrix } from './math';
 import { TileResolver } from './tile-resolver';
@@ -10,7 +11,7 @@ class TileCollider {
   }
 
   checkX(entity: Entity) {
-    let x;
+    let x: number;
     if (entity.vel.x > 0) {
       x = entity.bounds.right;
     } else if (entity.vel.x < 0) {
@@ -19,12 +20,7 @@ class TileCollider {
       return;
     }
 
-    const matches = this.tiles.searchByRange(
-      x,
-      x,
-      entity.bounds.top,
-      entity.bounds.bottom
-    );
+    const matches = this.tiles.searchByRange(x, x, entity.bounds.top, entity.bounds.bottom);
 
     matches.forEach(match => {
       if (!match) {
@@ -39,11 +35,15 @@ class TileCollider {
         if (entity.bounds.right > match.x1) {
           entity.bounds.right = match.x1;
           entity.vel.x = 0;
+          entity.obstruct(SIDES.RIGHT);
+
+          this.fixByX(x, entity);
         }
       } else if (entity.vel.x < 0) {
         if (entity.bounds.left < match.x2) {
           entity.bounds.left = match.x2;
           entity.vel.x = 0;
+          entity.obstruct(SIDES.LEFT);
         }
       }
     });
@@ -59,12 +59,7 @@ class TileCollider {
       return;
     }
 
-    const matches = this.tiles.searchByRange(
-      entity.bounds.left,
-      entity.bounds.right,
-      y,
-      y
-    );
+    const matches = this.tiles.searchByRange(entity.bounds.left, entity.bounds.right, y, y);
 
     matches.forEach(match => {
       if (!match) {
@@ -79,11 +74,15 @@ class TileCollider {
         if (entity.bounds.bottom > match.y1) {
           entity.bounds.bottom = match.y1;
           entity.vel.y = 0;
+
+          entity.obstruct(SIDES.BOTTOM);
         }
       } else if (entity.vel.y < 0) {
         if (entity.bounds.top < match.y2) {
           entity.bounds.top = match.y2;
           entity.vel.y = 0;
+
+          entity.obstruct(SIDES.TOP);
         }
       }
     });
@@ -118,6 +117,21 @@ class TileCollider {
         }
       }
     });
+  }
+
+  fixByX(x: number, entity: Entity) {
+    const { pos } = entity;
+    const { y } = pos;
+    const offset = 16;
+
+    const xIndex = this.tiles.toIndex(x);
+    const yRanges = this.tiles.toIndexRange(y - offset, y + offset);
+
+    const tiles = yRanges.map(yIndex => this.tiles.getByIndex(xIndex, yIndex));
+
+    entity.pos.y = yRanges[3] * 8;
+    console.warn({ xIndex, yRanges });
+    console.warn({ tiles });
   }
 }
 
