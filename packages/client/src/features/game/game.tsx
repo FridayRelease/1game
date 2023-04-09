@@ -1,52 +1,50 @@
-import { useRef, useEffect, memo } from 'react';
+import { useRef, useLayoutEffect, memo } from 'react';
 import { Timer } from './timer';
 import { setupKeyboard } from './input';
 import { createCollisionLayer } from './layers';
 import { loadEntities } from './enteties';
-import { gameApi } from '@/api';
 import { fetchLevel } from '@/controllers/game-controllers';
 
 function Game() {
-  const ref = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    (async () => {
-      const res = await gameApi.loadSprites('enemy');
+  useLayoutEffect(() => {
+    const ctx = canvasRef.current?.getContext('2d');
 
-      console.warn(res);
-    })();
+    (async function main(ctx: CanvasRenderingContext2D | undefined | null) {
+      if (!ctx) {
+        return;
+      }
+      const entityFactory = await loadEntities();
+      const loadLevel = await fetchLevel(entityFactory);
 
-    if (ref.current) {
-      const ctx = ref.current.getContext('2d');
+      const level = await loadLevel('1-1');
 
-      (async function main(ctx: CanvasRenderingContext2D | null) {
-        const entityFactory = await loadEntities();
-        const loadLevel = await fetchLevel(entityFactory);
+      const tank = entityFactory.tank();
+      tank.pos.set(60, 230);
+      level.entities.add(tank);
 
-        const level = await loadLevel('1-1');
+      level.comp.push(createCollisionLayer(level));
 
-        const tank = entityFactory.tank();
-        tank.pos.set(60, 230);
-        level.entities.add(tank);
+      const input = setupKeyboard(tank);
+      input.listenTo(window);
 
-        // level.comp.push(createCollisionLayer(level));
+      const timer = new Timer();
 
-        const input = setupKeyboard(tank);
-        input.listenTo(window);
+      timer.update = function update(deltaTime: number) {
+        level.update(deltaTime);
+        level.comp.draw(ctx);
+      };
 
-        const timer = new Timer();
+      timer.start();
 
-        timer.update = function update(deltaTime: number) {
-          level.update(deltaTime);
-          level.comp.draw(ctx);
-        };
-
-        timer.start();
-      })(ctx);
-    }
+      return () => {
+        timer.cancel();
+      };
+    })(ctx);
   }, []);
 
-  return <canvas className="game" ref={ref} id="screen" width="260px" height="260px" />;
+  return <canvas className="game" ref={canvasRef} id="screen" width="260px" height="260px" />;
 }
 
 export default memo(Game, () => false);

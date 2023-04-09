@@ -7,7 +7,7 @@ function setupKeyboard(entity: Entity) {
   const input = new KeyboardState();
 
   input.addMapping('ArrowRight', keyState => {
-    entity.obstruct(SIDES.RIGHT);
+    entity.direct(SIDES.RIGHT);
     const go = entity.getTrait('go') as Go;
     if (go) {
       go.directionY = 0;
@@ -17,7 +17,7 @@ function setupKeyboard(entity: Entity) {
   });
 
   input.addMapping('ArrowLeft', keyState => {
-    entity.obstruct(SIDES.LEFT);
+    entity.direct(SIDES.LEFT);
     const go = entity.getTrait('go') as Go;
     if (go) {
       go.directionY = 0;
@@ -27,7 +27,7 @@ function setupKeyboard(entity: Entity) {
   });
 
   input.addMapping('ArrowDown', keyState => {
-    entity.obstruct(SIDES.BOTTOM);
+    entity.direct(SIDES.BOTTOM);
     const go = entity.getTrait('go') as Go;
     if (go) {
       go.directionX = 0;
@@ -37,7 +37,7 @@ function setupKeyboard(entity: Entity) {
   });
 
   input.addMapping('ArrowUp', keyState => {
-    entity.obstruct(SIDES.TOP);
+    entity.direct(SIDES.TOP);
 
     const go = entity.getTrait('go') as Go;
     if (go) {

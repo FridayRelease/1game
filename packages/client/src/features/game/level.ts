@@ -2,6 +2,7 @@ import { Compositor } from './compositor';
 import { Entity } from './entity';
 import { Matrix } from './math';
 import { TileCollider } from './tile-collider';
+import { EntityCollider } from './entity-collider';
 
 class Level {
   comp: Compositor;
@@ -9,12 +10,14 @@ class Level {
   tiles: Matrix;
   tileCollider: TileCollider | null;
   totalTime: number;
+  entityCollider: EntityCollider;
 
   constructor() {
     this.comp = new Compositor();
     this.entities = new Set();
     this.tiles = new Matrix();
     this.tileCollider = null;
+    this.entityCollider = new EntityCollider(this.entities);
     this.totalTime = 0;
   }
 
@@ -31,6 +34,8 @@ class Level {
 
       entity.pos.y += entity.vel.y * deltaTime;
       this.tileCollider?.checkY(entity);
+
+      this.entityCollider?.check(entity);
     });
   }
 }

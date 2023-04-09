@@ -6,8 +6,8 @@ import { Go } from '../traits/go';
 function createTankFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-top');
 
-  function obstructTank(entity: Entity) {
-    return function obstruct(side: SIDES) {
+  function directTank(entity: Entity) {
+    return function direct(side: SIDES) {
       const go = entity.getTrait('go') as Go;
       if (go) {
         go.side = side;
@@ -34,9 +34,24 @@ function createTankFactory(sprite: SpriteSheet) {
     tank.offset.set(1, 1);
     tank.size.set(14, 14);
     tank.addTrait(new Go());
+    // tank.addTrait({
+    //   NAME: 'Action',
+    //   update: function (): void {
+    //     console.warn('update');
+    //   },
+    //   obstruct: function (entity: Entity, side: SIDES): void {
+    //     console.warn('obstruct', entity, side);
+    //   },
+    //   direct: function (entity: Entity, side: SIDES): void {
+    //     throw new Error('Function not implemented.');
+    //   },
+    //   collides: function (entity: Entity, canditate: Entity): void {
+    //     throw new Error('Function not implemented.');
+    //   },
+    // });
 
     tank.draw = drawTank(tank);
-    tank.obstruct = obstructTank(tank);
+    tank.direct = directTank(tank);
 
     return tank;
   };
