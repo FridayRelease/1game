@@ -36,6 +36,8 @@ class TileCollider {
           entity.bounds.right = match.x1;
           entity.vel.x = 0;
           entity.obstruct(SIDES.RIGHT);
+
+          this.fixByX(x, entity);
         }
       } else if (entity.vel.x < 0) {
         if (entity.bounds.left < match.x2) {
@@ -115,6 +117,21 @@ class TileCollider {
         }
       }
     });
+  }
+
+  fixByX(x: number, entity: Entity) {
+    const { pos } = entity;
+    const { y } = pos;
+    const offset = 16;
+
+    const xIndex = this.tiles.toIndex(x);
+    const yRanges = this.tiles.toIndexRange(y - offset, y + offset);
+
+    const tiles = yRanges.map(yIndex => this.tiles.getByIndex(xIndex, yIndex));
+
+    entity.pos.y = yRanges[3] * 8;
+    console.warn({ xIndex, yRanges });
+    console.warn({ tiles });
   }
 }
 

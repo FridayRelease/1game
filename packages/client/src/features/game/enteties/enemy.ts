@@ -57,6 +57,20 @@ function createEnemyFactory(sprite: SpriteSheet) {
     };
   }
 
+  function obstructEnemy(entity: Entity) {
+    return function obstruct(side: SIDES) {
+      const go = entity.getTrait('go') as Go;
+      if (side === SIDES.LEFT || side === SIDES.RIGHT) {
+        go.directionX = -go.directionX;
+        go.side = side === SIDES.LEFT ? SIDES.RIGHT : SIDES.LEFT;
+      } else {
+        go.directionY = -go.directionY;
+        go.side = side === SIDES.TOP ? SIDES.BOTTOM : SIDES.TOP;
+      }
+      runAnim = sprite.animations.get(`run-${go.side}`);
+    };
+  }
+
   return function createEnemy() {
     const enemy = new Entity();
 
