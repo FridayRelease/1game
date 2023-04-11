@@ -1,17 +1,13 @@
+import { ITileDTO } from '@/api/types';
+
 class Matrix {
-  grid: Array<{ name?: string; type?: string }[]>;
+  grid: Array<ITileDTO[]>;
 
   constructor() {
     this.grid = [];
   }
 
-  forEach(
-    callback: (
-      tile: { type?: string; name?: string },
-      x: number,
-      y: number
-    ) => void
-  ) {
+  forEach(callback: (tile: { type?: string; name?: string }, x: number, y: number) => void) {
     this.grid.forEach((column, x) => {
       column.forEach((value, y) => {
         callback(value, x, y);
@@ -27,7 +23,7 @@ class Matrix {
     return undefined;
   }
 
-  set(x: number, y: number, value: { name?: string; type?: string }) {
+  set(x: number, y: number, value: ITileDTO) {
     if (!this.grid[x]) {
       this.grid[x] = [];
     }

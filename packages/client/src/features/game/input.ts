@@ -1,10 +1,25 @@
 import { SIDES } from './constants';
 import { Entity } from './entity';
 import { KeyboardState } from './keyboard-state';
+import { Level } from './level';
+import { Bullet } from './traits/bullet';
 import { Go } from './traits/go';
+import { EntityFactoryCallback } from './types';
 
-function setupKeyboard(entity: Entity) {
+function setupKeyboard(entity: Entity, level: Level, entityFactory: Record<string, EntityFactoryCallback>) {
   const input = new KeyboardState();
+
+  input.addMapping('KeyZ', () => {
+    const createBulletEntity = entityFactory['bullet'];
+    const bullet = createBulletEntity();
+
+    bullet.pos.set(entity.pos.x, entity.bounds.top);
+    const go = entity.getTrait('go') as Go;
+
+    (bullet.getTrait('bullet') as Bullet).side = go.side;
+
+    level.entities.add(bullet);
+  });
 
   input.addMapping('ArrowRight', keyState => {
     entity.direct(SIDES.RIGHT);

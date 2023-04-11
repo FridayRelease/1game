@@ -1,18 +1,40 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
-import { Behavior } from '../traits/behavior';
 import { Enemy } from '../traits/enemy';
 import { Go } from '../traits/go';
 import { Killable } from '../traits/killable';
 import { Physics } from '../traits/physics';
 import { Solid } from '../traits/solid';
+import { Trait } from '../traits/trait';
+
+class Behavior extends Trait {
+  constructor() {
+    super('behavior');
+  }
+
+  collides(us: Entity, them: Entity) {
+    const usKillable = us.getTrait('killable') as Killable;
+    const themKillable = them.getTrait('killable') as Killable;
+
+    if (usKillable.dead || themKillable.dead) {
+      return;
+    }
+
+    if (them.getTrait('bullet')) {
+      themKillable.kill();
+
+      usKillable.kill();
+      (us.getTrait('go') as Go).speed = 0;
+    }
+  }
+}
 
 function createEnemyFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-bottom');
 
-  function routeFrame(tank: Entity): { route: string; offset: number } {
-    const killable = tank.getTrait('killable') as Killable;
+  function routeFrame(entity: Entity): { route: string; offset: number } {
+    const killable = entity.getTrait('killable') as Killable;
 
     if (killable.dead) {
       const animation = sprite.animations.get('bang');
@@ -21,7 +43,7 @@ function createEnemyFactory(sprite: SpriteSheet) {
       return { route, offset: route.includes('big') ? -8 : 0 };
     }
 
-    const go = tank.getTrait('go') as Go;
+    const go = entity.getTrait('go') as Go;
     runAnim = sprite.animations.get(`run-${go.side}`);
 
     const route = runAnim ? runAnim(Math.abs(go.direction)) : '';
@@ -52,7 +74,6 @@ function createEnemyFactory(sprite: SpriteSheet) {
     (enemy.getTrait('go') as Go).side = SIDES.BOTTOM;
 
     enemy.draw = drawEnemy(enemy);
-    // enemy.obstruct = obstructEnemy(enemy);
 
     return enemy;
   };

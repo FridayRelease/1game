@@ -15,7 +15,7 @@ class Solid extends Trait {
     } else if (side === SIDES.TOP) {
       entity.bounds.top = match.y2;
       entity.vel.y = 0;
-    } else if ((side = SIDES.RIGHT)) {
+    } else if (side === SIDES.RIGHT) {
       entity.bounds.right = match.x1;
       entity.vel.x = 0;
     } else if (side === SIDES.LEFT) {

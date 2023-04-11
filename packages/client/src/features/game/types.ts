@@ -1,12 +1,16 @@
 import { ITileDTO } from '@/api/types';
 import { Entity } from './entity';
 
+type TraitName = 'go' | 'behavior' | 'bullet' | 'enemy' | 'go' | 'physics' | 'playerController' | 'solid' | 'killable';
+
 type MatchTile = {
-  tile: { type?: string; name?: string };
+  tile: ITileDTO;
   x1: number;
   x2: number;
   y1: number;
   y2: number;
+  indexX: number;
+  indexY: number;
 };
 
 type IExpandedTile = {
@@ -28,6 +32,7 @@ type EntityFactoryCallback = () => Entity;
 type CallBackFunction = () => void;
 
 export {
+  type TraitName,
   type MatchTile,
   type EntityFactoryCallback,
   type CallBackFunction,

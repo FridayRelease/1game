@@ -1,9 +1,9 @@
 import { Level } from '../level';
-import { createBackgroundLayer, createSpriteLayer } from '../layers';
 import { IExpandedTile, EntityFactoryCallback } from '../types';
 import { Matrix } from '../math';
 import { SpriteSheet } from '../spritesheet';
 import { ITileDTO, ILevelDTO, IPatternDTO } from '@/api/types';
+import { createBackgroundLayer, createSpriteLayer } from '../layers/index';
 
 function setupCollision(levelSpec: ILevelDTO, level: Level) {
   const mergedTiles = levelSpec.layers.reduce<Array<ITileDTO>>((mergedTiles, layerSpec) => {
@@ -37,9 +37,7 @@ function createCollisionGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
   const grid = new Matrix();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
-    grid.set(x, y, {
-      type: tile.type,
-    });
+    grid.set(x, y, tile);
   }
 
   return grid;
@@ -49,9 +47,7 @@ function createBackgroundGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
   const grid = new Matrix();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
-    grid.set(x, y, {
-      name: tile.name,
-    });
+    grid.set(x, y, tile);
   }
 
   return grid;

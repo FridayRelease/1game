@@ -33,13 +33,13 @@ class TileCollider {
 
       if (entity.vel.x > 0) {
         if (entity.bounds.right > match.x1) {
-          this.smoothByY(SIDES.RIGHT, entity);
+          this.smoothByX(SIDES.RIGHT, entity);
 
           entity.obstruct(SIDES.RIGHT, match);
         }
       } else if (entity.vel.x < 0) {
         if (entity.bounds.left < match.x2) {
-          this.smoothByY(SIDES.LEFT, entity);
+          this.smoothByX(SIDES.LEFT, entity);
 
           entity.obstruct(SIDES.LEFT, match);
         }
@@ -87,6 +87,7 @@ class TileCollider {
   // Поворачивая влево или вправо танк упёрся в стену. Помогаем повернуть.
   smoothByX(side: SIDES, entity: Entity) {
     let matrixColumn = Math.floor(entity.bounds.right / this.tiles.tileSize);
+
     if (side === SIDES.LEFT) {
       matrixColumn = Math.max(Math.floor(entity.bounds.left / this.tiles.tileSize - 1), 0);
     }

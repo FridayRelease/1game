@@ -1,11 +1,11 @@
 import { useRef, useLayoutEffect, memo } from 'react';
 import { Timer } from './timer';
 import { setupKeyboard } from './input';
-import { createCollisionLayer } from './layers';
 import { loadEntities } from './enteties';
 import { fetchLevel } from '@/controllers/game-controllers';
 import { Entity } from './entity';
 import { PlayerController } from './traits/player-controller';
+import { createCollisionLayer } from './layers';
 
 const createPlayerEnv = (playerEntity: Entity) => {
   const playerEnv = new Entity();
@@ -37,9 +37,9 @@ function Game() {
       const playerEnv = createPlayerEnv(tank);
       level.entities.add(playerEnv);
 
-      level.comp.push(createCollisionLayer(level));
+      // level.comp.push(createCollisionLayer(level));
 
-      const input = setupKeyboard(tank);
+      const input = setupKeyboard(tank, level, entityFactory);
       input.listenTo(window);
 
       const timer = new Timer();

@@ -3,9 +3,9 @@ import { SIDES } from './constants';
 import { Level } from './level';
 import { Vec2 } from './math';
 import { Trait } from './traits/trait';
-import { MatchTile } from './types';
+import { MatchTile, TraitName } from './types';
 
-interface IEntity {
+type IEntity = {
   pos: Vec2;
   vel: Vec2;
   size: Vec2;
@@ -13,7 +13,7 @@ interface IEntity {
   obstruct: (side: SIDES, match: MatchTile) => void;
   direct: (side: SIDES) => void;
   draw: (ctx: CanvasRenderingContext2D | null) => void;
-}
+};
 
 class Entity implements IEntity {
   pos: Vec2;

@@ -1,7 +1,6 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
-import { Behavior } from '../traits/behavior';
 import { Go } from '../traits/go';
 import { Killable } from '../traits/killable';
 import { Physics } from '../traits/physics';
@@ -20,8 +19,8 @@ function createTankFactory(sprite: SpriteSheet) {
     };
   }
 
-  function routeFrame(tank: Entity) {
-    const go = tank.getTrait('go') as Go;
+  function routeFrame(entity: Entity) {
+    const go = entity.getTrait('go') as Go;
 
     return runAnim ? runAnim(Math.abs(go.direction)) : '';
   }
@@ -40,7 +39,6 @@ function createTankFactory(sprite: SpriteSheet) {
     tank.addTrait(new Solid());
     tank.addTrait(new Physics());
     tank.addTrait(new Go());
-    tank.addTrait(new Behavior());
     tank.addTrait(new Killable());
 
     (tank.getTrait('killable') as Killable).removeAfter = 0;

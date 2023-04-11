@@ -1,13 +1,24 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { Level } from '../level';
-import { CallBackFunction, MatchTile } from '../types';
+import { CallBackFunction, MatchTile, TraitName } from '../types';
 
-class Trait {
-  NAME: string;
+interface ITrait {
+  NAME: TraitName;
+  update(entity: Entity, deltaTime: number, level: Level): void;
+
+  obstruct(entity: Entity, side: SIDES, match: MatchTile): void;
+
+  direct(entity: Entity, side: SIDES): void;
+
+  collides(entity: Entity, canditate: Entity): void;
+}
+
+class Trait implements ITrait {
+  NAME: TraitName;
   tasks: CallBackFunction[];
 
-  constructor(name: string) {
+  constructor(name: TraitName) {
     this.NAME = name;
     this.tasks = [];
   }

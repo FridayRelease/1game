@@ -1,4 +1,4 @@
-import { fetchEnemy, fetchTank } from '@/controllers/game-controllers';
+import { fetchEnemy, fetchTank, fetchBullet } from '@/controllers/game-controllers';
 import { EntityFactoryCallback } from './types';
 
 function loadEntities() {
@@ -7,6 +7,7 @@ function loadEntities() {
   return Promise.all([
     fetchTank().then(factory => (entityFactory['tank'] = factory)),
     fetchEnemy().then(factory => (entityFactory['enemy'] = factory)),
+    fetchBullet().then(factory => (entityFactory['bullet'] = factory)),
   ]).then(() => entityFactory);
 }
 

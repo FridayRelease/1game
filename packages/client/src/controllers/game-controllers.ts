@@ -1,6 +1,7 @@
 import { gameApi } from '@/api';
 import { ILevelDTO, ISpriteSheetDTO } from '@/api/types';
 import { createAnim } from '@/features/game/anim';
+import { createBulletFactory } from '@/features/game/enteties/bullet';
 import { createEnemyFactory } from '@/features/game/enteties/enemy';
 import { createTankFactory } from '@/features/game/enteties/tank';
 import { Level } from '@/features/game/level';
@@ -51,6 +52,12 @@ const fetchEnemy = async () => {
   return createEnemyFactory(sheetSpec);
 };
 
+const fetchBullet = async () => {
+  const sheetSpec = await fetchSpriteSheet('bullet');
+
+  return createBulletFactory(sheetSpec);
+};
+
 const fetchTank = async () => {
   const sheetSpec = await fetchSpriteSheet('tank');
 
@@ -75,4 +82,4 @@ const fetchLevel = async (entityFactory: Record<string, EntityFactoryCallback>) 
   return loadLevel;
 };
 
-export { fetchSpriteSheet, fetchTankSprite, fetchEnemy, fetchTank, fetchLevel };
+export { fetchSpriteSheet, fetchTankSprite, fetchEnemy, fetchTank, fetchLevel, fetchBullet };
