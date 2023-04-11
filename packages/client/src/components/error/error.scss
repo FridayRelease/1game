@@ -1,9 +1,8 @@
 .error-page {
   display: flex;
   font: 400 30px/1.2 var(--game-font-family);
-  height: 100vh;
-  background-color: #1e1e1e;
-  color: white;
+  height: 80vh;
+  color: var(--main-color-text);
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -18,7 +17,7 @@
     font-size: 100px;
 
     &::first-letter {
-      color: #de2900;
+      color: var(--main-bg-alert);
     }
   }
 

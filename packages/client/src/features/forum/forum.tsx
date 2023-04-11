@@ -3,12 +3,14 @@ import ForumComp from './components/forum-comp';
 import ButtonNew from '../../components/button-new/button-new';
 import { Messages, currentUser } from '../../mock/mock-data-forum';
 import foto from '../../mock/currentUser.jpg';
-import plusInRing from '../../assets/images/create.svg';
+import { ReactComponent as PlusInRing } from '@/assets/images/icons/create.svg';
+import { FC } from 'react';
+import withLayoutMain from '@/layout/layoutMain/layoutMain';
 /**
  Список чатов форума
  @category page
  */
-function Forum() {
+const Forum: FC = () => {
   const listItems = Messages.map((message, index) => (
     <ForumComp
       key={index}
@@ -27,7 +29,7 @@ function Forum() {
 
   const children = (
     <div className="forum-create-module">
-      <img className="ring" src={plusInRing} />
+      <PlusInRing className="ring" fill="var(--base-bg-white)" />
       <label>Создать</label>{' '}
     </div>
   );
@@ -50,6 +52,8 @@ function Forum() {
       <div className="forum-messages row">{listItems}</div>
     </div>
   );
-}
+};
 
-export default Forum;
+Forum.displayName = 'Forum';
+
+export default withLayoutMain(Forum);

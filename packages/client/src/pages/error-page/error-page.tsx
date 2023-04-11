@@ -1,7 +1,9 @@
 import { useRouteError, isRouteErrorResponse, Link } from 'react-router-dom';
 import Error from '@/components/error';
+import { FC } from 'react';
+import withLayoutMain from '@/layout/layoutMain/layoutMain';
 
-export default function ErrorPage() {
+const ErrorPage: FC = () => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
@@ -30,4 +32,8 @@ export default function ErrorPage() {
   }
 
   return <Error text="Unknown Error" />;
-}
+};
+
+ErrorPage.displayName = 'ErrorPage';
+
+export default withLayoutMain(ErrorPage);

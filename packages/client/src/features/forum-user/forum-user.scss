@@ -3,7 +3,7 @@
   max-height: 1104px;
   width: 100%;
   height: 100%;
-  background-color: var(--black);
+  background-color: var(--main-color-bg);
 }
 .column {
   display: flex;
@@ -38,26 +38,26 @@
   /* identical to box height */
 }
 .red {
-  color: var(--red);
+  color: var(--main-bg-alert);
 }
 .white {
-  color: white;
+  color: var(--main-color-text);
 }
 .forum-user-button {
   box-sizing: border-box;
   width: 181px;
   height: 43px;
-  border: 1px solid var(--white);
-  color: var(--white);
+  border: 1px solid var(--main-color-text);
+  color: var(--main-color-text);
   border-radius: 90px;
   margin-left: auto;
   margin-right: 50px;
-  background-color: var(--black);
+  background-color: var(--main-color-bg);
 }
 
 .forum-user-current-user {
   width: 100%;
-  background-color: var(--black);
+  background-color: var(--main-color-bg);
   font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -71,7 +71,7 @@
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  border: 1px solid var(--white);
+  border: 1px solid var(--main-color-text);
 }
 .label-user {
   width: 32px;
@@ -81,7 +81,7 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-  color: var(--white);
+  color: var(--main-color-text);
   margin-left: 20px;
 }
 .forum-create-module {
@@ -109,13 +109,13 @@
   max-width: 500px;
   width: 50%;
   height: 43px;
-  border: 1px solid var(--white);
+  border: 1px solid var(--main-color-text);
   border-radius: 30px;
-  color: var(--black);
+  color: var(--main-color-bg);
 }
 .forum-user-button {
-  color: var(--white);
-  border: 1px solid var(--white);
+  color: var(--main-color-text);
+  border: 1px solid var(--main-color-text);
   border-radius: 30px;
   max-width: 150px;
   width: 25%;

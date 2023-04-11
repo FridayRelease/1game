@@ -1,0 +1,74 @@
+.home {
+  height: 100vh;
+  padding: 20px;
+
+  &__header {
+    margin: 20px 0 40px;
+    text-align: center;
+  }
+
+  &__logotype {
+    justify-self: center;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin: 0 50px;
+  }
+
+  &__left-side {
+    text-align: center;
+  }
+
+  &__greeting {
+    margin-bottom: 10px;
+  }
+
+  &__trophy-result {
+    margin-bottom: 40px;
+  }
+
+  &__link {
+    display: flex;
+    padding: 10px 0;
+    margin: 0 auto 20px;
+    color: var(--main-color-bg);
+    background-color: var(--base-bg-white);
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 300px;
+
+    &__bg-green {
+      background-color: var(--main-bg-success);
+    }
+
+    &__bg-red {
+      background-color: var(--main-bg-alert);
+    }
+  }
+
+  &__link-icon {
+    width: 18px;
+    margin-right: 10px;
+  }
+
+  &__link-start {
+    font: 400 35px/1.2 var(--game-font-family);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto 0;
+  }
+
+  &__right-side {
+    justify-self: center;
+    align-self: center;
+  }
+}

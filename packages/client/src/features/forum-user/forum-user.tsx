@@ -4,11 +4,13 @@ import { Chats } from '../../mock/mock-data-chat';
 import foto from '../../mock/currentUser.jpg';
 import { currentUser } from '../../mock/mock-data-forum';
 import { useParams } from 'react-router-dom';
+import { FC } from 'react';
+import withLayoutMain from '@/layout/layoutMain/layoutMain';
 /**
  Чат одного пользователя
  @category page
  */
-function ForumUser() {
+const ForumUser: FC = () => {
   const { id } = useParams();
   console.log('userId = ', id);
 
@@ -47,6 +49,8 @@ function ForumUser() {
       </div>
     </div>
   );
-}
+};
 
-export default ForumUser;
+ForumUser.displayName = 'Forum';
+
+export default withLayoutMain(ForumUser);
