@@ -1,3 +1,4 @@
+import { setLocalStorage } from '@/utils/localStorage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
@@ -12,7 +13,7 @@ export const themeSlice = createSlice({
       state.isLightTheme = !state.isLightTheme;
       state.value = state.isLightTheme ? 'light' : 'dark';
 
-      localStorage.setItem('theme', JSON.stringify({ value: state.value }));
+      setLocalStorage('theme', JSON.stringify({ value: state.value }));
       document.documentElement.dataset.theme = state.value;
     },
 

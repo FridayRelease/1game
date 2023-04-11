@@ -1,13 +1,14 @@
 import { themeActions } from '@/store/slices/theme-slice';
 import { store } from '@/store/store';
+import { getLocalStorage, setLocalStorage } from '@/utils/localStorage';
 import { useEffect } from 'react';
 
 const useTheme = () => {
   useEffect(() => {
-    let theme = JSON.parse(localStorage.getItem('theme') || '{}');
+    let theme = getLocalStorage('theme');
     if (!theme.value) {
       const stateTheme = store.getState().theme;
-      localStorage.setItem('theme', JSON.stringify({ value: stateTheme.value }));
+      setLocalStorage('theme', JSON.stringify({ value: stateTheme.value }));
       theme = stateTheme;
     }
 

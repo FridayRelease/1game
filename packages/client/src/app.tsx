@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { themeActions } from './store/slices/theme-slice';
 import useTheme from './hooks/use-theme';
+import { getLocalStorage } from './utils/localStorage';
 
 function App() {
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
   useEffect(() => {
     // Handling the storage event is necessary to switch the theme in multiple tabs.
     const handler = () => {
-      const theme = JSON.parse(localStorage.getItem('theme') || '{}');
+      const theme = getLocalStorage('theme');
       store.dispatch(themeActions.setTheme(theme.value));
     };
 
