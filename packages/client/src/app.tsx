@@ -5,6 +5,7 @@ import './app.scss';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { themeActions } from './store/slices/theme-slice';
+import useTheme from './hooks/use-theme';
 
 function App() {
   useEffect(() => {
@@ -18,17 +19,10 @@ function App() {
     fetchServerData();
   }, []);
 
+  useTheme();
+
   // Switching theme.
   useEffect(() => {
-    let theme = JSON.parse(localStorage.getItem('theme') || '{}');
-    if (!theme.value) {
-      const stateTheme = store.getState().theme;
-      localStorage.setItem('theme', JSON.stringify({ value: stateTheme.value }));
-      theme = stateTheme;
-    }
-
-    store.dispatch(themeActions.setTheme(theme.value));
-
     // Handling the storage event is necessary to switch the theme in multiple tabs.
     const handler = () => {
       const theme = JSON.parse(localStorage.getItem('theme') || '{}');
