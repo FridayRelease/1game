@@ -1,5 +1,6 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
+import { Level } from '../level';
 
 class Trait {
   NAME: string;
@@ -8,7 +9,7 @@ class Trait {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  update(entity: Entity, deltaTime: number) {}
+  update(entity: Entity, deltaTime: number, level: Level) {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   obstruct(entity: Entity, side: SIDES) {}

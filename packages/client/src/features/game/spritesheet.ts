@@ -33,12 +33,7 @@ class SpriteSheet {
     this.define(name, x * this.width, y * this.height, this.width, this.height);
   }
 
-  draw(
-    name: string,
-    ctx: CanvasRenderingContext2D | null,
-    x: number,
-    y: number
-  ) {
+  draw(name: string, ctx: CanvasRenderingContext2D | null, x: number, y: number) {
     const buffer = this.tiles.get(name);
 
     if (buffer) {
@@ -46,25 +41,14 @@ class SpriteSheet {
     }
   }
 
-  drawAnim(
-    name: string,
-    ctx: CanvasRenderingContext2D | null,
-    x: number,
-    y: number,
-    distance: number
-  ) {
+  drawAnim(name: string, ctx: CanvasRenderingContext2D | null, x: number, y: number, distance: number) {
     const animation = this.animations.get(name);
     if (animation) {
       this.drawTile(animation(distance), ctx, x, y);
     }
   }
 
-  drawTile(
-    name: string,
-    ctx: CanvasRenderingContext2D | null,
-    x: number,
-    y: number
-  ) {
+  drawTile(name: string, ctx: CanvasRenderingContext2D | null, x: number, y: number) {
     this.draw(name, ctx, x * this.width, y * this.width);
   }
 }

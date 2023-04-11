@@ -3,6 +3,26 @@
 
   "frames": [
     {
+      "name": "bang-1",
+      "rect": [256, 128, 16, 16]
+    },
+    {
+      "name": "bang-2",
+      "rect": [272, 128, 16, 16]
+    },
+    {
+      "name": "bang-3",
+      "rect": [288, 128, 16, 16]
+    },
+    {
+      "name": "bang-big-4",
+      "rect": [304, 128, 32, 32]
+    },
+    {
+      "name": "bang-big-5",
+      "rect": [320, 128, 32, 32]
+    },
+    {
       "name": "run-top-1",
       "rect": [126, 0, 16, 16]
     },
@@ -39,7 +59,12 @@
 
   "animations": [
     {
-      "name": "run-enemy-top-1",
+      "name": "bang",
+      "frameLen": 0.2,
+      "frames": ["bang-1", "bang-2", "bang-3", "bang-4", "bang-5", "bang-4"]
+    },
+    {
+      "name": "run-top",
       "frameLen": 6,
       "frames": ["run-top-1", "run-top-2"]
     },

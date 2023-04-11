@@ -6,7 +6,7 @@
   "tiles": [
     {
       "name": "black",
-      "index": [43, 0]
+      "index": [44, 0]
     },
     {
       "name": "brick-wall",
@@ -18,11 +18,11 @@
     },
     {
       "name": "water-wall",
-      "index": [38, 2]
+      "index": [33, 5]
     },
     {
       "name": "tree-wall",
-      "index": [18, 3]
+      "index": [35, 5]
     },
     {
       "name": "lock",

@@ -4,11 +4,7 @@ import { Game } from '../../features/game';
 import './game.css';
 
 function GamePage() {
-  return (
-    <div className="App">
-      <Game />
-    </div>
-  );
+  return <Game />;
 }
 
 export default memo(GamePage);

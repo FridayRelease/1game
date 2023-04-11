@@ -1,5 +1,6 @@
 import { BoundingBox } from './bounding-box';
 import { SIDES } from './constants';
+import { Level } from './level';
 import { Vec2 } from './math';
 import { Trait } from './traits/trait';
 
@@ -7,7 +8,7 @@ interface IEntity {
   pos: Vec2;
   vel: Vec2;
   size: Vec2;
-  update: (deltaTime: number) => void;
+  update: (deltaTime: number, level: Level) => void;
   obstruct: (side: SIDES) => void;
   direct: (side: SIDES) => void;
   draw: (ctx: CanvasRenderingContext2D | null) => void;
@@ -52,9 +53,9 @@ class Entity implements IEntity {
     });
   }
 
-  update(deltaTime: number) {
+  update(deltaTime: number, level: Level) {
     this.traits.forEach(trait => {
-      trait.update(this, deltaTime);
+      trait.update(this, deltaTime, level);
     });
   }
 
@@ -62,10 +63,8 @@ class Entity implements IEntity {
     return this.traits.find(e => e.NAME === name);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  draw(ctx: CanvasRenderingContext2D | null) {
-    throw new SyntaxError('Function is not defined');
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  draw(ctx: CanvasRenderingContext2D | null) {}
 }
 
 export { Entity };

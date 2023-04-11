@@ -1,7 +1,9 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
+import { Behavior } from '../traits/behavior';
 import { Go } from '../traits/go';
+import { Killable } from '../traits/killable';
 
 function createTankFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-top');
@@ -32,23 +34,12 @@ function createTankFactory(sprite: SpriteSheet) {
     const tank = new Entity();
 
     tank.offset.set(1, 1);
-    tank.size.set(14, 14);
+    tank.size.set(15, 15);
     tank.addTrait(new Go());
-    // tank.addTrait({
-    //   NAME: 'Action',
-    //   update: function (): void {
-    //     console.warn('update');
-    //   },
-    //   obstruct: function (entity: Entity, side: SIDES): void {
-    //     console.warn('obstruct', entity, side);
-    //   },
-    //   direct: function (entity: Entity, side: SIDES): void {
-    //     throw new Error('Function not implemented.');
-    //   },
-    //   collides: function (entity: Entity, canditate: Entity): void {
-    //     throw new Error('Function not implemented.');
-    //   },
-    // });
+    tank.addTrait(new Behavior());
+    tank.addTrait(new Killable());
+
+    (tank.getTrait('killable') as Killable).removeAfter = 0;
 
     tank.draw = drawTank(tank);
     tank.direct = directTank(tank);

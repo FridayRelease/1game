@@ -4,6 +4,18 @@ import { setupKeyboard } from './input';
 import { createCollisionLayer } from './layers';
 import { loadEntities } from './enteties';
 import { fetchLevel } from '@/controllers/game-controllers';
+import { Entity } from './entity';
+import { PlayerController } from './traits/player-controller';
+
+const createPlayerEnv = (playerEntity: Entity) => {
+  const playerEnv = new Entity();
+  const playerControl = new PlayerController();
+  playerControl.checkpoint.set(60, 232);
+  playerControl.setPlayer(playerEntity);
+  playerEnv.addTrait(playerControl);
+
+  return playerEnv;
+};
 
 function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,8 +33,9 @@ function Game() {
       const level = await loadLevel('1-1');
 
       const tank = entityFactory.tank();
-      tank.pos.set(60, 230);
-      level.entities.add(tank);
+
+      const playerEnv = createPlayerEnv(tank);
+      level.entities.add(playerEnv);
 
       level.comp.push(createCollisionLayer(level));
 

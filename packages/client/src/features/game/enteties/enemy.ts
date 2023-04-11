@@ -1,7 +1,10 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
+import { Behavior } from '../traits/behavior';
+import { Enemy } from '../traits/enemy';
 import { Go } from '../traits/go';
+import { Killable } from '../traits/killable';
 
 function createEnemyFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-bottom');
@@ -16,15 +19,27 @@ function createEnemyFactory(sprite: SpriteSheet) {
     };
   }
 
-  function routeFrame(tank: Entity) {
-    const go = tank.getTrait('go') as Go;
+  function routeFrame(tank: Entity): { route: string; offset: number } {
+    const killable = tank.getTrait('killable') as Killable;
 
-    return runAnim ? runAnim(Math.abs(go.direction)) : '';
+    if (killable.dead) {
+      const animation = sprite.animations.get('bang');
+
+      const route = animation ? animation(Math.abs(killable.deadTime)) : '';
+      return { route, offset: route.includes('big') ? -8 : 0 };
+    }
+
+    const go = tank.getTrait('go') as Go;
+    const route = runAnim ? runAnim(Math.abs(go.direction)) : '';
+
+    return { route, offset: 0 };
   }
 
   function drawEnemy(entity: Entity) {
     return function draw(ctx: CanvasRenderingContext2D | null) {
-      sprite.draw(routeFrame(entity), ctx, entity.pos.x, entity.pos.y);
+      const { route, offset } = routeFrame(entity);
+
+      sprite.draw(route, ctx, entity.pos.x + offset, entity.pos.y + offset);
     };
   }
 
@@ -46,7 +61,11 @@ function createEnemyFactory(sprite: SpriteSheet) {
     const enemy = new Entity();
 
     enemy.size.set(16, 16);
+    enemy.addTrait(new Enemy());
     enemy.addTrait(new Go());
+    enemy.addTrait(new Behavior());
+    enemy.addTrait(new Killable());
+
     (enemy.getTrait('go') as Go).directionY = 1;
     (enemy.getTrait('go') as Go).side = SIDES.BOTTOM;
 
