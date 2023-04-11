@@ -1,6 +1,14 @@
 import { ITileDTO } from '@/api/types';
 import { Entity } from './entity';
 
+type MatchTile = {
+  tile: { type?: string; name?: string };
+  x1: number;
+  x2: number;
+  y1: number;
+  y2: number;
+};
+
 type IExpandedTile = {
   tile: ITileDTO;
   x: number;
@@ -17,4 +25,14 @@ type Position = { x: number; y: number };
 
 type EntityFactoryCallback = () => Entity;
 
-export { type EntityFactoryCallback, type IExpandedTile, type ILevel, type Layer, type Position };
+type CallBackFunction = () => void;
+
+export {
+  type MatchTile,
+  type EntityFactoryCallback,
+  type CallBackFunction,
+  type IExpandedTile,
+  type ILevel,
+  type Layer,
+  type Position,
+};

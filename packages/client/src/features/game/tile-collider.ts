@@ -33,17 +33,15 @@ class TileCollider {
 
       if (entity.vel.x > 0) {
         if (entity.bounds.right > match.x1) {
-          entity.bounds.right = match.x1;
-          entity.vel.x = 0;
-          entity.obstruct(SIDES.RIGHT);
-          this.fixByX(SIDES.RIGHT, entity);
+          this.smoothByY(SIDES.RIGHT, entity);
+
+          entity.obstruct(SIDES.RIGHT, match);
         }
       } else if (entity.vel.x < 0) {
         if (entity.bounds.left < match.x2) {
-          entity.bounds.left = match.x2;
-          entity.vel.x = 0;
-          entity.obstruct(SIDES.LEFT);
-          this.fixByX(SIDES.LEFT, entity);
+          this.smoothByY(SIDES.LEFT, entity);
+
+          entity.obstruct(SIDES.LEFT, match);
         }
       }
     });
@@ -72,60 +70,25 @@ class TileCollider {
 
       if (entity.vel.y > 0) {
         if (entity.bounds.bottom > match.y1) {
-          entity.bounds.bottom = match.y1;
-          entity.vel.y = 0;
+          this.smoothByY(SIDES.BOTTOM, entity);
 
-          entity.obstruct(SIDES.BOTTOM);
-          this.fixByY(SIDES.BOTTOM, entity);
+          entity.obstruct(SIDES.BOTTOM, match);
         }
       } else if (entity.vel.y < 0) {
         if (entity.bounds.top < match.y2) {
-          entity.bounds.top = match.y2;
-          entity.vel.y = 0;
+          this.smoothByY(SIDES.TOP, entity);
 
-          entity.obstruct(SIDES.TOP);
-          this.fixByY(SIDES.TOP, entity);
-        }
-      }
-    });
-  }
-
-  test(entity: Entity) {
-    const matches = this.tiles.searchByRange(
-      entity.pos.x,
-      entity.pos.x + entity.size.x,
-      entity.pos.y,
-      entity.pos.y + entity.size.y
-    );
-
-    matches.forEach(match => {
-      if (!match) {
-        return;
-      }
-
-      if (match.tile.type !== 'wall') {
-        return;
-      }
-
-      if (entity.vel.y > 0) {
-        if (entity.pos.y + entity.size.y > match.y1) {
-          entity.pos.y = match.y1 - entity.size.y;
-          entity.vel.y = 0;
-        }
-      } else if (entity.vel.y < 0) {
-        if (entity.pos.y < match.y2) {
-          entity.pos.y = match.y2;
-          entity.vel.y = 0;
+          entity.obstruct(SIDES.TOP, match);
         }
       }
     });
   }
 
   // Поворачивая влево или вправо танк упёрся в стену. Помогаем повернуть.
-  fixByX(side: SIDES, entity: Entity) {
-    let matrixColumn = entity.bounds.right / this.tiles.tileSize;
+  smoothByX(side: SIDES, entity: Entity) {
+    let matrixColumn = Math.floor(entity.bounds.right / this.tiles.tileSize);
     if (side === SIDES.LEFT) {
-      matrixColumn = entity.bounds.left / this.tiles.tileSize - 1;
+      matrixColumn = Math.max(Math.floor(entity.bounds.left / this.tiles.tileSize - 1), 0);
     }
 
     const matrixColumnIndexTop = Math.floor(entity.bounds.top / this.tiles.tileSize);
@@ -133,14 +96,14 @@ class TileCollider {
 
     // Нижняя часть модели танка задевает стену.
     if (
-      !this.tiles.matrix.grid[matrixColumn][matrixColumnIndexTop] &&
+      this.tiles.matrix.grid[matrixColumn][matrixColumnIndexTop].type === 'background' &&
       this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom] &&
       this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom].type === 'wall'
     ) {
       if (matrixColumnIndexBottom - matrixColumnIndexTop > 1) {
         // В этом месте для верхней части танка свободный тайл.
         // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
-        if (!this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom - 1]) {
+        if (this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom - 1].type === 'background') {
           entity.pos.y = Math.floor(entity.pos.y / this.tiles.tileSize) * this.tiles.tileSize;
         }
       }
@@ -150,12 +113,12 @@ class TileCollider {
     else if (
       this.tiles.matrix.grid[matrixColumn][matrixColumnIndexTop] &&
       this.tiles.matrix.grid[matrixColumn][matrixColumnIndexTop].type === 'wall' &&
-      !this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom]
+      this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom].type === 'background'
     ) {
       if (matrixColumnIndexBottom - matrixColumnIndexTop > 1) {
         // В этом месте для нижней части танка свободный тайл.
         // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
-        if (!this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom - 1]) {
+        if (this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom - 1].type === 'background') {
           entity.pos.y = Math.floor(entity.pos.y / this.tiles.tileSize) * this.tiles.tileSize + this.tiles.tileSize;
         }
       }
@@ -163,10 +126,10 @@ class TileCollider {
   }
 
   // Поворачивая вверх или вниз танк упёрся в стену. Помогаем повернуть.
-  fixByY(side: SIDES, entity: Entity) {
-    let matrixRow = entity.bounds.top / this.tiles.tileSize - 1;
+  smoothByY(side: SIDES, entity: Entity) {
+    let matrixRow = Math.max(Math.floor(entity.bounds.top / this.tiles.tileSize - 1), 0);
     if (side === SIDES.BOTTOM) {
-      matrixRow = entity.bounds.bottom / this.tiles.tileSize;
+      matrixRow = Math.floor(entity.bounds.bottom / this.tiles.tileSize);
     }
 
     const matrixColumnIndexLeft = Math.floor(entity.bounds.left / this.tiles.tileSize);
@@ -174,14 +137,14 @@ class TileCollider {
 
     // Правая часть модели танка упёрлась стену.
     if (
-      !this.tiles.matrix.grid[matrixColumnIndexLeft][matrixRow] &&
+      this.tiles.matrix.grid[matrixColumnIndexLeft][matrixRow].type === 'background' &&
       this.tiles.matrix.grid[matrixColumnIndexRight][matrixRow] &&
       this.tiles.matrix.grid[matrixColumnIndexRight][matrixRow].type === 'wall'
     ) {
       if (matrixColumnIndexRight - matrixColumnIndexLeft > 1) {
         // В этом месте для левой части танка свободный тайл.
         // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
-        if (!this.tiles.matrix.grid[matrixColumnIndexRight - 1][matrixRow]) {
+        if (this.tiles.matrix.grid[matrixColumnIndexRight - 1][matrixRow].type === 'background') {
           entity.pos.x = Math.floor(entity.pos.x / this.tiles.tileSize) * this.tiles.tileSize;
         }
       }
@@ -191,12 +154,12 @@ class TileCollider {
     else if (
       this.tiles.matrix.grid[matrixColumnIndexLeft][matrixRow] &&
       this.tiles.matrix.grid[matrixColumnIndexLeft][matrixRow].type === 'wall' &&
-      !this.tiles.matrix.grid[matrixColumnIndexRight][matrixRow]
+      this.tiles.matrix.grid[matrixColumnIndexRight][matrixRow].type === undefined
     ) {
       if (matrixColumnIndexRight - matrixColumnIndexLeft > 1) {
         // В этом месте для правой части танка свободный тайл.
         // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
-        if (!this.tiles.matrix.grid[matrixColumnIndexRight - 1][matrixRow]) {
+        if (this.tiles.matrix.grid[matrixColumnIndexRight - 1][matrixRow].type === 'background') {
           entity.pos.x = Math.floor(entity.pos.x / this.tiles.tileSize) * this.tiles.tileSize + this.tiles.tileSize;
         }
       }

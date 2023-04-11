@@ -3,13 +3,14 @@ import { SIDES } from './constants';
 import { Level } from './level';
 import { Vec2 } from './math';
 import { Trait } from './traits/trait';
+import { MatchTile } from './types';
 
 interface IEntity {
   pos: Vec2;
   vel: Vec2;
   size: Vec2;
   update: (deltaTime: number, level: Level) => void;
-  obstruct: (side: SIDES) => void;
+  obstruct: (side: SIDES, match: MatchTile) => void;
   direct: (side: SIDES) => void;
   draw: (ctx: CanvasRenderingContext2D | null) => void;
 }
@@ -31,6 +32,12 @@ class Entity implements IEntity {
     this.traits = [];
   }
 
+  finalize() {
+    this.traits.forEach(trait => {
+      trait.finalize();
+    });
+  }
+
   addTrait(trait: Trait) {
     this.traits.push(trait);
   }
@@ -41,9 +48,9 @@ class Entity implements IEntity {
     });
   }
 
-  obstruct(side: SIDES) {
+  obstruct(side: SIDES, match: MatchTile) {
     this.traits.forEach(trait => {
-      trait.obstruct(this, side);
+      trait.obstruct(this, side, match);
     });
   }
 
