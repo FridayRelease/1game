@@ -36,21 +36,21 @@ class TileCollider {
           entity.bounds.right = match.x1;
           entity.vel.x = 0;
           entity.obstruct(SIDES.RIGHT);
-
-          this.fixByX(x, entity);
+          this.fixByX(SIDES.RIGHT, entity);
         }
       } else if (entity.vel.x < 0) {
         if (entity.bounds.left < match.x2) {
           entity.bounds.left = match.x2;
           entity.vel.x = 0;
           entity.obstruct(SIDES.LEFT);
+          this.fixByX(SIDES.LEFT, entity);
         }
       }
     });
   }
 
   checkY(entity: Entity) {
-    let y;
+    let y: number;
     if (entity.vel.y > 0) {
       y = entity.bounds.bottom;
     } else if (entity.vel.y < 0) {
@@ -76,6 +76,7 @@ class TileCollider {
           entity.vel.y = 0;
 
           entity.obstruct(SIDES.BOTTOM);
+          this.fixByY(SIDES.BOTTOM, entity);
         }
       } else if (entity.vel.y < 0) {
         if (entity.bounds.top < match.y2) {
@@ -83,6 +84,7 @@ class TileCollider {
           entity.vel.y = 0;
 
           entity.obstruct(SIDES.TOP);
+          this.fixByY(SIDES.TOP, entity);
         }
       }
     });
@@ -119,19 +121,86 @@ class TileCollider {
     });
   }
 
-  fixByX(x: number, entity: Entity) {
-    const { pos } = entity;
-    const { y } = pos;
-    const offset = 16;
+  // Поворачивая влево или вправо танк упёрся в стену. Помогаем повернуть.
+  fixByX(side: SIDES, entity: Entity) {
+    let matrixColumn = entity.bounds.right / this.tiles.tileSize;
+    if (side === SIDES.LEFT) {
+      matrixColumn = entity.bounds.left / this.tiles.tileSize - 1;
+    }
 
-    const xIndex = this.tiles.toIndex(x);
-    const yRanges = this.tiles.toIndexRange(y - offset, y + offset);
+    const matrixColumnIndexTop = Math.floor(entity.bounds.top / this.tiles.tileSize);
+    const matrixColumnIndexBottom = Math.floor(entity.bounds.bottom / this.tiles.tileSize);
 
-    const tiles = yRanges.map(yIndex => this.tiles.getByIndex(xIndex, yIndex));
+    // Нижняя часть модели танка задевает стену.
+    if (
+      !this.tiles.matrix.grid[matrixColumn][matrixColumnIndexTop] &&
+      this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom] &&
+      this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom].type === 'wall'
+    ) {
+      if (matrixColumnIndexBottom - matrixColumnIndexTop > 1) {
+        // В этом месте для верхней части танка свободный тайл.
+        // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
+        if (!this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom - 1]) {
+          entity.pos.y = Math.floor(entity.pos.y / this.tiles.tileSize) * this.tiles.tileSize;
+        }
+      }
+    }
 
-    entity.pos.y = yRanges[3] * 8;
-    console.warn({ xIndex, yRanges });
-    console.warn({ tiles });
+    // Верхняя часть модели танка задевает стену.
+    else if (
+      this.tiles.matrix.grid[matrixColumn][matrixColumnIndexTop] &&
+      this.tiles.matrix.grid[matrixColumn][matrixColumnIndexTop].type === 'wall' &&
+      !this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom]
+    ) {
+      if (matrixColumnIndexBottom - matrixColumnIndexTop > 1) {
+        // В этом месте для нижней части танка свободный тайл.
+        // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
+        if (!this.tiles.matrix.grid[matrixColumn][matrixColumnIndexBottom - 1]) {
+          entity.pos.y = Math.floor(entity.pos.y / this.tiles.tileSize) * this.tiles.tileSize + this.tiles.tileSize;
+        }
+      }
+    }
+  }
+
+  // Поворачивая вверх или вниз танк упёрся в стену. Помогаем повернуть.
+  fixByY(side: SIDES, entity: Entity) {
+    let matrixRow = entity.bounds.top / this.tiles.tileSize - 1;
+    if (side === SIDES.BOTTOM) {
+      matrixRow = entity.bounds.bottom / this.tiles.tileSize;
+    }
+
+    const matrixColumnIndexLeft = Math.floor(entity.bounds.left / this.tiles.tileSize);
+    const matrixColumnIndexRight = Math.floor(entity.bounds.right / this.tiles.tileSize);
+
+    // Правая часть модели танка упёрлась стену.
+    if (
+      !this.tiles.matrix.grid[matrixColumnIndexLeft][matrixRow] &&
+      this.tiles.matrix.grid[matrixColumnIndexRight][matrixRow] &&
+      this.tiles.matrix.grid[matrixColumnIndexRight][matrixRow].type === 'wall'
+    ) {
+      if (matrixColumnIndexRight - matrixColumnIndexLeft > 1) {
+        // В этом месте для левой части танка свободный тайл.
+        // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
+        if (!this.tiles.matrix.grid[matrixColumnIndexRight - 1][matrixRow]) {
+          entity.pos.x = Math.floor(entity.pos.x / this.tiles.tileSize) * this.tiles.tileSize;
+        }
+      }
+    }
+
+    // Левая часть модели танка упёрлась стену.
+    else if (
+      this.tiles.matrix.grid[matrixColumnIndexLeft][matrixRow] &&
+      this.tiles.matrix.grid[matrixColumnIndexLeft][matrixRow].type === 'wall' &&
+      !this.tiles.matrix.grid[matrixColumnIndexRight][matrixRow]
+    ) {
+      if (matrixColumnIndexRight - matrixColumnIndexLeft > 1) {
+        // В этом месте для правой части танка свободный тайл.
+        // Средняя чать танка занимает целиком один тайл, если он пустой, то переносим танк в проезд.
+        if (!this.tiles.matrix.grid[matrixColumnIndexRight - 1][matrixRow]) {
+          entity.pos.x = Math.floor(entity.pos.x / this.tiles.tileSize) * this.tiles.tileSize + this.tiles.tileSize;
+        }
+      }
+    }
   }
 }
 
