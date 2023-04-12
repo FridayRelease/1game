@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, memo } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import { Timer } from './timer';
 import { setupKeyboard } from './input';
 import { loadEntities } from './enteties';
@@ -20,8 +20,9 @@ const createPlayerEnv = (playerEntity: Entity) => {
 function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const ctx = canvasRef.current?.getContext('2d');
+    const timer = new Timer();
 
     (async function main(ctx: CanvasRenderingContext2D | undefined | null) {
       if (!ctx) {
@@ -42,19 +43,17 @@ function Game() {
       const input = setupKeyboard(tank, level, entityFactory);
       input.listenTo(window);
 
-      const timer = new Timer();
-
       timer.update = function update(deltaTime: number) {
         level.update(deltaTime);
         level.comp.draw(ctx);
       };
-
-      timer.start();
-
-      return () => {
-        timer.cancel();
-      };
     })(ctx);
+
+    timer.start();
+
+    return () => {
+      timer.cancel();
+    };
   }, []);
 
   return <canvas className="game" ref={canvasRef} id="screen" width="260px" height="260px" />;
