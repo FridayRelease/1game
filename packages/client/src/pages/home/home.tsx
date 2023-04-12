@@ -5,7 +5,7 @@ import Logotype from '../../assets/images/logotype.png';
 import { cn } from '@/utils/cn';
 import './home.scss';
 import { Link } from 'react-router-dom';
-import { ForumUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
+import { ForumUrl, GameUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
 import { ReactComponent as IconProfile } from '@/assets/images/icons/profile.svg';
 import { ReactComponent as IconTrophy } from '@/assets/images/icons/trophy.svg';
 import { ReactComponent as IconForum } from '@/assets/images/icons/forum.svg';
@@ -45,7 +45,7 @@ const Home: FC = () => {
               выйти
             </Link>
 
-            <Link to={'#'} className={cn('home__link', 'home__link-start', 'home__link__bg-red')}>
+            <Link to={GameUrl} className={cn('home__link', 'home__link-start', 'home__link__bg-red')}>
               старт
             </Link>
           </nav>
