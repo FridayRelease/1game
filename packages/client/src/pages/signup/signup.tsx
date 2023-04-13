@@ -6,7 +6,7 @@ import { useForm, userActions } from '@/features/authentication';
 import Button from '@/components/button/button';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Input from '@/components/input/input';
-import { initValues, validationSchema } from './signup.constants';
+import { initValues, singSchema } from './signup.constants';
 import Logotype from '../../assets/images/logotype.png';
 import './Signup.scss';
 import { IUserSignupRequest } from '@/types/user';
@@ -20,17 +20,15 @@ const Signup: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput, validate } = useForm({
+
+  const { values, hasError, onChangeForm, getFieldProps, onBlurInput } = useForm({
     initValues,
-    validationSchema,
+    validationSchema: singSchema,
   });
+
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault();
-    const valid = validate();
-
-    console.log('valid: ', valid);
-
     dispatch(userActions.signup({ props: values as IUserSignupRequest, navigate }));
   };
 
@@ -46,31 +44,26 @@ const Signup: FC = () => {
               <div className="registration-form__row">
                 <Input
                   {...getFieldProps('first_name')}
-                  error={getFieldError('first_name')}
                   placeholder={'Введите имя'}
                   onBlur={onBlurInput}
                 />
                 <Input
                   {...getFieldProps('second_name')}
-                  error={getFieldError('second_name')}
                   placeholder={'Введите фамилию'}
                   onBlur={onBlurInput}
                 />
                 <Input
                   {...getFieldProps('email')}
-                  error={getFieldError('email')}
                   placeholder={'Введите почту'}
                   onBlur={onBlurInput}
                 />
                 <Input
                   {...getFieldProps('login')}
-                  error={getFieldError('login')}
                   placeholder={'Введите юзернейм'}
                   onBlur={onBlurInput}
                 />
                 <Input
                   {...getFieldProps('phone')}
-                  error={getFieldError('phone')}
                   placeholder={'Введите телефон'}
                   onBlur={onBlurInput}
                 />
@@ -80,14 +73,12 @@ const Signup: FC = () => {
               <div className="registration-form__row">
                 <Input
                   {...getFieldProps('password')}
-                  error={getFieldError('password')}
                   type={'password'}
                   placeholder={'Введите пароль'}
                   onBlur={onBlurInput}
                 />
                 <Input
                   {...getFieldProps('passwordSecond')}
-                  error={getFieldError('passwordSecond')}
                   type={'password'}
                   placeholder={'Повторите пароль'}
                   onBlur={onBlurInput}

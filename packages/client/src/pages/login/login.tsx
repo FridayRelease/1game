@@ -7,7 +7,7 @@ import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Input from '@/components/input/input';
 import { userActions, useForm } from '@/features/authentication';
 import { IUserSigninRequest } from '@/types/user';
-import { initValues, validationSchema } from './login.constants';
+import { initValues, loginSchema } from './login.constants';
 import Logotype from '../../assets/images/logotype.png';
 import './login.scss';
 import { cn } from '@/utils/cn';
@@ -18,17 +18,15 @@ import { cn } from '@/utils/cn';
  * @category page
  */
 const Login: FC = () => {
-  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput, validate } = useForm({
+  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({
     initValues,
-    validationSchema,
+    validationSchema: loginSchema,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault();
-    const valid = validate();
-    console.log({ valid });
 
     dispatch(
       userActions.signin({

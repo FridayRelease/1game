@@ -5,7 +5,6 @@ import UserAvatar from '@/components/user-avatar';
 import Menu from '@/components/profile/menu';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
-import { ValidationProps } from '@/features/validation/validator';
 import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
 import AvatarForm from '@/components/profile/avatar-form';
 import { updateProfileData } from '@/controllers/user-controllers';
@@ -17,25 +16,7 @@ import { IUserDTO } from '@/api/types';
 import useResetState from '@/hooks/use-reset-state';
 import IMenuEditProfileData from './profile.interface';
 import './profile.scss';
-
-const validationSchema: Record<string, ValidationProps> = {
-  first_name: {
-    required: true,
-  },
-  second_name: {
-    required: true,
-  },
-  login: {
-    required: true,
-  },
-  phone: {
-    required: true,
-    isPhone: true,
-  },
-  display_name: {
-    required: true,
-  },
-};
+import { profileSchema } from '@/components/profile/edit/profile/profile.constants';
 
 const EditProfile: FC = () => {
   const navigate = useNavigate();
@@ -66,7 +47,7 @@ const EditProfile: FC = () => {
 
   const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({
     initValues,
-    validationSchema,
+    validationSchema: profileSchema,
   });
 
   const [isEditAvatar, setIsEditAvatar] = useState(false);
