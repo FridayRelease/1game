@@ -1,10 +1,11 @@
+import { Traits } from '@/constant/traits';
 import { Entity } from '../entity';
 import { Level } from '../level';
 import { Trait } from './trait';
 
 class Physics extends Trait {
   constructor() {
-    super('physics');
+    super(Traits.Physics);
   }
 
   update(entity: Entity, deltaTime: number, level: Level): void {

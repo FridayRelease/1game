@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
 import { Bullet } from '../traits/bullet';
@@ -7,7 +8,7 @@ import { Solid } from '../traits/solid';
 
 function createBulletFactory(sprite: SpriteSheet) {
   function routeFrame(entity: Entity): { route: string; offset: number } {
-    const killable = entity.getTrait('killable') as Killable;
+    const killable = entity.getTrait(Traits.Killable) as Killable;
 
     if (killable.dead) {
       const animation = sprite.animations.get('bang');
@@ -16,7 +17,7 @@ function createBulletFactory(sprite: SpriteSheet) {
       return { route, offset: route.includes('big') ? -8 : 0 };
     }
 
-    const bullet = entity.getTrait('bullet') as Bullet;
+    const bullet = entity.getTrait(Traits.Bullet) as Bullet;
 
     return { route: `run-${bullet.side}`, offset: 4 };
   }

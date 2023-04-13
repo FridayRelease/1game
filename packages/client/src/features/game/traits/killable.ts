@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { Entity } from '../entity';
 import { Level } from '../level';
 import { Trait } from './trait';
@@ -8,7 +9,7 @@ class Killable extends Trait {
   removeAfter: number;
 
   constructor() {
-    super('killable');
+    super(Traits.Killable);
     this.dead = false;
     this.deadTime = 0;
     this.removeAfter = 1.2;
