@@ -1,23 +1,12 @@
-enum Icons {
-  Profile = 'Profile',
-  Trophy = 'Trophy',
-  Forum = 'Forum',
-  Logout = 'Logout',
-}
+import { Icons } from './icon';
 
-interface IconType {
-  type: string;
+interface IconProps {
+  type: Icons;
   className?: string;
   fill?: string;
   stroke?: string;
 }
 
-type IconsComponentType = {
-  [key: string]: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & {
-      title?: string | undefined;
-    }
-  >;
-};
+type IconComponentType = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string | undefined }>;
 
-export { type IconType, Icons, type IconsComponentType };
+export { type IconProps, type IconComponentType };

@@ -1,15 +1,17 @@
-import { ReactComponent as IconProfile } from '@/assets/images/icons/profile.svg';
-import { ReactComponent as IconTrophy } from '@/assets/images/icons/trophy.svg';
-import { ReactComponent as IconForum } from '@/assets/images/icons/forum.svg';
-import { ReactComponent as IconLogout } from '@/assets/images/icons/logout.svg';
-import { IconsComponentType, IconType } from './types';
+import { IconProps } from './types';
+import { getIconComponentByType } from '@/utils/get-icon-component-by-type';
 
-const Icon = ({ type, className, fill, stroke }: IconType) => {
-  const icons: IconsComponentType = { IconProfile, IconTrophy, IconForum, IconLogout };
+export enum Icons {
+  Profile = 'profile',
+  Trophy = 'trophy',
+  Forum = 'forum',
+  Logout = 'logout',
+}
 
-  const IconComponent = icons[`Icon${type}`];
+const Icon = ({ type, className, fill = 'none', stroke = 'none' }: IconProps) => {
+  const IconComponent = getIconComponentByType(type);
 
-  return <IconComponent className={className} fill={fill ?? 'none'} stroke={stroke ?? 'none'} />;
+  return IconComponent ? <IconComponent className={className} fill={fill} stroke={stroke} /> : <></>;
 };
 
 export default Icon;

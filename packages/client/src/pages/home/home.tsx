@@ -7,7 +7,7 @@ import './home.scss';
 import { Link } from 'react-router-dom';
 import { ForumUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
-import { Icons } from '@/components/icon/types';
+import { Icons } from '@/components/icon/icon';
 import Icon from '@/components/icon';
 import { LinkType } from '@/types/link';
 
