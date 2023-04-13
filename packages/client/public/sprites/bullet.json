@@ -1,34 +1,34 @@
 {
-  "imageUrl": "/img/tiles.png",
+  "imageUrl": "/img/bullet.png",
 
   "frames": [
     {
       "name": "bang-1",
-      "rect": [256, 128, 16, 16]
+      "rect": [31, 0, 16, 16]
     },
     {
       "name": "bang-2",
-      "rect": [272, 128, 16, 16]
+      "rect": [46, 0, 16, 16]
     },
     {
       "name": "bang-3",
-      "rect": [288, 128, 16, 16]
+      "rect": [63, 0, 16, 16]
     },
     {
       "name": "run-top",
-      "rect": [320, 99, 8, 8]
+      "rect": [0, 0, 8, 8]
     },
     {
       "name": "run-left",
-      "rect": [328, 99, 8, 8]
+      "rect": [8, 0, 8, 8]
     },
     {
       "name": "run-bottom",
-      "rect": [336, 99, 8, 8]
+      "rect": [16, 0, 8, 8]
     },
     {
       "name": "run-right",
-      "rect": [344, 99, 8, 8]
+      "rect": [24, 0, 8, 8]
     }
   ],
 

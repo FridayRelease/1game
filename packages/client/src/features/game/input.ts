@@ -59,7 +59,6 @@ function setupKeyboard(entity: Entity, level: Level, entityFactory: Record<strin
       go.directionX = 0;
       go.directionY = keyState ? -1 : 0;
     }
-    console.warn('ArrowUp', go.directionX, go.directionX);
   });
 
   return input;

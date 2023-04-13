@@ -1,5 +1,5 @@
 {
-  "imageUrl": "/img/tiles.png",
+  "imageUrl": "/img/tanks.png",
 
   "frames": [
     {
@@ -40,7 +40,7 @@
   "animations": [
     {
       "name": "run-top",
-      "frameLen": 6,
+      "frameLen": 10,
       "frames": ["run-top-1", "run-top-2"]
     },
     {
@@ -50,7 +50,7 @@
     },
     {
       "name": "run-left",
-      "frameLen": 6,
+      "frameLen": 1,
       "frames": ["run-left-1", "run-left-2"]
     },
     {
