@@ -1,0 +1,9 @@
+const PHONE_SPEC = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+const PASSWORD_SPEC =
+  /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*/;
+
+
+export {
+  PASSWORD_SPEC,
+  PHONE_SPEC
+}
