@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { RequireAuth } from '@/features/authentication';
+import GamePage from './pages/game';
 import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -9,7 +10,7 @@ import EditRouter from './pages/edit-router';
 import EditProfile from './pages/edit-profile';
 import EditPassword from './pages/edit-password';
 import GameOver from './pages/game-over';
-import { MainUrl, LoginUrl, SignupUrl, ProfileUrl, LeaderboardUrl } from './constant/router';
+import { MainUrl, LoginUrl, SignupUrl, ProfileUrl, LeaderboardUrl, GameUrl } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: LoginUrl,
     element: <Login />,
+  },
+  {
+    path: GameUrl,
+    element: <GamePage />,
   },
   {
     path: SignupUrl,

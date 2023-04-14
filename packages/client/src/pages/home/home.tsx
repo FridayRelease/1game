@@ -5,7 +5,7 @@ import Logotype from '../../assets/images/logotype.png';
 import { cn } from '@/utils/cn';
 import './home.scss';
 import { Link } from 'react-router-dom';
-import { ForumUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
+import { ForumUrl, GameUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import { Icons } from '@/components/icon/icon';
 import Icon from '@/components/icon';
@@ -41,7 +41,7 @@ const Home: FC = () => {
     },
     {
       text: 'старт',
-      url: '#',
+      url: GameUrl,
       className: cn('home__link', 'home__link-start', 'home__link__bg-red'),
     },
   ];

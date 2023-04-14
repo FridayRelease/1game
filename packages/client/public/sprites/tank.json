@@ -1,0 +1,62 @@
+{
+  "imageUrl": "/img/tanks.png",
+
+  "frames": [
+    {
+      "name": "run-top-1",
+      "rect": [0, 0, 16, 16]
+    },
+    {
+      "name": "run-top-2",
+      "rect": [16, 0, 16, 16]
+    },
+    {
+      "name": "run-left-1",
+      "rect": [32, 0, 16, 16]
+    },
+    {
+      "name": "run-left-2",
+      "rect": [48, 0, 16, 16]
+    },
+    {
+      "name": "run-bottom-1",
+      "rect": [64, 0, 16, 16]
+    },
+    {
+      "name": "run-bottom-2",
+      "rect": [80, 0, 16, 16]
+    },
+
+    {
+      "name": "run-right-1",
+      "rect": [96, 0, 16, 16]
+    },
+    {
+      "name": "run-right-2",
+      "rect": [110, 0, 16, 16]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "run-top",
+      "frameLen": 10,
+      "frames": ["run-top-1", "run-top-2"]
+    },
+    {
+      "name": "run-bottom",
+      "frameLen": 6,
+      "frames": ["run-bottom-1", "run-bottom-2"]
+    },
+    {
+      "name": "run-left",
+      "frameLen": 1,
+      "frames": ["run-left-1", "run-left-2"]
+    },
+    {
+      "name": "run-right",
+      "frameLen": 6,
+      "frames": ["run-right-1", "run-right-2"]
+    }
+  ]
+}

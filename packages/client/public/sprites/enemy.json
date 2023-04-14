@@ -1,0 +1,87 @@
+{
+  "imageUrl": "/img/tiles.png",
+
+  "frames": [
+    {
+      "name": "bang-1",
+      "rect": [256, 128, 16, 16]
+    },
+    {
+      "name": "bang-2",
+      "rect": [272, 128, 16, 16]
+    },
+    {
+      "name": "bang-3",
+      "rect": [288, 128, 16, 16]
+    },
+    {
+      "name": "bang-big-4",
+      "rect": [304, 128, 32, 32]
+    },
+    {
+      "name": "bang-big-5",
+      "rect": [320, 128, 32, 32]
+    },
+    {
+      "name": "run-top-1",
+      "rect": [126, 0, 16, 16]
+    },
+    {
+      "name": "run-top-2",
+      "rect": [142, 0, 16, 16]
+    },
+    {
+      "name": "run-left-1",
+      "rect": [158, 0, 16, 16]
+    },
+    {
+      "name": "run-left-2",
+      "rect": [174, 0, 16, 16]
+    },
+    {
+      "name": "run-bottom-1",
+      "rect": [190, 0, 16, 16]
+    },
+    {
+      "name": "run-bottom-2",
+      "rect": [216, 0, 16, 16]
+    },
+
+    {
+      "name": "run-right-1",
+      "rect": [232, 0, 16, 16]
+    },
+    {
+      "name": "run-right-2",
+      "rect": [248, 0, 16, 16]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "bang",
+      "frameLen": 0.2,
+      "frames": ["bang-1", "bang-2", "bang-3", "bang-4", "bang-5", "bang-4"]
+    },
+    {
+      "name": "run-top",
+      "frameLen": 6,
+      "frames": ["run-top-1", "run-top-2"]
+    },
+    {
+      "name": "run-bottom",
+      "frameLen": 6,
+      "frames": ["run-bottom-1", "run-bottom-2"]
+    },
+    {
+      "name": "run-left",
+      "frameLen": 6,
+      "frames": ["run-left-1", "run-left-2"]
+    },
+    {
+      "name": "run-right",
+      "frameLen": 6,
+      "frames": ["run-right-1", "run-right-2"]
+    }
+  ]
+}
