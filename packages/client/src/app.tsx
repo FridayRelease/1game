@@ -9,15 +9,29 @@ import useTheme from './hooks/use-theme';
 import { getLocalStorage } from './utils/localStorage';
 
 function App() {
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:3001`;
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-    };
 
-    fetchServerData();
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('./service-worker/sw.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+
+  useEffect(() => {
+    if (window.Worker) {
+      const fetchServerData = async () => {
+        const url = `http://localhost:3001`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+
+      };
+
+      fetchServerData();
+    }
   }, []);
 
   useTheme();
