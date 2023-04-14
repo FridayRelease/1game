@@ -23,7 +23,7 @@ export class HttpClient {
   }
 
   public put<T>(url: string, data: AllowedData) {
-    const options = {} as AxiosRequestConfig<any>;
+    const options: AxiosRequestConfig = {};
 
     if (data instanceof FormData) {
       options.headers = { 'Content-Type': 'multipart/form-data' };

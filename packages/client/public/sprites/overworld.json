@@ -1,0 +1,32 @@
+{
+  "imageUrl": "/img/ground.png",
+  "tileW": 8,
+  "tileH": 8,
+
+  "tiles": [
+    {
+      "name": "black",
+      "index": [0, 0]
+    },
+    {
+      "name": "brick-wall",
+      "index": [1, 0]
+    },
+    {
+      "name": "stone-wall",
+      "index": [2, 2]
+    },
+    {
+      "name": "water-wall",
+      "index": [3, 5]
+    },
+    {
+      "name": "tree-wall",
+      "index": [4, 5]
+    },
+    {
+      "name": "lock",
+      "index": [5, 0]
+    }
+  ]
+}
