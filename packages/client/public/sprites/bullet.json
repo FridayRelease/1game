@@ -1,0 +1,42 @@
+{
+  "imageUrl": "/img/bullet.png",
+
+  "frames": [
+    {
+      "name": "bang-1",
+      "rect": [31, 0, 16, 16]
+    },
+    {
+      "name": "bang-2",
+      "rect": [46, 0, 16, 16]
+    },
+    {
+      "name": "bang-3",
+      "rect": [63, 0, 16, 16]
+    },
+    {
+      "name": "run-top",
+      "rect": [0, 0, 8, 8]
+    },
+    {
+      "name": "run-left",
+      "rect": [8, 0, 8, 8]
+    },
+    {
+      "name": "run-bottom",
+      "rect": [16, 0, 8, 8]
+    },
+    {
+      "name": "run-right",
+      "rect": [24, 0, 8, 8]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "bang",
+      "frameLen": 0.2,
+      "frames": ["bang-1", "bang-2", "bang-3"]
+    }
+  ]
+}

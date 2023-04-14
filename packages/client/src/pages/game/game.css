@@ -1,0 +1,7 @@
+.game {
+  height: 100%;
+  image-rendering: pixelated;
+  display: block;
+  height: 100vh;
+  margin: auto;
+}
