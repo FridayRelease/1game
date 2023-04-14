@@ -8,11 +8,13 @@ import { Trait } from './trait';
 class PlayerController extends Trait {
   checkpoint: Vec2;
   player: Entity | null;
+  lives: number;
 
   constructor() {
     super(Traits.PlayerController);
     this.checkpoint = new Vec2(0, 0);
     this.player = null;
+    this.lives = 2;
   }
 
   setPlayer(entity: Entity) {

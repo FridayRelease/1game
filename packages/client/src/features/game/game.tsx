@@ -2,10 +2,11 @@ import { useRef, useEffect, memo } from 'react';
 import { Timer } from './timer';
 import { setupKeyboard } from './input';
 import { loadEntities } from './enteties';
-import { fetchLevel } from '@/controllers/game-controllers';
+import { fetchFont, fetchLevel } from '@/controllers/game-controllers';
 import { Entity } from './entity';
 import { PlayerController } from './traits/player-controller';
-import { createCollisionLayer } from './layers';
+import { createCollisionLayer, createDashboardLayer } from './layers';
+import { Traits } from '@/constant/traits';
 
 const createPlayerEnv = (playerEntity: Entity) => {
   const playerEnv = new Entity();
@@ -28,6 +29,8 @@ function Game() {
       if (!ctx) {
         return;
       }
+      const font = await fetchFont();
+
       const entityFactory = await loadEntities();
       const loadLevel = await fetchLevel(entityFactory);
 
@@ -38,6 +41,7 @@ function Game() {
       const playerEnv = createPlayerEnv(tank);
       level.entities.add(playerEnv);
 
+      level.comp.push(createDashboardLayer(font, playerEnv.getTrait(Traits.PlayerController) as PlayerController));
       // level.comp.push(createCollisionLayer(level));
 
       const input = setupKeyboard(tank, level, entityFactory);

@@ -1,6 +1,7 @@
 import { gameApi } from '@/api';
 import { ILevelDTO, ISpriteSheetDTO } from '@/api/types';
 import { Entities } from '@/constant/entities';
+import { Font } from '@/features/game/font';
 import { createAnim } from '@/features/game/anim';
 import { createBulletFactory } from '@/features/game/enteties/bullet';
 import { createEnemyFactory } from '@/features/game/enteties/enemy';
@@ -68,4 +69,32 @@ const fetchLevel = async (entityFactory: Record<string, EntityFactoryCallback>) 
   return loadLevel;
 };
 
-export { fetchSpriteSheet, fetchEnemy, fetchTank, fetchLevel, fetchBullet };
+const fetchFont = async () => {
+  const image = await gameApi.loadImage('/img/fonts.png');
+
+  const fontSprite = new SpriteSheet(image, 8, 8);
+
+  fontSprite.define('0', 0, 0, 8, 8);
+  fontSprite.define('1', 8, 0, 8, 8);
+  fontSprite.define('2', 16, 0, 8, 8);
+  fontSprite.define('3', 24, 0, 8, 8);
+  fontSprite.define('4', 32, 0, 8, 8);
+
+  fontSprite.define('5', 0, 8, 8, 8);
+  fontSprite.define('6', 8, 8, 8, 8);
+  fontSprite.define('7', 16, 8, 8, 8);
+  fontSprite.define('8', 24, 8, 8, 8);
+  fontSprite.define('9', 32, 8, 8, 8);
+
+  fontSprite.define('i', 0, 16, 8, 8);
+  fontSprite.define('p', 8, 16, 8, 8);
+
+  fontSprite.define('&', 16, 16, 8, 8);
+  fontSprite.define('*', 24, 16, 8, 8);
+
+  fontSprite.define('@', 32, 16, 16, 16);
+
+  return new Font(fontSprite, 8);
+};
+
+export { fetchSpriteSheet, fetchEnemy, fetchTank, fetchLevel, fetchBullet, fetchFont };
