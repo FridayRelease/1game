@@ -1,0 +1,14 @@
+{
+  "bonus": {
+    "url": "/audio/bonus.ogg"
+  },
+  "move": {
+    "url": "/audio/tank_move.wav"
+  },
+  "idle": {
+    "url": "/audio/tank_idle.wav"
+  },
+  "shoot": {
+    "url": "/audio/shoot.ogg"
+  }
+}

@@ -1,35 +1,14 @@
 import { Traits } from '@/constant/traits';
-import { SIDES } from '../constants';
+import { EntityType, POSITION, SIDES } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
+import { Behavior } from '../traits/behavior';
 import { Enemy } from '../traits/enemy';
 import { Go } from '../traits/go';
 import { Killable } from '../traits/killable';
 import { Physics } from '../traits/physics';
+import { Shoot } from '../traits/shoot';
 import { Solid } from '../traits/solid';
-import { Trait } from '../traits/trait';
-
-class Behavior extends Trait {
-  constructor() {
-    super(Traits.Behavior);
-  }
-
-  collides(us: Entity, them: Entity) {
-    const usKillable = us.getTrait(Traits.Killable) as Killable;
-    const themKillable = them.getTrait(Traits.Killable) as Killable;
-
-    if (usKillable.dead || themKillable.dead) {
-      return;
-    }
-
-    if (them.getTrait(Traits.Bullet)) {
-      themKillable.kill();
-
-      usKillable.kill();
-      (us.getTrait(Traits.Go) as Go).speed = 0;
-    }
-  }
-}
 
 function createEnemyFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-bottom');
@@ -63,6 +42,7 @@ function createEnemyFactory(sprite: SpriteSheet) {
   return function createEnemy() {
     const enemy = new Entity();
 
+    enemy.type = EntityType.TANK;
     enemy.size.set(16, 16);
     enemy.addTrait(new Solid());
     enemy.addTrait(new Physics());
@@ -70,9 +50,11 @@ function createEnemyFactory(sprite: SpriteSheet) {
     enemy.addTrait(new Go());
     enemy.addTrait(new Behavior());
     enemy.addTrait(new Killable());
+    enemy.addTrait(new Shoot());
 
     (enemy.getTrait(Traits.Go) as Go).directionY = 1;
     (enemy.getTrait(Traits.Go) as Go).side = SIDES.BOTTOM;
+    (enemy.getTrait(Traits.Shoot) as Shoot).position = POSITION.VILLAIN;
 
     enemy.draw = drawEnemy(enemy);
 

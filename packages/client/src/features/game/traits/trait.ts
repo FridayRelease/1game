@@ -1,11 +1,14 @@
+import { AudioBoard } from '../audio-board';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
+import { EventBus } from '../event-emitter';
 import { Level } from '../level';
-import { CallBackFunction, MatchTile, TraitName } from '../types';
+
+import { CallBackFunction, GameContext, MatchTile, TraitName } from '../types';
 
 interface ITrait {
   NAME: TraitName;
-  update(entity: Entity, deltaTime: number, level: Level): void;
+  update(entity: Entity, gameContext: GameContext, level: Level): void;
 
   obstruct(entity: Entity, side: SIDES, match: MatchTile): void;
 
@@ -17,10 +20,14 @@ interface ITrait {
 class Trait implements ITrait {
   NAME: TraitName;
   tasks: CallBackFunction[];
+  sounds: Set<string>;
+  events: EventBus;
 
   constructor(name: TraitName) {
     this.NAME = name;
+    this.sounds = new Set();
     this.tasks = [];
+    this.events = new EventBus();
   }
 
   finalize() {
@@ -31,12 +38,20 @@ class Trait implements ITrait {
     this.tasks.length = 0;
   }
 
+  playSounds(audioBoard: AudioBoard, audioContext: AudioContext) {
+    this.sounds.forEach(name => {
+      audioBoard.playAudio(name, audioContext);
+    });
+
+    this.sounds.clear();
+  }
+
   queue(task: CallBackFunction) {
     this.tasks.push(task);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  update(entity: Entity, deltaTime: number, level: Level) {}
+  update(entity: Entity, gameContext: GameContext, level: Level) {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   obstruct(entity: Entity, side: SIDES, match: MatchTile) {}

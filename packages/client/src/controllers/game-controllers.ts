@@ -10,6 +10,7 @@ import { Level } from '@/features/game/level';
 import { setupCollision, setupBackgrounds, setupEntities } from '@/features/game/loaders/level';
 import { SpriteSheet } from '@/features/game/spritesheet';
 import { EntityFactoryCallback } from '@/features/game/types';
+import { AudioBoard } from '@/features/game/audio-board';
 
 const fetchSpriteSheet = async (name: string) => {
   const sheetSpec = await gameApi.loadSprites(name);
@@ -45,10 +46,13 @@ const fetchBullet = async () => {
   return createBulletFactory(sheetSpec);
 };
 
-const fetchTank = async () => {
-  const sheetSpec = await fetchSpriteSheet(Entities.Tank);
+const fetchTank = async (audioContext: AudioContext) => {
+  const resSheetSpec = fetchSpriteSheet(Entities.Tank);
+  const resAudio = fetchAudioBoard(Entities.Tank, audioContext);
 
-  return createTankFactory(sheetSpec);
+  const [sprite, audio] = await Promise.all([resSheetSpec, resAudio]);
+
+  return createTankFactory(sprite, audio);
 };
 
 const fetchLevel = async (entityFactory: Record<string, EntityFactoryCallback>) => {
@@ -97,4 +101,29 @@ const fetchFont = async () => {
   return new Font(fontSprite, 8);
 };
 
-export { fetchSpriteSheet, fetchEnemy, fetchTank, fetchLevel, fetchBullet, fetchFont };
+const fetchAudio = (audioContext: AudioContext) => {
+  return async (name: string) => {
+    const arrayBuffer = await gameApi.loadAudio(name);
+
+    return audioContext.decodeAudioData(arrayBuffer);
+  };
+};
+
+const fetchAudioBoard = async (name: string, audioContext: AudioContext) => {
+  const loadAudio = fetchAudio(audioContext);
+
+  const audioSheet = await gameApi.loadAudioSheet(name);
+  const audioBoard = new AudioBoard();
+
+  await Promise.all(
+    Object.keys(audioSheet).map(name => {
+      return loadAudio(audioSheet[name].url).then(buffer => {
+        audioBoard.addAudio(name, buffer);
+      });
+    })
+  );
+
+  return audioBoard;
+};
+
+export { fetchSpriteSheet, fetchEnemy, fetchTank, fetchLevel, fetchBullet, fetchFont, fetchAudio, fetchAudioBoard };

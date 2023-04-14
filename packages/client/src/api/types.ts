@@ -82,7 +82,14 @@ interface ISpriteSheetDTO {
   animations?: Array<IAnimationDTO>;
 }
 
+interface ISoundSheetDTO {
+  [key: string]: {
+    url: string;
+  };
+}
+
 export {
+  type ISoundSheetDTO,
   type ErrorResponse,
   type StatusResponse,
   type SignUpResponseDTO,

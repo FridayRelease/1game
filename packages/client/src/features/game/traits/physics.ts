@@ -1,6 +1,7 @@
 import { Traits } from '@/constant/traits';
 import { Entity } from '../entity';
 import { Level } from '../level';
+import { GameContext } from '../types';
 import { Trait } from './trait';
 
 class Physics extends Trait {
@@ -8,7 +9,7 @@ class Physics extends Trait {
     super(Traits.Physics);
   }
 
-  update(entity: Entity, deltaTime: number, level: Level): void {
+  update(entity: Entity, { deltaTime }: GameContext, level: Level): void {
     entity.pos.x += entity.vel.x * deltaTime;
     level.tileCollider?.checkX(entity);
 

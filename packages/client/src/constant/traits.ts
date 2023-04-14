@@ -7,6 +7,7 @@ enum Traits {
   Physics = 'physics',
   PlayerController = 'playerController',
   Solid = 'solid',
+  Shoot = 'shoot',
 }
 
 export { Traits };

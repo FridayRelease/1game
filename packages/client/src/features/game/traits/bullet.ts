@@ -1,15 +1,32 @@
 import { Traits } from '@/constant/traits';
-import { SIDES } from '../constants';
+import { POSITION, SIDES } from '../constants';
 import { Entity } from '../entity';
 import { Killable } from './killable';
 import { Trait } from './trait';
 
 class Bullet extends Trait {
   side: SIDES;
+  position: POSITION;
 
   constructor() {
     super(Traits.Bullet);
     this.side = SIDES.TOP;
+    this.position = POSITION.NONE;
+  }
+
+  collides(us: Entity, them: Entity) {
+    if (us.type === them.type) {
+      const usKillable = us.getTrait(Traits.Killable) as Killable;
+      const themKillable = them.getTrait(Traits.Killable) as Killable;
+
+      if (usKillable.dead || themKillable.dead) {
+        return;
+      }
+
+      themKillable.kill();
+
+      usKillable.kill();
+    }
   }
 
   obstruct(entity: Entity): void {
@@ -23,6 +40,12 @@ class Bullet extends Trait {
   }
 
   update(entity: Entity): void {
+    const killable = entity.getTrait(Traits.Killable) as Killable;
+
+    if (killable.dead) {
+      return;
+    }
+
     if (this.side === SIDES.LEFT || this.side === SIDES.RIGHT) {
       entity.vel.x = this.side === SIDES.LEFT ? -100 : 100;
     } else if (this.side === SIDES.TOP || this.side === SIDES.BOTTOM) {
