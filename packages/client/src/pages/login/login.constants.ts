@@ -10,13 +10,13 @@ const initValues: IUserSigninRequest = {
 const loginSchema = yup.object().shape({
   login: yup
     .string()
-    .min(3, 'Логин должен содержать от 3 символов')
-    .max(20, 'Логин не может быть больше 20 символов')
+    .min(3, ERROR_MESSAGES.LOGIN_MIN)
+    .max(20, ERROR_MESSAGES.LOGIN_MAX)
     .required(ERROR_MESSAGES.REQUIRED),
   password: yup
     .string()
-    .min(8, 'Пароль должен содержать от 8 символов')
-    .max(40, 'Пароль не может быть больше 40 символов')
+    .min(8, ERROR_MESSAGES.PASSWORD_MIN)
+    .max(40, ERROR_MESSAGES.PASSWORD_MAX)
     .required(ERROR_MESSAGES.REQUIRED),
 })
 
