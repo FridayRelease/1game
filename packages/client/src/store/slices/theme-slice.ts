@@ -1,32 +1,31 @@
-import { setLocalStorage } from '@/utils/localStorage';
+import { Themes } from '@/components/toggle-theme/types';
+import { setLocalStorage } from '@/utils/local-storage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
+interface IThemeState {
+  value: Themes;
+}
+
+const ThemeState: IThemeState = { value: Themes.Dark };
+
 export const themeSlice = createSlice({
   name: 'theme',
-  initialState: {
-    isLightTheme: false,
-    value: 'dark',
-  },
+  initialState: ThemeState,
   reducers: {
-    toggleTheme: state => {
-      state.isLightTheme = !state.isLightTheme;
-      state.value = state.isLightTheme ? 'light' : 'dark';
-
-      setLocalStorage('theme', JSON.stringify({ value: state.value }));
-      document.documentElement.dataset.theme = state.value;
-    },
-
     setTheme: (state, { payload }: PayloadAction<string>) => {
-      if (payload === 'dark') {
-        state.isLightTheme = false;
-        state.value = payload;
-      } else {
-        state.isLightTheme = true;
-        state.value = 'light';
-      }
+      const themeKey = Object.keys(Themes)[Object.values(Themes).indexOf(payload as Themes)] as Themes;
 
-      document.documentElement.dataset.theme = state.value;
+      if (themeKey) {
+        state.value = payload as Themes;
+        setLocalStorage('theme', JSON.stringify({ value: payload }));
+
+        document.documentElement.dataset.theme = state.value;
+      } else {
+        state.value = Themes.Dark;
+        setLocalStorage('theme', JSON.stringify({ value: Themes.Dark }));
+        document.documentElement.dataset.theme = state.value;
+      }
     },
   },
 });

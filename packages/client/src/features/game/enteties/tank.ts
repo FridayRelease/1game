@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
@@ -11,7 +12,7 @@ function createTankFactory(sprite: SpriteSheet) {
 
   function directTank(entity: Entity) {
     return function direct(side: SIDES) {
-      const go = entity.getTrait('go') as Go;
+      const go = entity.getTrait(Traits.Go) as Go;
       if (go) {
         go.side = side;
       }
@@ -20,7 +21,7 @@ function createTankFactory(sprite: SpriteSheet) {
   }
 
   function routeFrame(entity: Entity) {
-    const go = entity.getTrait('go') as Go;
+    const go = entity.getTrait(Traits.Go) as Go;
 
     return runAnim ? runAnim(Math.abs(go.direction)) : '';
   }
@@ -41,7 +42,7 @@ function createTankFactory(sprite: SpriteSheet) {
     tank.addTrait(new Go());
     tank.addTrait(new Killable());
 
-    (tank.getTrait('killable') as Killable).removeAfter = 0;
+    (tank.getTrait(Traits.Killable) as Killable).removeAfter = 0;
 
     tank.draw = drawTank(tank);
     tank.direct = directTank(tank);

@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
@@ -10,22 +11,22 @@ import { Trait } from '../traits/trait';
 
 class Behavior extends Trait {
   constructor() {
-    super('behavior');
+    super(Traits.Behavior);
   }
 
   collides(us: Entity, them: Entity) {
-    const usKillable = us.getTrait('killable') as Killable;
-    const themKillable = them.getTrait('killable') as Killable;
+    const usKillable = us.getTrait(Traits.Killable) as Killable;
+    const themKillable = them.getTrait(Traits.Killable) as Killable;
 
     if (usKillable.dead || themKillable.dead) {
       return;
     }
 
-    if (them.getTrait('bullet')) {
+    if (them.getTrait(Traits.Bullet)) {
       themKillable.kill();
 
       usKillable.kill();
-      (us.getTrait('go') as Go).speed = 0;
+      (us.getTrait(Traits.Go) as Go).speed = 0;
     }
   }
 }
@@ -34,7 +35,7 @@ function createEnemyFactory(sprite: SpriteSheet) {
   let runAnim = sprite.animations.get('run-bottom');
 
   function routeFrame(entity: Entity): { route: string; offset: number } {
-    const killable = entity.getTrait('killable') as Killable;
+    const killable = entity.getTrait(Traits.Killable) as Killable;
 
     if (killable.dead) {
       const animation = sprite.animations.get('bang');
@@ -43,7 +44,7 @@ function createEnemyFactory(sprite: SpriteSheet) {
       return { route, offset: route.includes('big') ? -8 : 0 };
     }
 
-    const go = entity.getTrait('go') as Go;
+    const go = entity.getTrait(Traits.Go) as Go;
     runAnim = sprite.animations.get(`run-${go.side}`);
 
     const route = runAnim ? runAnim(Math.abs(go.direction)) : '';
@@ -70,8 +71,8 @@ function createEnemyFactory(sprite: SpriteSheet) {
     enemy.addTrait(new Behavior());
     enemy.addTrait(new Killable());
 
-    (enemy.getTrait('go') as Go).directionY = 1;
-    (enemy.getTrait('go') as Go).side = SIDES.BOTTOM;
+    (enemy.getTrait(Traits.Go) as Go).directionY = 1;
+    (enemy.getTrait(Traits.Go) as Go).side = SIDES.BOTTOM;
 
     enemy.draw = drawEnemy(enemy);
 
