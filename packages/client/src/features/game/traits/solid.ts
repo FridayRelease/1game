@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { MatchTile } from '../types';
@@ -5,7 +6,7 @@ import { Trait } from './trait';
 
 class Solid extends Trait {
   constructor() {
-    super('solid');
+    super(Traits.Solid);
   }
 
   obstruct(entity: Entity, side: SIDES, match: MatchTile): void {

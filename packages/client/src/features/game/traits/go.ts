@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { Trait } from './trait';
@@ -10,7 +11,7 @@ class Go extends Trait {
   speed: number;
 
   constructor() {
-    super('go');
+    super(Traits.Go);
     this.side = SIDES.TOP;
     this.directionX = 0;
     this.directionY = 0;

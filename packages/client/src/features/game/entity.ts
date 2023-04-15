@@ -3,7 +3,7 @@ import { SIDES } from './constants';
 import { Level } from './level';
 import { Vec2 } from './math';
 import { Trait } from './traits/trait';
-import { MatchTile, TraitName } from './types';
+import { MatchTile } from './types';
 
 type IEntity = {
   pos: Vec2;

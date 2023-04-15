@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { Killable } from './killable';
@@ -7,12 +8,12 @@ class Bullet extends Trait {
   side: SIDES;
 
   constructor() {
-    super('bullet');
+    super(Traits.Bullet);
     this.side = SIDES.TOP;
   }
 
   obstruct(entity: Entity): void {
-    const killable = entity.getTrait('killable') as Killable;
+    const killable = entity.getTrait(Traits.Killable) as Killable;
 
     if (killable?.dead) {
       return;
