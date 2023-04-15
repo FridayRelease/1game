@@ -7,13 +7,13 @@ const initValues: Record<string, string> = {};
 const singSchema = yup.object().shape({
   first_name: yup
     .string()
-    .min(2, 'Имя должно содержать от 2 символов')
-    .max(20, 'Имя не может быть больше 20 символов')
+    .min(2, ERROR_MESSAGES.NAME_MIN)
+    .max(20, ERROR_MESSAGES.NAME_MAX)
     .required(ERROR_MESSAGES.REQUIRED),
   second_name: yup
     .string()
-    .min(2, 'Фамилия должна содержать от 2 символов')
-    .max(20, 'Фамилия не может быть больше 20 символов')
+    .min(2, ERROR_MESSAGES.SURNAME_MIN)
+    .max(20, ERROR_MESSAGES.SURNAME_MAX)
     .required(ERROR_MESSAGES.REQUIRED),
   email: yup
     .string()
@@ -21,9 +21,9 @@ const singSchema = yup.object().shape({
     .required(ERROR_MESSAGES.REQUIRED),
   password: yup
     .string()
-    .min(8, 'Пароль должен содержать от 8 символов')
-    .max(40, 'Пароль не может быть больше 40 символов')
-    .matches(PASSWORD_SPEC, 'Пароль должен содержать хотя бы одну заглавную букву и цифру')
+    .min(8, ERROR_MESSAGES.LOGIN_MIN)
+    .max(40, ERROR_MESSAGES.PASSWORD_MAX)
+    .matches(PASSWORD_SPEC, ERROR_MESSAGES.PASSWORD_VALID)
     .required(ERROR_MESSAGES.REQUIRED)
     .test("is-unique-login-password", ERROR_MESSAGES.UNIQUE_VALUES, function(password) {
         const { login } = this.parent;
@@ -35,8 +35,8 @@ const singSchema = yup.object().shape({
     .oneOf([yup.ref("password")], ERROR_MESSAGES.INCORRECT_CONFIRM_PASSWORD),
   phone: yup
     .string()
-    .min(10, `Номер телефона должен содержать от 10 символов`)
-    .max(15, `Номер телефона не может быть больше 15 символов`)
+    .min(10, ERROR_MESSAGES.PHONE_MIN)
+    .max(15, ERROR_MESSAGES.PHONE_MAX)
     .matches(PHONE_SPEC, {
       message: ERROR_MESSAGES.INCORRECT_PHONE,
       excludeEmptyString: false
@@ -44,8 +44,8 @@ const singSchema = yup.object().shape({
     .required(ERROR_MESSAGES.REQUIRED),
   login: yup
     .string()
-    .min(3, 'Логин должен содержать от 3 символов')
-    .max(20, 'Логин не может быть больше 20 символов')
+    .min(3, ERROR_MESSAGES.LOGIN_MIN)
+    .max(20, ERROR_MESSAGES.LOGIN_MAX)
     .required(ERROR_MESSAGES.REQUIRED),
 });
 
