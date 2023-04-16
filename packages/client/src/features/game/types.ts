@@ -11,6 +11,7 @@ type TraitName =
   | Traits.Enemy
   | Traits.Physics
   | Traits.PlayerController
+  | Traits.Player
   | Traits.Solid
   | Traits.Killable
   | Traits.Shoot

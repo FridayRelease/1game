@@ -7,6 +7,7 @@ enum Traits {
   Killable = 'killable',
   Physics = 'physics',
   PlayerController = 'playerController',
+  Player = 'player',
   Solid = 'solid',
   Shoot = 'shoot',
   Emitter = 'emitter',

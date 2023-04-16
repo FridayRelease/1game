@@ -2,22 +2,13 @@ import { Traits } from '@/constant/traits';
 import { fetchFont, fetchLevel } from '@/controllers/game-controllers';
 import { RefObject, useState, useEffect, ReactEventHandler } from 'react';
 import { loadEntities } from '../enteties';
-import { Entity } from '../entity';
 import { setupKeyboard } from '../input';
 import { createDashboardLayer } from '../layers';
+import { createPlayerEnv } from '../player';
 import { Timer } from '../timer';
+import { createPlayer } from '../traits/player';
 import { PlayerController } from '../traits/player-controller';
 import { GameContext } from '../types';
-
-const createPlayerEnv = (playerEntity: Entity) => {
-  const playerEnv = new Entity();
-  const playerControl = new PlayerController();
-  playerControl.checkpoint.set(60, 232);
-  playerControl.setPlayer(playerEntity);
-  playerEnv.addTrait(playerControl);
-
-  return playerEnv;
-};
 
 function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
   isStarted: boolean;
@@ -38,7 +29,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
 
     const level = await loadLevel('1-1');
 
-    const tank = entityFactory.tank();
+    const tank = createPlayer(entityFactory.tank());
 
     const playerEnv = createPlayerEnv(tank);
     level.entities.add(playerEnv);
