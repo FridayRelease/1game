@@ -40,6 +40,11 @@ class Vec2 {
     this.set(x, y);
   }
 
+  copy(vec2: Vec2) {
+    this.x = vec2.x;
+    this.y = vec2.y;
+  }
+
   set(x: number, y: number) {
     this.x = x;
     this.y = y;

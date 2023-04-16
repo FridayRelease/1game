@@ -1,16 +1,25 @@
+import { Entities } from '@/constant/entities';
 import { Traits } from '@/constant/traits';
 import { AudioBoard } from '../audio-board';
-import { EntityType, POSITION, SIDES } from '../constants';
+import { EntityType, ENTITY_POSITION, SIDES } from '../constants';
 import { Entity } from '../entity';
+import { Level } from '../level';
 import { SpriteSheet } from '../spritesheet';
 import { Behavior } from '../traits/behavior';
+import { Bullet } from '../traits/bullet';
+import Emitter from '../traits/emitter';
 import { Go } from '../traits/go';
 import { Killable } from '../traits/killable';
 import { Physics } from '../traits/physics';
 import { Shoot } from '../traits/shoot';
 import { Solid } from '../traits/solid';
+import { EntityFactoryCallback } from '../types';
 
-function createTankFactory(sprite: SpriteSheet, audio: AudioBoard) {
+function createTankFactory(
+  sprite: SpriteSheet,
+  audio: AudioBoard,
+  entityFactories: Record<string, EntityFactoryCallback>
+) {
   let runAnim = sprite.animations.get('run-top');
 
   function directTank(entity: Entity) {
@@ -48,11 +57,29 @@ function createTankFactory(sprite: SpriteSheet, audio: AudioBoard) {
     };
   }
 
+  function emitBullet(entity: Entity, level: Level) {
+    const createBulletEntity = entityFactories[Entities.Bullet];
+    const bullet = createBulletEntity();
+    bullet.pos.copy(entity.pos);
+
+    const go = entity.getTrait(Traits.Go) as Go;
+
+    bullet.addTrait(
+      new Bullet({
+        side: go.side,
+        position: ENTITY_POSITION.FRIEND,
+      })
+    );
+
+    entity.sounds.add('shoot');
+
+    level.entities.add(bullet);
+  }
+
   return function createTank() {
-    const tank = new Entity();
+    const tank = new Entity(EntityType.TANK);
     tank.audio = audio;
 
-    tank.type = EntityType.TANK;
     tank.offset.set(1, 1);
     tank.size.set(15, 15);
     tank.addTrait(new Solid());
@@ -60,8 +87,11 @@ function createTankFactory(sprite: SpriteSheet, audio: AudioBoard) {
     tank.addTrait(new Go());
     tank.addTrait(new Killable());
     tank.addTrait(new Behavior());
-    tank.addTrait(new Shoot());
-    (tank.getTrait(Traits.Shoot) as Shoot).position = POSITION.FRIEND;
+
+    const emitter = new Shoot();
+    emitter.interval = 2;
+    emitter.emitters.push(emitBullet);
+    tank.addTrait(emitter);
 
     tank.draw = drawTank(tank);
     tank.direct = directTank(tank);

@@ -6,18 +6,20 @@ import { Go } from './go';
 import { Killable } from './killable';
 import { Trait } from './trait';
 
-class Behavior extends Trait {
+class EnemyBehavior extends Trait {
   constructor() {
-    super(Traits.Behavior);
+    super(Traits.EnemyBehavior);
   }
 
   collides(us: Entity, them: Entity) {
     if (us.type !== them.type) {
       const usPosition =
-        us.type === EntityType.TANK ? ENTITY_POSITION.FRIEND : (us.getTrait(Traits.Bullet) as Bullet)?.position;
+        us.type === EntityType.ENEMY_TANK ? ENTITY_POSITION.VILLAIN : (us.getTrait(Traits.Bullet) as Bullet)?.position;
 
       const themPosition =
-        them.type === EntityType.TANK ? ENTITY_POSITION.FRIEND : (them.getTrait(Traits.Bullet) as Bullet)?.position;
+        them.type === EntityType.ENEMY_TANK
+          ? ENTITY_POSITION.VILLAIN
+          : (them.getTrait(Traits.Bullet) as Bullet)?.position;
 
       if (usPosition === themPosition) {
         return;
@@ -40,4 +42,4 @@ class Behavior extends Trait {
   }
 }
 
-export { Behavior };
+export { EnemyBehavior };

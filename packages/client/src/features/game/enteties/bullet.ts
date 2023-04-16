@@ -32,15 +32,13 @@ function createBulletFactory(sprite: SpriteSheet) {
   }
 
   return function createBullet() {
-    const bullet = new Entity();
+    const bullet = new Entity(EntityType.BULLET);
 
-    bullet.type = EntityType.BULLET;
     bullet.size.set(8, 8);
     bullet.offset.set(4, 4);
     bullet.addTrait(new Solid());
     bullet.addTrait(new Physics());
     bullet.addTrait(new Killable());
-    bullet.addTrait(new Bullet());
 
     bullet.draw = drawBullet(bullet);
 

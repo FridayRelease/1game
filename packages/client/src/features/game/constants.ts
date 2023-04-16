@@ -5,16 +5,17 @@ enum SIDES {
   RIGHT = 'right',
 }
 
-enum POSITION {
+enum ENTITY_POSITION {
   NONE = 0,
   FRIEND = 1,
   VILLAIN = 2,
 }
 
-enum EntityType {
-  NONE,
-  TANK,
-  BULLET,
+enum ENTITY_TYPE {
+  NONE = 0,
+  TANK = 1,
+  ENEMY_TANK = 2,
+  BULLET = 3,
 }
 
-export { SIDES, POSITION, EntityType };
+export { SIDES, ENTITY_POSITION, ENTITY_TYPE as EntityType };

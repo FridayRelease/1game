@@ -1,17 +1,20 @@
 import { ITileDTO } from '@/api/types';
 import { Traits } from '@/constant/traits';
 import { Entity } from './entity';
+import { Level } from './level';
 
 type TraitName =
   | Traits.Go
   | Traits.Behavior
+  | Traits.EnemyBehavior
   | Traits.Bullet
   | Traits.Enemy
   | Traits.Physics
   | Traits.PlayerController
   | Traits.Solid
   | Traits.Killable
-  | Traits.Shoot;
+  | Traits.Shoot
+  | Traits.Emitter;
 
 type MatchTile = {
   tile: ITileDTO;
@@ -41,6 +44,8 @@ type EntityFactoryCallback = () => Entity;
 
 type CallBackFunction = () => void;
 
+type EmmitCallBackFunction = (entity: Entity, level: Level) => void;
+
 type GameContext = {
   deltaTime: number;
   audioContext: AudioContext;
@@ -57,4 +62,5 @@ export {
   type Layer,
   type Position,
   type GameContext,
+  type EmmitCallBackFunction,
 };

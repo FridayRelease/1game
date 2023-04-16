@@ -34,10 +34,10 @@ const fetchSpriteSheet = async (name: string) => {
   return sprite;
 };
 
-const fetchEnemy = async () => {
+const fetchEnemy = async (entityFactories: Record<string, EntityFactoryCallback>) => {
   const sheetSpec = await fetchSpriteSheet(Entities.Enemy);
 
-  return createEnemyFactory(sheetSpec);
+  return createEnemyFactory(sheetSpec, entityFactories);
 };
 
 const fetchBullet = async () => {
@@ -46,16 +46,16 @@ const fetchBullet = async () => {
   return createBulletFactory(sheetSpec);
 };
 
-const fetchTank = async (audioContext: AudioContext) => {
+const fetchTank = async (audioContext: AudioContext, entitiesFactory: Record<string, EntityFactoryCallback>) => {
   const resSheetSpec = fetchSpriteSheet(Entities.Tank);
   const resAudio = fetchAudioBoard(Entities.Tank, audioContext);
 
   const [sprite, audio] = await Promise.all([resSheetSpec, resAudio]);
 
-  return createTankFactory(sprite, audio);
+  return createTankFactory(sprite, audio, entitiesFactory);
 };
 
-const fetchLevel = async (entityFactory: Record<string, EntityFactoryCallback>) => {
+const fetchLevel = async (entityFactories: Record<string, EntityFactoryCallback>) => {
   const loadLevel = async (name: string) => {
     const levelSpec = await gameApi.loadLevel(name);
 
@@ -65,7 +65,7 @@ const fetchLevel = async (entityFactory: Record<string, EntityFactoryCallback>) 
 
     setupCollision(levelSpec, level);
     setupBackgrounds(levelSpec, level, backgroundSprites);
-    setupEntities(levelSpec, level, entityFactory);
+    setupEntities(levelSpec, level, entityFactories);
 
     return level;
   };

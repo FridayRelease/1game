@@ -1,15 +1,20 @@
 import { Entities } from '@/constant/entities';
 import { fetchEnemy, fetchTank, fetchBullet } from '@/controllers/game-controllers';
+import { Entity } from './entity';
 import { EntityFactoryCallback } from './types';
 
 function loadEntities(audioContext: AudioContext) {
-  const entityFactory: Record<string, EntityFactoryCallback> = {};
+  const entityFactories: Record<string, EntityFactoryCallback> = {};
+
+  const addAs = (name: string) => {
+    return (factory: () => Entity) => (entityFactories[name] = factory);
+  };
 
   return Promise.all([
-    fetchTank(audioContext).then(factory => (entityFactory[Entities.Tank] = factory)),
-    fetchEnemy().then(factory => (entityFactory[Entities.Enemy] = factory)),
-    fetchBullet().then(factory => (entityFactory[Entities.Bullet] = factory)),
-  ]).then(() => entityFactory);
+    fetchBullet().then(addAs(Entities.Bullet)),
+    fetchTank(audioContext, entityFactories).then(addAs(Entities.Tank)),
+    fetchEnemy(entityFactories).then(addAs(Entities.Enemy)),
+  ]).then(() => entityFactories);
 }
 
 export { loadEntities };

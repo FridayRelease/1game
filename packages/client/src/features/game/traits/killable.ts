@@ -2,7 +2,6 @@ import { Traits } from '@/constant/traits';
 import { Entity } from '../entity';
 import { Level } from '../level';
 import { GameContext } from '../types';
-import { Bullet } from './bullet';
 import { Trait } from './trait';
 
 class Killable extends Trait {

@@ -1,5 +1,6 @@
 enum Traits {
   Behavior = 'behavior',
+  EnemyBehavior = 'enemyBehavior',
   Bullet = 'bullet',
   Enemy = 'enemy',
   Go = 'go',
@@ -8,6 +9,7 @@ enum Traits {
   PlayerController = 'playerController',
   Solid = 'solid',
   Shoot = 'shoot',
+  Emitter = 'emitter',
 }
 
 export { Traits };

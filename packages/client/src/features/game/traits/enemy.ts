@@ -1,9 +1,8 @@
-import { Trait } from './trait';
 import { Traits } from '@/constant/traits';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { Go } from './go';
-import { Shoot } from './shoot';
+import { Trait } from './trait';
 
 class Enemy extends Trait {
   constructor() {
@@ -25,7 +24,7 @@ class Enemy extends Trait {
   }
 
   obstruct(entity: Entity, side: SIDES): void {
-    const go = entity.getTrait('go') as Go;
+    const go = entity.getTrait(Traits.Go) as Go;
     const arrDirections = this.excludeDirection(this.arrSides, side);
     const newSide = this.random(arrDirections);
     go.side = SIDES.LEFT;
@@ -43,12 +42,6 @@ class Enemy extends Trait {
       go.directionY = +1;
       go.side = SIDES.BOTTOM;
     }
-  }
-
-  update(entity: Entity): void {
-    const shoot = entity.getTrait(Traits.Shoot) as Shoot;
-
-    shoot.shoot();
   }
 }
 

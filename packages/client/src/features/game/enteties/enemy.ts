@@ -1,16 +1,20 @@
+import { Entities } from '@/constant/entities';
 import { Traits } from '@/constant/traits';
-import { EntityType, POSITION, SIDES } from '../constants';
+import { EntityType, ENTITY_POSITION, SIDES } from '../constants';
 import { Entity } from '../entity';
+import { Level } from '../level';
 import { SpriteSheet } from '../spritesheet';
-import { Behavior } from '../traits/behavior';
+import { Bullet } from '../traits/bullet';
+import Emitter from '../traits/emitter';
 import { Enemy } from '../traits/enemy';
+import { EnemyBehavior } from '../traits/enemy-behavior';
 import { Go } from '../traits/go';
 import { Killable } from '../traits/killable';
 import { Physics } from '../traits/physics';
-import { Shoot } from '../traits/shoot';
 import { Solid } from '../traits/solid';
+import { EntityFactoryCallback } from '../types';
 
-function createEnemyFactory(sprite: SpriteSheet) {
+function createEnemyFactory(sprite: SpriteSheet, entityFactories: Record<string, EntityFactoryCallback>) {
   let runAnim = sprite.animations.get('run-bottom');
 
   function routeFrame(entity: Entity): { route: string; offset: number } {
@@ -31,6 +35,27 @@ function createEnemyFactory(sprite: SpriteSheet) {
     return { route, offset: 0 };
   }
 
+  function emitBullet(enemy: Entity, level: Level) {
+    const killable = enemy.getTrait(Traits.Killable) as Killable;
+    if (killable.dead) {
+      return;
+    }
+    const createBulletEntity = entityFactories[Entities.Bullet];
+    const bullet = createBulletEntity();
+    bullet.pos.copy(enemy.pos);
+
+    const go = enemy.getTrait(Traits.Go) as Go;
+
+    bullet.addTrait(
+      new Bullet({
+        side: go.side,
+        position: ENTITY_POSITION.VILLAIN,
+      })
+    );
+
+    level.entities.add(bullet);
+  }
+
   function drawEnemy(entity: Entity) {
     return function draw(ctx: CanvasRenderingContext2D | null) {
       const { route, offset } = routeFrame(entity);
@@ -40,21 +65,22 @@ function createEnemyFactory(sprite: SpriteSheet) {
   }
 
   return function createEnemy() {
-    const enemy = new Entity();
+    const enemy = new Entity(EntityType.ENEMY_TANK);
 
-    enemy.type = EntityType.TANK;
     enemy.size.set(16, 16);
     enemy.addTrait(new Solid());
     enemy.addTrait(new Physics());
     enemy.addTrait(new Enemy());
     enemy.addTrait(new Go());
-    enemy.addTrait(new Behavior());
+    enemy.addTrait(new EnemyBehavior());
     enemy.addTrait(new Killable());
-    enemy.addTrait(new Shoot());
 
     (enemy.getTrait(Traits.Go) as Go).directionY = 1;
     (enemy.getTrait(Traits.Go) as Go).side = SIDES.BOTTOM;
-    (enemy.getTrait(Traits.Shoot) as Shoot).position = POSITION.VILLAIN;
+
+    const emitter = new Emitter();
+    emitter.emitters.push(emitBullet);
+    enemy.addTrait(emitter);
 
     enemy.draw = drawEnemy(enemy);
 

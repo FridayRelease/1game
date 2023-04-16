@@ -1,17 +1,17 @@
 import { Traits } from '@/constant/traits';
-import { POSITION, SIDES } from '../constants';
+import { ENTITY_POSITION, SIDES } from '../constants';
 import { Entity } from '../entity';
 import { Killable } from './killable';
 import { Trait } from './trait';
 
 class Bullet extends Trait {
   side: SIDES;
-  position: POSITION;
+  position: ENTITY_POSITION;
 
-  constructor() {
+  constructor({ position, side } = { position: ENTITY_POSITION.NONE, side: SIDES.TOP }) {
     super(Traits.Bullet);
-    this.side = SIDES.TOP;
-    this.position = POSITION.NONE;
+    this.side = side;
+    this.position = position;
   }
 
   collides(us: Entity, them: Entity) {

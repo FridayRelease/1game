@@ -1,4 +1,3 @@
-import { AudioBoard } from '../audio-board';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
 import { EventBus } from '../event-emitter';
@@ -20,12 +19,10 @@ interface ITrait {
 class Trait implements ITrait {
   NAME: TraitName;
   tasks: CallBackFunction[];
-  sounds: Set<string>;
   events: EventBus;
 
   constructor(name: TraitName) {
     this.NAME = name;
-    this.sounds = new Set();
     this.tasks = [];
     this.events = new EventBus();
   }
@@ -36,14 +33,6 @@ class Trait implements ITrait {
     });
 
     this.tasks.length = 0;
-  }
-
-  playSounds(audioBoard: AudioBoard, audioContext: AudioContext) {
-    this.sounds.forEach(name => {
-      audioBoard.playAudio(name, audioContext);
-    });
-
-    this.sounds.clear();
   }
 
   queue(task: CallBackFunction) {

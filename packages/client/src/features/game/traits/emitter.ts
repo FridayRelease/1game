@@ -4,16 +4,14 @@ import { Level } from '../level';
 import { Trait } from './trait';
 import { GameContext, EmmitCallBackFunction } from '../types';
 
-export default class Shoot extends Trait {
+export default class Emitter extends Trait {
   interval: number;
   coolDown: number;
   emitters: EmmitCallBackFunction[];
-  isCreatedBullet: boolean;
 
   constructor() {
-    super(Traits.Shoot);
-    this.interval = 1.2;
-    this.isCreatedBullet = false;
+    super(Traits.Emitter);
+    this.interval = 2;
     this.coolDown = this.interval;
     this.emitters = [];
   }
@@ -24,21 +22,11 @@ export default class Shoot extends Trait {
     }
   }
 
-  shoot() {
-    if (this.coolDown <= 0) {
-      this.isCreatedBullet = true;
-    }
-  }
-
   update(entity: Entity, { deltaTime }: GameContext, level: Level) {
     this.coolDown -= deltaTime;
-
-    if (this.isCreatedBullet) {
+    if (this.coolDown <= 0) {
       this.emit(entity, level);
-      this.isCreatedBullet = false;
       this.coolDown = this.interval;
     }
   }
 }
-
-export { Shoot };
