@@ -7,4 +7,5 @@ type LinkType = {
   icon?: IconProps;
 };
 
+// @ts-ignore
 export { type LinkType };
