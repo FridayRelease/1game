@@ -18,6 +18,7 @@ type TraitName =
   | Traits.Shoot
   | Traits.Emitter
   | Traits.Trigger
+  | Traits.EagleController
   | Traits.LevelTimer;
 
 type MatchTile = {
