@@ -43,7 +43,6 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     const gameContext: GameContext = {
       deltaTime: 0,
       audioContext,
-      entityFactory,
     };
 
     timer.update = function update(deltaTime: number) {
@@ -52,6 +51,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       level.update(gameContext);
       level.comp.draw(ctx);
     };
+    level.music.player?.playTrack('levelstarting');
   }
 
   const start = () => {
@@ -59,6 +59,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
 
     main(ctx);
     timer.start();
+
     setStart(true);
   };
 

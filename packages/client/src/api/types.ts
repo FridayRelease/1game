@@ -62,6 +62,7 @@ interface IPatternDTO {
 
 interface ILevelDTO {
   spriteSheet: string;
+  musicSheet: string;
   patterns: IPatternDTO;
   layers: Array<ILayerDTO>;
   entities: Array<IEntityDTO>;

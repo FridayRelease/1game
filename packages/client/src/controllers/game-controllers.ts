@@ -11,6 +11,7 @@ import { setupBackgrounds, setupEntities } from '@/features/game/loaders/level';
 import { SpriteSheet } from '@/features/game/spritesheet';
 import { EntityFactoryCallback } from '@/features/game/types';
 import { AudioBoard } from '@/features/game/audio-board';
+import { MusicPlayer } from '@/features/game/music-player';
 
 const fetchSpriteSheet = async (name: string) => {
   const sheetSpec = await gameApi.loadSprites(name);
@@ -32,6 +33,17 @@ const fetchSpriteSheet = async (name: string) => {
   });
 
   return sprite;
+};
+
+const fetchMusicSheet = async (name: string) => {
+  const musicSheet = await gameApi.loadAudioSheet(name);
+
+  const musicPlayer = new MusicPlayer();
+
+  for (const [name, track] of Object.entries(musicSheet)) {
+    musicPlayer.addTrack(name, track.url);
+  }
+  return musicPlayer;
 };
 
 const fetchEnemy = async (entityFactories: Record<string, EntityFactoryCallback>) => {
@@ -61,8 +73,11 @@ const fetchLevel = async (entityFactories: Record<string, EntityFactoryCallback>
 
     const backgroundSprites = await fetchSpriteSheet(levelSpec.spriteSheet);
 
+    const musicPlayer = await fetchMusicSheet(levelSpec.musicSheet);
+
     const level = new Level();
 
+    level.music.setPlayer(musicPlayer);
     setupBackgrounds(levelSpec, level, backgroundSprites);
     setupEntities(levelSpec, level, entityFactories);
 
@@ -125,4 +140,14 @@ const fetchAudioBoard = async (name: string, audioContext: AudioContext) => {
   return audioBoard;
 };
 
-export { fetchSpriteSheet, fetchEnemy, fetchTank, fetchLevel, fetchBullet, fetchFont, fetchAudio, fetchAudioBoard };
+export {
+  fetchSpriteSheet,
+  fetchEnemy,
+  fetchTank,
+  fetchLevel,
+  fetchBullet,
+  fetchFont,
+  fetchAudio,
+  fetchAudioBoard,
+  fetchMusicSheet,
+};
