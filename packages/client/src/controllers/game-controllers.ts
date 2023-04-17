@@ -7,7 +7,7 @@ import { createBulletFactory } from '@/features/game/enteties/bullet';
 import { createEnemyFactory } from '@/features/game/enteties/enemy';
 import { createTankFactory } from '@/features/game/enteties/tank';
 import { Level } from '@/features/game/level';
-import { setupCollision, setupBackgrounds, setupEntities } from '@/features/game/loaders/level';
+import { setupBackgrounds, setupEntities } from '@/features/game/loaders/level';
 import { SpriteSheet } from '@/features/game/spritesheet';
 import { EntityFactoryCallback } from '@/features/game/types';
 import { AudioBoard } from '@/features/game/audio-board';
@@ -63,7 +63,6 @@ const fetchLevel = async (entityFactories: Record<string, EntityFactoryCallback>
 
     const level = new Level();
 
-    setupCollision(levelSpec, level);
     setupBackgrounds(levelSpec, level, backgroundSprites);
     setupEntities(levelSpec, level, entityFactories);
 

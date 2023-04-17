@@ -2,6 +2,7 @@ import { ITileDTO } from '@/api/types';
 import { Traits } from '@/constant/traits';
 import { Entity } from './entity';
 import { Level } from './level';
+import { TileResolver } from './tile-resolver';
 
 type TraitName =
   | Traits.Go
@@ -50,8 +51,17 @@ type EmmitCallBackFunction = (entity: Entity, level: Level) => void;
 type GameContext = {
   deltaTime: number;
   audioContext: AudioContext;
-  entityFactory: Record<string, EntityFactoryCallback>;
 };
+
+type HandlerProps = {
+  entity: Entity;
+  match: MatchTile;
+  resolver: TileResolver;
+  gameContext: GameContext;
+  level: Level;
+};
+
+type HandlerFunction = (props: HandlerProps) => void;
 
 export {
   type TraitName,
@@ -64,4 +74,6 @@ export {
   type Position,
   type GameContext,
   type EmmitCallBackFunction,
+  type HandlerFunction,
+  type HandlerProps,
 };

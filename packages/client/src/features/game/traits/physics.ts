@@ -9,12 +9,12 @@ class Physics extends Trait {
     super(Traits.Physics);
   }
 
-  update(entity: Entity, { deltaTime }: GameContext, level: Level): void {
-    entity.pos.x += entity.vel.x * deltaTime;
-    level.tileCollider?.checkX(entity);
+  update(entity: Entity, gameContext: GameContext, level: Level): void {
+    entity.pos.x += entity.vel.x * gameContext.deltaTime;
+    level.tileCollider?.checkX(entity, gameContext, level);
 
-    entity.pos.y += entity.vel.y * deltaTime;
-    level.tileCollider?.checkY(entity);
+    entity.pos.y += entity.vel.y * gameContext.deltaTime;
+    level.tileCollider?.checkY(entity, gameContext, level);
   }
 }
 

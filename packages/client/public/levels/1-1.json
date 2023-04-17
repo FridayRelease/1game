@@ -49,7 +49,7 @@
       "tiles": [
         {
           "name": "brick-wall",
-          "type": "wall",
+          "type": "brick",
           "ranges": [
             [0, 0],
             [1, 0]
@@ -70,7 +70,7 @@
       "tiles": [
         {
           "name": "brick-wall",
-          "type": "wall",
+          "type": "brick",
           "ranges": [
             [0, 0],
             [0, 1],
@@ -121,7 +121,7 @@
       "tiles": [
         {
           "name": "brick-wall",
-          "type": "wall",
+          "type": "brick",
           "ranges": [
             [0, 0],
             [0, 1],
@@ -157,7 +157,7 @@
       "tiles": [
         {
           "name": "brick-wall",
-          "type": "wall",
+          "type": "brick",
           "ranges": [
             [0, 0],
             [1, 0],

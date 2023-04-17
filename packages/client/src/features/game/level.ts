@@ -17,13 +17,10 @@ class Level {
     this.comp = new Compositor();
     this.entities = new Set();
     this.tiles = new Matrix();
-    this.tileCollider = null;
+    this.tileCollider = new TileCollider();
+
     this.entityCollider = new EntityCollider(this.entities);
     this.totalTime = 0;
-  }
-
-  setCollisionGrid(matrix: Matrix) {
-    this.tileCollider = new TileCollider(matrix);
   }
 
   update(gameContext: GameContext) {
