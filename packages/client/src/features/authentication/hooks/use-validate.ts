@@ -1,21 +1,28 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { clearObject, isEmptyObject } from '@/utils/functions';
-import { InferType } from 'yup';
+import { ObjectSchema, Maybe, AnyObject } from 'yup'
 
-interface IProps {
+interface IProps<T extends Maybe<AnyObject>> {
   initValues?: Record<string, any>;
-  validationSchema?: InferType<any>;
+  validationSchema?: ObjectSchema<T>;
 }
 
-const useForm = (props: IProps) => {
-  const { initValues = {}, validationSchema = {} } = props;
+interface FieldProps {
+  name: string;
+  value: string;
+  error: string;
+  onChange: (e: React.FocusEvent<HTMLInputElement>) => void;
+}
+
+const useForm = <T extends Maybe<AnyObject>>(props: IProps<T>) => {
+  const { initValues = {}, validationSchema } = props;
   const [values, setValues] = useState(initValues);
   const [errors, setErrors] = useState<Record<string, any>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const getFieldValue = (field: string): string => values[field] ?? '';
 
-  const getFieldProps = (field: string): Record<string, any> => ({
+  const getFieldProps = (field: string): FieldProps => ({
     name: field,
     value: getFieldValue(field),
     error: getFieldError(field),
@@ -57,7 +64,7 @@ const useForm = (props: IProps) => {
   };
 
   const yupValidate = () => {
-    validationSchema.validate(values, { abortEarly: false }).then(function() {
+    validationSchema?.validate(values, { abortEarly: false }).then(function() {
       setErrors({});
     }).catch((err: { inner: any[]; }) => {
       const error = err.inner.reduce((acc, item) => {
