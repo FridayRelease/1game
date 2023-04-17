@@ -8,7 +8,7 @@ import { Solid } from '../traits/solid';
 function createEagleFactory(sprite: SpriteSheet) {
   function drawEagle(entity: Entity) {
     return function draw(ctx: CanvasRenderingContext2D | null) {
-      sprite.draw('run-top-1', ctx, entity.pos.x, entity.pos.y);
+      sprite.draw('eagle', ctx, entity.pos.x, entity.pos.y);
     };
   }
 
