@@ -6,7 +6,6 @@ import UserAvatar from '@/components/user-avatar';
 import Menu from '@/components/profile/menu';
 import useForm from '@/features/authentication/hooks/use-validate';
 import Input from '@/components/input/input';
-import { ValidationProps } from '@/features/validation/validator';
 import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
 import { updatePassword } from '@/controllers/user-controllers';
 import { IUserUpdatePasswordRequest } from '@/types/user';
@@ -16,6 +15,7 @@ import { userSelectors } from '@/features/authentication';
 import useResetState from '@/hooks/use-reset-state';
 import IMenuEditProfilePassword from './password.interface';
 import './password.scss';
+import { passwordSchema } from '@/components/profile/edit/password/password.contants';
 
 const userMenuData: IMenuEditProfilePassword[] = [
   { label: 'Старый пароль', name: 'old_password' },
@@ -23,22 +23,10 @@ const userMenuData: IMenuEditProfilePassword[] = [
   { label: 'Повторите пароль', name: 'new_password_extra' },
 ];
 
-const validationSchema: Record<string, ValidationProps> = {
-  old_password: {
-    required: true,
-  },
-  new_password: {
-    required: true,
-    isPassword: true,
-  },
-  new_password_extra: {
-    required: true,
-    isRetryPassword: 'new_password',
-  },
-};
-
 const EditPassword: FC = () => {
-  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({ validationSchema });
+  const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({
+    validationSchema: passwordSchema
+  });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
