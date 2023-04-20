@@ -38,7 +38,9 @@ class Timer implements ITimer {
   }
 
   cancel() {
-    cancelAnimationFrame(this.id);
+    if (this.id) {
+      cancelAnimationFrame(this.id);
+    }
   }
 }
 

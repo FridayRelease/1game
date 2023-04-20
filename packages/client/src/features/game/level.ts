@@ -3,6 +3,8 @@ import { Entity } from './entity';
 import { Matrix } from './math';
 import { TileCollider } from './tile-collider';
 import { EntityCollider } from './entity-collider';
+import { GameContext } from './types';
+import { MusicController } from './music-controller';
 
 class Level {
   comp: Compositor;
@@ -11,23 +13,22 @@ class Level {
   tileCollider: TileCollider | null;
   totalTime: number;
   entityCollider: EntityCollider;
+  music: MusicController;
 
   constructor() {
     this.comp = new Compositor();
     this.entities = new Set();
     this.tiles = new Matrix();
-    this.tileCollider = null;
+    this.tileCollider = new TileCollider();
+    this.music = new MusicController();
+
     this.entityCollider = new EntityCollider(this.entities);
     this.totalTime = 0;
   }
 
-  setCollisionGrid(matrix: Matrix) {
-    this.tileCollider = new TileCollider(matrix);
-  }
-
-  update(deltaTime: number) {
+  update(gameContext: GameContext) {
     this.entities.forEach(entity => {
-      entity.update(deltaTime, this);
+      entity.update(gameContext, this);
     });
 
     this.entities.forEach(entity => {

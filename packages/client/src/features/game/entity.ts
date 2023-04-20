@@ -1,35 +1,45 @@
+import { AudioBoard } from './audio-board';
 import { BoundingBox } from './bounding-box';
-import { SIDES } from './constants';
+import { EntityType, SIDES } from './constants';
 import { Level } from './level';
 import { Vec2 } from './math';
 import { Trait } from './traits/trait';
-import { MatchTile } from './types';
+import { GameContext, MatchTile, TraitName } from './types';
 
 type IEntity = {
   pos: Vec2;
   vel: Vec2;
   size: Vec2;
-  update: (deltaTime: number, level: Level) => void;
+  update: (gameContext: GameContext, level: Level) => void;
   obstruct: (side: SIDES, match: MatchTile) => void;
   direct: (side: SIDES) => void;
   draw: (ctx: CanvasRenderingContext2D | null) => void;
 };
 
 class Entity implements IEntity {
+  type: EntityType;
   pos: Vec2;
   vel: Vec2;
   size: Vec2;
   offset: Vec2;
   traits: Trait[];
   bounds: BoundingBox;
+  lifeTime: number;
+  audio: AudioBoard;
+  sounds: Set<string>;
 
-  constructor() {
+  constructor(type = EntityType.NONE) {
+    this.audio = new AudioBoard();
+    this.sounds = new Set();
+    this.type = type;
     this.vel = new Vec2(0, 0);
     this.pos = new Vec2(0, 0);
     this.size = new Vec2(8, 8);
     this.offset = new Vec2(0, 0);
     this.bounds = new BoundingBox(this.pos, this.size, this.offset);
     this.traits = [];
+
+    this.lifeTime = 0;
   }
 
   finalize() {
@@ -60,13 +70,24 @@ class Entity implements IEntity {
     });
   }
 
-  update(deltaTime: number, level: Level) {
-    this.traits.forEach(trait => {
-      trait.update(this, deltaTime, level);
+  playSounds(audioBoard: AudioBoard, audioContext: AudioContext) {
+    this.sounds.forEach(name => {
+      audioBoard.playAudio(name, audioContext);
     });
+    this.sounds.clear();
   }
 
-  getTrait(name: string): Trait | undefined {
+  update(gameContext: GameContext, level: Level) {
+    this.traits.forEach(trait => {
+      trait.update(this, gameContext, level);
+    });
+
+    this.playSounds(this.audio, gameContext.audioContext);
+
+    this.lifeTime += gameContext.deltaTime;
+  }
+
+  getTrait(name: TraitName): Trait | undefined {
     return this.traits.find(e => e.NAME === name);
   }
 

@@ -1,6 +1,7 @@
 import { Traits } from '@/constant/traits';
 import { Entity } from '../entity';
 import { Level } from '../level';
+import { GameContext } from '../types';
 import { Trait } from './trait';
 
 class Killable extends Trait {
@@ -26,8 +27,10 @@ class Killable extends Trait {
     this.deadTime = 0;
   }
 
-  update(entity: Entity, deltaTime: number, level: Level): void {
+  update(entity: Entity, { deltaTime }: GameContext, level: Level): void {
     if (this.dead) {
+      entity.vel.set(0, 0);
+
       this.deadTime += deltaTime;
       if (this.deadTime > this.removeAfter) {
         this.queue(() => {

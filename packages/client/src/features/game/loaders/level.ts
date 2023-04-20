@@ -5,19 +5,12 @@ import { SpriteSheet } from '../spritesheet';
 import { ITileDTO, ILevelDTO, IPatternDTO } from '@/api/types';
 import { createBackgroundLayer, createSpriteLayer } from '../layers/index';
 
-function setupCollision(levelSpec: ILevelDTO, level: Level) {
-  const mergedTiles = levelSpec.layers.reduce<Array<ITileDTO>>((mergedTiles, layerSpec) => {
-    return mergedTiles.concat(layerSpec.tiles);
-  }, []);
-  const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
-  level.setCollisionGrid(collisionGrid);
-}
-
 function setupBackgrounds(levelSpec: ILevelDTO, level: Level, backgroundSprites: SpriteSheet) {
   levelSpec.layers.forEach(layer => {
-    const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
-    const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
+    const grid = createGrid(layer.tiles, levelSpec.patterns);
+    const backgroundLayer = createBackgroundLayer(level, grid, backgroundSprites);
     level.comp.push(backgroundLayer);
+    level.tileCollider?.addGrid(grid);
   });
 }
 
@@ -33,17 +26,7 @@ function setupEntities(levelSpec: ILevelDTO, level: Level, entityFactory: Record
   level.comp.push(spriteLayer);
 }
 
-function createCollisionGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
-  const grid = new Matrix();
-
-  for (const { tile, x, y } of expandTiles(tiles, patterns)) {
-    grid.set(x, y, tile);
-  }
-
-  return grid;
-}
-
-function createBackgroundGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
+function createGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
   const grid = new Matrix();
 
   for (const { tile, x, y } of expandTiles(tiles, patterns)) {
@@ -108,4 +91,4 @@ function* expandTiles(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
   yield* walkTiles(tiles, 0, 0);
 }
 
-export { setupCollision, setupBackgrounds, setupEntities };
+export { setupBackgrounds, setupEntities };

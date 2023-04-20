@@ -1,6 +1,6 @@
 import { Entity } from '../entity';
 import { Level } from '../level';
-import { TileCollider } from '../tile-collider';
+import { TileResolver } from '../tile-resolver';
 
 function createEntityLayer(entities: Set<Entity>) {
   return function drawBoundingBox(ctx: CanvasRenderingContext2D) {
@@ -14,14 +14,9 @@ function createEntityLayer(entities: Set<Entity>) {
   };
 }
 
-function createTileCandidateLayer(tileCollider: TileCollider | null) {
-  if (!tileCollider) {
-    return;
-  }
-
+function createTileCandidateLayer(tileResolver: TileResolver) {
   const resolvedTiles: { x: number; y: number }[] = [];
 
-  const tileResolver = tileCollider?.tiles;
   const tileSize = tileResolver?.tileSize;
 
   const getByIndexOriginal = tileResolver?.getByIndex;
@@ -44,15 +39,14 @@ function createTileCandidateLayer(tileCollider: TileCollider | null) {
 }
 
 function createCollisionLayer(level: Level) {
-  const drawTileCandidates = createTileCandidateLayer(level.tileCollider);
+  const drawTileCandidates = level.tileCollider?.resolvers.map(createTileCandidateLayer);
   const drawBoundingBoxes = createEntityLayer(level.entities);
 
   return function drawCollision(ctx: CanvasRenderingContext2D | null) {
     if (!ctx || !drawTileCandidates) {
       return;
     }
-
-    drawTileCandidates(ctx);
+    drawTileCandidates.forEach(draw => draw(ctx));
 
     drawBoundingBoxes(ctx);
   };
