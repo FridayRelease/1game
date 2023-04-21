@@ -14,6 +14,7 @@ enum Traits {
   Emitter = 'emitter',
   Trigger = 'trigger',
   LevelTimer = 'levelTimer',
+  Eagle = 'eagle',
 }
 
 export { Traits };

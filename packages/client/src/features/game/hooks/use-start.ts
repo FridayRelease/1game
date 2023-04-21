@@ -1,3 +1,4 @@
+import { Traits } from '@/constant/traits';
 import { fetchFont, fetchLevel } from '@/controllers/game-controllers';
 import { RefObject, useState, useEffect, ReactEventHandler } from 'react';
 import { loadEntities } from '../loaders/enteties';
@@ -11,7 +12,6 @@ import { createPlayer, Player } from '../traits/player';
 import { GameContext } from '../types';
 import { createColorLayer } from '../layers/color';
 import { Level } from '../level';
-import { Traits } from '@/constant/traits';
 import { Scene } from '../scene';
 import { createTextLayer } from '../layers/text';
 import TimedScene from '../timed-scene';
@@ -21,6 +21,14 @@ const random = (arr: number[][]): number[] => {
   const rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
 };
+
+/**
+ * tiles - отрисовка всех элементов игры
+ * enteties - все юниты игры(танки, пули, орла)
+ * level (движок игры)
+ *
+ * entitiesFactory - фабрика функций с замыканием tiles
+ */
 
 function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
   isStarted: boolean;
@@ -36,12 +44,12 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     const font = await fetchFont();
     const audioContext = new AudioContext();
 
-    const entetiesFactory = await loadEntities(audioContext);
-    const loadLevel = await fetchLevel(entetiesFactory);
+    const entitiesFactory = await loadEntities(audioContext);
+    const loadLevel = await fetchLevel(entitiesFactory);
 
     const sceneRunner = new SceneRunner();
 
-    const tank = createPlayer(entetiesFactory.tank());
+    const tank = createPlayer(entitiesFactory.tank());
 
     const input = setupKeyboard(tank);
     input.listenTo(window);
@@ -67,7 +75,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
         }
 
         if (trigger && type === 'entity') {
-          const createTriggerEntity = entetiesFactory[trigger.name];
+          const createTriggerEntity = entitiesFactory[trigger.name];
 
           const enemy = createTriggerEntity();
 
@@ -101,7 +109,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       deltaTime: 0,
       audioContext,
       videoContext,
-      entetiesFactory,
+      entitiesFactory,
     };
 
     timer.update = function update(deltaTime: number) {

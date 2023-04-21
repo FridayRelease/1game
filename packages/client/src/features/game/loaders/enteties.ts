@@ -1,5 +1,5 @@
 import { Entities } from '@/constant/entities';
-import { fetchEnemy, fetchTank, fetchBullet } from '@/controllers/game-controllers';
+import { fetchEnemy, fetchTank, fetchBullet, fetchEagle } from '@/controllers/game-controllers';
 import { Entity } from '../entity';
 import { EntityFactoryCallback } from '../types';
 
@@ -14,6 +14,7 @@ function loadEntities(audioContext: AudioContext) {
     fetchBullet().then(addAs(Entities.Bullet)),
     fetchTank(audioContext, entityFactories).then(addAs(Entities.Tank)),
     fetchEnemy(entityFactories).then(addAs(Entities.Enemy)),
+    fetchEagle().then(addAs(Entities.Eagle)),
   ]).then(() => entityFactories);
 }
 
