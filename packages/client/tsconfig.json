@@ -30,5 +30,10 @@
   "include": ["src"],
   "typeRoots": ["./node_modules/@types", "src/types"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "exclude": ["node_modules", "**/*.test.ts"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }

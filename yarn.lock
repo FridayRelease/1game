@@ -34,11 +34,6 @@
   resolved "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.18.13.tgz"
   integrity sha512-5yUzC5LqyTFp2HLmDoxGQelcdYgSpP9xsnMWBphAscOdFrHSAVbLNzWiy32sVNDqJRDiJK6klfDnAgu6PAGSHw==
 
-"@babel/compat-data@^7.21.4":
-  version "7.21.4"
-  resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.21.4.tgz#457ffe647c480dff59c2be092fc3acf71195c87f"
-  integrity sha512-/DYyDpeCfaVinT40FPGdkkb+lYSKvsVuMjDAG7jPOWWiM1ibOaB9CXJAlc4d1QpP/U2q2P9jbrSlClKSErd55g==
-
 "@babel/core@^7.11.6", "@babel/core@^7.12.3", "@babel/core@^7.18.10":
   version "7.18.13"
   resolved "https://registry.npmjs.org/@babel/core/-/core-7.18.13.tgz"
