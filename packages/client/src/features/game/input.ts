@@ -1,26 +1,17 @@
-import { Entities } from '@/constant/entities';
 import { Traits } from '@/constant/traits';
 import { SIDES } from './constants';
 import { Entity } from './entity';
 import { KeyboardState } from './keyboard-state';
-import { Level } from './level';
-import { Bullet } from './traits/bullet';
 import { Go } from './traits/go';
-import { EntityFactoryCallback } from './types';
+import { Shoot } from './traits/shoot';
 
-function setupKeyboard(entity: Entity, level: Level, entityFactory: Record<string, EntityFactoryCallback>) {
+function setupKeyboard(entity: Entity) {
   const input = new KeyboardState();
 
   input.addMapping('KeyZ', () => {
-    const createBulletEntity = entityFactory[Entities.Bullet];
-    const bullet = createBulletEntity();
+    const shoot = entity.getTrait(Traits.Shoot) as Shoot;
 
-    bullet.pos.set(entity.pos.x, entity.bounds.top);
-    const go = entity.getTrait(Traits.Go) as Go;
-
-    (bullet.getTrait(Traits.Bullet) as Bullet).side = go.side;
-
-    level.entities.add(bullet);
+    shoot.shoot();
   });
 
   input.addMapping('ArrowRight', keyState => {

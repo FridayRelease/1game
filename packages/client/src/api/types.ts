@@ -62,6 +62,7 @@ interface IPatternDTO {
 
 interface ILevelDTO {
   spriteSheet: string;
+  musicSheet: string;
   patterns: IPatternDTO;
   layers: Array<ILayerDTO>;
   entities: Array<IEntityDTO>;
@@ -82,7 +83,14 @@ interface ISpriteSheetDTO {
   animations?: Array<IAnimationDTO>;
 }
 
+interface ISoundSheetDTO {
+  [key: string]: {
+    url: string;
+  };
+}
+
 export {
+  type ISoundSheetDTO,
   type ErrorResponse,
   type StatusResponse,
   type SignUpResponseDTO,

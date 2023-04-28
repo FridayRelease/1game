@@ -1,11 +1,13 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
+import { EventBus } from '../event-emitter';
 import { Level } from '../level';
-import { CallBackFunction, MatchTile, TraitName } from '../types';
+
+import { CallBackFunction, GameContext, MatchTile, TraitName } from '../types';
 
 interface ITrait {
   NAME: TraitName;
-  update(entity: Entity, deltaTime: number, level: Level): void;
+  update(entity: Entity, gameContext: GameContext, level: Level): void;
 
   obstruct(entity: Entity, side: SIDES, match: MatchTile): void;
 
@@ -17,10 +19,12 @@ interface ITrait {
 class Trait implements ITrait {
   NAME: TraitName;
   tasks: CallBackFunction[];
+  events: EventBus;
 
   constructor(name: TraitName) {
     this.NAME = name;
     this.tasks = [];
+    this.events = new EventBus();
   }
 
   finalize() {
@@ -36,7 +40,7 @@ class Trait implements ITrait {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  update(entity: Entity, deltaTime: number, level: Level) {}
+  update(entity: Entity, gameContext: GameContext, level: Level) {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   obstruct(entity: Entity, side: SIDES, match: MatchTile) {}

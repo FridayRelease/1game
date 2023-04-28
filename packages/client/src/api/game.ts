@@ -1,5 +1,5 @@
 import { HttpClient } from './http-client';
-import { ILevelDTO, ISpriteSheetDTO } from './types';
+import { ILevelDTO, ISoundSheetDTO, ISpriteSheetDTO } from './types';
 
 export class GameApi {
   private http;
@@ -16,6 +16,14 @@ export class GameApi {
       });
       image.src = url;
     });
+  };
+
+  loadAudio = async (url: string) => {
+    return await this.http.get<ArrayBuffer>(url, { responseType: 'arraybuffer' }).then(res => res.data);
+  };
+
+  loadAudioSheet = async (name: string) => {
+    return await this.http.get<ISoundSheetDTO>(`/sounds/${name}.json`).then(res => res.data);
   };
 
   loadSprites = async (name: string) => {

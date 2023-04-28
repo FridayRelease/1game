@@ -1,4 +1,5 @@
 import { Traits } from '@/constant/traits';
+import { EntityType } from '../constants';
 import { Entity } from '../entity';
 import { SpriteSheet } from '../spritesheet';
 import { Bullet } from '../traits/bullet';
@@ -31,15 +32,13 @@ function createBulletFactory(sprite: SpriteSheet) {
   }
 
   return function createBullet() {
-    const bullet = new Entity();
+    const bullet = new Entity(EntityType.BULLET);
 
     bullet.size.set(8, 8);
     bullet.offset.set(4, 4);
     bullet.addTrait(new Solid());
     bullet.addTrait(new Physics());
-    // bullet.addTrait(new Go());
     bullet.addTrait(new Killable());
-    bullet.addTrait(new Bullet());
 
     bullet.draw = drawBullet(bullet);
 

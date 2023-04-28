@@ -3,6 +3,26 @@
 
   "frames": [
     {
+      "name": "bang-1",
+      "rect": [256, 0, 16, 16]
+    },
+    {
+      "name": "bang-2",
+      "rect": [272, 0, 16, 16]
+    },
+    {
+      "name": "bang-3",
+      "rect": [288, 0, 16, 16]
+    },
+    {
+      "name": "bang-big-4",
+      "rect": [304, 0, 32, 32]
+    },
+    {
+      "name": "bang-big-5",
+      "rect": [340, 0, 32, 32]
+    },
+    {
       "name": "run-top-1",
       "rect": [0, 0, 16, 16]
     },
@@ -39,8 +59,13 @@
 
   "animations": [
     {
+      "name": "bang",
+      "frameLen": 0.2,
+      "frames": ["bang-1", "bang-2", "bang-3", "bang-big-4", "bang-big-5"]
+    },
+    {
       "name": "run-top",
-      "frameLen": 10,
+      "frameLen": 0.15,
       "frames": ["run-top-1", "run-top-2"]
     },
     {

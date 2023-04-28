@@ -1,6 +1,7 @@
 import { Traits } from '@/constant/traits';
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
+import { GameContext } from '../types';
 import { Trait } from './trait';
 
 class Go extends Trait {
@@ -9,6 +10,7 @@ class Go extends Trait {
   directionY: number;
   deceleration: number;
   speed: number;
+  time: number;
 
   constructor() {
     super(Traits.Go);
@@ -17,6 +19,7 @@ class Go extends Trait {
     this.directionY = 0;
     this.speed = 2000;
     this.deceleration = 100;
+    this.time = 0;
   }
 
   get direction() {
@@ -26,7 +29,9 @@ class Go extends Trait {
     return this.directionY;
   }
 
-  update(entity: Entity, deltaTime: number) {
+  update(entity: Entity, { deltaTime }: GameContext) {
+    this.time += deltaTime;
+
     if (this.side === SIDES.LEFT || this.side === SIDES.RIGHT) {
       const absX = Math.abs(entity.vel.x);
       entity.vel.y = 0;
