@@ -9,3 +9,5 @@ export const EditUrl = generatePath('/edit');
 export const GameUrl = generatePath('/game');
 export const Forum = generatePath('/forum');
 export const LeaderboardUrl = generatePath('/leaderboard');
+
+export const Urls = [MainUrl, ForumUrl, LoginUrl, SignupUrl, ProfileUrl, EditUrl, GameUrl, Forum, LeaderboardUrl];
