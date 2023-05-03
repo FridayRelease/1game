@@ -16,64 +16,6 @@
     {
       "tiles": [
         {
-          "name": "brick-wall",
-          "ranges": [[10, 10]]
-        },
-        {
-          "pattern": "brick-h",
-          "ranges": [[13, 27]]
-        },
-
-        {
-          "pattern": "brick-v-4",
-          "ranges": [
-            [13, 3],
-            [18, 3]
-          ]
-        },
-
-        {
-          "name": "stone-wall",
-          "type": "wall",
-          "ranges": [
-            [16, 6],
-            [17, 6],
-            [16, 7],
-            [17, 7]
-          ]
-        },
-        {
-          "pattern": "brick-stone",
-          "ranges": [[1, 15]]
-        },
-        {
-          "pattern": "brick-wall-square",
-          "ranges": [
-            [6, 15],
-            [8, 15],
-            [22, 15],
-            [24, 15]
-          ]
-        },
-        {
-          "pattern": "brick-v-5",
-          "ranges": [
-            [3, 3],
-            [8, 3],
-            [22, 3],
-            [27, 3],
-
-            [3, 19],
-            [8, 19],
-            [22, 19],
-            [27, 19]
-          ]
-        }
-      ]
-    },
-    {
-      "tiles": [
-        {
           "pattern": "fence-v",
           "ranges": [
             [0, 0],
@@ -113,15 +55,17 @@
   ],
 
   "entities": [],
+
   "triggers": [
     {
       "type": "goto",
-      "name": "1-2"
+      "name": "1-1",
+      "pos": [64, 64]
     },
     {
       "type": "entity",
       "name": "enemy",
-      "count": 4,
+      "count": 6,
       "pos": [
         [20, 10],
         [30, 10],

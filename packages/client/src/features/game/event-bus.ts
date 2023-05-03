@@ -1,12 +1,12 @@
 type Callback = (...args: any) => void;
 
-export interface Bus {
+interface Bus {
   on(event: string, callback: Callback): void;
   off(event: string, callback: Callback): void;
   emit(event: string, ...args: []): void;
 }
 
-export class EventBus implements Bus {
+class EventBus implements Bus {
   private listeners: Array<{ name: string; callback: Callback }> = [];
 
   on(name: string, callback: Callback) {
@@ -22,8 +22,12 @@ export class EventBus implements Bus {
   emit(name: string, ...args: unknown[]) {
     this.listeners.forEach(listener => {
       if (listener.name === name) {
-        listener.callback(args);
+        listener.callback(...args);
       }
     });
   }
 }
+
+export { EventBus, type Bus, type Callback };
+
+export default new EventBus();

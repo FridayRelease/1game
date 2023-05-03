@@ -10,7 +10,7 @@ class Font {
   }
 
   print(text: string, ctx: CanvasRenderingContext2D, x: number, y: number) {
-    [...text].forEach((char, pos) => {
+    [...text]?.forEach((char, pos) => {
       this.sprites.draw(char, ctx, x + pos * this.size, y);
     });
   }

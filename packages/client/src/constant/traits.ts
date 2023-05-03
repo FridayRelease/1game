@@ -11,6 +11,8 @@ enum Traits {
   Solid = 'solid',
   Shoot = 'shoot',
   Emitter = 'emitter',
+  Trigger = 'trigger',
+  LevelTimer = 'levelTimer',
 }
 
 export { Traits };
