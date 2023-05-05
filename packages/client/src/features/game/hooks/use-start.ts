@@ -8,7 +8,7 @@ import { createCollisionLayer } from '../layers/collision';
 import { createPlayerEnv } from '../player';
 import { SceneRunner } from '../scene-runner';
 import { Timer } from '../timer';
-import { createPlayer, Player } from '../traits/player';
+import { createPlayer, getPlayerTrait, Player } from '../traits/player';
 import { GameContext } from '../types';
 import { createColorLayer } from '../layers/color';
 import { Level } from '../level';
@@ -16,6 +16,8 @@ import { Scene } from '../scene';
 import { createTextLayer } from '../layers/text';
 import TimedScene from '../timed-scene';
 import { createPlayerProgressLayer } from '../layers/player-progress';
+import { gameActions } from '../store/game-slice';
+import { useDispatch } from 'react-redux';
 
 const random = (arr: number[][]): number[] => {
   const rand = Math.floor(Math.random() * arr.length);
@@ -35,6 +37,8 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
   start: ReactEventHandler<HTMLButtonElement>;
 } {
   const [isStarted, setStart] = useState(false);
+  const dispatch = useDispatch();
+
   const timer = new Timer();
 
   async function main(videoContext: CanvasRenderingContext2D | undefined | null) {
@@ -56,7 +60,9 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     const input = setupKeyboard(tank);
     input.listenTo(window);
 
-    const gameOver = async () => {
+    const gameOver = async (score?: number) => {
+      dispatch(gameActions.setScore(score || 0));
+
       const waitScreen = new TimedScene();
       waitScreen.countDown = 2;
       waitScreen.comp.push(createColorLayer('#757575'));
@@ -66,7 +72,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
 
       const loadScreen = new Scene();
       loadScreen.comp.push(createColorLayer('#757575'));
-      loadScreen.comp.push(createTextLayer(font, 'Dashboard with score'));
+      loadScreen.comp.push(createTextLayer(font, `Dashboard with score, ${score}`));
       sceneRunner.addScene(loadScreen);
       sceneRunner.next();
 
@@ -74,11 +80,10 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     };
 
     const runLevel = async (name: string) => {
-      const loadScreen = new Scene();
+      const loadScreen = new TimedScene();
       loadScreen.comp.push(createColorLayer('#757575'));
       loadScreen.comp.push(createTextLayer(font, `stage ${name}`));
       sceneRunner.addScene(loadScreen);
-      sceneRunner.next();
 
       const level = await loadLevel(name);
 
@@ -90,7 +95,9 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
 
       level.events.on(Level.EVENT_TRIGGER, (type: string) => {
         if (type === 'gameOver') {
-          gameOver();
+          const player = getPlayerTrait(level.entities);
+
+          gameOver(player?.score);
         }
 
         const trigger = level.triggers.get(type);

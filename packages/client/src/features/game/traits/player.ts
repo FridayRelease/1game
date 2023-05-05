@@ -34,11 +34,19 @@ class Player extends Trait {
   }
 }
 
-function createPlayer(entity: Entity) {
+const getPlayerTrait = (entities: Set<Entity>): Player | undefined => {
+  for (const entity of findPlayer(entities)) {
+    return entity.traits.get(Traits.Player) as Player;
+  }
+
+  return undefined;
+};
+
+const createPlayer = (entity: Entity) => {
   entity.addTrait(new Player());
 
   return entity;
-}
+};
 
 function* findPlayer(entities: Set<Entity>) {
   for (const entity of entities) {
@@ -48,4 +56,4 @@ function* findPlayer(entities: Set<Entity>) {
   }
 }
 
-export { Player, createPlayer, findPlayer };
+export { Player, createPlayer, findPlayer, getPlayerTrait };
