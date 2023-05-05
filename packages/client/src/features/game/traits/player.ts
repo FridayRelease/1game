@@ -1,6 +1,8 @@
 import { Traits } from '@/constant/traits';
 import { EntityType } from '../constants';
 import { Entity } from '../entity';
+import { Level } from '../level';
+import { GameContext } from '../types';
 import { Killable } from './killable';
 import { Trait } from './trait';
 
@@ -23,6 +25,12 @@ class Player extends Trait {
       }
       console.warn(this);
     });
+  }
+
+  update(entity: Entity, gameContext: GameContext, level: Level): void {
+    if (this.lives <= 0) {
+      level.events.emit(Level.EVENT_TRIGGER, 'gameOver');
+    }
   }
 }
 

@@ -56,6 +56,23 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     const input = setupKeyboard(tank);
     input.listenTo(window);
 
+    const gameOver = async () => {
+      const waitScreen = new TimedScene();
+      waitScreen.countDown = 2;
+      waitScreen.comp.push(createColorLayer('#757575'));
+      waitScreen.comp.push(createTextLayer(font, 'game over!'));
+
+      sceneRunner.addScene(waitScreen);
+
+      const loadScreen = new Scene();
+      loadScreen.comp.push(createColorLayer('#757575'));
+      loadScreen.comp.push(createTextLayer(font, 'Dashboard with score'));
+      sceneRunner.addScene(loadScreen);
+      sceneRunner.next();
+
+      // добавить главное меню
+    };
+
     const runLevel = async (name: string) => {
       const loadScreen = new Scene();
       loadScreen.comp.push(createColorLayer('#757575'));
@@ -72,6 +89,10 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       (tank.getTrait(Traits.Player) as Player).enemiesCount = trigger?.count || 4;
 
       level.events.on(Level.EVENT_TRIGGER, (type: string) => {
+        if (type === 'gameOver') {
+          gameOver();
+        }
+
         const trigger = level.triggers.get(type);
 
         if (trigger && type === 'goto') {
@@ -93,17 +114,14 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       const playerEnv = createPlayerEnv(tank);
       level.entities.add(playerEnv);
 
-      const playerProgressLayer = createPlayerProgressLayer(font, level);
-      const dashboardLayer = createDashboardLayer(font, level);
-
       const waitScreen = new TimedScene();
       waitScreen.countDown = 2;
       waitScreen.comp.push(createColorLayer('#757575'));
-      waitScreen.comp.push(playerProgressLayer);
+      waitScreen.comp.push(createPlayerProgressLayer(font, level));
       sceneRunner.addScene(waitScreen);
 
       level.comp.push(createCollisionLayer(level));
-      level.comp.push(dashboardLayer);
+      level.comp.push(createDashboardLayer(font, level));
       sceneRunner.addScene(level);
 
       sceneRunner.next();

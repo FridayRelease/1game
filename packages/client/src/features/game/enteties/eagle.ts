@@ -1,5 +1,6 @@
 import { Traits } from '@/constant/traits';
 import { Entity } from '../entity';
+import { Level } from '../level';
 import { SpriteSheet } from '../spritesheet';
 import { Eagle } from '../traits/eagle';
 import { Killable } from '../traits/killable';
@@ -26,6 +27,9 @@ function createEagleFactory(sprite: SpriteSheet) {
     eagle.addTrait(new Killable());
 
     (eagle.getTrait(Traits.Killable) as Killable).isRemoveAfter = false;
+    (eagle.getTrait(Traits.Killable) as Killable).callbackAfterKilled = level => {
+      level.events.emit(Level.EVENT_TRIGGER, 'gameOver');
+    };
 
     eagle.draw = drawEagle(eagle);
 
