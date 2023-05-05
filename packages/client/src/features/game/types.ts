@@ -19,7 +19,7 @@ type TraitName =
   | Traits.Emitter
   | Traits.Trigger
   | Traits.EagleController
-  | Traits.LevelTimer;
+  | Traits.LevelTimer
   | Traits.Eagle;
 
 type MatchTile = {

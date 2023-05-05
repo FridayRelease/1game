@@ -50,6 +50,8 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     const sceneRunner = new SceneRunner();
 
     const tank = createPlayer(entitiesFactory.tank());
+    const eagle = entitiesFactory.eagle();
+    eagle.pos.set(120, 232);
 
     const input = setupKeyboard(tank);
     input.listenTo(window);
@@ -62,6 +64,8 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       sceneRunner.next();
 
       const level = await loadLevel(name);
+
+      level.entities.add(eagle);
 
       const trigger = level.triggers.get('entity');
 
