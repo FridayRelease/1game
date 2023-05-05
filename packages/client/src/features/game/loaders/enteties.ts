@@ -1,7 +1,7 @@
 import { Entities } from '@/constant/entities';
 import { fetchEnemy, fetchTank, fetchBullet } from '@/controllers/game-controllers';
-import { Entity } from './entity';
-import { EntityFactoryCallback } from './types';
+import { Entity } from '../entity';
+import { EntityFactoryCallback } from '../types';
 
 function loadEntities(audioContext: AudioContext) {
   const entityFactories: Record<string, EntityFactoryCallback> = {};

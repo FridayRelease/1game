@@ -11,8 +11,17 @@ import { EnemyBehavior } from '../traits/enemy-behavior';
 import { Go } from '../traits/go';
 import { Killable } from '../traits/killable';
 import { Physics } from '../traits/physics';
+import { findPlayer, Player } from '../traits/player';
 import { Solid } from '../traits/solid';
 import { EntityFactoryCallback } from '../types';
+
+const getPlayerTrait = (entities: Set<Entity>): Player | undefined => {
+  for (const entity of findPlayer(entities)) {
+    return entity.traits.get(Traits.Player) as Player;
+  }
+
+  return undefined;
+};
 
 function createEnemyFactory(sprite: SpriteSheet, entityFactories: Record<string, EntityFactoryCallback>) {
   let runAnim = sprite.animations.get('run-bottom');
@@ -64,6 +73,15 @@ function createEnemyFactory(sprite: SpriteSheet, entityFactories: Record<string,
     };
   }
 
+  function callbackAfterKilled(level: Level) {
+    const enemies = Array.from(level.entities).filter((e: Entity) => e.hasTrait(Traits.Enemy));
+    const enemiesCount = getPlayerTrait(level.entities)?.enemiesCount || 0;
+
+    if (enemies?.length <= 0 && enemiesCount <= 0) {
+      level.events.emit(Level.EVENT_TRIGGER, 'goto');
+    }
+  }
+
   return function createEnemy() {
     const enemy = new Entity(EntityType.ENEMY_TANK);
 
@@ -77,6 +95,8 @@ function createEnemyFactory(sprite: SpriteSheet, entityFactories: Record<string,
 
     (enemy.getTrait(Traits.Go) as Go).directionY = 1;
     (enemy.getTrait(Traits.Go) as Go).side = SIDES.BOTTOM;
+
+    (enemy.getTrait(Traits.Killable) as Killable).callbackAfterKilled = callbackAfterKilled;
 
     const emitter = new Emitter();
     emitter.emitters.push(emitBullet);

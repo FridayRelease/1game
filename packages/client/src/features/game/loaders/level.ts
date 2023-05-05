@@ -4,10 +4,18 @@ import { Matrix } from '../math';
 import { SpriteSheet } from '../spritesheet';
 import { ITileDTO, ILevelDTO, IPatternDTO } from '@/api/types';
 import { createBackgroundLayer, createSpriteLayer } from '../layers/index';
+import { Entity } from '../entity';
+import LevelTimer from '../traits/level-timer';
 
-function setupBackgrounds(levelSpec: ILevelDTO, level: Level, backgroundSprites: SpriteSheet) {
+function createTimer() {
+  const timer = new Entity();
+  timer.addTrait(new LevelTimer());
+  return timer;
+}
+
+function setupBackgrounds(levelSpec: ILevelDTO, level: Level, backgroundSprites: SpriteSheet, patterns: IPatternDTO) {
   levelSpec.layers.forEach(layer => {
-    const grid = createGrid(layer.tiles, levelSpec.patterns);
+    const grid = createGrid(layer.tiles, patterns);
     const backgroundLayer = createBackgroundLayer(level, grid, backgroundSprites);
     level.comp.push(backgroundLayer);
     level.tileCollider?.addGrid(grid);
@@ -24,6 +32,28 @@ function setupEntities(levelSpec: ILevelDTO, level: Level, entityFactory: Record
 
   const spriteLayer = createSpriteLayer(level.entities);
   level.comp.push(spriteLayer);
+}
+
+function setupBehavior(level: Level) {
+  const timer = createTimer();
+  level.entities.add(timer);
+
+  level.events.on(LevelTimer.EVENT_TIMER_OK, () => {
+    level.music.playTheme();
+  });
+  level.events.on(LevelTimer.EVENT_TIMER_HURRY, () => {
+    level.music.playHurryTheme();
+  });
+}
+
+function setupTriggers(levelSpec: ILevelDTO, level: Level) {
+  if (!levelSpec.triggers) {
+    return;
+  }
+
+  for (const triggerSpec of levelSpec.triggers) {
+    level.triggers.set(triggerSpec.type, triggerSpec);
+  }
 }
 
 function createGrid(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
@@ -91,4 +121,4 @@ function* expandTiles(tiles: Array<ITileDTO>, patterns: IPatternDTO) {
   yield* walkTiles(tiles, 0, 0);
 }
 
-export { setupBackgrounds, setupEntities };
+export { setupBackgrounds, setupEntities, setupTriggers, setupBehavior };

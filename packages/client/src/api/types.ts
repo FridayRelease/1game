@@ -60,12 +60,21 @@ interface IPatternDTO {
   };
 }
 
+interface ITriggersDTO {
+  type: string;
+  name: string;
+  pos?: Array<number[]>;
+  count?: number;
+}
+
 interface ILevelDTO {
   spriteSheet: string;
+  patternSheet: string;
   musicSheet: string;
   patterns: IPatternDTO;
   layers: Array<ILayerDTO>;
   entities: Array<IEntityDTO>;
+  triggers: Array<ITriggersDTO>;
 }
 
 interface IAnimationDTO {
@@ -102,4 +111,5 @@ export {
   type ITileDTO,
   type ILevelDTO,
   type IPatternDTO,
+  type ITriggersDTO,
 };

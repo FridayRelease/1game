@@ -5,9 +5,12 @@ import { GameContext } from '../types';
 import { Trait } from './trait';
 
 class Killable extends Trait {
+  static EVENT_KILL = 'kill';
+
   dead: boolean;
   deadTime: number;
   removeAfter: number;
+  callbackAfterKilled!: (level: Level) => void;
 
   constructor() {
     super(Traits.Killable);
@@ -35,6 +38,9 @@ class Killable extends Trait {
       if (this.deadTime > this.removeAfter) {
         this.queue(() => {
           level.entities.delete(entity);
+          if (this.callbackAfterKilled) {
+            this.callbackAfterKilled(level);
+          }
         });
       }
     }

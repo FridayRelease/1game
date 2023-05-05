@@ -1,23 +1,30 @@
-import { Compositor } from './compositor';
 import { Entity } from './entity';
 import { Matrix } from './math';
 import { TileCollider } from './tile-collider';
 import { EntityCollider } from './entity-collider';
 import { GameContext } from './types';
 import { MusicController } from './music-controller';
+import { Scene } from './scene';
+import { ITriggersDTO } from '@/api/types';
 
-class Level {
-  comp: Compositor;
+class Level extends Scene {
+  static EVENT_TRIGGER = 'trigger';
+
   entities: Set<Entity>;
+  triggers: Map<string, ITriggersDTO>;
   tiles: Matrix;
   tileCollider: TileCollider | null;
   totalTime: number;
   entityCollider: EntityCollider;
   music: MusicController;
+  name: string;
 
-  constructor() {
-    this.comp = new Compositor();
+  constructor(name: string) {
+    super();
+
+    this.name = name;
     this.entities = new Set();
+    this.triggers = new Map();
     this.tiles = new Matrix();
     this.tileCollider = new TileCollider();
     this.music = new MusicController();
@@ -38,6 +45,14 @@ class Level {
     this.entities.forEach(entity => {
       entity.finalize();
     });
+  }
+
+  draw(gameContext: GameContext) {
+    this.comp.draw(gameContext.videoContext);
+  }
+
+  pause() {
+    this.music.pause();
   }
 }
 

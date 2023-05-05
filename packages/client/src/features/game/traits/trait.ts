@@ -1,6 +1,6 @@
 import { SIDES } from '../constants';
 import { Entity } from '../entity';
-import { EventBus } from '../event-emitter';
+import EventBus from '../event-bus';
 import { Level } from '../level';
 
 import { CallBackFunction, GameContext, MatchTile, TraitName } from '../types';
@@ -19,12 +19,12 @@ interface ITrait {
 class Trait implements ITrait {
   NAME: TraitName;
   tasks: CallBackFunction[];
-  events: EventBus;
+  events: typeof EventBus;
 
   constructor(name: TraitName) {
     this.NAME = name;
     this.tasks = [];
-    this.events = new EventBus();
+    this.events = EventBus;
   }
 
   finalize() {
