@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { RequireAuth } from '@/features/authentication';
 import GamePage from './pages/game';
 import ErrorPage from './pages/error-page';
@@ -16,7 +16,7 @@ import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
 
-const router = createBrowserRouter([
+export const routes: RouteObject[] = [
   {
     path: MainUrl,
     element: (
@@ -92,6 +92,8 @@ const router = createBrowserRouter([
     path: LeaderboardUrl,
     element: <Leaderboard />,
   },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 export default router;
