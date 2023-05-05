@@ -1,6 +1,8 @@
 import { Traits } from '@/constant/traits';
 import { EntityType } from '../constants';
 import { Entity } from '../entity';
+import { Level } from '../level';
+import { GameContext } from '../types';
 import { Killable } from './killable';
 import { Trait } from './trait';
 
@@ -24,13 +26,27 @@ class Player extends Trait {
       console.warn(this);
     });
   }
+
+  update(entity: Entity, gameContext: GameContext, level: Level): void {
+    if (this.lives <= 0) {
+      level.events.emit(Level.EVENT_TRIGGER, 'gameOver');
+    }
+  }
 }
 
-function createPlayer(entity: Entity) {
+const getPlayerTrait = (entities: Set<Entity>): Player | undefined => {
+  for (const entity of findPlayer(entities)) {
+    return entity.traits.get(Traits.Player) as Player;
+  }
+
+  return undefined;
+};
+
+const createPlayer = (entity: Entity) => {
   entity.addTrait(new Player());
 
   return entity;
-}
+};
 
 function* findPlayer(entities: Set<Entity>) {
   for (const entity of entities) {
@@ -40,4 +56,4 @@ function* findPlayer(entities: Set<Entity>) {
   }
 }
 
-export { Player, createPlayer, findPlayer };
+export { Player, createPlayer, findPlayer, getPlayerTrait };

@@ -5,6 +5,7 @@ import { createAnim } from '@/features/game/anim';
 import { createBulletFactory } from '@/features/game/enteties/bullet';
 import { createEnemyFactory } from '@/features/game/enteties/enemy';
 import { createTankFactory } from '@/features/game/enteties/tank';
+import { createEagleFactory } from '@/features/game/enteties/eagle';
 import { Level } from '@/features/game/level';
 import { setupBackgrounds, setupBehavior, setupEntities, setupTriggers } from '@/features/game/loaders/level';
 import { SpriteSheet } from '@/features/game/spritesheet';
@@ -66,6 +67,12 @@ const fetchTank = async (audioContext: AudioContext, entitiesFactory: Record<str
   return createTankFactory(sprite, audio, entitiesFactory);
 };
 
+const fetchEagle = async () => {
+  const sheetSpec = await fetchSpriteSheet(Entities.Eagle);
+
+  return createEagleFactory(sheetSpec);
+};
+
 const fetchLevel = async (entityFactories: Record<string, EntityFactoryCallback>) => {
   const loadLevel = async (name: string) => {
     const levelSpec = await gameApi.loadLevel(name);
@@ -113,6 +120,7 @@ const fetchFont = async () => {
   fontSprite.define('s', 64, 0, 8, 8);
   fontSprite.define('e', 72, 0, 8, 8);
   fontSprite.define('i', 80, 0, 8, 8);
+  fontSprite.define('c', 88, 0, 8, 8);
 
   fontSprite.define('g', 40, 8, 8, 8);
   fontSprite.define('m', 48, 8, 8, 8);
@@ -164,4 +172,5 @@ export {
   fetchAudio,
   fetchAudioBoard,
   fetchMusicSheet,
+  fetchEagle,
 };
