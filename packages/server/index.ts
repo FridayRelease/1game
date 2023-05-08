@@ -48,7 +48,9 @@ async function startServer() {
 
       if (!isDev()) {
         template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
-        render = (await import(ssrClientPath)).render;
+
+        render = (await require(ssrClientPath)).render;
+        // render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/entry-server.tsx'))).render;
       } else {
         template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8');
 

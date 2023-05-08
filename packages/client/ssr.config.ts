@@ -15,6 +15,10 @@ export default defineConfig({
       formats: ['cjs'],
     },
     outDir: 'dist/server',
+    ssr: true,
+  },
+  ssr: {
+    format: 'cjs',
   },
   plugins: [
     react(),
