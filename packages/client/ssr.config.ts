@@ -14,7 +14,7 @@ export default defineConfig({
       name: 'Client',
       formats: ['cjs'],
     },
-    outDir: 'dist/ssr',
+    outDir: 'dist/server',
   },
   plugins: [
     react(),

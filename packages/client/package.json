@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:client": "rimraf --glob 'dist/client/' && tsc && vite build --config vite.config.ts",
-    "build:ssr": "rimraf --glob 'dist/ssr/' && tsc && vite build --ssr --config ssr.config.ts",
+    "build:client": "rimraf --glob  'dist/client/' && vite build  --config vite.config.ts",
+    "build:server": "rimraf --glob 'dist/server/'  && vite build --ssr --config ssr.config.ts",
     "link": "yarn link",
     "preview": "vite preview",
     "lint": "eslint .",

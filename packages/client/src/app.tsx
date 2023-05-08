@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
-import { RouterProvider } from 'react-router-dom';
-import router from './router';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { routes } from './router';
 import './app.scss';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { themeActions } from './store/slices/theme-slice';
 import { getLocalStorage } from './utils/local-storage';
 import useTheme from './hooks/use-theme';
+
+const router = createBrowserRouter(routes);
 
 function App() {
   useTheme();

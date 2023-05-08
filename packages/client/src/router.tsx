@@ -93,7 +93,3 @@ export const routes: RouteObject[] = [
     element: <Leaderboard />,
   },
 ];
-
-const router = createBrowserRouter(routes);
-
-export default router;

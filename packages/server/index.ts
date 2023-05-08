@@ -19,7 +19,7 @@ async function startServer() {
   let vite: ViteDevServer | undefined;
   const distPath = path.dirname(require.resolve('client/dist/client/index.html'));
   const srcPath = path.dirname(require.resolve('client/index.html'));
-  const ssrClientPath = require.resolve('client/dist/ssr/ssr.cjs');
+  const ssrClientPath = require.resolve('client/dist/server/entry-server.js');
 
   if (isDev()) {
     vite = await createViteServer({
@@ -64,6 +64,8 @@ async function startServer() {
       const appHtml = await render();
 
       const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+
+      console.warn(html);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
