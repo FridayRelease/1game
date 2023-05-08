@@ -14,6 +14,11 @@ export default defineConfig({
       name: 'Client',
       formats: ['cjs'],
     },
+    rollupOptions: {
+      output: {
+        dir: 'dist/server',
+      },
+    },
     outDir: 'dist/server',
     ssr: true,
   },

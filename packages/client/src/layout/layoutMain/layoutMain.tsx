@@ -1,4 +1,4 @@
-import ToggleTheme from '@/components/toggle-theme';
+// import ToggleTheme from '@/components/toggle-theme';
 import React, { ComponentType } from 'react';
 import './layoutMain.scss';
 
@@ -21,7 +21,6 @@ function withLayoutMain<T extends object>(Component: ComponentType<T>) {
             yandex 23
           </a>
         </p>
-        <ToggleTheme />
         <div className="layout-main__content">
           <Component {...props} />
         </div>

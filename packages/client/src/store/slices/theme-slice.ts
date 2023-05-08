@@ -1,5 +1,4 @@
 import { Themes } from '@/components/toggle-theme/types';
-import { setLocalStorage } from '@/utils/local-storage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
@@ -18,12 +17,12 @@ export const themeSlice = createSlice({
 
       if (themeKey) {
         state.value = payload as Themes;
-        setLocalStorage('theme', JSON.stringify({ value: payload }));
+        // setLocalStorage('theme', JSON.stringify({ value: payload }));
 
         document.documentElement.dataset.theme = state.value;
       } else {
         state.value = Themes.Dark;
-        setLocalStorage('theme', JSON.stringify({ value: Themes.Dark }));
+        // setLocalStorage('theme', JSON.stringify({ value: Themes.Dark }));
         document.documentElement.dataset.theme = state.value;
       }
     },

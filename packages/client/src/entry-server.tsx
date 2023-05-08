@@ -3,19 +3,14 @@ import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import { routes } from './router';
+import App from './app';
 
 export function render(url: string) {
   return ReactDOMServer.renderToString(
-    <Provider store={store}>
-      <StaticRouter location={url}>
-        <Routes>
-          {routes.map(({ element, path }) => (
-            <Route element={element} path={path} key={path} />
-          ))}
-        </Routes>
-      </StaticRouter>
-    </Provider>
+    <StaticRouter location={url}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </StaticRouter>
   );
 }

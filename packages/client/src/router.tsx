@@ -19,11 +19,7 @@ import Leaderboard from './pages/leaderboard';
 export const routes: RouteObject[] = [
   {
     path: MainUrl,
-    element: (
-      <RequireAuth>
-        <Home />
-      </RequireAuth>
-    ),
+    element: <Home />,
     errorElement: <ErrorPage />,
   },
   {

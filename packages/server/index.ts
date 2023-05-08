@@ -49,8 +49,7 @@ async function startServer() {
       if (!isDev()) {
         template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
 
-        render = (await require(ssrClientPath)).render;
-        // render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/entry-server.tsx'))).render;
+        render = (await import(ssrClientPath)).render;
       } else {
         template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8');
 
@@ -62,8 +61,6 @@ async function startServer() {
       const appHtml = await render();
 
       const html = template.replace(`<!--ssr-outlet-->`, appHtml);
-
-      console.warn(html);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
