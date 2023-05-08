@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
 import { RequireAuth } from '@/features/authentication';
 import GamePage from './pages/game';
 import ErrorPage from './pages/error-page';

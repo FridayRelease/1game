@@ -1,10 +1,10 @@
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
-import { store } from './src/store/store';
+import { store } from './store/store';
 import { Provider } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { routes } from './src/router';
+import { routes } from './router';
 
 export function render(url: string) {
   return ReactDOMServer.renderToString(

@@ -10,7 +10,7 @@ dotenv.config();
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'ssr.tsx'),
+      entry: path.resolve(__dirname, 'src/entry-server.tsx'),
       name: 'Client',
       formats: ['cjs'],
     },

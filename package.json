@@ -6,7 +6,6 @@
     "build": "lerna run build",
     "dev:client": "lerna run dev  --scope=client",
     "dev:server": "lerna run dev --scope=server",
-    "build:ssr": "lerna run build:client --scope=client && lerna run build:ssr --scope=client && lerna run build --scope=server",
     "linking": "lerna run link --scope=client && lerna run link:client --scope=server",
     "unlinking": "lerna run unlink:client --scope=server",
     "dev": "lerna run dev",
