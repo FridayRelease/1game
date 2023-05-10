@@ -1,15 +1,15 @@
-type StatusResponse = 'OK';
+export type StatusResponse = 'OK';
 
-type ErrorResponse = {
+export type ErrorResponse = {
   reason: string;
   error: string;
 };
 
-type SignUpResponseDTO = {
+export type SignUpResponseDTO = {
   id: number;
 };
 
-type IUserDTO = {
+export type IUserDTO = {
   id: number;
   first_name: string;
   second_name: string;
@@ -20,47 +20,67 @@ type IUserDTO = {
   avatar: string | null;
 };
 
-enum Status {
+export enum Status {
   SUCCESS = 200,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   UNEXPECTED_ERROR = 500,
 }
 
-type LeaderboardListDTO = {
-  id: number;
+export type LeaderboardListDTO = {
+  id?: number;
   name: string;
-  score: number;
+  score: number|string;
 }[];
 
-interface IFrameDTO {
+export interface ILeaderboardAddUser{
+  data: {
+    name:string,
+    score:number|string,
+  },
+  ratingFieldName: string,
+  teamName: string
+}
+
+export interface ILeaderAll{
+  data?: {
+    name:string,
+    score:number|string,
+  },
+  ratingFieldName?: string,
+  cursor?: number,
+  limit?: number,
+  teamName?: string
+}
+
+export interface IFrameDTO {
   name: string;
   rect: Array<number>;
 }
 
-interface IEntityDTO {
+export interface IEntityDTO {
   name: string;
   pos: Array<number>;
 }
 
-interface ITileDTO {
+export interface ITileDTO {
   name?: string;
   type: string;
   pattern?: string;
   ranges: Array<number[]>;
 }
 
-interface ILayerDTO {
+export interface ILayerDTO {
   tiles: Array<ITileDTO>;
 }
 
-interface IPatternDTO {
+export interface IPatternDTO {
   [key: string]: {
     tiles: Array<ITileDTO>;
   };
 }
 
-interface ILevelDTO {
+export interface ILevelDTO {
   spriteSheet: string;
   musicSheet: string;
   patterns: IPatternDTO;
@@ -68,13 +88,13 @@ interface ILevelDTO {
   entities: Array<IEntityDTO>;
 }
 
-interface IAnimationDTO {
+export interface IAnimationDTO {
   name: string;
   frameLen: number;
   frames: Array<string>;
 }
 
-interface ISpriteSheetDTO {
+export interface ISpriteSheetDTO {
   imageUrl: string;
   tileW: number;
   tileH: number;
@@ -83,18 +103,24 @@ interface ISpriteSheetDTO {
   animations?: Array<IAnimationDTO>;
 }
 
-interface ISoundSheetDTO {
+export interface ISoundSheetDTO {
   [key: string]: {
     url: string;
   };
 }
-
+/*
 export {
+  // eslint-disable-line
   type ISoundSheetDTO,
+  // eslint-disable-line
   type ErrorResponse,
+  // eslint-disable-line
   type StatusResponse,
+  // eslint-disable-line
   type SignUpResponseDTO,
+  // eslint-disable-line
   type IUserDTO,
+  // eslint-disable-line
   Status,
   type LeaderboardListDTO,
   type ISpriteSheetDTO,
@@ -103,3 +129,4 @@ export {
   type ILevelDTO,
   type IPatternDTO,
 };
+*/

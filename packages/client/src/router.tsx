@@ -90,7 +90,11 @@ const router = createBrowserRouter([
   },
   {
     path: LeaderboardUrl,
-    element: <Leaderboard />,
+    element: (
+        <ErrorBoundary>
+          <Leaderboard />
+        </ErrorBoundary>
+    ),
   },
 ]);
 
