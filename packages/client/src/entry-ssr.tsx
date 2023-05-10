@@ -7,10 +7,12 @@ import App from './app';
 
 export function render(url: string) {
   return ReactDOMServer.renderToString(
-    <StaticRouter location={url}>
+    <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <StaticRouter location={url}>
+          <App />
+        </StaticRouter>
       </Provider>
-    </StaticRouter>
+    </React.StrictMode>
   );
 }
