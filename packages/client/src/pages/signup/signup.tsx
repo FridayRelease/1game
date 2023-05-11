@@ -7,7 +7,7 @@ import Button from '@/components/button/button';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Input from '@/components/input/input';
 import { initValues, singSchema } from './signup.constants';
-import Logotype from '../../assets/images/logotype.png';
+import Logotype from '@/components/logotype';
 import './Signup.scss';
 import { IUserSignupRequest } from '@/types/user';
 
@@ -20,12 +20,10 @@ const Signup: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const { values, hasError, onChangeForm, getFieldProps, onBlurInput } = useForm({
     initValues,
     validationSchema: singSchema,
   });
-
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault();
@@ -36,37 +34,17 @@ const Signup: FC = () => {
     <div className="registration">
       <main className="main container registration__container">
         <div className="registration__box">
-          <img src={Logotype} alt="Battle city" className="registration__logotype" />
+          <Logotype className="registration__logotype" />
 
           <form onChange={onChangeForm} onSubmit={onSubmitForm} className="registration-form" autoComplete="off">
             <div className="content-box registration-form__box">
               <h1 className="registration__title">Регистрация</h1>
               <div className="registration-form__row">
-                <Input
-                  {...getFieldProps('first_name')}
-                  placeholder={'Введите имя'}
-                  onBlur={onBlurInput}
-                />
-                <Input
-                  {...getFieldProps('second_name')}
-                  placeholder={'Введите фамилию'}
-                  onBlur={onBlurInput}
-                />
-                <Input
-                  {...getFieldProps('email')}
-                  placeholder={'Введите почту'}
-                  onBlur={onBlurInput}
-                />
-                <Input
-                  {...getFieldProps('login')}
-                  placeholder={'Введите юзернейм'}
-                  onBlur={onBlurInput}
-                />
-                <Input
-                  {...getFieldProps('phone')}
-                  placeholder={'Введите телефон'}
-                  onBlur={onBlurInput}
-                />
+                <Input {...getFieldProps('first_name')} placeholder={'Введите имя'} onBlur={onBlurInput} />
+                <Input {...getFieldProps('second_name')} placeholder={'Введите фамилию'} onBlur={onBlurInput} />
+                <Input {...getFieldProps('email')} placeholder={'Введите почту'} onBlur={onBlurInput} />
+                <Input {...getFieldProps('login')} placeholder={'Введите юзернейм'} onBlur={onBlurInput} />
+                <Input {...getFieldProps('phone')} placeholder={'Введите телефон'} onBlur={onBlurInput} />
               </div>
             </div>
             <div className="content-box">

@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-import { RouterProvider } from 'react-router-dom';
-import router from './router';
-import './app.scss';
-import { Provider } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { routes } from './router';
 import { store } from './store/store';
 import { themeActions } from './store/slices/theme-slice';
 import { getLocalStorage } from './utils/local-storage';
 import useTheme from './hooks/use-theme';
+import './app.scss';
 
 function App() {
   useTheme();
@@ -19,15 +18,17 @@ function App() {
       store.dispatch(themeActions.setTheme(theme.value));
     };
 
-    window.addEventListener('storage', handler);
+    globalThis.addEventListener('storage', handler);
 
-    return () => window.removeEventListener('storage', handler);
+    return () => globalThis.removeEventListener('storage', handler);
   }, []);
 
   return (
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <Routes>
+      {routes.map(({ element, path }) => (
+        <Route path={path} element={element} key={path} />
+      ))}
+    </Routes>
   );
 }
 
