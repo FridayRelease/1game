@@ -1,5 +1,5 @@
-import { RouteObject } from 'react-router-dom';
 import { RequireAuth } from '@/features/authentication';
+import { RouteObject } from 'react-router-dom';
 import GamePage from './pages/game';
 import ErrorPage from './pages/error-page';
 import Home from './pages/home';
@@ -10,7 +10,16 @@ import EditRouter from './pages/edit-router';
 import EditProfile from './pages/edit-profile';
 import EditPassword from './pages/edit-password';
 import GameOver from './pages/game-over';
-import { MainUrl, LoginUrl, SignupUrl, ProfileUrl, LeaderboardUrl, GameUrl } from './constant/router';
+import {
+  MainUrl,
+  LoginUrl,
+  GameUrl,
+  SignupUrl,
+  ProfileUrl,
+  GameoverUrl,
+  ForumUrl,
+  LeaderboardUrl,
+} from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
@@ -19,7 +28,11 @@ import Leaderboard from './pages/leaderboard';
 export const routes: RouteObject[] = [
   {
     path: MainUrl,
-    element: <Home />,
+    element: (
+      <RequireAuth>
+        <Home />
+      </RequireAuth>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -65,11 +78,11 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: 'gameover',
+    path: GameoverUrl,
     element: <GameOver />,
   },
   {
-    path: 'Forum',
+    path: ForumUrl,
     element: (
       <ErrorBoundary>
         <Forum />
@@ -77,7 +90,7 @@ export const routes: RouteObject[] = [
     ),
   },
   {
-    path: 'forum/:id',
+    path: `${ForumUrl}/:id`,
     element: (
       <ErrorBoundary>
         <ForumUser />
