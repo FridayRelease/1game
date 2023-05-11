@@ -23,34 +23,6 @@ export default defineConfig(({ mode }) => {
           find: '@',
           replacement: fileURLToPath(new URL('./src', import.meta.url)),
         },
-        {
-          find: '@/assets',
-          replacement: fileURLToPath(new URL('./src/assets', import.meta.url)),
-        },
-        {
-          find: '@/components',
-          replacement: fileURLToPath(new URL('./src/components', import.meta.url)),
-        },
-        {
-          find: '@/api',
-          replacement: fileURLToPath(new URL('./src/api', import.meta.url)),
-        },
-        {
-          find: '@/layout',
-          replacement: fileURLToPath(new URL('./src/layout', import.meta.url)),
-        },
-        {
-          find: '@/types',
-          replacement: fileURLToPath(new URL('./src/types', import.meta.url)),
-        },
-        {
-          find: '@/hook',
-          replacement: fileURLToPath(new URL('./src/types', import.meta.url)),
-        },
-        {
-          find: '@/utils',
-          replacement: fileURLToPath(new URL('./src/utils', import.meta.url)),
-        },
       ],
     },
   };
