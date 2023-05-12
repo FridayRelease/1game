@@ -1,0 +1,30 @@
+{
+  "imageUrl": "/img/tiles.png",
+
+  "frames": [
+    {
+      "name": "eagle",
+      "rect": [304, 32, 16, 16]
+    },
+    {
+      "name": "stone",
+      "rect": [320, 32, 16, 16]
+    },
+    {
+      "name": "bang-big-1",
+      "rect": [304, 128, 32, 32]
+    },
+    {
+      "name": "bang-big-2",
+      "rect": [336, 128, 32, 32]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "bang",
+      "frameLen": 0.2,
+      "frames": ["bang-big-1", "bang-big-2", "bang-big-1", "bang-big-2", "bang-big-1"]
+    }
+  ]
+}

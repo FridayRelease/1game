@@ -1,5 +1,5 @@
 import { HttpClient } from './http-client';
-import { ILevelDTO, ISoundSheetDTO, ISpriteSheetDTO } from './types';
+import { ILevelDTO, IPatternDTO, ISoundSheetDTO, ISpriteSheetDTO } from './types';
 
 export class GameApi {
   private http;
@@ -29,6 +29,11 @@ export class GameApi {
   loadSprites = async (name: string) => {
     // Получить информацию о пользователе
     return await this.http.get<ISpriteSheetDTO>(`/sprites/${name}.json`).then(res => res.data);
+  };
+
+  loadPatterns = async (name: string) => {
+    // Получить информацию о пользователе
+    return await this.http.get<IPatternDTO>(`/sprites/patterns/${name}.json`).then(res => res.data);
   };
 
   loadLevel = async (name: string) => {

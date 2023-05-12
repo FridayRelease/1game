@@ -22,7 +22,7 @@ class Entity implements IEntity {
   vel: Vec2;
   size: Vec2;
   offset: Vec2;
-  traits: Trait[];
+  traits: Map<TraitName, Trait>;
   bounds: BoundingBox;
   lifeTime: number;
   audio: AudioBoard;
@@ -37,7 +37,7 @@ class Entity implements IEntity {
     this.size = new Vec2(8, 8);
     this.offset = new Vec2(0, 0);
     this.bounds = new BoundingBox(this.pos, this.size, this.offset);
-    this.traits = [];
+    this.traits = new Map();
 
     this.lifeTime = 0;
   }
@@ -49,7 +49,11 @@ class Entity implements IEntity {
   }
 
   addTrait(trait: Trait) {
-    this.traits.push(trait);
+    this.traits.set(trait.NAME, trait);
+  }
+
+  hasTrait(name: TraitName) {
+    return this.traits.has(name);
   }
 
   collides(canditate: Entity) {
@@ -88,7 +92,7 @@ class Entity implements IEntity {
   }
 
   getTrait(name: TraitName): Trait | undefined {
-    return this.traits.find(e => e.NAME === name);
+    return this.traits.get(name);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function

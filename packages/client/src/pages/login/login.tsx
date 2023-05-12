@@ -8,7 +8,7 @@ import Input from '@/components/input/input';
 import { userActions, useForm } from '@/features/authentication';
 import { IUserSigninRequest } from '@/types/user';
 import { initValues, loginSchema } from './login.constants';
-import Logotype from '../../assets/images/logotype.png';
+import Logotype from '@/components/logotype';
 import './login.scss';
 import { cn } from '@/utils/cn';
 
@@ -40,7 +40,7 @@ const Login: FC = () => {
     <div className="login">
       <main className={cn('main', 'container', 'login__container')}>
         <div className="login__box">
-          <img src={Logotype} alt="Battle city" className="login__logotype" />
+          <Logotype className="login__logotype" />
 
           <form onChange={onChangeForm} onSubmit={onSubmitForm} className="login-form" autoComplete="off">
             <div className="content-box login-form__box">

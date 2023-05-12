@@ -7,6 +7,7 @@ export const SignupUrl = generatePath('/signup');
 export const ProfileUrl = generatePath('/profile');
 export const EditUrl = generatePath('/edit');
 export const GameUrl = generatePath('/game');
+export const GameoverUrl = generatePath('/gameover');
 export const Forum = generatePath('/forum');
 export const LeaderboardUrl = generatePath('/leaderboard');
 
