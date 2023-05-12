@@ -18,6 +18,6 @@ const loginSchema = yup.object().shape({
     .min(8, ERROR_MESSAGES.PASSWORD_MIN)
     .max(40, ERROR_MESSAGES.PASSWORD_MAX)
     .required(ERROR_MESSAGES.REQUIRED),
-})
+});
 
 export { initValues, loginSchema };

@@ -25,7 +25,7 @@ const userMenuData: IMenuEditProfilePassword[] = [
 
 const EditPassword: FC = () => {
   const { values, hasError, onChangeForm, getFieldProps, getFieldError, onBlurInput } = useForm({
-    validationSchema: passwordSchema
+    validationSchema: passwordSchema,
   });
 
   const navigate = useNavigate();

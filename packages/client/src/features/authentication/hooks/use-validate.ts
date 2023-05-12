@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { clearObject, isEmptyObject } from '@/utils/functions';
-import { ObjectSchema, Maybe, AnyObject } from 'yup'
+import { ObjectSchema, Maybe, AnyObject } from 'yup';
 
 interface IProps<T extends Maybe<AnyObject>> {
   initValues?: Record<string, any>;
@@ -64,20 +64,23 @@ const useForm = <T extends Maybe<AnyObject>>(props: IProps<T>) => {
   };
 
   const yupValidate = () => {
-    validationSchema?.validate(values, { abortEarly: false }).then(function() {
-      setErrors({});
-    }).catch((err: { inner: any[]; }) => {
-      const error = err.inner.reduce((acc, item) => {
-        return { ...acc, [item.path]: item.message }
-      }, {});
+    validationSchema
+      ?.validate(values, { abortEarly: false })
+      .then(function () {
+        setErrors({});
+      })
+      .catch((err: { inner: any[] }) => {
+        const error = err.inner.reduce((acc, item) => {
+          return { ...acc, [item.path]: item.message };
+        }, {});
 
-      setErrors(error)
-    });
-  }
+        setErrors(error);
+      });
+  };
 
   useEffect(() => {
-    yupValidate()
-  }, [values])
+    yupValidate();
+  }, [values]);
 
   const onBlurInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     const elements = event.target as HTMLInputElement;
