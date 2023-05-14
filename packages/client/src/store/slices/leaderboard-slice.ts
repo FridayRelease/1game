@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import {LeaderboardListDTO} from "@/api/types";
 
-interface ILeaderboardState {
+export interface ILeaderboardState {
   leaderboard:{
   id?:number,
   name: string;
   score:number;
 }[]};
-interface ILeader{
+export interface ILeader{
   name: string;
   score:number
 }

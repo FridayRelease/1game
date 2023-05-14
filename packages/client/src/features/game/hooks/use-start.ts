@@ -18,6 +18,8 @@ import TimedScene from '../timed-scene';
 import { createPlayerProgressLayer } from '../layers/player-progress';
 import { gameActions } from '../store/game-slice';
 import { useDispatch } from 'react-redux';
+import {addUserDatasToServer, setUserDatasToStore} from "@/controllers/lider-controller";
+import {ILeaderboardAddUser} from "@/api/types";
 
 const random = (arr: number[][]): number[] => {
   const rand = Math.floor(Math.random() * arr.length);
@@ -96,7 +98,20 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       level.events.on(Level.EVENT_TRIGGER, (type: string) => {
         if (type === 'gameOver') {
           const player = getPlayerTrait(level.entities);
-
+          if (player!==undefined){
+            const data = {name:player.NAME, score:player.score}
+            const info:ILeaderboardAddUser = {
+              "data": data,
+              "ratingFieldName": "score",
+              "teamName": "1game"
+            }
+            setUserDatasToStore(data,dispatch);//запись в Store
+            try{
+              addUserDatasToServer(info);// Запись на Сервер
+            }catch (e) {
+              console.log('Ошибка записи на сервер результатов Игрока', e)
+            }
+          }
           gameOver(player?.score);
         }
 

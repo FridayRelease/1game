@@ -17,14 +17,4 @@ export class LiderApi {
     return await this.http.post(`/leaderboard/{teamName}`, data);
   };
 
-/* не будем использовать
-  get_all_leaderboard = async (data: IRating) => {
-    // получение всей таблицы лидеров
-    return await this.http.post('/leaderboard/all', data);
-  };
-*/
-
-
-
-
 }
