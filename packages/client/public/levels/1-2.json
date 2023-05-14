@@ -1,0 +1,77 @@
+{
+  "spriteSheet": "overworld",
+  "musicSheet": "overworld",
+  "patternSheet": "overworld-pattern",
+
+  "layers": [
+    {
+      "tiles": [
+        {
+          "name": "black",
+          "type": "background",
+          "ranges": [[0, 33, 0, 33]]
+        }
+      ]
+    },
+    {
+      "tiles": [
+        {
+          "pattern": "fence-v",
+          "ranges": [
+            [0, 0],
+            [0, 11],
+            [0, 22],
+
+            [28, 0],
+            [28, 11],
+            [28, 22],
+
+            [29, 0],
+            [29, 11],
+            [29, 22],
+
+            [30, 0],
+            [30, 11],
+            [30, 22],
+
+            [31, 0],
+            [31, 11],
+            [31, 22]
+          ]
+        },
+        {
+          "pattern": "fence-h",
+          "ranges": [
+            [0, 0],
+            [11, 0],
+            [22, 0],
+            [0, 31],
+            [11, 31],
+            [22, 31]
+          ]
+        }
+      ]
+    }
+  ],
+
+  "entities": [],
+
+  "triggers": [
+    {
+      "type": "goto",
+      "name": "1-1",
+      "pos": [64, 64]
+    },
+    {
+      "type": "entity",
+      "name": "enemy",
+      "count": 6,
+      "pos": [
+        [20, 10],
+        [30, 10],
+        [40, 10],
+        [10, 10]
+      ]
+    }
+  ]
+}

@@ -1,15 +1,15 @@
-export type StatusResponse = 'OK';
+type StatusResponse = 'OK';
 
-export type ErrorResponse = {
+type ErrorResponse = {
   reason: string;
   error: string;
 };
 
-export type SignUpResponseDTO = {
+type SignUpResponseDTO = {
   id: number;
 };
 
-export type IUserDTO = {
+type IUserDTO = {
   id: number;
   first_name: string;
   second_name: string;
@@ -20,17 +20,17 @@ export type IUserDTO = {
   avatar: string | null;
 };
 
-export enum Status {
+enum Status {
   SUCCESS = 200,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   UNEXPECTED_ERROR = 500,
 }
 
-export type LeaderboardListDTO = {
-  id?: number;
+type LeaderboardListDTO = {
+  id: number;
   name: string;
-  score: number|string;
+  score: number;
 }[];
 
 export interface ILeaderboardAddUser{
@@ -64,29 +64,29 @@ export interface IFrameDTO {
   rect: Array<number>;
 }
 
-export interface IEntityDTO {
+interface IEntityDTO {
   name: string;
   pos: Array<number>;
 }
 
-export interface ITileDTO {
+interface ITileDTO {
   name?: string;
   type: string;
   pattern?: string;
   ranges: Array<number[]>;
 }
 
-export interface ILayerDTO {
+interface ILayerDTO {
   tiles: Array<ITileDTO>;
 }
 
-export interface IPatternDTO {
+interface IPatternDTO {
   [key: string]: {
     tiles: Array<ITileDTO>;
   };
 }
 
-export interface ILevelDTO {
+interface ILevelDTO {
   spriteSheet: string;
   musicSheet: string;
   patterns: IPatternDTO;
@@ -94,13 +94,13 @@ export interface ILevelDTO {
   entities: Array<IEntityDTO>;
 }
 
-export interface IAnimationDTO {
+interface IAnimationDTO {
   name: string;
   frameLen: number;
   frames: Array<string>;
 }
 
-export interface ISpriteSheetDTO {
+interface ISpriteSheetDTO {
   imageUrl: string;
   tileW: number;
   tileH: number;
@@ -109,24 +109,18 @@ export interface ISpriteSheetDTO {
   animations?: Array<IAnimationDTO>;
 }
 
-export interface ISoundSheetDTO {
+interface ISoundSheetDTO {
   [key: string]: {
     url: string;
   };
 }
-/*
+
 export {
-  // eslint-disable-line
   type ISoundSheetDTO,
-  // eslint-disable-line
   type ErrorResponse,
-  // eslint-disable-line
   type StatusResponse,
-  // eslint-disable-line
   type SignUpResponseDTO,
-  // eslint-disable-line
   type IUserDTO,
-  // eslint-disable-line
   Status,
   type LeaderboardListDTO,
   type ISpriteSheetDTO,
@@ -135,4 +129,3 @@ export {
   type ILevelDTO,
   type IPatternDTO,
 };
-*/

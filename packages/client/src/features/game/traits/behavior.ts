@@ -27,15 +27,17 @@ class Behavior extends Trait {
     const usKillable = us.getTrait(Traits.Killable) as Killable;
     const themKillable = them.getTrait(Traits.Killable) as Killable;
 
-    if (usKillable.dead || themKillable.dead) {
+    if (usKillable?.dead || themKillable?.dead) {
       return;
     }
 
     if (them.getTrait(Traits.Bullet)) {
-      themKillable.kill();
+      usKillable.dead = true;
 
-      usKillable.kill();
+      usKillable?.kill();
       (us.getTrait(Traits.Go) as Go).speed = 0;
+
+      usKillable.events.emit(Killable.EVENT_KILL, us);
     }
   }
 }

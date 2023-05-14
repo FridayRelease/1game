@@ -29,15 +29,19 @@ class EnemyBehavior extends Trait {
     const usKillable = us.getTrait(Traits.Killable) as Killable;
     const themKillable = them.getTrait(Traits.Killable) as Killable;
 
-    if (usKillable.dead || themKillable.dead) {
+    if (usKillable?.dead || themKillable?.dead) {
       return;
     }
 
     if (them.getTrait(Traits.Bullet)) {
       themKillable.kill();
 
-      usKillable.kill();
+      usKillable.dead = true;
+
       (us.getTrait(Traits.Go) as Go).speed = 0;
+
+      console.warn({ collides: 'collides', isDead: usKillable?.dead, usKillable });
+      usKillable.events.emit(Killable.EVENT_KILL, us);
     }
   }
 }

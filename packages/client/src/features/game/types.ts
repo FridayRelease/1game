@@ -16,7 +16,11 @@ type TraitName =
   | Traits.Solid
   | Traits.Killable
   | Traits.Shoot
-  | Traits.Emitter;
+  | Traits.Emitter
+  | Traits.Trigger
+  | Traits.EagleController
+  | Traits.LevelTimer
+  | Traits.Eagle;
 
 type MatchTile = {
   tile: ITileDTO;
@@ -51,6 +55,8 @@ type EmmitCallBackFunction = (entity: Entity, level: Level) => void;
 type GameContext = {
   deltaTime: number;
   audioContext: AudioContext;
+  entitiesFactory: Record<string, EntityFactoryCallback>;
+  videoContext: CanvasRenderingContext2D;
 };
 
 type HandlerProps = {

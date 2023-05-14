@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { userSelectors } from '@/features/authentication';
 import { useSelector } from 'react-redux';
-import Logotype from '../../assets/images/logotype.png';
+import Logotype from '@/components/logotype';
 import { cn } from '@/utils/cn';
 import './home.scss';
 import { Link } from 'react-router-dom';
@@ -56,7 +56,7 @@ const Home: FC = () => {
   return (
     <main className="home">
       <div className="home__header">
-        <img src={Logotype} alt="Battle city" className="home__logotype" />
+        <Logotype className="home__logotype" />
       </div>
       <div className="home__content">
         <div className="home__left-side">

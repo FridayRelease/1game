@@ -5,15 +5,20 @@ import { GameContext } from '../types';
 import { Trait } from './trait';
 
 class Killable extends Trait {
+  static EVENT_KILL = 'kill';
+
   dead: boolean;
   deadTime: number;
   removeAfter: number;
+  callbackAfterKilled!: (level: Level) => void;
+  isRemoveAfter: boolean;
 
   constructor() {
     super(Traits.Killable);
     this.dead = false;
     this.deadTime = 0;
     this.removeAfter = 1.2;
+    this.isRemoveAfter = true;
   }
 
   kill() {
@@ -32,10 +37,14 @@ class Killable extends Trait {
       entity.vel.set(0, 0);
 
       this.deadTime += deltaTime;
-      if (this.deadTime > this.removeAfter) {
+      if (this.isRemoveAfter && this.deadTime > this.removeAfter) {
         this.queue(() => {
           level.entities.delete(entity);
         });
+      }
+
+      if (this.callbackAfterKilled) {
+        this.callbackAfterKilled(level);
       }
     }
   }
