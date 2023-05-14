@@ -53,6 +53,12 @@ export interface ILeaderAll{
   teamName?: string
 }
 
+export interface IQuery{
+  ratingFieldName: string,
+  cursor: number,
+  limit: number,
+}
+
 export interface IFrameDTO {
   name: string;
   rect: Array<number>;
