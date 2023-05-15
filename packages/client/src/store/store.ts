@@ -7,9 +7,17 @@ import { LoadingReducer } from './slices/loading-slice';
 import { themeReducer } from './slices/theme-slice';
 import { gameReducer } from '@/features/game';
 
+let preloadedState = undefined;
+
+if (typeof window !== 'undefined') {
+  preloadedState = window.__PRELOADED_STATE__;
+  delete window?.__PRELOADED_STATE__;
+}
+
 const saga = createSagaMiddleware();
 
 export const store = configureStore({
+  preloadedState,
   reducer: {
     user: userSlice.reducer,
     error: errorReducer,

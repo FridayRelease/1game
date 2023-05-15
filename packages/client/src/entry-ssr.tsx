@@ -6,7 +6,9 @@ import { Provider } from 'react-redux';
 import App from './app';
 
 export function render(url: string) {
-  return ReactDOMServer.renderToString(
+  const initialStore = store.getState();
+
+  const appHtml = ReactDOMServer.renderToString(
     <React.StrictMode>
       <Provider store={store}>
         <StaticRouter location={url}>
@@ -15,4 +17,6 @@ export function render(url: string) {
       </Provider>
     </React.StrictMode>
   );
+
+  return [appHtml, initialStore];
 }

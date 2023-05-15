@@ -19,12 +19,14 @@ export const themeSlice = createSlice({
       if (themeKey) {
         state.value = payload as Themes;
         setLocalStorage('theme', JSON.stringify({ value: payload }));
-        globalThis.document.documentElement.dataset.theme = state.value;
       } else {
         state.value = Themes.Dark;
         setLocalStorage('theme', JSON.stringify({ value: Themes.Dark }));
-        globalThis.document.documentElement.dataset.theme = state.value;
       }
+
+      globalThis.document.documentElement.dataset.theme = state.value;
+      const themePicker = globalThis.document.getElementById('theme-picker') as HTMLSelectElement;
+      themePicker.value = state.value;
     },
   },
 });
