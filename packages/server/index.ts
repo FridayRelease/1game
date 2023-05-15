@@ -8,6 +8,8 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
+import type { IState } from './src/store/types';
+import { getTheme, getAuthUserInfo } from './src/store';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
@@ -44,7 +46,7 @@ async function startServer() {
 
     try {
       let template: string;
-      let render: (url: string) => Promise<string>;
+      let render: (url: string) => Promise<[string, IState]>;
 
       if (!isDev()) {
         template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
@@ -55,9 +57,17 @@ async function startServer() {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, './src/entry-ssr.tsx'))).render;
       }
 
-      const appHtml = await render(url);
+      const [appHtml, initialState] = await render(url);
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      initialState.theme = await getTheme();
+      initialState.user = await getAuthUserInfo();
+
+      const initialStateHtml = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(initialState).replace(
+        /</g,
+        '\\u003c'
+      )}</script>`;
+
+      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace('<!--init-state-->', initialStateHtml);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
