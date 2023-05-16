@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 const LeaderboardList = () => {
 
   const leaderboardListData = useSelector(LeaderboardSelectors.all);
+  console.log('leaderboardListData = ', leaderboardListData)
   const copyArray = [...leaderboardListData];
   const sortedArray = copyArray.sort((a, b) => (Number(b.score) - Number(a.score)));
 

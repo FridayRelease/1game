@@ -105,9 +105,12 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
               "ratingFieldName": "score",
               "teamName": "1game"
             }
+            console.log('file use-start data {name, score} to server', data)
             setUserDatasToStore(data,dispatch);//запись в Store
+            console.log('Данные игрока и очки в Стор записали')
             try{
               addUserDatasToServer(info);// Запись на Сервер
+              console.log('Данные игрока и очки в Сервер записали')
             }catch (e) {
               console.log('Ошибка записи на сервер результатов Игрока', e)
             }
