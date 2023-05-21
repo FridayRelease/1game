@@ -18,12 +18,13 @@ import {
   ProfileUrl,
   GameoverUrl,
   ForumUrl,
-  LeaderboardUrl,
-} from './constant/router';
+  LeaderboardUrl, ControlUrl
+} from './constant/router'
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
+import Controls from '@/pages/controls'
 
 export const routes: RouteObject[] = [
   {
@@ -46,6 +47,10 @@ export const routes: RouteObject[] = [
   {
     path: SignupUrl,
     element: <Signup />,
+  },
+  {
+    path: ControlUrl,
+    element: <Controls />,
   },
   {
     path: ProfileUrl,

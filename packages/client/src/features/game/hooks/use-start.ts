@@ -18,6 +18,7 @@ import TimedScene from '../timed-scene';
 import { createPlayerProgressLayer } from '../layers/player-progress';
 import { gameActions } from '../store/game-slice';
 import { useDispatch } from 'react-redux';
+import { setupGamepad } from '@/features/game/input-gamepad'
 
 const random = (arr: number[][]): number[] => {
   const rand = Math.floor(Math.random() * arr.length);
@@ -58,7 +59,9 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     eagle.pos.set(120, 232);
 
     const input = setupKeyboard(tank);
+    const input2 = setupGamepad(tank);
     input.listenTo(window);
+    input2.listenTo();
 
     const gameOver = async (score?: number) => {
       dispatch(gameActions.setScore(score || 0));

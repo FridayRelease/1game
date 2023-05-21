@@ -1,0 +1,27 @@
+.gamepad-popup {
+  position: fixed;
+  right: 30px;
+  top: 30px;
+  width: 300px;
+  height: auto;
+  background: #090909;
+  border-radius: 10px;
+  padding: 20px 25px;
+  transition: 1s ease;
+  animation-name: circle-to-square;
+  animation-duration: 0.4s;
+
+  &--status-success {
+    border-top: 1px solid var(--profile-success);
+  }
+
+  &__title {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &__controller {
+    color: #535353;
+    font-size: 14px;
+  }
+}

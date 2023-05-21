@@ -1,18 +1,18 @@
-import { FC } from 'react';
+import { FC } from 'react'
 import { userSelectors } from '@/features/authentication';
 import { useSelector } from 'react-redux';
 import Logotype from '@/components/logotype';
 import { cn } from '@/utils/cn';
 import './home.scss';
 import { Link } from 'react-router-dom';
-import { ForumUrl, GameUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
+import { ControlUrl, ForumUrl, GameUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router'
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import { Icons } from '@/components/icon/icon';
 import Icon from '@/components/icon';
 import { LinkType } from '@/types/link';
 
 const Home: FC = () => {
-  const user = useSelector(userSelectors.user);
+  const user = useSelector(userSelectors.user)
 
   const links: LinkType[] = [
     {
@@ -30,6 +30,12 @@ const Home: FC = () => {
     {
       text: 'форум',
       url: ForumUrl,
+      className: cn('home__link', 'home__link__bg-green'),
+      icon: { type: Icons.Forum, className: cn('home__link-icon'), stroke: 'var(--main-color-bg)' },
+    },
+    {
+      text: 'Управление',
+      url: ControlUrl,
       className: cn('home__link', 'home__link__bg-green'),
       icon: { type: Icons.Forum, className: cn('home__link-icon'), stroke: 'var(--main-color-bg)' },
     },

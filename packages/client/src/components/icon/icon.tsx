@@ -6,6 +6,9 @@ export enum Icons {
   Trophy = 'trophy',
   Forum = 'forum',
   Logout = 'logout',
+  Gamepad = 'Gamepad',
+  GamepadD = 'GamepadD',
+  GamepadActiveButton = 'GamepadActiveButton',
 }
 
 const Icon = ({ type, className, fill = 'none', stroke = 'none' }: IconProps) => {
