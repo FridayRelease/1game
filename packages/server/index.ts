@@ -8,6 +8,10 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
+import { initDB } from './db';
+import topicRoutes from './routes/topic';
+
+initDB();
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
@@ -31,9 +35,11 @@ async function startServer() {
     app.use(vite.middlewares);
   }
 
-  app.get('/api', (_, res) => {
+  app.get('/api/v1', (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
+
+  topicRoutes(app);
 
   if (!isDev()) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));

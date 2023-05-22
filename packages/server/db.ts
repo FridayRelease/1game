@@ -1,27 +1,30 @@
-import { Client } from 'pg';
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
+import { User } from './models/user';
+import { Topic } from './models/topic';
+import { Comment } from './models/comment';
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } = process.env;
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
 
-export const createClientAndConnect = async (): Promise<Client | null> => {
+export const initDB = async () => {
   try {
-    const client = new Client({
-      user: POSTGRES_USER,
-      host: 'localhost',
-      database: POSTGRES_DB,
-      password: POSTGRES_PASSWORD,
+    const sequelizeOptions: SequelizeOptions = {
+      host: POSTGRES_HOST || 'localhost',
       port: Number(POSTGRES_PORT),
-    });
+      username: POSTGRES_USER,
+      password: POSTGRES_PASSWORD,
+      database: POSTGRES_DB,
+      dialect: 'postgres',
+    };
 
-    await client.connect();
+    const sequelize = new Sequelize(sequelizeOptions);
+    sequelize.addModels([User, Topic, Comment]);
 
-    const res = await client.query('SELECT NOW()');
-    console.log('  ➜ 🎸 Connected to the database at:', res?.rows?.[0].now);
-    client.end();
+    // Create or update tables.
+    await sequelize.sync({ alter: true });
 
-    return client;
-  } catch (e) {
-    console.error(e);
+    return sequelize;
+  } catch (error) {
+    console.log('sequelize initDB error: ', error);
+    return null;
   }
-
-  return null;
 };
