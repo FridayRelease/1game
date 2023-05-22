@@ -4,7 +4,6 @@ import {ILeaderboardAddUser, IQuery} from "@/api/types";
 
 export class LiderApi {
   private http;
-  //private url = 'https://ya-praktikum.tech/api/v2'
 
   constructor(url: string) {
     this.http = new HttpClient(url);
@@ -16,6 +15,7 @@ export class LiderApi {
   };
   // получение своей таблицы лидеров - на самом деле только одной записи одного игрока
   get_team_leaderboard = async ( query:IQuery) => {
+    console.log('Start get_team_leaderboard')
     return await this.http.post(`/leaderboard/1game`, query);
   };
 

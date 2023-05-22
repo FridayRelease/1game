@@ -4,6 +4,7 @@ import {ILeaderboardAddUser, IQuery} from "@/api/types";
 import {addUserDatasToServer, getLeaderboardDatas, setUserDatasToStore} from "@/controllers/lider-controller";
 import {useDispatch, useSelector} from 'react-redux';
 import {LeaderboardSelectors} from "@/store/slices/leaderboard-slice";
+import {Link} from "react-router-dom";
 
 /**
  * Страница proba
@@ -50,28 +51,24 @@ const Proba: FC = () => {
     const sortedArray = copyArray.sort((a, b) => (Number(b.score) - Number(a.score)));
     console.log('sortedArray = ', sortedArray)
     //--------
+
     //-------------------
-    const gameName =  '1game'
+    //const gameName =  '1game'
     const query:IQuery = {// сортировка score, 1 страница на 10 записей
         ratingFieldName: "score",
         cursor: 0,
         limit:10,
     }
     // получаем с сервера данные игрока и его очки и записываем в Store
-    // реально получаем данные только одного игрока
-    try{
-        getLeaderboardDatas( query)// от тут валится приложение, поскольку обращается к адресу -  _currentUrl: 'http://localhost/leaderboard/1game',
+        console.log('start getLeaderboardDatas')
+      const result = getLeaderboardDatas( query)// от тут валится приложение,
+    console.log('end getLeaderboardDatas')
 
-        console.log('Данные с сервера получаем')
-
-    }catch (e) {
-        console.log('Полученные с сервера не получены, ошибка = ',e)
-    }
 
     //--------------
     try{
         //addUserDatasToServer(info);// Запись на Сервер - // и вот тут валится приложение, поскольку обращается к локальному адресу
-        console.log('Данные игрока и очки на Сервер записали')
+        //console.log('Данные игрока и очки на Сервер записали')
     }catch (e) {
         //console.log('Ошибка записи на сервер результатов Игрока', e)
     }
@@ -79,6 +76,7 @@ const Proba: FC = () => {
     return (
         <div className="leaderboard">
            <h1>Proba page</h1>
+            <Link to='/leaderboard'> Перейти в Leader </Link>
         </div>
     );
 };
