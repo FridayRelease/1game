@@ -1,6 +1,5 @@
 import { HttpClient } from './http-client';
-import {ILeaderboardAddUser, IQuery} from "@/api/types";
-
+import { ILeaderboardAddUser, IQuery } from '@/api/types';
 
 export class LiderApi {
   private http;
@@ -11,12 +10,11 @@ export class LiderApi {
 
   // включение User в таблицу лидеров на сервере
   add_user_to_leaderboard = async (data: ILeaderboardAddUser) => {
-      return await this.http.post('/leaderboard', data);
+    return await this.http.post('/leaderboard', data);
   };
   // получение своей таблицы лидеров - на самом деле только одной записи одного игрока
-  get_team_leaderboard = async ( query:IQuery) => {
-    console.log('Start get_team_leaderboard')
+  get_team_leaderboard = async (query: IQuery) => {
+    console.log('Start get_team_leaderboard');
     return await this.http.post(`/leaderboard/1game`, query);
   };
-
 }

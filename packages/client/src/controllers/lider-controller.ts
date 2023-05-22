@@ -20,12 +20,7 @@ export const addUserDatasToServer = async (info: ILeaderboardAddUser) => {
 };
 //-------------------
 //const gameName =  '1game'
-const query: IQuery = {
-  // сортировка score, 1 страница на 10 записей
-  ratingFieldName: 'score',
-  cursor: 0,
-  limit: 10,
-};
+
 // получаем с сервера данные игрока и его очки и записываем в Store
 // реально получаем данные только одного игрока
 export const getLeaderboardDatas = async (query: IQuery) => {
