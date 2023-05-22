@@ -8,8 +8,7 @@ import { IQuery } from '@/api/types';
 import LeaderboardItem from './leaderboard-item';
 
 const LeaderboardList = () => {
-  const [data, setData] = useState<any>([]);
-  const leaderboardListData = useSelector(LeaderboardSelectors.all);
+  const [list, setData] = useState<any>([]);
 
   useEffect(() => {
     const query: IQuery = {
@@ -23,17 +22,14 @@ const LeaderboardList = () => {
       const res = await getLeaderboardDatas(query);
 
       setData(res);
+      console.warn(res);
     })();
   }, []);
 
-
-  const copyArray = [...leaderboardListData.leaderboard];
-  const sortedArray = copyArray.sort((a, b) => Number(b.score) - Number(a.score));
-
   return (
     <ul className="leaderboard__data">
-      {sortedArray.map((item, index) => (
-        <LeaderboardItem position={index + 1} item={item} />
+      {list.map(({ data }: any, index: number) => (
+        <LeaderboardItem position={index + 1} item={data} />
       ))}
     </ul>
   );
