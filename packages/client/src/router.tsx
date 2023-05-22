@@ -19,7 +19,6 @@ import {
   GameoverUrl,
   ForumUrl,
   LeaderboardUrl,
-
 } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
@@ -42,7 +41,11 @@ export const routes: RouteObject[] = [
   },
   {
     path: GameUrl,
-    element: <GamePage />,
+    element: (
+      <RequireAuth>
+        <GamePage />
+      </RequireAuth>
+    ),
   },
   {
     path: SignupUrl,
@@ -101,9 +104,9 @@ export const routes: RouteObject[] = [
   {
     path: LeaderboardUrl,
     element: (
-        <ErrorBoundary>
-          <Leaderboard />
-        </ErrorBoundary>
+      <ErrorBoundary>
+        <Leaderboard />
+      </ErrorBoundary>
     ),
   },
 ];
