@@ -1,21 +1,21 @@
-import { Layer } from './types'
+import { Layer } from './types';
 
 class Compositor {
-  private layers: Array<Layer>
+  private layers: Array<Layer>;
 
   constructor() {
-    this.layers = []
+    this.layers = [];
   }
 
   draw(ctx: CanvasRenderingContext2D | null) {
     this.layers.forEach(layer => {
-      layer(ctx)
-    })
+      layer(ctx);
+    });
   }
 
   push(layer: Layer) {
-    this.layers.push(layer)
+    this.layers.push(layer);
   }
 }
 
-export { Compositor }
+export { Compositor };
