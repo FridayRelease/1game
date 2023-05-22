@@ -18,11 +18,8 @@ export const addUserDatasToServer = async (info: ILeaderboardAddUser) => {
 
   throw new Error('Произошла ошибка при добавлении пользователя');
 };
-//-------------------
-//const gameName =  '1game'
 
-// получаем с сервера данные игрока и его очки и записываем в Store
-// реально получаем данные только одного игрока
+// получаем с сервера данные игрока и его очки
 export const getLeaderboardDatas = async (query: IQuery) => {
   console.log('Start in getLeaderboardDatas');
   const { data } = await liderApi.get_team_leaderboard(query);

@@ -11,4 +11,3 @@ export const GameoverUrl = generatePath('/gameover');
 export const Forum = generatePath('/forum');
 export const LeaderboardUrl = generatePath('/leaderboard');
 
-export const ProbadUrl = generatePath('/proba');

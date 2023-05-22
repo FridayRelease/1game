@@ -26,7 +26,7 @@ const LeaderboardList = () => {
     })();
   }, []);
 
-  console.log('leaderboardListData = ', leaderboardListData);
+
   const copyArray = [...leaderboardListData.leaderboard];
   const sortedArray = copyArray.sort((a, b) => Number(b.score) - Number(a.score));
 
