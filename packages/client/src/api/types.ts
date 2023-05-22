@@ -35,8 +35,8 @@ type LeaderboardListDTO = {
 
 export interface ILeaderboardAddUser{
   data: {
-    name:string,
-    score:number|string,
+    name:string | undefined,
+    score:number | undefined,
   },
   ratingFieldName: string,
   teamName: string

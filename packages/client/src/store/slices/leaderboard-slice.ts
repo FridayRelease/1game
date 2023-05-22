@@ -15,13 +15,13 @@ export interface ILeader{
 
 const LeaderboardState: ILeaderboardState = {
   leaderboard : [
-  { name: 'Papa', score: 1000 },
-  { name: 'Mama', score: 900 },
-  { name: 'Alex', score: 800 },
-  { name: 'Max', score: 1700 },
-  { name: 'Sergey', score: 600 },
-  { name: 'Masha', score: 500 },
-  { name: 'Petr', score: 400 },
+  { name: 'Papa', score: 100 },
+  { name: 'Mama', score: 90 },
+  { name: 'Alex', score: 80 },
+  { name: 'Max', score: 170 },
+  { name: 'Sergey', score: 60 },
+  { name: 'Masha', score: 50 },
+  { name: 'Petr', score: 40 },
   ]}
 ;
 

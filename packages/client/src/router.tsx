@@ -19,11 +19,14 @@ import {
   GameoverUrl,
   ForumUrl,
   LeaderboardUrl,
+  ProbadUrl
 } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
+import Proba from './pages/proba';
+
 
 export const routes: RouteObject[] = [
   {
@@ -102,6 +105,14 @@ export const routes: RouteObject[] = [
     element: (
         <ErrorBoundary>
           <Leaderboard />
+        </ErrorBoundary>
+    ),
+  },
+  {
+    path: ProbadUrl,
+    element: (
+        <ErrorBoundary>
+          <Proba />
         </ErrorBoundary>
     ),
   },

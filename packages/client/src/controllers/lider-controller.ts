@@ -9,10 +9,12 @@ import {AppDispatch} from "@/store/store";
 //добавление пользователя с его очками на сервер
 export const addUserDatasToServer = async (info: ILeaderboardAddUser) => {
   const { data } = await liderApi.add_user_to_leaderboard(info);
+  console.log('info addUserDatasToServer=', info)
 
   if (data ==='Ok') {
     return data;
   }
+  console.log('data is not OK = ', data)
 
   throw new Error('Произошла ошибка при добавлении пользователя');
 };
@@ -25,10 +27,10 @@ const query:IQuery = {// сортировка score, 1 страница на 10 
 }
   // получаем с сервера данные игрока и его очки и записываем в Store
   // реально получаем данные только одного игрока
-export const getLeaderboardDatas = async (gameName:string, query:IQuery) => {
-  const { data } = await liderApi.get_team_leaderboard(gameName, query);
+export const getLeaderboardDatas = async ( query:IQuery) => {
+  const { data } = await liderApi.get_team_leaderboard( query);
 
-  if (data !==null) {
+  if (data ==='Ok') {
     return data;
   }
 

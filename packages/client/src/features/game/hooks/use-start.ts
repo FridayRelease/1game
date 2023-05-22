@@ -98,23 +98,27 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       level.events.on(Level.EVENT_TRIGGER, (type: string) => {
         if (type === 'gameOver') {
           const player = getPlayerTrait(level.entities);
-          if (player!==undefined){
-            const data = {name:player.NAME, score:player.score}
-            const info:ILeaderboardAddUser = {
-              "data": data,
-              "ratingFieldName": "score",
-              "teamName": "1game"
-            }
-            console.log('file use-start data {name, score} to server', data)
+          //
+          const data = {name:player?.NAME, score:player?.score}
+          const info:ILeaderboardAddUser = {
+            "data": data,
+            "ratingFieldName": "score",
+            "teamName": "1game"
+          }
+          console.log('file use-start data {name, score} to server', data)
+          if (data.name!==undefined && data.score!==undefined){
+            //@ts-ignore
             setUserDatasToStore(data,dispatch);//запись в Store
             console.log('Данные игрока и очки в Стор записали')
-            try{
-              addUserDatasToServer(info);// Запись на Сервер
-              console.log('Данные игрока и очки в Сервер записали')
-            }catch (e) {
-              console.log('Ошибка записи на сервер результатов Игрока', e)
-            }
           }
+
+          try{
+            addUserDatasToServer(info);// Запись на Сервер
+            console.log('Данные игрока и очки на Сервер записали')
+          }catch (e) {
+            console.log('Ошибка записи на сервер результатов Игрока', e)
+          }
+          //
           gameOver(player?.score);
         }
 
