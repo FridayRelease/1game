@@ -60,7 +60,7 @@ const Proba: FC = () => {
     // получаем с сервера данные игрока и его очки и записываем в Store
     // реально получаем данные только одного игрока
     try{
-        //getLeaderboardDatas( query)// от тут валится приложение, поскольку обращается к адресу -  _currentUrl: 'http://localhost/leaderboard/1game',
+        getLeaderboardDatas( query)// от тут валится приложение, поскольку обращается к адресу -  _currentUrl: 'http://localhost/leaderboard/1game',
 
         console.log('Данные с сервера получаем')
 
@@ -71,7 +71,7 @@ const Proba: FC = () => {
     //--------------
     try{
         //addUserDatasToServer(info);// Запись на Сервер - // и вот тут валится приложение, поскольку обращается к локальному адресу
-        //console.log('Данные игрока и очки на Сервер записали')
+        console.log('Данные игрока и очки на Сервер записали')
     }catch (e) {
         //console.log('Ошибка записи на сервер результатов Игрока', e)
     }

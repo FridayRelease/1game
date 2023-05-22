@@ -4,7 +4,7 @@ import {ILeaderboardAddUser, IQuery} from "@/api/types";
 
 export class LiderApi {
   private http;
-  private url = 'https://ya-praktikum.tech/api/v2'
+  //private url = 'https://ya-praktikum.tech/api/v2'
 
   constructor(url: string) {
     this.http = new HttpClient(url);
