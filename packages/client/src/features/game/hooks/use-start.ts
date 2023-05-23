@@ -91,7 +91,8 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
 
       const trigger = level.triggers.get('entity');
 
-      (tank.getTrait(Traits.Player) as Player).enemiesCount = trigger?.count || 4;
+      (tank.getTrait(Traits.Player) as Player).totalEnemies = trigger?.count || 4;
+      (tank.getTrait(Traits.Player) as Player).enemiesCount = 0;
 
       level.events.on(Level.EVENT_TRIGGER, (type: string) => {
         if (type === 'gameOver') {
