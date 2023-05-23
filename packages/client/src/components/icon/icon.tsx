@@ -9,6 +9,7 @@ export enum Icons {
   Gamepad = 'Gamepad',
   GamepadD = 'GamepadD',
   GamepadActiveButton = 'GamepadActiveButton',
+  GamepadDirectory = 'GamepadDirectory',
 }
 
 const Icon = ({ type, className, fill = 'none', stroke = 'none' }: IconProps) => {

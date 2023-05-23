@@ -18,11 +18,16 @@ const useTimer = (seconds: number) => {
     return () => clearInterval(timer);
   }, [isActive]);
 
+  const onReset = () => {
+    setTimer(seconds)
+  }
+
   return {
     timer,
     isActive,
     hasShowTimer: seconds !== timer,
-    handleStart
+    handleStart,
+    onReset
   }
 }
 

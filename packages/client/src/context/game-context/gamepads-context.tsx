@@ -26,7 +26,7 @@ const GamepadsProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const addGamepad = (gamepad: Gamepad) => {
+  const addGamepad = (gamepad: globalThis.Gamepad) => {
     if (gamepad) {
       dispatch({ type: 'ADD_GAMEPAD', value: {
           buttons: gamepad.buttons,

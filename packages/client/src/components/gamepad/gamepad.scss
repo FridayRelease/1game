@@ -1,7 +1,7 @@
 .gamepad-popup {
   position: fixed;
-  right: 30px;
-  top: 30px;
+  right: 10px;
+  bottom: 10px;
   width: 300px;
   height: auto;
   background: #090909;
@@ -21,7 +21,7 @@
   }
 
   &__controller {
-    color: #535353;
+    color: var(--background-gamepad);
     font-size: 14px;
   }
 }

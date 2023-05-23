@@ -37,7 +37,7 @@ const Home: FC = () => {
       text: 'Управление',
       url: ControlUrl,
       className: cn('home__link', 'home__link__bg-green'),
-      icon: { type: Icons.Forum, className: cn('home__link-icon'), stroke: 'var(--main-color-bg)' },
+      icon: { type: Icons.GamepadDirectory, className: cn('home__link-icon'), stroke: 'var(--main-color-bg)' },
     },
     {
       text: 'выйти',

@@ -1,4 +1,4 @@
-import { memo, FC, ReactEventHandler } from 'react'
+import { memo, FC, ReactEventHandler, useRef } from 'react'
 import './start-game.scss';
 import { ReactComponent as IconStart } from '@/assets/images/icons/start.svg';
 import GamepadIndicator from '@/components/gamepad-indicator/gamepad-indicator'
@@ -9,16 +9,21 @@ interface IStartProps {
 }
 
 const StartGame: FC<IStartProps> = ({ isStarted, handleClick }) => {
+  const refButton = useRef<HTMLButtonElement>(null);
   if (isStarted) {
     return null;
   }
 
+  const onStartGame = () => {
+    refButton?.current?.click()
+  }
+
   return (
     <div className="start-game__container">
-      <button onClick={handleClick} type="button">
+      <button ref={refButton} onClick={handleClick} type="button">
         <IconStart />
       </button>
-      <GamepadIndicator handleClick={handleClick} />
+      <GamepadIndicator handleClick={onStartGame} />
     </div>
   );
 };

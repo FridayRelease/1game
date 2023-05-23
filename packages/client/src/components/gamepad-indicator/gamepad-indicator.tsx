@@ -1,18 +1,18 @@
-import React, { FC, ReactEventHandler, useContext, useEffect } from 'react'
+import React, { FC, useContext, useEffect } from 'react'
 import { GamepadsContext } from '@/context/game-context/gamepads-context'
 import './gamepad-indicator.scss'
 import useTimer from '@/hooks/useTimer'
 
 interface IStartProps {
-  handleClick: ReactEventHandler<HTMLButtonElement>;
+  handleClick: () => void;
 }
 
 const GamepadIndicator: FC<IStartProps> = ({ handleClick }) => {
   const { gamepad, hasGamepad } = useContext(GamepadsContext);
-  const { handleStart, timer } = useTimer(2);
+  const { handleStart, timer } = useTimer(5);
 
   useEffect(() => {
-    if (timer === 0) handleClick(null as any);
+    if (timer === 0) handleClick();
   }, [timer])
 
   useEffect(() => {

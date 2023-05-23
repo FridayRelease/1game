@@ -1,11 +1,11 @@
 export interface Gamepad {
-  axes: Array<number>,
-  buttons: Array<GamepadButton>,
+  axes: readonly number[],
+  buttons: readonly GamepadButton[],
   id: string,
 }
 
 export interface IStateGamepad {
-  gamepad: Gamepad | undefined,
+  gamepad?: Gamepad,
   current: number,
 }
 

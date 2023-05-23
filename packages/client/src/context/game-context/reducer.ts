@@ -1,7 +1,7 @@
-import { IStateGamepad } from '@/context/game-context/gamepads-context.types'
+import { Gamepad, IStateGamepad } from '@/context/game-context/gamepads-context.types'
 
 export type Action =
-  | { type: 'ADD_GAMEPAD'; value: any }
+  | { type: 'ADD_GAMEPAD'; value: Gamepad }
   | { type: 'CURRENT'; value: number }
 
 export const initialStateGamepadContext: IStateGamepad = {

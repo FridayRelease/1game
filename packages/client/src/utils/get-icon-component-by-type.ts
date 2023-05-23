@@ -5,6 +5,7 @@ import { ReactComponent as IconLogout } from '@/assets/images/icons/logout.svg';
 import { ReactComponent as IconGamepad } from '@/assets/images/icons/dualshock.svg';
 import { ReactComponent as IconGamepadD } from '@/assets/images/icons/gamepad-d.svg';
 import { ReactComponent as IconGamepadActiveButton } from '@/assets/images/icons/gamepad-active-buttom.svg';
+import { ReactComponent as IconGamepadDirectory } from '@/assets/images/icons/gamepad-directory.svg';
 import { IconComponentType } from '@/components/icon/types';
 import { Icons } from '@/components/icon/icon';
 
@@ -36,6 +37,9 @@ export const getIconComponentByType = (type: Icons) => {
       break;
     case Icons.GamepadActiveButton:
       iconComponent = IconGamepadActiveButton;
+      break;
+    case Icons.GamepadDirectory:
+      iconComponent = IconGamepadDirectory;
       break;
     default:
       exhaustiveCheck(type);
