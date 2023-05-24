@@ -43,6 +43,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(userSelectors.user);
+  const navigate = useNavigate();
 
   const timer = new Timer();
 
