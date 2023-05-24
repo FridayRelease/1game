@@ -127,6 +127,10 @@ interface ISoundSheetDTO {
   };
 }
 
+interface IOAuthYandexResponse {
+  service_id: string;
+}
+
 export {
   type ISoundSheetDTO,
   type ErrorResponse,
@@ -141,4 +145,5 @@ export {
   type ILevelDTO,
   type IPatternDTO,
   type ITriggersDTO,
+  type IOAuthYandexResponse,
 };

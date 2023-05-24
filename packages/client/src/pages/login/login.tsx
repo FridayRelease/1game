@@ -12,6 +12,7 @@ import Logotype from '@/components/logotype';
 import './login.scss';
 import { cn } from '@/utils/cn';
 import { MainUrl } from '@/constant/router';
+import OAuth from '@/components/o-auth-panel';
 
 /**
  * Страница аутентификации пользователя
@@ -71,6 +72,7 @@ const Login: FC = () => {
               </Link>
             </div>
           </form>
+          <OAuth />
         </div>
       </main>
     </div>

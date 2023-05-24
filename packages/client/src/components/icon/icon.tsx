@@ -6,6 +6,7 @@ export enum Icons {
   Trophy = 'trophy',
   Forum = 'forum',
   Logout = 'logout',
+  Yandex = 'yandex',
 }
 
 const Icon = ({ type, className, fill = 'none', stroke = 'none' }: IconProps) => {

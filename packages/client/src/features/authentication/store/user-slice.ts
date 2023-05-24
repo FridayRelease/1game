@@ -7,10 +7,12 @@ import { NavigateSagaProps, PropsWithNavigator } from './types';
 
 export interface UserState {
   info: IUserDTO | null;
+  code: string | null;
 }
 
 const initialState: UserState = {
   info: null,
+  code: null,
 };
 
 export const userSlice = createSlice({
@@ -43,8 +45,23 @@ export const userSlice = createSlice({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       { payload }: PayloadAction<NavigateSagaProps>
     ) => {
-      console.log('signout');
       state.info = null;
+    },
+
+    oauthYandexGetServiceId: (
+      state,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      { payload }: PayloadAction<string>
+    ) => {
+     state.code = payload
+    },
+
+    oauthYandexGetUser: (
+      state,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      { payload }: PayloadAction<NavigateSagaProps>
+    ) => {
+      console.log(state);
     },
   },
 });
