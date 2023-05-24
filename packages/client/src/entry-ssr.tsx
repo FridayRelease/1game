@@ -1,16 +1,19 @@
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
-import { store } from './store/store';
 import { Provider } from 'react-redux';
 import App from './app';
+import createReduxStore from './store/store';
+import { userActions } from './features/authentication';
 
 export function render(url: string) {
-  const initialStore = store.getState();
+  const initialStore = createReduxStore({ test: 'hello' });
+
+  initialStore.dispatch(userActions.auth());
 
   const appHtml = ReactDOMServer.renderToString(
     <React.StrictMode>
-      <Provider store={store}>
+      <Provider store={initialStore}>
         <StaticRouter location={url}>
           <App />
         </StaticRouter>

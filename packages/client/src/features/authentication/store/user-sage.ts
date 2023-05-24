@@ -7,8 +7,7 @@ import { signin, signup, userFullInfo } from '@/controllers/user-controllers';
 import { UserResponseInfo, NavigateSagaProps, PropsWithNavigator } from './types';
 import { LoginUrl, MainUrl } from '@/constant/router';
 
-function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
-  const { navigate } = payload;
+function* userInfoSaga() {
   try {
     yield put(LoadingActions.setIsLoading(true));
 
@@ -16,14 +15,14 @@ function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
 
     yield put(userActions.setUser(user));
   } catch (error) {
+    yield put(userActions.setUser(null));
+
     yield put(
       errorActions.setError({
         title: 'Что-то пошло не так...',
         description: 'Попробуйте авторизоваться еще раз',
       })
     );
-
-    navigate(LoginUrl);
   } finally {
     yield put(LoadingActions.setIsLoading(false));
   }

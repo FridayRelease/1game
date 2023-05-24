@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { routes } from './router';
-import { store } from './store/store';
+import { useStore } from 'react-redux';
+
 import { themeActions } from './store/slices/theme-slice';
 import { getLocalStorage } from './utils/local-storage';
 import useTheme from './hooks/use-theme';
 import './app.scss';
 
 function App() {
+  const store = useStore();
   useTheme();
 
   // Switching theme.

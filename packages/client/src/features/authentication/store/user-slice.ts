@@ -18,7 +18,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    auth: (state, { payload }: PayloadAction<NavigateSagaProps>) => {
+    auth: (state, { payload }: PayloadAction) => {
       return state;
     },
 
