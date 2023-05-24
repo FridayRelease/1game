@@ -86,6 +86,13 @@ interface IPatternDTO {
   };
 }
 
+interface ITriggersDTO {
+  type: string;
+  name: string;
+  pos?: Array<number[]>;
+  count?: number;
+}
+
 interface ILevelDTO {
   spriteSheet: string;
   musicSheet: string;
@@ -128,4 +135,5 @@ export {
   type ITileDTO,
   type ILevelDTO,
   type IPatternDTO,
+  type ITriggersDTO,
 };

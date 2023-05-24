@@ -9,11 +9,11 @@ export class LiderApi {
   }
 
   // включение User в таблицу лидеров на сервере
-  add_user_to_leaderboard = async (data: ILeaderboardAddUser) => {
+  addUserToLeaderboard = async (data: ILeaderboardAddUser) => {
     return await this.http.post('/leaderboard', data);
   };
   // получение своей таблицы лидеров - на самом деле только одной записи одного игрока
-  get_team_leaderboard = async (query: IQuery) => {
+  getTeamLeaderboard = async (query: IQuery) => {
     return await this.http.post(`/leaderboard/1game`, query);
   };
 }

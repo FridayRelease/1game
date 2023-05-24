@@ -80,7 +80,7 @@ const fetchLevel = async (entityFactories: Record<string, EntityFactoryCallback>
     const backgroundSprites = await fetchSpriteSheet(levelSpec.spriteSheet);
 
     const musicPlayer = await fetchMusicSheet(levelSpec.musicSheet);
-    //@ts-ignore
+
     const patterns = await gameApi.loadPatterns(levelSpec.patternSheet);
 
     const level = new Level(name);

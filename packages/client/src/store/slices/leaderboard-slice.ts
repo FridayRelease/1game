@@ -15,15 +15,7 @@ export interface ILeader {
 }
 
 const LeaderboardState: ILeaderboardState = {
-  leaderboard: [
-    { name: 'Papa', score: 100 },
-    { name: 'Mama', score: 90 },
-    { name: 'Alex', score: 80 },
-    { name: 'Max', score: 170 },
-    { name: 'Sergey', score: 60 },
-    { name: 'Masha', score: 50 },
-    { name: 'Petr', score: 40 },
-  ],
+  leaderboard: [],
 };
 export const LeaderboardSlice = createSlice({
   name: 'leaderboard',

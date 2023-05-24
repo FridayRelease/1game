@@ -114,12 +114,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
             console.log('Данные игрока и очки в Стор записали');
           }
 
-          try {
-            addUserDatasToServer(info); // Запись на Сервер
-            console.log('Данные игрока и очки на Сервер записали');
-          } catch (e) {
-            console.log('Ошибка записи на сервер результатов Игрока', e);
-          }
+          addUserDatasToServer(info); // Запись на Сервер
           //
           gameOver(player?.score);
         }
