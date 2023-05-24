@@ -14,6 +14,6 @@ export class LiderApi {
   };
   // получение своей таблицы лидеров - на самом деле только одной записи одного игрока
   get_team_leaderboard = async (query: IQuery) => {
-     return await this.http.post(`/leaderboard/1game`, query);
+    return await this.http.post(`/leaderboard/1game`, query);
   };
 }

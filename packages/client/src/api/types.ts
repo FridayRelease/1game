@@ -33,30 +33,30 @@ type LeaderboardListDTO = {
   score: number;
 }[];
 
-export interface ILeaderboardAddUser{
+export interface ILeaderboardAddUser {
   data: {
-    name:string | undefined,
-    score:number | undefined,
-  },
-  ratingFieldName: string,
-  teamName: string
+    name: string | undefined;
+    score: number | undefined;
+  };
+  ratingFieldName: string;
+  teamName: string;
 }
 
-export interface ILeaderAll{
+export interface ILeaderAll {
   data?: {
-    name:string,
-    score:number|string,
-  },
-  ratingFieldName?: string,
-  cursor?: number,
-  limit?: number,
-  teamName?: string
+    name: string;
+    score: number | string;
+  };
+  ratingFieldName?: string;
+  cursor?: number;
+  limit?: number;
+  teamName?: string;
 }
 
-export interface IQuery{
-  ratingFieldName: string,
-  cursor: number,
-  limit: number,
+export interface IQuery {
+  ratingFieldName: string;
+  cursor: number;
+  limit: number;
 }
 
 export interface IFrameDTO {

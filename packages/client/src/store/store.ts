@@ -16,7 +16,7 @@ export const store = configureStore({
     error: errorReducer,
     loading: LoadingReducer,
     theme: themeReducer,
-    leaderboard:LeaderboardReducer,
+    leaderboard: LeaderboardReducer,
     game: gameReducer,
   },
   middleware: [saga],
