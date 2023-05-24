@@ -23,10 +23,6 @@ export const themeSlice = createSlice({
         state.value = Themes.Dark;
         setLocalStorage('theme', JSON.stringify({ value: Themes.Dark }));
       }
-
-      globalThis.document.documentElement.dataset.theme = state.value;
-      const themePicker = globalThis.document.getElementById('theme-picker') as HTMLSelectElement;
-      themePicker.value = state.value;
     },
   },
 });
