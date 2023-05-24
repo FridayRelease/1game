@@ -1,4 +1,4 @@
-import createSagaMiddleware, { Task, END } from 'redux-saga';
+import createSagaMiddleware, { END, Task } from 'redux-saga';
 import { configureStore, Store } from '@reduxjs/toolkit';
 import rootSaga from './root-saga';
 import { errorReducer } from './slices/error-slice';
