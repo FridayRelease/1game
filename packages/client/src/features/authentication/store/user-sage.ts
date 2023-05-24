@@ -11,9 +11,7 @@ function* userInfoSaga() {
   try {
     yield put(LoadingActions.setIsLoading(true));
 
-    console.warn({ userAuthSaga: 'info' });
     const user: UserResponseInfo = yield call(userFullInfo);
-    console.warn({ user });
 
     yield put(userActions.setUser(user));
   } catch (error) {

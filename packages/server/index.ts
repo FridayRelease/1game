@@ -40,7 +40,7 @@ async function startServer() {
 
   app.use('/assets', express.static(path.resolve(distPath, 'assets')));
 
-  app.use('*', ssrMiddleware);
+  app.use(ssrMiddleware);
 
   const port = Number(process.env.SERVER_PORT) || 3001;
 
