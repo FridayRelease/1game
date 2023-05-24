@@ -2,10 +2,10 @@ import { IconProps } from '@/components/icon/types';
 
 type LinkType = {
   text: string;
-  url: string;
+  url?: string;
   className: string;
   icon?: IconProps;
+  onClick?: () => void;
 };
 
-// @ts-ignore
 export { type LinkType };

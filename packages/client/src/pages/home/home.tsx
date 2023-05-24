@@ -1,18 +1,25 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { userSelectors } from '@/features/authentication';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Logotype from '@/components/logotype';
 import { cn } from '@/utils/cn';
 import './home.scss';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ForumUrl, GameUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import { Icons } from '@/components/icon/icon';
-import Icon from '@/components/icon';
 import { LinkType } from '@/types/link';
+import { signout } from '@/controllers/user-controllers';
+import MenuItem from '@/features/home';
 
 const Home: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector(userSelectors.user);
+
+  const onClick = useCallback(() => {
+    signout(navigate, dispatch);
+  }, []);
 
   const links: LinkType[] = [
     {
@@ -35,7 +42,7 @@ const Home: FC = () => {
     },
     {
       text: 'выйти',
-      url: '#',
+      onClick,
       className: cn('home__link', 'home__link__bg-green'),
       icon: { type: Icons.Logout, className: cn('home__link-icon'), fill: 'var(--main-color-bg)' },
     },
@@ -46,13 +53,6 @@ const Home: FC = () => {
     },
   ];
 
-  const listItems = links.map(({ url, className, text, icon }) => (
-    <Link to={url} className={className} key={text}>
-      {icon && <Icon type={icon.type} className={icon.className} fill={icon.fill} stroke={icon.stroke} />}
-      {text}
-    </Link>
-  ));
-
   return (
     <main className="home">
       <div className="home__header">
@@ -62,7 +62,11 @@ const Home: FC = () => {
         <div className="home__left-side">
           <h2 className="home__greeting">Привет, {user.info?.first_name}!</h2>
           <h3 className="home__trophy-result">Твой лучший результат: {'123'}</h3>
-          <nav className="home__nav">{listItems}</nav>
+          <nav className="home__nav">
+            {links.map(item => (
+              <MenuItem {...item} key={item.text} />
+            ))}
+          </nav>
         </div>
         <div className="home__right-side">место для видео</div>
       </div>
