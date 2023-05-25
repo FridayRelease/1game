@@ -1,13 +1,13 @@
 import type { Request, Response } from 'express';
 import { User } from '../models/user';
 
+/**
+ * Пример запроса
+ * curl -X POST -H "Content-Type: application/json" -d '{"first_name":"John","last_name":"Doe","email":"johndoe@email.com"}' http://localhost:3001/api/v1/users
+ */
 export const userCreate = async (req: Request, res: Response) => {
-  console.log('userInsert req.body: ', req.body);
-
   const user = await User.create(req.body);
-  console.log('user.id: ', user.id);
-
-  res.status(200).send(req.body); // вместо req.body возвращать user.id
+  res.status(200).send(user.id);
 };
 
 /*

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Table, Column, Model, HasMany, DataType, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, HasMany, DataType, BelongsTo, ForeignKey, AllowNull } from 'sequelize-typescript';
 import { Topic } from './topic';
 import { User } from './user';
 
@@ -14,6 +14,11 @@ export class Comment extends Model {
   })
   message!: string;
 
+  @ForeignKey(() => User)
+  @AllowNull(false)
+  @Column
+  user_id!: number;
+
   @BelongsTo(() => User, {
     foreignKey: 'user_id',
   })
@@ -25,11 +30,10 @@ export class Comment extends Model {
   })
   comments?: Comment[];
 
-  // This is the answer.
-  @BelongsTo(() => Comment, {
-    foreignKey: 'comment_id',
-  })
-  comment?: Comment;
+  @ForeignKey(() => Comment)
+  @AllowNull(true)
+  @Column
+  comment_id!: number;
 
   @BelongsTo(() => Topic, {
     foreignKey: 'topic_id',

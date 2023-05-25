@@ -18,6 +18,12 @@ export class User extends Model {
   @Column
   email!: string;
 
+  @Column
+  display_name?: string;
+
+  @Column
+  avatar?: string;
+
   @HasMany(() => Topic, {
     foreignKey: 'user_id',
   })

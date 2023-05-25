@@ -10,6 +10,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { initDB } from './db';
 import topicRoutes from './routes/topic';
+import userRoutes from './routes/user';
+import commentRoutes from './routes/comment';
 
 initDB();
 
@@ -39,7 +41,9 @@ async function startServer() {
     res.json('👋 Howdy from the server :)');
   });
 
+  userRoutes(app);
   topicRoutes(app);
+  commentRoutes(app);
 
   if (!isDev()) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
