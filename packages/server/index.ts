@@ -10,8 +10,8 @@ dotenv.config();
 
 import { isDev } from './src/constants/env';
 import { ssrMiddleware, proxyMiddleware } from './src/modules';
-import { v1, v2 } from './src/constants/api';
-// import cookieParser from 'cookie-parser';
+import { v2 } from './src/constants/api';
+import cookieParser from 'cookie-parser';
 
 async function startServer() {
   const app = express();
@@ -31,24 +31,18 @@ async function startServer() {
     app.set('vite', vite);
     app.use(vite.middlewares);
   }
-
   // * MIDDLEWARES
   app.use(cors());
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
-  // app.use(cookieParser() as any);
+  app.use(cookieParser() as any);
+  app.use(v2, proxyMiddleware());
 
   app.use('/assets', express.static(path.resolve(distPath, 'assets')));
 
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
   app.use(ssrMiddleware);
 
   const port = Number(process.env.SERVER_PORT) || 3001;
-
-  // * ROUTES
-  app.get(v1, (_, res) => {
-    res.json('👋 Howdy from the server :)');
-  });
-  app.use(v2, proxyMiddleware());
 
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`);

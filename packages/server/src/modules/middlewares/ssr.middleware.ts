@@ -1,10 +1,15 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { ViteDevServer } from 'vite';
-
+import type { Store } from '@reduxjs/toolkit';
+import type { Task } from 'redux-saga';
 import * as path from 'path';
 import * as fs from 'fs';
-import type { IState } from '../../store/types';
 import { isDev } from '../../constants/env';
+
+interface SagaStore extends Store {
+  rootSaga: Task;
+  close: () => void;
+}
 
 async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
   if (req.url.startsWith('/api')) {
@@ -12,8 +17,7 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     return;
   }
 
-  console.warn({ ssrMiddleware: req.url });
-
+  const cookie = req.headers.cookie;
   const vite = req.app.locals.settings.vite as ViteDevServer;
 
   const distPath = path.dirname(require.resolve('client/dist/client/index.html'));
@@ -24,7 +28,7 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
 
   try {
     let template: string;
-    let render: (url: string) => Promise<[string, IState]>;
+    let render: (url: string, cookie: string | undefined) => Promise<[string, SagaStore]>;
 
     if (!isDev()) {
       template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
@@ -35,16 +39,19 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
       render = (await vite!.ssrLoadModule(path.resolve(srcPath, './src/entry-ssr.tsx'))).render;
     }
 
-    const [appHtml, initialState] = await render(url);
+    const [appHtml, initialState] = await render(url, cookie);
 
-    const initialStateHtml = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(initialState).replace(
-      /</g,
-      '\\u003c'
-    )}</script>`;
+    initialState.rootSaga.toPromise().then(() => {
+      const state = initialState.getState();
+      console.warn({ state });
 
-    const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace('<!--init-state-->', initialStateHtml);
-
-    res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      const initialStateHtml = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(state).replace(
+        /</g,
+        '\\u003c'
+      )}</script>`;
+      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace('<!--init-state-->', initialStateHtml);
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+    });
   } catch (e) {
     if (isDev()) {
       vite!.ssrFixStacktrace(e as Error);

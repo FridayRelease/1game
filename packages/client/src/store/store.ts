@@ -1,4 +1,4 @@
-import createSagaMiddleware, { Task } from 'redux-saga';
+import createSagaMiddleware, { Task, END } from 'redux-saga';
 import { configureStore, Store } from '@reduxjs/toolkit';
 import rootSaga from './root-saga';
 import { errorReducer } from './slices/error-slice';
@@ -9,6 +9,7 @@ import { gameReducer } from '@/features/game';
 
 export interface SagaStore extends Store {
   rootSaga: Task;
+  close: () => void;
 }
 
 export default function createReduxStore(initialState = {}) {
@@ -26,6 +27,7 @@ export default function createReduxStore(initialState = {}) {
   });
 
   (store as SagaStore).rootSaga = sagaMiddleware.run(rootSaga);
+  (store as SagaStore).close = () => store.dispatch(END);
 
   return store as SagaStore;
 }

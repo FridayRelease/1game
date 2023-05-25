@@ -1,16 +1,17 @@
-import { FC, FormEvent } from 'react';
+import { FC, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@/components/button/button';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Input from '@/components/input/input';
-import { userActions, useForm } from '@/features/authentication';
+import { userActions, useForm, userSelectors } from '@/features/authentication';
 import { IUserSigninRequest } from '@/types/user';
 import { initValues, loginSchema } from './login.constants';
 import Logotype from '@/components/logotype';
 import './login.scss';
 import { cn } from '@/utils/cn';
+import { MainUrl } from '@/constant/router';
 
 /**
  * Страница аутентификации пользователя
@@ -24,17 +25,19 @@ const Login: FC = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector(userSelectors.user);
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault();
 
-    dispatch(
-      userActions.signin({
-        props: values as IUserSigninRequest,
-        navigate,
-      })
-    );
+    dispatch(userActions.signin(values as IUserSigninRequest));
   };
+
+  useEffect(() => {
+    if (user.info) {
+      navigate(MainUrl);
+    }
+  }, [user.info]);
 
   return (
     <div className="login">

@@ -17,10 +17,9 @@ export const filterCookies = (req: Request): string => {
 
 const proxyMiddleware = () => {
   return createProxyMiddleware({
-    changeOrigin: true,
     cookieDomainRewrite: { '*': '' },
     target: 'https://ya-praktikum.tech',
-    selfHandleResponse: true,
+    secure: false,
     onProxyReq: (proxyReq, req) => {
       const filteredCookies = filterCookies(req);
       proxyReq.setHeader('cookie', filteredCookies);
@@ -33,9 +32,6 @@ const proxyMiddleware = () => {
         proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
         proxyReq.write(bodyData);
       }
-    },
-    onProxyRes: (_proxyRes, req) => {
-      console.warn('proxyRes', req.url, _proxyRes.statusCode, req.body);
     },
 
     onError: err => {

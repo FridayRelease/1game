@@ -7,13 +7,15 @@ import createReduxStore from './store/store';
 import { userActions } from './features/authentication';
 import { themeActions } from './store/slices/theme-slice';
 import { Themes } from './components/toggle-theme/types';
+import { END } from 'redux-saga';
 
-export function render(url: string) {
+export function render(url: string, cookie: string) {
   const initialStore = createReduxStore();
 
-  initialStore.dispatch(userActions.auth());
+  initialStore.dispatch(userActions.auth(cookie));
 
   initialStore.dispatch(themeActions.setTheme(Themes.Light));
+  initialStore.dispatch(END);
 
   const appHtml = ReactDOMServer.renderToString(
     <React.StrictMode>
@@ -25,5 +27,5 @@ export function render(url: string) {
     </React.StrictMode>
   );
 
-  return [appHtml, initialStore.getState()];
+  return [appHtml, initialStore];
 }
