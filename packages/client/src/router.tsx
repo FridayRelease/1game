@@ -41,7 +41,11 @@ export const routes: RouteObject[] = [
   },
   {
     path: GameUrl,
-    element: <GamePage />,
+    element: (
+      <RequireAuth>
+        <GamePage />
+      </RequireAuth>
+    ),
   },
   {
     path: SignupUrl,
@@ -99,6 +103,10 @@ export const routes: RouteObject[] = [
   },
   {
     path: LeaderboardUrl,
-    element: <Leaderboard />,
+    element: (
+      <ErrorBoundary>
+        <Leaderboard />
+      </ErrorBoundary>
+    ),
   },
 ];
