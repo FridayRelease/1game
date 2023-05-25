@@ -10,6 +10,7 @@ class Player extends Trait {
   lives: number;
   score: number;
   enemiesCount!: number;
+  name!: string;
 
   constructor() {
     super(Traits.Player);
