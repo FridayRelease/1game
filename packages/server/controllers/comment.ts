@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-// import { User } from '../models/user';
+import { User } from '../models/user';
 import { Comment } from '../models/comment';
 
 /**
@@ -19,15 +19,27 @@ export const commentGet = async (req: Request, res: Response) => {
 };
 */
 
+interface IUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+  display_name: string;
+  avatar: string;
+}
+
 interface IComment {
   id: number;
   message: string;
   user_id: number;
+  user: IUser;
   topic_id: number;
   comment_id: number;
   created_at: string;
   updated_at: string;
-  comments: IComment[] | [];
+  comments?: IComment[];
 }
 
 /**
@@ -35,69 +47,44 @@ interface IComment {
  * curl -X GET -H "Content-Type: application/json" http://localhost:3001/api/v1/comments/7
  */
 export const commentRead = async (req: Request, res: Response) => {
-  console.log('commentRead: get comment by PK');
-  console.log('req.params.id: ', req.params.id);
-
-  /*
-  const comment = await Comment.findByPk(req.params.id, {
-    include: [
-      {
-        model: User,
-        attributes: ['first_name', 'last_name', 'display_name', 'email', 'avatar'],
-      },
-      {
-        model: Comment,
-        attributes: ['id', 'message', 'user_id', 'topic_id', 'comment_id', 'created_at'],
-        include: [
-          {
-            model: User,
-            attributes: ['first_name', 'last_name', 'display_name', 'email', 'avatar'],
-          },
-          {
-            model: Comment,
-            attributes: ['id', 'message', 'user_id', 'topic_id', 'comment_id', 'created_at'],
-            include: [
-              //...
-            ]
-          },
-        ],
-      },
-    ],
-  });
-  */
-
-  const comment = await Comment.findByPk(req.params.id); // возвращает null если ничего не находит
-  // console.log('comment: ', typeof comment, comment); // возаращает object Comment
+  const comment = (await Comment.findByPk(req.params.id))?.toJSON();
 
   if (!comment) {
-    res.send(comment);
+    res.send('comment is not found');
     return;
   }
-  // console.log('comment.toJSON(): ', typeof comment.toJSON(), comment.toJSON()); // возаращает object {...} - это IComment без comments
 
+  // Добавляем в коммент полную инфу о пользователе (так же в комментрии есть свойство user_id)
+  const user = (await User.findByPk((comment as IComment).user_id))?.toJSON();
+  comment.user = user;
+
+  // Получаем все комментарии на комментарии
   const expandSubcomments = async (comment: IComment, comment_id: number) => {
-    console.log(' !!! comment_id: ', comment_id);
-    const childrenComment = await Comment.findAll({ where: { comment_id: comment_id } }); // возвращает [] если ничего не находит
+    const childrenComments = await Comment.findAll({ where: { comment_id: comment_id } });
 
-    // comment.comments.push(childrenComment)
-    if (childrenComment.length === 0) {
+    if (childrenComments.length === 0) {
       return comment;
     }
 
-    for (let i = 0; i < childrenComment.length; i++) {
-      const res = await expandSubcomments(comment, childrenComment[i].id);
-      console.log('res: ', res);
-      // comment.comments.push(res);
+    if (!comment.comments) {
+      comment.comments = [];
+    }
+
+    for (let i = 0; i < childrenComments.length; i++) {
+      const childrenComment = childrenComments[i].toJSON();
+
+      // Добавляем в коммент полную инфу о пользователе (так же в комментрии есть свойство user_id)
+      const childrenUser = (await User.findByPk((childrenComment as IComment).user_id))?.toJSON();
+      childrenComment.user = childrenUser;
+
+      comment.comments.push(await expandSubcomments(childrenComment, childrenComment.id));
     }
 
     return comment;
   };
 
-  const result = await expandSubcomments(comment.toJSON(), Number(req.params.id));
-  console.log('result: ', typeof result, result);
-
-  res.send(comment);
-  // res.send(comment?.toJSON()); //.sendStatus(200);
+  const result = await expandSubcomments(comment, Number(req.params.id));
+  res.send(result);
 };
 
 /*
