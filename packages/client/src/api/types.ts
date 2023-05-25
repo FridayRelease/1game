@@ -99,6 +99,7 @@ interface ILevelDTO {
   patterns: IPatternDTO;
   layers: Array<ILayerDTO>;
   entities: Array<IEntityDTO>;
+  patternSheet: string;
 }
 
 interface IAnimationDTO {
