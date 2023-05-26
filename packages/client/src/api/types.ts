@@ -33,7 +33,33 @@ type LeaderboardListDTO = {
   score: number;
 }[];
 
-interface IFrameDTO {
+export interface ILeaderboardAddUser {
+  data: {
+    name: string | undefined;
+    score: number | undefined;
+  };
+  ratingFieldName: string;
+  teamName: string;
+}
+
+export interface ILeaderAll {
+  data?: {
+    name: string;
+    score: number | string;
+  };
+  ratingFieldName?: string;
+  cursor?: number;
+  limit?: number;
+  teamName?: string;
+}
+
+export interface IQuery {
+  ratingFieldName: string;
+  cursor: number;
+  limit: number;
+}
+
+export interface IFrameDTO {
   name: string;
   rect: Array<number>;
 }
@@ -69,12 +95,11 @@ interface ITriggersDTO {
 
 interface ILevelDTO {
   spriteSheet: string;
-  patternSheet: string;
   musicSheet: string;
   patterns: IPatternDTO;
   layers: Array<ILayerDTO>;
   entities: Array<IEntityDTO>;
-  triggers: Array<ITriggersDTO>;
+  patternSheet: string;
 }
 
 interface IAnimationDTO {

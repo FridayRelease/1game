@@ -17,7 +17,10 @@ import { createTextLayer } from '../layers/text';
 import TimedScene, { Scene } from '../timed-scene';
 import { createPlayerProgressLayer } from '../layers/player-progress';
 import { gameActions } from '../store/game-slice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUserDatasToServer, setUserDatasToStore } from '@/controllers/lider-controller';
+import { ILeaderboardAddUser } from '@/api/types';
+import { userSelectors } from '@/features/authentication/store/user-slice';
 
 const random = (arr: number[][]): number[] => {
   const rand = Math.floor(Math.random() * arr.length);
@@ -39,6 +42,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
   const [isStarted, setStart] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector(userSelectors.user);
 
   const timer = new Timer();
 
@@ -102,7 +106,22 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       level.events.on(Level.EVENT_TRIGGER, (type: string) => {
         if (type === 'gameOver') {
           const player = getPlayerTrait(level.entities);
+          //
+          const data = { name: player?.name, score: player?.score };
+          const info: ILeaderboardAddUser = {
+            data: data,
+            ratingFieldName: 'score',
+            teamName: '1game',
+          };
+          console.log('file use-start data {name, score} to server', data);
+          if (data.name !== undefined && data.score !== undefined) {
+            //@ts-ignore
+            setUserDatasToStore(data, dispatch); //запись в Store
+            console.log('Данные игрока и очки в Стор записали');
+          }
 
+          addUserDatasToServer(info); // Запись на Сервер
+          //
           gameOver(player?.score);
         }
 
@@ -124,7 +143,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
         }
       });
 
-      const playerEnv = createPlayerEnv(tank);
+      const playerEnv = createPlayerEnv(tank, user.info);
       level.entities.add(playerEnv);
 
       const waitScreen = new TimedScene();

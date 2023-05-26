@@ -5,6 +5,7 @@ import { errorReducer } from './slices/error-slice';
 import { userSlice } from '@/features/authentication';
 import { LoadingReducer } from './slices/loading-slice';
 import { themeReducer } from './slices/theme-slice';
+import { LeaderboardReducer } from './slices/leaderboard-slice';
 import { gameReducer } from '@/features/game';
 
 export interface SagaStore extends Store {
@@ -25,7 +26,7 @@ export default function createReduxStore(initialState = {}) {
     },
     middleware: [sagaMiddleware],
   });
-
+  
   (store as SagaStore).rootSaga = sagaMiddleware.run(rootSaga);
   (store as SagaStore).close = () => store.dispatch(END);
 
