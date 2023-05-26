@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './app';
 import createReduxStore from './store/store';
 
-let preloadedState = undefined;
+let preloadedState;
 
 if (typeof window !== 'undefined') {
   preloadedState = window.__PRELOADED_STATE__;
