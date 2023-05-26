@@ -11,7 +11,6 @@ dotenv.config();
 import { isDev } from './src/constants/env';
 import { ssrMiddleware, proxyMiddleware } from './src/modules';
 import { v2 } from './src/constants/api';
-import cookieParser from 'cookie-parser';
 
 async function startServer() {
   const app = express();
@@ -33,7 +32,6 @@ async function startServer() {
   }
   // * MIDDLEWARES
   app.use(cors());
-  app.use(cookieParser() as any);
   app.use(v2, proxyMiddleware());
 
   app.use('/assets', express.static(path.resolve(distPath, 'assets')));

@@ -26,8 +26,6 @@
     "prettier": "^2.7.1"
   },
   "devDependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
-    "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.8",
@@ -39,7 +37,6 @@
     "jest": "^28",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
-    "redux-saga": "^1.2.3",
     "rimraf": "^5.0.0",
     "ts-jest": "^28.0.8",
     "ts-node": "^10.9.1",
