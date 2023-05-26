@@ -1,14 +1,14 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { ViteDevServer } from 'vite';
-import type { Store } from '@reduxjs/toolkit';
-import type { Task } from 'redux-saga';
 import * as path from 'path';
 import * as fs from 'fs';
 import { isDev } from '../../constants/env';
 
-interface SagaStore extends Store {
-  rootSaga: Task;
-  close: () => void;
+interface IResponse {
+  error: string;
+  redirectLocation: string;
+  html: string;
+  state: string;
 }
 
 async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
@@ -28,7 +28,7 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
 
   try {
     let template: string;
-    let render: (url: string, cookie: string | undefined) => Promise<[string, SagaStore]>;
+    let render: (url: string, callback: (response: IResponse) => void, cookie?: string) => Promise<void>;
 
     if (!isDev()) {
       template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
@@ -39,19 +39,23 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
       render = (await vite!.ssrLoadModule(path.resolve(srcPath, './src/entry-ssr.tsx'))).render;
     }
 
-    const [appHtml, initialState] = await render(url, cookie);
+    render(
+      req.url,
+      (response: IResponse) => {
+        if (response.error) {
+          res.status(500).send(response.error);
+        } else if (response.redirectLocation) {
+          res.redirect(302, response.redirectLocation);
+        } else {
+          const html = template
+            .replace(`<!--ssr-outlet-->`, response.html)
+            .replace('<!--init-state-->', response.state);
 
-    initialState.rootSaga.toPromise().then(() => {
-      const state = initialState.getState();
-      console.warn({ state });
-
-      const initialStateHtml = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(state).replace(
-        /</g,
-        '\\u003c'
-      )}</script>`;
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace('<!--init-state-->', initialStateHtml);
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
-    });
+          res.status(200).send(html);
+        }
+      },
+      cookie
+    );
   } catch (e) {
     if (isDev()) {
       vite!.ssrFixStacktrace(e as Error);

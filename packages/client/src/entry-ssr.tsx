@@ -3,13 +3,34 @@ import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
 import { Provider } from 'react-redux';
 import App from './app';
-import createReduxStore from './store/store';
+import createReduxStore, { RootState } from './store/store';
+import { routes } from './router';
+import { matchRoutes } from 'react-router-dom';
+import { END } from 'redux-saga';
+import { Themes } from './components/toggle-theme/types';
 import { userActions } from './features/authentication';
 import { themeActions } from './store/slices/theme-slice';
-import { Themes } from './components/toggle-theme/types';
-import { END } from 'redux-saga';
 
-export function render(url: string, cookie: string) {
+const renderAppToString = (state: RootState, url: string) => {
+  return ReactDOMServer.renderToString(
+    <React.StrictMode>
+      <Provider store={state}>
+        <StaticRouter location={url}>
+          <App />
+        </StaticRouter>
+      </Provider>
+    </React.StrictMode>
+  );
+};
+
+interface IResponse {
+  html?: string;
+  error?: string;
+  redirectLocation?: string;
+  state?: string;
+}
+
+const render = (url: string, callback: (response: IResponse) => void, cookie?: string) => {
   const initialStore = createReduxStore();
 
   initialStore.dispatch(userActions.auth(cookie));
@@ -17,15 +38,35 @@ export function render(url: string, cookie: string) {
   initialStore.dispatch(themeActions.setTheme(Themes.Light));
   initialStore.dispatch(END);
 
-  const appHtml = ReactDOMServer.renderToString(
-    <React.StrictMode>
-      <Provider store={initialStore}>
-        <StaticRouter location={url}>
-          <App />
-        </StaticRouter>
-      </Provider>
-    </React.StrictMode>
-  );
+  const match = matchRoutes(routes, url);
+  if (!match) {
+    callback({ redirectLocation: '/' });
+  } else if (match.length > 0) {
+    initialStore.rootSaga
+      .toPromise()
+      .then(() => {
+        const state = initialStore.getState();
 
-  return [appHtml, initialStore];
-}
+        const appHtml = renderAppToString(initialStore, url);
+
+        const initialStateHtml = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(state).replace(
+          /</g,
+          '\\u003c'
+        )}</script>`;
+
+        callback({ state: initialStateHtml, html: appHtml });
+      })
+      .catch(e => {
+        callback({ error: e });
+
+        const state = initialStore.getState();
+        renderAppToString(state, url);
+
+        initialStore.close();
+      });
+  } else {
+    callback({ error: 'Unknown error' });
+  }
+};
+
+export { renderAppToString, render };

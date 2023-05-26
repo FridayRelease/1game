@@ -16,7 +16,7 @@ function* userInfoSaga({ payload }: Effect<string, string | undefined>) {
     yield put(userActions.setUser(user));
   } catch (error) {
     yield put(userActions.setUser(null));
-    console.warn((error as any).toString());
+
     yield put(
       errorActions.setError({
         title: 'Что-то пошло не так...',
