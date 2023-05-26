@@ -35,7 +35,7 @@ const render = (url: string, callback: (response: IResponse) => void, cookie?: s
 
   initialStore.dispatch(userActions.auth(cookie));
 
-  initialStore.dispatch(themeActions.setTheme(Themes.Light));
+  initialStore.dispatch(themeActions.initialTheme());
   initialStore.dispatch(END);
 
   const match = matchRoutes(routes, url);
