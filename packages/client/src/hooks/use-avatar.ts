@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 const useAvatar = (url: string | null) => {
   const [avatar, setAvatar] = useState<string | null>(null);
 
-  const src = `${import.meta.env.VITE_AUTH_API}resources${url}`;
+  // нужно переписать с использованием апи
+  const src = `${import.meta.env.VITE_AUTH_API}/resources${url}`;
 
   useEffect(() => {
     if (url) {

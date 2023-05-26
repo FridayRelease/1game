@@ -25,9 +25,9 @@ const ToggleTheme = () => {
       setSelectedAttribute(selectThemeElement, theme.value);
     };
 
-    window.addEventListener('storage', handler);
+    globalThis.addEventListener('storage', handler);
 
-    return () => window.removeEventListener('storage', handler);
+    return () => globalThis.removeEventListener('storage', handler);
   }, []);
 
   function handleClick(event: React.ChangeEvent<HTMLSelectElement>) {

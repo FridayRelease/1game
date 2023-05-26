@@ -74,10 +74,10 @@ function createEnemyFactory(sprite: SpriteSheet, entityFactories: Record<string,
   }
 
   function callbackAfterKilled(level: Level) {
-    const enemies = Array.from(level.entities).filter((e: Entity) => e.hasTrait(Traits.Enemy));
     const enemiesCount = getPlayerTrait(level.entities)?.enemiesCount || 0;
+    const totalEnemies = getPlayerTrait(level.entities)?.totalEnemies || 0;
 
-    if (enemies?.length <= 0 && enemiesCount <= 0) {
+    if (enemiesCount === totalEnemies) {
       level.events.emit(Level.EVENT_TRIGGER, 'goto');
     }
   }

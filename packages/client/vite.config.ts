@@ -25,6 +25,9 @@ export default defineConfig(({ mode }) => {
         },
       ],
     },
+    esbuild: {
+      logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    },
   };
 
   if (mode === 'client') {

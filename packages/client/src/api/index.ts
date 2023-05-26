@@ -2,7 +2,7 @@ import { GameApi } from './game';
 import { UserApi } from './user';
 import { LiderApi } from '@/api/lider';
 
-const userApi = new UserApi(import.meta.env.VITE_AUTH_API || '/');
+const userApi = new UserApi(import.meta.env.VITE_AUTH_API || '/api/v2/');
 const gameApi = new GameApi('/');
 const liderApi = new LiderApi(import.meta.env.VITE_AUTH_API || '/');
 

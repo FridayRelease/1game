@@ -19,11 +19,9 @@ export const themeSlice = createSlice({
       if (themeKey) {
         state.value = payload as Themes;
         setLocalStorage('theme', JSON.stringify({ value: payload }));
-        globalThis.document.documentElement.dataset.theme = state.value;
       } else {
         state.value = Themes.Dark;
         setLocalStorage('theme', JSON.stringify({ value: Themes.Dark }));
-        globalThis.document.documentElement.dataset.theme = state.value;
       }
     },
   },

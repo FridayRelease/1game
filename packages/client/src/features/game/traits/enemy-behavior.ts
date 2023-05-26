@@ -40,7 +40,6 @@ class EnemyBehavior extends Trait {
 
       (us.getTrait(Traits.Go) as Go).speed = 0;
 
-      console.warn({ collides: 'collides', isDead: usKillable?.dead, usKillable });
       usKillable.events.emit(Killable.EVENT_KILL, us);
     }
   }
