@@ -1,15 +1,16 @@
 import express from 'express';
 import type { Express } from 'express';
-import { topicCreate, topicRead } from '../controllers/topic';
+import { topicCreate, topicRead, topicGet, topicUpdate, topicDelete } from '../controllers/topic';
+import { PREFIX } from '../config/contants';
 
 const topicRoutes = function (app: Express) {
   app.use(express.json());
 
-  app.post('/api/v1/topics', [topicCreate]);
-  // app.get('/api/v1/topics', [topicGet]);
-  app.get('/api/v1/topics/:id', [topicRead]);
-  // app.put('/api/v1/topics/:id', [topicUpdate]);
-  // app.delete('/api/v1/topics/:id', [topicDelete]);
+  app.post(`${PREFIX}/topics`, [topicCreate]);
+  app.get(`${PREFIX}/topics`, [topicGet]);
+  app.get(`${PREFIX}/topics/:id`, [topicRead]);
+  app.put(`${PREFIX}/topics/:id`, [topicUpdate]);
+  app.delete(`${PREFIX}/topics/:id`, [topicDelete]);
 };
 
 export default topicRoutes;

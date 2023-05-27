@@ -9,7 +9,7 @@ import { Topic } from './topic';
   updatedAt: 'updated_at',
 })
 export class User extends Model {
-  @Column
+  @Column({ })
   first_name!: string;
 
   @Column

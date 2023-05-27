@@ -1,6 +1,8 @@
 import type { Request, Response } from 'express';
 import { User } from '../models/user';
 import { Comment } from '../models/comment';
+import type { IComment } from 'comment';
+import { errorMessage } from '../utils/messageHelper';
 
 /**
  * Пример запроса
@@ -9,38 +11,34 @@ import { Comment } from '../models/comment';
  * message | user_id | topic_id | comment_id
  */
 export const commentCreate = async (req: Request, res: Response) => {
-  const comment = await Comment.create(req.body);
-  res.status(200).send(comment.id);
+  try {
+    const comment = await Comment.create(req.body);
+    console.log(comment, 'commentcommentcommentcommentcommentcomment')
+    return res.status(200).json(comment.dataValues);
+  } catch (error) {
+    return res.status(500).json({ message: 'error', error: error })
+  }
 };
 
-/*
-export const commentGet = async (req: Request, res: Response) => {
-  console.log('commentGet: get all comments');
+export const commentGet = async (req: Request<{ topic_id: number }>, res: Response) => {
+  try {
+    console.log('commentGet: get all comments');
+    const { topic_id } = req.params;
+    const comments = await Comment.findAll({
+      where: {
+        topic_id
+      }
+    })
+
+    if (topic_id) {
+      return res.status(200).json(comments);
+    }
+
+    return res.status(200).json({ message: 'error', error: 'topic not found' });
+  } catch (error) {
+    return res.status(500).json({ message: 'error', error: error });
+  }
 };
-*/
-
-interface IUser {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  created_at: string;
-  updated_at: string;
-  display_name: string;
-  avatar: string;
-}
-
-interface IComment {
-  id: number;
-  message: string;
-  user_id: number;
-  user: IUser;
-  topic_id: number;
-  comment_id: number;
-  created_at: string;
-  updated_at: string;
-  comments?: IComment[];
-}
 
 /**
  * Пример запроса
@@ -55,8 +53,7 @@ export const commentRead = async (req: Request, res: Response) => {
   }
 
   // Добавляем в коммент полную инфу о пользователе (так же в комментрии есть свойство user_id)
-  const user = (await User.findByPk((comment as IComment).user_id))?.toJSON();
-  comment.user = user;
+  comment.user = (await User.findByPk((comment as IComment).user_id))?.toJSON();
 
   // Получаем все комментарии на комментарии
   const expandSubcomments = async (comment: IComment, comment_id: number) => {
@@ -74,8 +71,7 @@ export const commentRead = async (req: Request, res: Response) => {
       const childrenComment = childrenComments[i].toJSON();
 
       // Добавляем в коммент полную инфу о пользователе (так же в комментрии есть свойство user_id)
-      const childrenUser = (await User.findByPk((childrenComment as IComment).user_id))?.toJSON();
-      childrenComment.user = childrenUser;
+      childrenComment.user = (await User.findByPk((childrenComment as IComment).user_id))?.toJSON();
 
       comment.comments.push(await expandSubcomments(childrenComment, childrenComment.id));
     }
@@ -87,12 +83,39 @@ export const commentRead = async (req: Request, res: Response) => {
   res.send(result);
 };
 
-/*
+
 export const commentUpdate = async (req: Request, res: Response) => {
-  console.log('commentUpdate');
+  try {
+    const { id } = req.params;
+    const commentUpdated = await Comment.update(req.body, {
+      where: { id }
+    });
+
+    if (commentUpdated) {
+      const comment = await Comment.findByPk(id);
+      return res.status(200).json(comment);
+    }
+
+    return res.status(404).json(errorMessage('Comment not found'))
+  } catch (error) {
+
+    return res.status(500).json(errorMessage(error))
+  }
 };
 
 export const commentDelete = async (req: Request, res: Response) => {
-  console.log('commentDelete');
+  try {
+    const { id } = req.params;
+    const comment = await Comment.destroy({
+      where: { id }
+    });
+
+    if (comment) {
+      return res.status(204).json({ message: 'Comment deleted' })
+    }
+
+    return res.status(404).json(errorMessage('User not found'))
+  } catch (error) {
+    return res.status(500).json(errorMessage(error))
+  }
 };
-*/

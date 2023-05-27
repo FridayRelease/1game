@@ -1,7 +1,7 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-import { User } from './models/user';
-import { Topic } from './models/topic';
-import { Comment } from './models/comment';
+import { User } from '../models/user';
+import { Topic } from '../models/topic';
+import { Comment } from '../models/comment';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
 
