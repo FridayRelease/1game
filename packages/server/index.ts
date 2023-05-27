@@ -1,16 +1,16 @@
-import dotenv from 'dotenv';
-import cors from 'cors';
 import { createServer as createViteServer } from 'vite';
 import type { ViteDevServer } from 'vite';
-import cookieParser from 'cookie-parser';
 import express from 'express';
+import helmet from 'helmet';
 import * as fs from 'fs';
 import * as path from 'path';
 import { initDB } from './config/db';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import topicRoutes from './routes/topic';
 import userRoutes from './routes/user';
 import commentRoutes from './routes/comment';
-import { verifyUser } from './middlewares/auth';
 
 dotenv.config();
 initDB();
@@ -20,8 +20,11 @@ const isDev = () => process.env.NODE_ENV === 'development';
 async function startServer() {
   const app = express();
   app.use(cors());
-  app.use(cookieParser())
-  app.use(verifyUser)
+  app.use(cookieParser());
+  app.use(helmet());
+  app.disable('x-powered-by');
+  // app.use(verifyUser)
+
   const port = Number(process.env.SERVER_PORT) || 3001;
 
   let vite: ViteDevServer | undefined;

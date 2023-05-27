@@ -13,7 +13,6 @@ import { errorMessage } from '../utils/messageHelper';
 export const commentCreate = async (req: Request, res: Response) => {
   try {
     const comment = await Comment.create(req.body);
-    console.log(comment, 'commentcommentcommentcommentcommentcomment')
     return res.status(200).json(comment.dataValues);
   } catch (error) {
     return res.status(500).json({ message: 'error', error: error })
@@ -22,7 +21,6 @@ export const commentCreate = async (req: Request, res: Response) => {
 
 export const commentGet = async (req: Request<{ topic_id: number }>, res: Response) => {
   try {
-    console.log('commentGet: get all comments');
     const { topic_id } = req.params;
     const comments = await Comment.findAll({
       where: {
