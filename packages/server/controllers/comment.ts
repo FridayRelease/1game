@@ -44,7 +44,7 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
  */
 export const commentRead = async (req: Request, res: Response) => {
   const findComment = await Comment.findByPk(req.params.id, { include: User })
-  const comment =  findComment?.toJSON();
+  const comment = findComment?.toJSON();
 
   if (!comment) {
     res.send('comment is not found');
@@ -53,7 +53,7 @@ export const commentRead = async (req: Request, res: Response) => {
 
   // Получаем все комментарии на комментарии
   const expandSubcomments = async (comment: IComment, comment_id: number) => {
-    const childrenComments = await Comment.findAll({ where: { comment_id: comment_id } });
+    const childrenComments = await Comment.findAll({ where: { comment_id: comment_id }, include: User });
 
     if (childrenComments.length === 0) {
       return comment;
@@ -65,9 +65,6 @@ export const commentRead = async (req: Request, res: Response) => {
 
     for (let i = 0; i < childrenComments.length; i++) {
       const childrenComment = childrenComments[i].toJSON();
-
-      // Добавляем в коммент полную инфу о пользователе (так же в комментрии есть свойство user_id)
-      childrenComment.user = (await User.findByPk((childrenComment as IComment).user_id))?.toJSON();
 
       comment.comments.push(await expandSubcomments(childrenComment, childrenComment.id));
     }
