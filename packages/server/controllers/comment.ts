@@ -43,15 +43,13 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
  * curl -X GET -H "Content-Type: application/json" http://localhost:3001/api/v1/comments/7
  */
 export const commentRead = async (req: Request, res: Response) => {
-  const comment = (await Comment.findByPk(req.params.id))?.toJSON();
+  const findComment = await Comment.findByPk(req.params.id, { include: User })
+  const comment =  findComment?.toJSON();
 
   if (!comment) {
     res.send('comment is not found');
     return;
   }
-
-  // Добавляем в коммент полную инфу о пользователе (так же в комментрии есть свойство user_id)
-  comment.user = (await User.findByPk((comment as IComment).user_id))?.toJSON();
 
   // Получаем все комментарии на комментарии
   const expandSubcomments = async (comment: IComment, comment_id: number) => {
