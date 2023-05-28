@@ -1,5 +1,4 @@
 import { Themes } from '@/components/toggle-theme/types';
-import { setLocalStorage } from '@/utils/local-storage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
@@ -13,16 +12,15 @@ export const themeSlice = createSlice({
   name: 'theme',
   initialState: ThemeState,
   reducers: {
-    setTheme: (state, { payload }: PayloadAction<string>) => {
-      const themeKey = Object.keys(Themes)[Object.values(Themes).indexOf(payload as Themes)] as Themes;
+    initialTheme: state => {
+      return state;
+    },
+    updateTheme: (state, { payload }: PayloadAction<string>) => {
+      return state;
+    },
 
-      if (themeKey) {
-        state.value = payload as Themes;
-        setLocalStorage('theme', JSON.stringify({ value: payload }));
-      } else {
-        state.value = Themes.Dark;
-        setLocalStorage('theme', JSON.stringify({ value: Themes.Dark }));
-      }
+    setTheme: (state, { payload }: PayloadAction<Themes>) => {
+      state.value = payload;
     },
   },
 });

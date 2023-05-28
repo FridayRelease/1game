@@ -1,4 +1,4 @@
-import createSagaMiddleware, { Task, END } from 'redux-saga';
+import createSagaMiddleware, { END, Task } from 'redux-saga';
 import { configureStore, Store } from '@reduxjs/toolkit';
 import rootSaga from './root-saga';
 import { errorReducer } from './slices/error-slice';
@@ -23,10 +23,11 @@ export default function createReduxStore(initialState = {}) {
       loading: LoadingReducer,
       theme: themeReducer,
       game: gameReducer,
+      leaderboard: LeaderboardReducer,
     },
     middleware: [sagaMiddleware],
   });
-  
+
   (store as SagaStore).rootSaga = sagaMiddleware.run(rootSaga);
   (store as SagaStore).close = () => store.dispatch(END);
 

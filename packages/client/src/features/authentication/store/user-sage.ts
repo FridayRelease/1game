@@ -25,7 +25,6 @@ function* userInfoSaga({ payload }: Effect<string, string | undefined>) {
     );
   } finally {
     yield put(LoadingActions.setIsLoading(false));
-    yield cancel();
   }
 }
 
