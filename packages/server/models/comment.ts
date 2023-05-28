@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Table, Column, Model, HasMany, DataType, BelongsTo, ForeignKey, AllowNull } from 'sequelize-typescript';
+import { Table, Column, Model, HasMany, DataType, BelongsTo, ForeignKey, AllowNull, Default } from 'sequelize-typescript';
 import { Topic } from './topic';
 import { User } from './user';
 
@@ -39,4 +39,8 @@ export class Comment extends Model {
     foreignKey: 'topic_id',
   })
   topic!: Topic;
+
+  @Default(0)
+  @Column
+  nested_comment_count!: number;
 }

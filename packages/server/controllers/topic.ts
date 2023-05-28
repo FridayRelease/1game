@@ -92,15 +92,20 @@ export const topicUpdate = async (req: Request<RequestWithId>, res: Response) =>
 export const topicDelete = async (req: Request<RequestWithId>, res: Response) => {
   try {
     const { id } = req.params;
-    const topic = await Topic.destroy({
-      where: { id }
-    });
+    const topic = await Topic.findByPk(id);
 
-    if (topic) {
-      return res.status(204).json({ message: 'Topic deleted' })
+    if (!topic) {
+      return res.status(204).json(errorMessage('Topic not found'))
     }
 
-    return res.status(404).json(errorMessage('Topic not found'))
+    await Comment.destroy({
+      where: {
+        topic_id: topic?.id,
+      }
+    });
+
+    await topic.destroy();
+    return res.status(200).json(errorMessage('Topic deleted'))
   } catch (error) {
     return res.status(500).json(errorMessage(error))
   }
