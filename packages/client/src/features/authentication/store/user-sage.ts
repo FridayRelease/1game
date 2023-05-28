@@ -2,45 +2,42 @@ import { errorActions } from '@/store/slices/error-slice';
 import { LoadingActions } from '@/store/slices/loading-slice';
 import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
 import { userActions } from './user-slice';
-import { Effect, takeEvery, put, call, takeLatest } from 'redux-saga/effects';
+import { Effect, takeEvery, put, call, takeLatest, cancel } from 'redux-saga/effects';
 import { signin, signup, userFullInfo } from '@/controllers/user-controllers';
 import { UserResponseInfo, NavigateSagaProps, PropsWithNavigator } from './types';
 import { LoginUrl, MainUrl } from '@/constant/router';
 
-function* userInfoSaga({ payload }: Effect<string, NavigateSagaProps>) {
-  const { navigate } = payload;
+function* userInfoSaga({ payload }: Effect<string, string | undefined>) {
   try {
     yield put(LoadingActions.setIsLoading(true));
 
-    const user: UserResponseInfo = yield call(userFullInfo);
+    const user: UserResponseInfo = yield call(userFullInfo, payload);
 
     yield put(userActions.setUser(user));
   } catch (error) {
+    yield put(userActions.setUser(null));
+
     yield put(
       errorActions.setError({
         title: 'Что-то пошло не так...',
         description: 'Попробуйте авторизоваться еще раз',
       })
     );
-
-    navigate(LoginUrl);
   } finally {
     yield put(LoadingActions.setIsLoading(false));
+    yield cancel();
   }
 }
 
-function* signinSage({ payload }: Effect<string, PropsWithNavigator<IUserSigninRequest>>) {
-  const { props, navigate } = payload;
+function* signinSage({ payload }: Effect<string, IUserSigninRequest>) {
   yield put(LoadingActions.setIsLoading(true));
 
   try {
-    yield call(signin, props);
+    yield call(signin, payload);
 
     const user: UserResponseInfo = yield call(userFullInfo);
 
     yield put(userActions.setUser(user));
-
-    navigate(MainUrl);
   } catch (error) {
     yield put(
       errorActions.setError({

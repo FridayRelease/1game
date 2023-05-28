@@ -9,21 +9,25 @@ import { Trait } from './trait';
 class Player extends Trait {
   lives: number;
   score: number;
+  enemiesCount: number;
+  totalEnemies: number;
   enemiesCount!: number;
+  name!: string;
 
   constructor() {
     super(Traits.Player);
     this.score = 0;
     this.lives = 3;
+    this.enemiesCount = 0;
+    this.totalEnemies = 0;
 
     this.events.on(Killable.EVENT_KILL, (entity: Entity) => {
       if (entity.type === EntityType.TANK) {
         this.lives -= 1;
       } else if (entity.type === EntityType.ENEMY_TANK) {
         this.score += 100;
-        this.enemiesCount -= 1;
+        this.enemiesCount += 1;
       }
-      console.warn(this);
     });
   }
 

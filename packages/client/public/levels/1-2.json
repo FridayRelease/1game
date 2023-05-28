@@ -59,7 +59,7 @@
   "triggers": [
     {
       "type": "goto",
-      "name": "1-1",
+      "name": "1-3",
       "pos": [64, 64]
     },
     {

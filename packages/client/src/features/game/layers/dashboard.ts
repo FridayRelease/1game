@@ -40,7 +40,7 @@ function createDashboardLayer(font: Font, level: Level) {
 
     const playerTrait = getPlayerTrait(level.entities);
 
-    const enemies = getColumn(playerTrait?.enemiesCount || 4);
+    const enemies = getColumn(Number(playerTrait?.totalEnemies) - Number(playerTrait?.enemiesCount) || 0);
     const lives = playerTrait?.lives || 0;
 
     enemies.forEach((e, index) => {
