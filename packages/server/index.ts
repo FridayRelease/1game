@@ -4,7 +4,16 @@ import type { ViteDevServer } from 'vite';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import helmet from 'helmet';
 import * as path from 'path';
+import { initDB } from './config/db';
+import cookieParser from 'cookie-parser';
+import topicRoutes from './routes/topic';
+import userRoutes from './routes/user';
+import commentRoutes from './routes/comment';
+
+dotenv.config();
+initDB();
 
 dotenv.config();
 
@@ -14,6 +23,10 @@ import { v2 } from './src/constants/api';
 
 async function startServer() {
   const app = express();
+  app.use(cors());
+  app.use(cookieParser());
+  app.use(helmet());
+  app.disable('x-powered-by');
 
   // VITE SERVER
   let vite: ViteDevServer | undefined;
@@ -39,6 +52,11 @@ async function startServer() {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(ssrMiddleware);
+
+  // * ENDPOINTS
+  userRoutes(app);
+  topicRoutes(app);
+  commentRoutes(app);
 
   const port = Number(process.env.SERVER_PORT) || 3001;
 
