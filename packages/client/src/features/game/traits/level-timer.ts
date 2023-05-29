@@ -48,8 +48,14 @@ export default class LevelTimer extends Trait {
     if (this.currentTime < this.addedTime) {
       const enemies = Array.from(level.entities).filter(e => e.hasTrait(Traits.Enemy));
       const player = getPlayerTrait(level.entities);
-      const count = player?.enemiesCount || 0 - enemies.length;
-      if (enemies?.length < this.totalEnemy && count > 0) {
+      const enemiesCount = player?.enemiesCount || 0;
+      const totalEnemies = player?.totalEnemies || 0;
+
+      if (
+        enemies.length < totalEnemies &&
+        enemiesCount < totalEnemies &&
+        enemies.length + enemiesCount < totalEnemies
+      ) {
         level.events.emit(Level.EVENT_TRIGGER, 'entity');
       }
       this.addedTime = this.addedTime - 10;

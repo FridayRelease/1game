@@ -1,14 +1,15 @@
 import { themeActions } from '@/store/slices/theme-slice';
-import { store } from '@/store/store';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { useEffect } from 'react';
+import { useStore } from 'react-redux';
 
 const useTheme = () => {
-  let theme = getLocalStorage('theme');
+  const store = useStore();
+  const theme = getLocalStorage('theme');
 
   useEffect(() => {
     if (!theme.value) {
-      theme = store.getState().theme;
+      // theme = store.theme;
       setLocalStorage('theme', JSON.stringify({ value: theme.value }));
     }
 

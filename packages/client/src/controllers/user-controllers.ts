@@ -26,8 +26,8 @@ const request = async (req: () => Promise<void>, error: IErrorState, dispatch: D
   }
 };
 
-const userFullInfo = async () => {
-  const user = await userApi.userInfo();
+const userFullInfo = async (cookie?: string) => {
+  const user = await userApi.userInfo(cookie);
 
   return user.data;
 };

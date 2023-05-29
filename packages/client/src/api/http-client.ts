@@ -10,6 +10,7 @@ export class HttpClient {
       baseURL: prefixUrl,
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
+      timeout: 5000,
       ...config,
     });
   }

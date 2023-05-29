@@ -44,8 +44,12 @@ export class UserApi {
     return await this.http.put<IUserDTO>('user/profile/avatar', data);
   };
 
-  userInfo = async () => {
+  userInfo = async (cookie?: string) => {
     // Получить информацию о пользователе
-    return await this.http.get<IUserDTO>('/auth/user');
+    return await this.http.get<IUserDTO>('/auth/user', {
+      headers: {
+        Cookie: cookie,
+      },
+    });
   };
 }
