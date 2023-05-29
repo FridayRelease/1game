@@ -14,12 +14,10 @@ const ToggleTheme = () => {
 
   // Обновление localstorage
   useEffect(() => {
-    if (theme.value) {
-      setLocalStorage('theme', JSON.stringify({ value: theme.value }));
-      globalThis.document.documentElement.dataset.theme = theme.value;
-    } else {
-      globalThis.document.documentElement.dataset.theme = DEFAULT_THEME;
-    }
+    const value = theme.value || DEFAULT_THEME;
+    setLocalStorage('theme', JSON.stringify({ value }));
+
+    globalThis.document.documentElement.dataset.theme = value;
   }, []);
 
   // Switching theme.
