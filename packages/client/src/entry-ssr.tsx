@@ -49,13 +49,7 @@ const render = (url: string, callback: (response: IResponse) => void, cookie?: s
 
         const appHtml = renderAppToString(initialStore, url);
 
-        // Защита от XSS state преобразуется в строку и в заменяется < на символьный '\\u003c'
-        const initialStateHtml = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(state).replace(
-          /</g,
-          '\\u003c'
-        )}</script>`;
-
-        callback({ state: initialStateHtml, html: appHtml });
+        callback({ state: JSON.stringify(state).replace(/</g, '\\u003c'), html: appHtml });
       })
       .catch(e => {
         callback({ error: e });

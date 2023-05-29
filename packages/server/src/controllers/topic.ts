@@ -3,8 +3,8 @@ import { User } from '../models/user';
 import { Topic } from '../models/topic';
 import { Comment } from '../models/comment';
 import type { IQueryPagination, RequestWithId } from 'request';
-import { errorMessage } from '../utils/messageHelper';
-import { paginateResponse } from '../utils/data';
+import { errorMessage } from '../../utils/messageHelper';
+import { paginateResponse } from '../../utils/data';
 import { Op } from 'sequelize';
 
 /**
@@ -16,7 +16,7 @@ export const topicCreate = async (req: Request, res: Response) => {
     const topic = await Topic.create(req.body);
     return res.status(201).json(topic.dataValues);
   } catch (error) {
-    return res.status(500).json(errorMessage(error))
+    return res.status(500).json(errorMessage(error));
   }
 };
 
@@ -28,24 +28,23 @@ export const topicGet = async (req: Request, res: Response) => {
     if (Number(queryParams.limit) === 0) {
       const topics = await Topic.findAll({
         where: {
-          'subject': { [Op.like]: '%' + textSearch + '%' }
-        }
+          subject: { [Op.like]: '%' + textSearch + '%' },
+        },
       });
-      return res.status(200).json(paginateResponse(topics.length, topics, offset, limit))
+      return res.status(200).json(paginateResponse(topics.length, topics, offset, limit));
     }
 
     const { count, rows } = await Topic.findAndCountAll({
       limit: limit,
       offset: offset * limit,
       where: {
-        'subject': { [Op.like]: '%' + textSearch + '%' }
-      }
+        subject: { [Op.like]: '%' + textSearch + '%' },
+      },
     });
 
-    return res.status(200).json(paginateResponse(count, rows, offset, limit))
-  }
-  catch (error) {
-    return res.status(500).json(errorMessage(error))
+    return res.status(200).json(paginateResponse(count, rows, offset, limit));
+  } catch (error) {
+    return res.status(500).json(errorMessage(error));
   }
 };
 
@@ -70,12 +69,11 @@ export const topicRead = async (req: Request, res: Response) => {
   res.send(topic?.toJSON()); //.sendStatus(200);
 };
 
-
 export const topicUpdate = async (req: Request<RequestWithId>, res: Response) => {
   try {
     const { id } = req.params;
     const topicUpdated = await Topic.update(req.body, {
-      where: { id }
+      where: { id },
     });
 
     if (topicUpdated) {
@@ -83,9 +81,9 @@ export const topicUpdate = async (req: Request<RequestWithId>, res: Response) =>
       return res.status(200).json(topic);
     }
 
-    return res.status(404).json(errorMessage('Topic not found'))
+    return res.status(404).json(errorMessage('Topic not found'));
   } catch (error) {
-    return res.status(500).json(errorMessage(error))
+    return res.status(500).json(errorMessage(error));
   }
 };
 
@@ -95,18 +93,18 @@ export const topicDelete = async (req: Request<RequestWithId>, res: Response) =>
     const topic = await Topic.findByPk(id);
 
     if (!topic) {
-      return res.status(204).json(errorMessage('Topic not found'))
+      return res.status(204).json(errorMessage('Topic not found'));
     }
 
     await Comment.destroy({
       where: {
         topic_id: topic?.id,
-      }
+      },
     });
 
     await topic.destroy();
-    return res.status(200).json(errorMessage('Topic deleted'))
+    return res.status(200).json(errorMessage('Topic deleted'));
   } catch (error) {
-    return res.status(500).json(errorMessage(error))
+    return res.status(500).json(errorMessage(error));
   }
 };
