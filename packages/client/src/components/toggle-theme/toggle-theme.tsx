@@ -5,6 +5,7 @@ import { Themes } from './types';
 import { useEffect, useRef } from 'react';
 import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
 import { setSelectedAttribute } from '@/utils/set-selected-attribute';
+import { DEFAULT_THEME } from '@/constant/default';
 
 const ToggleTheme = () => {
   const theme = useSelector(themeSelectors.theme);
@@ -15,6 +16,9 @@ const ToggleTheme = () => {
   useEffect(() => {
     if (theme.value) {
       setLocalStorage('theme', JSON.stringify({ value: theme.value }));
+      globalThis.document.documentElement.dataset.theme = theme.value;
+    } else {
+      globalThis.document.documentElement.dataset.theme = DEFAULT_THEME;
     }
   }, []);
 
