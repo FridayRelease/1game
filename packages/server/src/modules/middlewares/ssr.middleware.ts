@@ -47,9 +47,11 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
         } else if (response.redirectLocation) {
           res.redirect(302, response.redirectLocation);
         } else {
+          const initialStateHtml = `<script nonce="${res.locals.nonce}">window.__PRELOADED_STATE__ = ${response.state}</script>`;
+
           const html = template
             .replace(`<!--ssr-outlet-->`, response.html)
-            .replace('<!--init-state-->', response.state);
+            .replace('<!--init-state-->', initialStateHtml);
 
           res.status(200).send(html);
         }

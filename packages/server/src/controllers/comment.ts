@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import { User } from '../models/user';
 import { Comment } from '../models/comment';
 import type { IComment } from 'comment';
-import { errorMessage } from '../utils/messageHelper';
+import { errorMessage } from '../../utils/messageHelper';
 import { Op } from 'sequelize';
 
 /**
@@ -22,21 +22,21 @@ export const commentCreate = async (req: Request, res: Response) => {
       const findParentComment = await Comment.findByPk(comment_id);
 
       if (!findParentComment) {
-        return res.status(404).json(errorMessage(`Комментария с id ${comment_id} не найдено`))
+        return res.status(404).json(errorMessage(`Комментария с id ${comment_id} не найдено`));
       }
 
       const updateObj = {
-        nested_comment_count: findParentComment?.nested_comment_count + 1
-      }
+        nested_comment_count: findParentComment?.nested_comment_count + 1,
+      };
 
       await Comment.update(updateObj, {
-        where: { id: comment_id }
+        where: { id: comment_id },
       });
     }
 
     return res.status(200).json(comment.dataValues);
   } catch (error) {
-    return res.status(500).json({ message: 'error', error: error })
+    return res.status(500).json({ message: 'error', error: error });
   }
 };
 
@@ -47,10 +47,10 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
       where: {
         topic_id,
         comment_id: {
-          [Op.not]: null
-        }
-      }
-    })
+          [Op.not]: null,
+        },
+      },
+    });
 
     if (topic_id) {
       return res.status(200).json(comments);
@@ -67,7 +67,7 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
  * curl -X GET -H "Content-Type: application/json" http://localhost:3001/api/v1/comments/7
  */
 export const commentRead = async (req: Request, res: Response) => {
-  const findComment = await Comment.findByPk(req.params.id, { include: User })
+  const findComment = await Comment.findByPk(req.params.id, { include: User });
   const comment = findComment?.toJSON();
 
   if (!comment) {
@@ -100,12 +100,11 @@ export const commentRead = async (req: Request, res: Response) => {
   res.send(result);
 };
 
-
 export const commentUpdate = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const commentUpdated = await Comment.update(req.body, {
-      where: { id }
+      where: { id },
     });
 
     if (commentUpdated) {
@@ -113,10 +112,9 @@ export const commentUpdate = async (req: Request, res: Response) => {
       return res.status(200).json(comment);
     }
 
-    return res.status(404).json(errorMessage('Comment not found'))
+    return res.status(404).json(errorMessage('Comment not found'));
   } catch (error) {
-
-    return res.status(500).json(errorMessage(error))
+    return res.status(500).json(errorMessage(error));
   }
 };
 
@@ -131,41 +129,39 @@ export const commentDelete = async (req: Request, res: Response) => {
       const findParentComment = await Comment.findByPk(comment?.comment_id);
 
       if (!findParentComment) {
-        return res.status(404).json(errorMessage(`Комментария с id ${comment?.comment_id} не найдено`))
+        return res.status(404).json(errorMessage(`Комментария с id ${comment?.comment_id} не найдено`));
       }
 
       const updateObj = {
-        nested_comment_count: findParentComment?.nested_comment_count - 1
-      }
+        nested_comment_count: findParentComment?.nested_comment_count - 1,
+      };
 
       await Comment.update(updateObj, {
-        where: { id: comment?.comment_id }
+        where: { id: comment?.comment_id },
       });
     }
 
     if (!comment) {
-      return res.status(404).json(errorMessage('Comment not found'))
+      return res.status(404).json(errorMessage('Comment not found'));
     }
 
     if (comment.comment_id === null) {
       await Comment.destroy({
         where: {
           comment_id: comment.id,
-        }
+        },
       });
       await comment.destroy();
     } else {
       await comment.destroy();
     }
 
-
-
     if (comment) {
-      return res.status(204).json({ message: 'Comment deleted' })
+      return res.status(204).json({ message: 'Comment deleted' });
     }
 
-    return res.status(404).json(errorMessage('Comment not found'))
+    return res.status(404).json(errorMessage('Comment not found'));
   } catch (error) {
-    return res.status(500).json(errorMessage(error))
+    return res.status(500).json(errorMessage(error));
   }
 };
