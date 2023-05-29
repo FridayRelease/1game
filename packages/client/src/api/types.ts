@@ -37,6 +37,7 @@ type LeaderboardListDTO = {
 export interface IPlayerInfo {
   name?: string;
   score?: number;
+  enemies: number;
 }
 
 export interface ILeaderboardAddUser {

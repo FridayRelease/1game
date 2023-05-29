@@ -102,6 +102,7 @@ const fetchFont = async () => {
 
   const fontSprite = new SpriteSheet(image, 8, 8);
 
+  fontSprite.define('-', 0, 16, 8, 8);
   fontSprite.define('0', 0, 0, 8, 8);
   fontSprite.define('1', 8, 0, 8, 8);
   fontSprite.define('2', 16, 0, 8, 8);
