@@ -1,0 +1,190 @@
+.friends{
+  width: 100%;
+  margin: auto;
+}
+.topic-list{
+  width: 100%;
+  margin: auto;
+  height: 60%;
+}
+.header-search{
+  width: 100%;
+  margin: auto;
+  height: 50px;
+}
+.header-user{
+  width: 100%;
+  margin-top:20px ;
+  height: 50px;
+}
+.border-blue{
+  border: #151a84 solid 1px;
+}
+.comment{
+  height: auto;
+  min-height: 80px;
+}
+.comment-list{
+  min-height: 300px;
+  margin-top: 30px;
+}
+.border-yellow{
+  border:yellow solid 1px;
+}
+
+
+.forum-user-comp {
+  max-width: 700px;
+  max-height: 100px;
+  width: 90%;
+  border: var(--base-bg-600) solid 1px;
+  border-radius: 30px;
+  background: var(--base-bg-900);
+  padding: 10px 10px;
+  margin: 10px 10px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+}
+font {
+  font-family: var(--main-font-family);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 31px;
+  letter-spacing: 0;
+  text-align: left;
+}
+.forum-message {
+  width: 100%;
+  overflow-wrap: normal; /* не поддерживает IE, Firefox; является копией word-wrap */
+  word-wrap: normal;
+  word-break: normal; /* не поддерживает Opera12.14, значение keep-all не поддерживается IE, Chrome */
+  line-break: auto; /* нет поддержки для русского языка */
+  hyphens: manual; /* значение auto не поддерживается Chrome */
+  color: var(--main-color-text);
+}
+.forum-info {
+  width: 100%;
+}
+.forum-user {
+  width: 159px;
+  height: 19px;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--base-bg-200);
+}
+.forum-data {
+  width: 123px;
+  height: 19px;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--base-bg-200);
+}
+.forum-quantity {
+  width: 12px;
+  height: 19px;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--base-bg-200);
+}
+
+.forum-user-comp-column {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+}
+.forum-comp-row {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-items: center;
+}
+.white {
+  color: var(--main-color-text);
+}
+
+form {
+  width: 80%;
+  color: #555;
+  display: flex;
+  padding: 2px;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  margin: auto;
+  }
+
+input[type="search"] {
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 7px 8px;
+  font-size: 14px;
+  color: inherit;
+  border: 1px solid transparent;
+  border-radius: inherit;
+}
+
+input[type="search"]::placeholder {
+  color: #bbb;
+}
+
+button[type="submit"] {
+  text-indent: -999px;
+  overflow: hidden;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+button[type="submit"]:hover {
+  opacity: 1;
+}
+
+button[type="submit"]:focus,
+input[type="search"]:focus {
+  box-shadow: 0 0 3px 0 #1183d6;
+  border-color: #1183d6;
+  outline: none;
+}
+
+form.nosubmit {
+  border: none;
+  padding: 0;
+}
+
+input.nosubmit {
+  border: 1px solid #555;
+  width: 100%;
+  padding: 9px 4px 9px 40px;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+}
+.circle {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  font-size: 14px;
+  color: yellow;
+  text-align: center;
+  background: #000;
+  border:1px solid yellow;
+
+}
