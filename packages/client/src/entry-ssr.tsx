@@ -40,7 +40,7 @@ const render = (url: string, callback: (response: IResponse) => void, cookie?: s
 
   const match = matchRoutes(routes, url);
   if (!match) {
-    callback({ redirectLocation: '/' });
+    callback({ redirectLocation: '/page-404' });
   } else if (match.length > 0) {
     initialStore.rootSaga
       .toPromise()

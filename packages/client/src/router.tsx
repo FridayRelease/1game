@@ -1,7 +1,6 @@
 import { RequireAuth } from '@/features/authentication';
 import { RouteObject } from 'react-router-dom';
 import GamePage from './pages/game';
-import ErrorPage from './pages/error-page';
 import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
@@ -19,11 +18,13 @@ import {
   GameoverUrl,
   ForumUrl,
   LeaderboardUrl,
+  Page404Url,
 } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
+import Page404 from './pages/page-404';
 
 export const routes: RouteObject[] = [
   {
@@ -33,7 +34,6 @@ export const routes: RouteObject[] = [
         <Home />
       </RequireAuth>
     ),
-    errorElement: <ErrorPage />,
   },
   {
     path: LoginUrl,
@@ -108,5 +108,9 @@ export const routes: RouteObject[] = [
         <Leaderboard />
       </ErrorBoundary>
     ),
+  },
+  {
+    path: Page404Url,
+    element: <Page404 />,
   },
 ];
