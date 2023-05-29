@@ -19,6 +19,17 @@ type IUserDTO = {
   phone: string;
   avatar: string | null;
 };
+interface IUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+  display_name: string | null;
+  avatar: string | null;
+}
+
 
 enum Status {
   SUCCESS = 200,
@@ -123,6 +134,43 @@ interface ISoundSheetDTO {
   };
 }
 
+interface ITopicCreate{
+  subject:string,
+  user_id:number
+}
+
+interface ITopic{
+  id : number,
+  subject:string,
+  user_id : number,
+  user:IUser,
+  comment_id?: null | number,
+  created_at?:string,
+  updated_at?:string,
+  topic_id:  number,
+  comments?:[]|IComment[]|null,
+}
+
+interface IComment {
+  id: number;
+  message: string;
+  user_id: number;
+  topic_id: number;
+  comment_id: number | null;
+  created_at: string;
+  updated_at: string;
+  user:IUser;
+  comments?: IComment[] | [] |any;
+}
+
+interface ICommentCreate{
+  id: number;
+  message: string;
+  user_id: number;
+  topic_id: number;
+  comment_id: number | null;
+}
+
 export {
   type ISoundSheetDTO,
   type ErrorResponse,
@@ -137,4 +185,8 @@ export {
   type ILevelDTO,
   type IPatternDTO,
   type ITriggersDTO,
+  type ITopic,
+  type ITopicCreate,
+  type IComment,
+  type ICommentCreate
 };
