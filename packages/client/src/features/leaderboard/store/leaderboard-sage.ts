@@ -62,6 +62,6 @@ function* getScoreSaga() {
 }
 
 export default function* liSaga() {
-  yield takeLatest('leaderboard/auth', updateScoreSaga);
+  yield takeLatest('leaderboard/updateScore', updateScoreSaga);
   yield takeLatest('leaderboard/getScore', getScoreSaga);
 }
