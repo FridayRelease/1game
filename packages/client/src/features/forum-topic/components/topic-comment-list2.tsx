@@ -12,7 +12,7 @@ const TopicCommentList2 = () => {
     return (
         <ul className="comment-list column">
             <div>
-                <h1>Object will be this place</h1>
+                <h1 className='topic-list-title'>Сообщения </h1>
                 <Comments children={list}/>
             </div>
         </ul>

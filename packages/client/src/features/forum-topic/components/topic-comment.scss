@@ -20,9 +20,18 @@
 .border-blue{
   border: #151a84 solid 1px;
 }
+.comments{
+  height: auto;
+  min-height: 60px;
+}
 .comment{
   height: auto;
-  min-height: 80px;
+  min-height: 40px;
+}
+.comment-child{
+  height: auto;
+  min-height: 30px;
+  margin:30px;
 }
 .comment-list{
   min-height: 300px;
@@ -30,7 +39,17 @@
 }
 .border-yellow{
   border:yellow solid 1px;
+  border-radius: 20px;
 }
+.border-red{
+  border:red solid 1px;
+  border-radius: 20px;
+}
+
+.topic-list-title{
+  text-align: center;
+}
+
 
 
 .forum-user-comp {
