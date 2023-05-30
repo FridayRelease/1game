@@ -28,16 +28,20 @@ enum Status {
 }
 
 type LeaderboardListDTO = {
-  id: number;
-  name: string;
-  score: number;
-}[];
+  data: {
+    name: string;
+    score: number;
+  };
+};
+
+export interface IPlayerInfo {
+  name?: string;
+  score?: number;
+  enemies: number;
+}
 
 export interface ILeaderboardAddUser {
-  data: {
-    name: string | undefined;
-    score: number | undefined;
-  };
+  data: IPlayerInfo;
   ratingFieldName: string;
   teamName: string;
 }
