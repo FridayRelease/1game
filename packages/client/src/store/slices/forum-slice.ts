@@ -4,11 +4,7 @@ import {ITopic, IUserDTO} from "@/api/types";
 import {MockTopics} from "@/mock/mockTopics";
 import {Users} from "@/mock/mockUsers";
 
-export interface IFriend{
-  id:number;
-  name:string;
-  avatar?:string;
-}
+
 export interface IForumState {
   serverData:string;
   isLoaded:boolean;

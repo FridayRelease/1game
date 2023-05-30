@@ -1,4 +1,4 @@
-import {IComment} from "@/api/types";
+import {IComment} from "../api/types";
 
 export const mockComments:IComment[] = [
   { id: 5,
@@ -8,6 +8,16 @@ export const mockComments:IComment[] = [
     comment_id: null,
     created_at: '',
     updated_at: '',
+    user: {
+      id: 2,
+      first_name: 'Mike',
+      last_name: 'Mike_Big',
+      email: 'davidjoe@email.com',
+      display_name: null,
+      avatar: null,
+      created_at: '2023-05-24T11:31:21.229Z',
+      updated_at: '2023-05-24T11:31:21.229Z',
+    },
     comments: [
       {
         id: 7,
@@ -16,6 +26,16 @@ export const mockComments:IComment[] = [
         topic_id: 5,
         comment_id: 5,
         created_at: '2023-05-24T13:02:54.424Z',
+        user: {
+          id: 2,
+          first_name: 'Mike',
+          last_name: 'Mike_Big',
+          email: 'davidjoe@email.com',
+          display_name: null,
+          avatar: null,
+          created_at: '2023-05-24T11:31:21.229Z',
+          updated_at: '2023-05-24T11:31:21.229Z',
+        },
       },
       {
         id: 8,
@@ -24,6 +44,16 @@ export const mockComments:IComment[] = [
         topic_id: 5,
         comment_id: 5,
         created_at: '2023-05-24T13:03:09.987Z',
+        user: {
+          id: 2,
+          first_name: 'Mike',
+          last_name: 'Mike_Big',
+          email: 'davidjoe@email.com',
+          display_name: null,
+          avatar: null,
+          created_at: '2023-05-24T11:31:21.229Z',
+          updated_at: '2023-05-24T11:31:21.229Z',
+        },
         comments: [
           {
             id: 10,
@@ -32,6 +62,16 @@ export const mockComments:IComment[] = [
             topic_id: 5,
             comment_id: 5,
             created_at: '2023-05-24T13:02:54.424Z',
+            user: {
+              id: 2,
+              first_name: 'Mike',
+              last_name: 'Mike_Big',
+              email: 'davidjoe@email.com',
+              display_name: null,
+              avatar: null,
+              created_at: '2023-05-24T11:31:21.229Z',
+              updated_at: '2023-05-24T11:31:21.229Z',
+            },
           },
           {
             id: 11,
@@ -40,6 +80,16 @@ export const mockComments:IComment[] = [
             topic_id: 5,
             comment_id: 5,
             created_at: '2023-05-24T13:02:54.424Z',
+            user: {
+              id: 2,
+              first_name: 'Mike',
+              last_name: 'Mike_Big',
+              email: 'davidjoe@email.com',
+              display_name: null,
+              avatar: null,
+              created_at: '2023-05-24T11:31:21.229Z',
+              updated_at: '2023-05-24T11:31:21.229Z',
+            },
             comments: [
               {
                 id: 10,
@@ -48,6 +98,16 @@ export const mockComments:IComment[] = [
                 topic_id: 5,
                 comment_id: 5,
                 created_at: '2023-05-24T13:02:54.424Z',
+                user: {
+                  id: 2,
+                  first_name: 'Mike',
+                  last_name: 'Mike_Big',
+                  email: 'davidjoe@email.com',
+                  display_name: null,
+                  avatar: null,
+                  created_at: '2023-05-24T11:31:21.229Z',
+                  updated_at: '2023-05-24T11:31:21.229Z',
+                },
               },
             ],
           },
@@ -60,6 +120,16 @@ export const mockComments:IComment[] = [
         topic_id: 5,
         comment_id: 5,
         created_at: '2023-05-24T13:03:18.533Z',
+        user: {
+          id: 2,
+          first_name: 'Mike',
+          last_name: 'Mike_Big',
+          email: 'davidjoe@email.com',
+          display_name: null,
+          avatar: null,
+          created_at: '2023-05-24T11:31:21.229Z',
+          updated_at: '2023-05-24T11:31:21.229Z',
+        },
       },
     ]
   },
@@ -71,6 +141,16 @@ export const mockComments:IComment[] = [
     comment_id: 1,
     created_at: '',
     updated_at: '',
+    user: {
+      id: 2,
+      first_name: 'Mike',
+      last_name: 'Mike_Big',
+      email: 'davidjoe@email.com',
+      display_name: null,
+      avatar: null,
+      created_at: '2023-05-24T11:31:21.229Z',
+      updated_at: '2023-05-24T11:31:21.229Z',
+    },
     comments:[]
   },{
     id: 3,
@@ -80,6 +160,16 @@ export const mockComments:IComment[] = [
     comment_id: 1,
     created_at: '',
     updated_at: '',
+    user: {
+      id: 2,
+      first_name: 'Mike',
+      last_name: 'Mike_Big',
+      email: 'davidjoe@email.com',
+      display_name: null,
+      avatar: null,
+      created_at: '2023-05-24T11:31:21.229Z',
+      updated_at: '2023-05-24T11:31:21.229Z',
+    },
     comments:[]
   }
 

@@ -12,10 +12,10 @@ import { useSelector, useDispatch } from 'react-redux';
  */
 export const Friends: FC = () => {
     const dispatch = useDispatch();
-    const list = useSelector(ForumSelectors.friends);
+    const list = Users;//useSelector(ForumSelectors.friends);
 
     useEffect(() => {
-        dispatch(ForumActions.getFriends);
+        //dispatch(ForumActions.getFriends);
     }, []);
 
 

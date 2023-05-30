@@ -2,7 +2,7 @@ import './forum-comp.scss';
 import {useNavigate} from 'react-router-dom';
 import {ITopic} from "@/api/types";
 import {useDispatch} from "react-redux";
-import {ForumReducer} from '../../../store/slices/forum-slice'
+import {ForumActions} from "@/store/slices/forum-slice";
 
 /**
  Компонент Топика форума c первым сообщением
@@ -17,7 +17,7 @@ function ForumTopicItem(topic: ITopic) {
     const dispatch = useDispatch();
 
     function goToTopic(topic_id: number) {
-        setActiveTopicIdToStore(topic_id);
+        dispatch(ForumActions.setActiveTopicIdToStore(topic_id));
         navigate(`/forum/${topic_id}`);
     }
 
@@ -35,6 +35,4 @@ function ForumTopicItem(topic: ITopic) {
 
 export default ForumTopicItem;
 
-function setActiveTopicIdToStore(topic_id: number) {
-    throw new Error('Function not implemented.');
-}
+
