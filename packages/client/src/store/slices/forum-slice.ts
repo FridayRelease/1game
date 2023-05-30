@@ -8,7 +8,7 @@ import {Users} from "@/mock/mockUsers";
 export interface IForumState {
   serverData:string;
   isLoaded:boolean;
-  forum: ITopic[];
+  forum: ITopic[] | any;
   id:number | null;
   friends:IUserDTO[];
 }
@@ -42,8 +42,8 @@ export const ForumSlice = createSlice({
 });
 
 export const ForumSelectors = {
-  all: (state: RootState) => state.forum,
-  forum: (state: RootState) => state.forum.forum,
+  all: (state: RootState) => state,
+  forum: (state: RootState) => state.forum,
   id: (state: RootState) => state.forum.id,
   friends:(state: RootState) => state.forum.friends,
 };

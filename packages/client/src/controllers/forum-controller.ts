@@ -23,11 +23,11 @@ export const getTopicsAll = async () => {
   try {
     const { data } = await forumApi.getTopicsAll();
 
-    console.log('All Topics C ервера= ', data)
+    console.log('All Topics с Cервера получены = ', data)
     return data;
   } catch (e) {
     console.log('Ошибка получения списка Топиков c Сервера', e);
-    //console.log('All Mock Topics = ', mockTopicsString)
+
     return mockTopicsString;
   }
 };
@@ -36,12 +36,16 @@ export const getTopicsAndPrepare = async () => {
   let data:any;
   try {
     data  = await forumApi.getTopicsAll();
+    console.log('Все Topic c Сервера получили', data);
+    return data
   } catch (e) {
      data = mockTopicsString;
+    console.log('Ошибка получения списка Топиков c Сервера', e);
+    return data
   }
 
-  const result = data.type === 'string' ? JSON.parse(data) : ''
-  return result;
+ // const result = data.type === 'string' ? JSON.parse(data) : ''
+ // return result;
 };
 // получаем с сервера Топики по ID
 export const getTopicByIdPrepare = async (id:number) => {
@@ -80,32 +84,3 @@ export const deleteTopic = async (id:number) => {
   }
 };
 
-/*
-// запиcь данных в Store
-export const setForumDataToStore = (data: string, dispatch: Dispatch<AnyAction>) => {
-  dispatch(ForumActions.setForumDataFromServerToStore(data));
-}
-
-export const setForumPreparedDataToStore = (data: ITopic[], dispatch: Dispatch<AnyAction>) => {
-  dispatch(ForumActions.setPreparedDataToStore(data));
-}
-
-export const setActiveTopicToStore = (id: number, dispatch: Dispatch<AnyAction>) => {
-  dispatch(ForumActions.setActiveTopicIdToStore(id));
-}
-//Selectors
-export const getActiveTopicId = ()=>{
-  return store.getState().forum.id
-}
-
-export const getAllTopicsFromStore = ()=>{
-  return store.getState().forum.forum
-}
-
-export const getTopicCommentsFromStoreById = (id:number)=>{
-  let list = store.getState().forum.forum
-  list.filter(function (lis){if (lis.topic_id===id) return lis})
-  return list
-}
-
-*/

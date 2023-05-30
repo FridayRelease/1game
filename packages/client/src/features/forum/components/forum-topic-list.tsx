@@ -3,22 +3,21 @@ import {getTopicsAll, getTopicsAndPrepare} from "@/controllers/forum-controller"
 import ForumTopicItem from "@/features/forum/components/forum-topic-item";
 import {ITopic} from "@/api/types";
 import {MockTopics} from "@/mock/mockTopics";
+import {useDispatch, useSelector} from "react-redux";
+import {ForumActions, ForumSelectors} from "@/store/slices/forum-slice";
 
 /**
  Компонент форума cо списком Топиков
  @category component
  */
 const ForumTopicList = () => {
-    const [list, setData] = useState<any>([]);
+
+    const dispatch = useDispatch();
+    const list = useSelector(ForumSelectors.all);
+    console.log('list of topics in forum-topic-list = ', list)
 
     useEffect(() => {
-
-        (async () => {
-            const res = await getTopicsAndPrepare();
-
-            setData(MockTopics);//переделать
-            console.log('resTopicPrepare = ', res);
-        })();
+        dispatch(ForumActions.setForumDataFromServerToStore);
     }, []);
 
     return (
