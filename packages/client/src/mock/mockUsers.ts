@@ -1,4 +1,4 @@
-import {IUserDTO} from "@/api/types";
+import {IUserDTO} from "../api/types";
 
 export const Users:IUserDTO[] = [
   {

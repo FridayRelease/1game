@@ -4,7 +4,7 @@ import {AnyAction, Dispatch, Store} from '@reduxjs/toolkit';
 import  {MockTopics} from "@/mock/mockTopics";
 import {ForumActions} from "@/store/slices/forum-slice";
 import {mockTopicsString} from "@/mock/mockTopicsString";
-import {store} from "@/store/store";
+
 
 
 //добавление Topic на сервер
@@ -80,7 +80,7 @@ export const deleteTopic = async (id:number) => {
   }
 };
 
-
+/*
 // запиcь данных в Store
 export const setForumDataToStore = (data: string, dispatch: Dispatch<AnyAction>) => {
   dispatch(ForumActions.setForumDataFromServerToStore(data));
@@ -108,4 +108,4 @@ export const getTopicCommentsFromStoreById = (id:number)=>{
   return list
 }
 
-
+*/

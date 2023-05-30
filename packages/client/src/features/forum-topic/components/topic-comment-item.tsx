@@ -7,12 +7,12 @@ import './topic-comment.scss';
  @category component
  */
 interface CommentItemType{
-    comment:any
+    comment:IComment
 }
 
 function TopicCommentItem({comment}: CommentItemType) {
     console.log('TopicCommentItem data = ', comment)
-  //const { message, user, created_at,updated_at } = comment;
+  const { message, user, created_at,updated_at } = comment;
 
     const time = updated_at !== undefined ? updated_at : created_at
     const d = new Date(Date.parse(time!)).toLocaleTimeString().slice(0, -3);

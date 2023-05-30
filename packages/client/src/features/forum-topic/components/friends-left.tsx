@@ -1,31 +1,24 @@
-//import './topic-comment.scss';
+import './topic-comment.scss';
 import {FC, useEffect, useState} from "react";
-import LeaderboardItem from "@/components/leaderboard-list/leaderboard-item";
 import {Ring} from "@/features/forum-topic/components/ring";
-import avatar from "@/components/avatar";
-import {IQuery} from "@/api/types";
-import {getLeaderboardDatas} from "@/controllers/lider-controller";
 import {Users} from "@/mock/mockUsers";
+import { ForumActions, ForumSelectors } from '../../../store/slices/forum-slice';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 /**
  Компонент Страницы одного Топика с Сообщениями
  @category page
  */
 export const Friends: FC = () => {
-    /*
-    const [list, setData] = useState<any>([]);
+    const dispatch = useDispatch();
+    const list = useSelector(ForumSelectors.friends);
 
     useEffect(() => {
-          (async () => {
-            const res = Users;
-
-            setData(res);
-            console.warn(res);
-        })();
+        dispatch(ForumActions.getFriends);
     }, []);
-    */
-    const list = Users;
-    //console.log('list = ', list)
+
+
     return (
         <div className="friends row ">
             {list.map(( li : any, index: number) => (
