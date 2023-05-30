@@ -43,7 +43,7 @@ export const ForumSlice = createSlice({
 
 export const ForumSelectors = {
   all: (state: RootState) => state,
-  forum: (state: RootState) => state.forum,
+  forum: (state: RootState) => state.forum.forum,
   id: (state: RootState) => state.forum.id,
   friends:(state: RootState) => state.forum.friends,
 };

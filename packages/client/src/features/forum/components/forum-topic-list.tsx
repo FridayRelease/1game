@@ -12,13 +12,13 @@ import {ForumActions, ForumSelectors} from "@/store/slices/forum-slice";
  */
 const ForumTopicList = () => {
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const list = useSelector(ForumSelectors.all);
     console.log('list of topics in forum-topic-list = ', list)
 
-    useEffect(() => {
-        dispatch(ForumActions.setForumDataFromServerToStore);
-    }, []);
+    //useEffect(() => {
+    //    dispatch(ForumActions.setForumDataFromServerToStore);
+    //}, []);
 
     return (
         <ul className="">

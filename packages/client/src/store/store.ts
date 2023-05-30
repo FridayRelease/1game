@@ -7,6 +7,7 @@ import { LoadingReducer } from './slices/loading-slice';
 import { themeReducer } from './slices/theme-slice';
 import { LeaderboardReducer } from './slices/leaderboard-slice';
 import { gameReducer } from '@/features/game';
+import {ForumReducer} from "@/store/slices/forum-slice";
 
 export interface SagaStore extends Store {
   rootSaga: Task;
@@ -24,6 +25,7 @@ export default function createReduxStore(initialState = {}) {
       theme: themeReducer,
       game: gameReducer,
       leaderboard: LeaderboardReducer,
+      forum:ForumReducer
     },
     middleware: [sagaMiddleware],
   });
