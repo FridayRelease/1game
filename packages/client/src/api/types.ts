@@ -143,11 +143,11 @@ interface ITopic{
   id : number,
   subject:string,
   user_id : number,
-  user:IUser,
+  created_at:string,
+  updated_at:string,
+  user?:IUser,
   comment_id?: null | number,
-  created_at?:string,
-  updated_at?:string,
-  topic_id:  number,
+  topic_id?:  number,
   comments?:[]|IComment[]|null,
 }
 
@@ -160,6 +160,7 @@ interface IComment {
   created_at: string;
   updated_at: string;
   user:IUser;
+  nested_comment_count?:number;
   comments?: IComment[] | [] |any;
 }
 
@@ -177,6 +178,7 @@ export {
   type StatusResponse,
   type SignUpResponseDTO,
   type IUserDTO,
+  type IUser,
   Status,
   type LeaderboardListDTO,
   type ISpriteSheetDTO,

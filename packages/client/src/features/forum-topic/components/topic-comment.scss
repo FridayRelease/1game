@@ -205,5 +205,14 @@ input.nosubmit {
   text-align: center;
   background: #000;
   border:1px solid yellow;
-
 }
+.img-ring {
+  width: 100%; /* or any custom size */
+  height: 100%;
+  object-fit: cover;
+  border-radius: 40px;
+}
+.forum-user-message{
+  margin-bottom: 20px;
+}
+

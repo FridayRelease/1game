@@ -12,7 +12,7 @@ export const MessageSenderBottom: FC = () => {
         alert('Функция отправки сообщений будет реализована вместе с API');
     }
     return (
-        <div className="forum-user-message row border-blue">
+        <div className="forum-user-message row">
             <input placeholder="Оставить сообщение" className="forum-user-input"/>
             <button className="forum-user-button" onClick={onClick}>
                 Отправить

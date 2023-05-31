@@ -34,19 +34,13 @@ export const getCommentsAll = async () => {
 export const getCommentsByTopicId = async (id: number) => {
   const arr = []
   try {
-    const {data} = await forumApi.getCommentById(id);
-    console.log('Topic по Id с Сервера получили');
+    const {data} = await forumApi.getCommentsByIdTopic(id);
+    console.log(`Comments по Topic ${id} с Сервера получили = `, data);
     return data;
   } catch (e) {
-    console.log('Ошибка получения Comment по id с Сервера', e);
-    console.log('Подставляем Моковые Комментарии по ID Топика')
-    for (let i = 0; i < MockTopics.length; i++) {
-      if (MockTopics[i].topic_id == id) {
-        arr.push(MockTopics[i])
-      }
-    }
-
-    return arr;
+    console.log('Ошибка получения Comment по id Topic с Сервера', e);
+    //console.log('Подставляем Моковые Комментарии по ID Топика')
+    //return mockComments;
   }
 };
 

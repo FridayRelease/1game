@@ -4,6 +4,7 @@ import {Ring} from "@/features/forum-topic/components/ring";
 import {Users} from "@/mock/mockUsers";
 import { ForumActions, ForumSelectors } from '../../../store/slices/forum-slice';
 import { useSelector, useDispatch } from 'react-redux';
+import {getTopicsAll, getUsers} from "@/controllers/forum-topic-controller";
 
 
 /**
@@ -12,11 +13,23 @@ import { useSelector, useDispatch } from 'react-redux';
  */
 export const Friends: FC = () => {
     const dispatch = useDispatch();
-    const list = Users;//useSelector(ForumSelectors.friends);
+    const init_state = useSelector(ForumSelectors.friends);
+    const [list, setList] = useState(init_state);
 
     useEffect(() => {
-        //dispatch(ForumActions.getFriends);
+        async function fetchData() {
+            const response:any = await getUsers();
+            console.log('users list in friends-left = ', response.data)
+            if (response.data!==undefined && response.status === 200){
+                setList(response.data);
+                dispatch(ForumActions.setUsersFromServerToStore(response.data));
+            }
+
+
+        }
+        fetchData();
     }, []);
+
 
 
     return (

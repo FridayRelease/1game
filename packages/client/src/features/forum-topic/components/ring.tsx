@@ -8,7 +8,7 @@ export const Ring= ({avatar,  name }: any) => {
     return (
         <div className='ring column'>
             <div className="circle">
-                <img src={avatar} key={name}/>
+                <img className='img-ring' src={avatar} key={name}/>
             </div>
             <h6>{name}</h6>
        </div>

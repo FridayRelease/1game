@@ -11,12 +11,13 @@ import {TopicList} from "@/features/forum-topic/components/topic-list";
 import {HeaderUserRight} from "@/features/forum-topic/components/header-user-right";
 import {MessageSenderBottom} from "@/features/forum-topic/components/message-sender-bottom";
 import TopicCommentList2 from "@/features/forum-topic/components/topic-comment-list2";
+import {useSelector} from "react-redux";
+import {ForumSelectors} from "@/store/slices/forum-slice";
 /**
  Страница одного Топика с Сообщениями
  @category page
  */
-const ForumTopic: FC = () => {
-    const { id } = useParams();
+const ForumTopic = () => {
 
     return (
         <div className="forum-user-page row">
@@ -28,7 +29,7 @@ const ForumTopic: FC = () => {
 
             <div className="forum-topic-right column width60 border-blue">
                 <HeaderUserRight />
-                <TopicCommentList2 key={id}/>
+                <TopicCommentList2/>
                 <MessageSenderBottom />
             </div>
 

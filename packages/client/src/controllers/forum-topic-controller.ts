@@ -1,11 +1,7 @@
 import {forumApi} from "@/api";
 import {ITopic, ITopicCreate} from "@/api/types";
-import {AnyAction, Dispatch, Store} from '@reduxjs/toolkit';
 import  {MockTopics} from "@/mock/mockTopics";
-import {ForumActions} from "@/store/slices/forum-slice";
-import {mockTopicsString} from "@/mock/mockTopicsString";
-
-
+import {Users} from "@/mock/mockUsers";
 
 //добавление Topic на сервер
 export const addTopicToServer = async (info: ITopicCreate) => {
@@ -28,38 +24,22 @@ export const getTopicsAll = async () => {
   } catch (e) {
     console.log('Ошибка получения списка Топиков c Сервера', e);
 
-    return mockTopicsString;
+    return MockTopics;
   }
 };
-// Топики - обработка полученные с сервера строки и запись обьекта в Стор - forum
-export const getTopicsAndPrepare = async () => {
-  let data:any;
-  try {
-    data  = await forumApi.getTopicsAll();
-    console.log('Все Topic c Сервера получили', data);
-    return data
-  } catch (e) {
-     data = mockTopicsString;
-    console.log('Ошибка получения списка Топиков c Сервера', e);
-    return data
-  }
 
- // const result = data.type === 'string' ? JSON.parse(data) : ''
- // return result;
-};
 // получаем с сервера Топики по ID
-export const getTopicByIdPrepare = async (id:number) => {
+export const getTopicById = async (id:number) => {
   let data:any;
   try {
     data  = await forumApi.getTopicById(id);
     console.log('Topic по Id с Сервера получили');
-
+    return data
   } catch (e) {
     console.log('Ошибка получения Топика по id с Сервера', e);
     return MockTopics[id+1];
   }
-  const result = data.type === 'string' ? JSON.parse(data) : ''
-  return result;
+
 };
 
 // обновление Топика на сервере
@@ -81,6 +61,18 @@ export const deleteTopic = async (id:number) => {
   } catch (e) {
     console.log('Ошибка удаления Топика на Сервере', e);
 
+  }
+};
+
+//Получение списка друзей для чата
+export const getUsers = async () => {
+  try {
+    const users = await forumApi.getUsers();
+    console.log('Получили список Users с Сервера = ', users);
+    return users
+  } catch (e) {
+    console.log('Ошибка получения списка Users с Сервера', e);
+    return Users
   }
 };
 

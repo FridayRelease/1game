@@ -1,33 +1,33 @@
-import {IUserDTO} from "../api/types";
+import {IUser} from "../api/types";
 
-export const Users:IUserDTO[] = [
+export const Users:IUser[] = [
   {
     id: 1,
     first_name: "Дима",
-    second_name: "Петров",
+    last_name: "Петров",
     display_name: "Дима",
-    login: 'Dima',
     email: 'dima@ya.ru',
-    phone: '+749511111111',
-    avatar: '../../mock/currentUser.jpg',
+    created_at:"2023-05-24T11:27:52.729Z",
+    updated_at:"2023-05-24T11:27:52.729Z",
+    avatar: 'https://ya-praktikum.tech/api/v2/resources//5651bc91-8189-4042-8f92-933c4b8f8415/b5833c66-ce21-446c-b6c9-dc500587f463_avatarki-dlia-vatsapa-49.webp',
   },{
     id: 2,
     first_name: "Миша",
-    second_name: "Иванов",
+    last_name: "Иванов",
     display_name: "Миша",
-    login: 'Misha',
+    created_at:"2023-05-24T11:27:52.729Z",
+    updated_at:"2023-05-24T11:27:52.729Z",
     email: 'misha@ya.ru',
-    phone: '+74952222222',
-    avatar: '../../../../mock/face2.png',
+    avatar: 'https://ya-praktikum.tech/api/v2/resources/cd51bcb1-8a34-4acd-92ae-028d3244a650/fc5ef7f8-1107-4015-9b20-8e0c6ccd720e_453544.png',
   }
   ,{
     id: 3,
     first_name: "Лида",
-    second_name: "Сидорова",
+    last_name: "Сидорова",
     display_name: "Лида",
-    login: 'Petr',
+    created_at:"2023-05-24T11:27:52.729Z",
+    updated_at:"2023-05-24T11:27:52.729Z",
     email: 'sidorov@ya.ru',
-    phone: '+74953333333',
-    avatar: '../../mock/face3.png',
+    avatar: 'https://ya-praktikum.tech/api/v2/resources//9b34f0d7-c858-4385-816d-9fb23954ceab/8f3875fd-6ce1-41dc-aa3b-e16a9dbad6fe_medved.jpg'
   }
 ]

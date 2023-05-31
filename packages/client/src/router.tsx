@@ -24,6 +24,7 @@ import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-topic/forum-topic';
 import Leaderboard from './pages/leaderboard';
+import ForumTopic from '@/features/forum-topic/forum-topic';
 
 export const routes: RouteObject[] = [
     {
@@ -96,11 +97,11 @@ export const routes: RouteObject[] = [
         ),
     },
     {
-        path: `/forum/:id`,
+        path: `/forum/topic`,
         element: (
             <ErrorBoundary>
                 <RequireAuth>
-                    <ForumUser />
+                    <ForumTopic />
                 </RequireAuth>
             </ErrorBoundary>
         ),

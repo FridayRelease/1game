@@ -23,14 +23,14 @@ export class ForumApi {
     return await this.http.get(`/api/v1/topics/`);
   };
   getTopicById = async (id: number) => {//topicRead - string
-    return await this.http.get(`/api/v1/topics/{id}`);
+    return await this.http.get(`/api/v1/topics/${id}`);
   };
   updateTopic = async (id: number, data:string) => {//topicUpdate
-    return await this.http.put(`/api/v1/topics/{id}`, data);
+    return await this.http.put(`/api/v1/topics/${id}`, data);
   };
 
   deleteTopic = async (id: number) => {//topicDelete
-    return await this.http.delete(`/api/v1/topics/{id}`);
+    return await this.http.delete(`/api/v1/topics/${id}`);
   };
 
   /*
@@ -47,14 +47,24 @@ export class ForumApi {
   getCommentsAll = async () => {//Get all comments
     return await this.http.get(`/api/v1/comments/`);
   };
-  getCommentById = async (id: number) => {//commentRead by Id
-    return await this.http.get(`/api/v1/comments/{id}`);
+  getCommentsById = async (id: number) => {//commentRead by Id
+    return await this.http.get(`/api/v1/comments/${id}`);
+  };
+  getCommentsByIdTopic = async (id: number) => {//commentRead by Id Topic
+    return await this.http.get(`/api/v1/comments/topic/${id}`);
   };
   updateComment = async (id: number, data:string) => {//Update comment
-    return await this.http.put(`/api/v1/comments/{id}`, data);
+    return await this.http.put(`/api/v1/comments/${id}`, data);
   };
 
   deleteComment = async (id: number) => {//delete comment
-    return await this.http.delete(`/api/v1/comments/{id}`);
+    return await this.http.delete(`/api/v1/comments/${id}`);
   };
+  /*
+* users - /api/v1/users
+* */
+  getUsers = async () => {
+    return await this.http.get(`/api/v1/users/`);
+  };
+
 }

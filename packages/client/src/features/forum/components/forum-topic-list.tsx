@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react";
-import {getTopicsAll, getTopicsAndPrepare} from "@/controllers/forum-controller";
+import {getTopicsAll} from "@/controllers/forum-topic-controller";
 import ForumTopicItem from "@/features/forum/components/forum-topic-item";
-import {ITopic} from "@/api/types";
-import {MockTopics} from "@/mock/mockTopics";
+
 import {useDispatch, useSelector} from "react-redux";
 import {ForumActions, ForumSelectors} from "@/store/slices/forum-slice";
 
@@ -12,18 +11,27 @@ import {ForumActions, ForumSelectors} from "@/store/slices/forum-slice";
  */
 const ForumTopicList = () => {
 
-    //const dispatch = useDispatch();
-    const list = useSelector(ForumSelectors.all);
-    console.log('list of topics in forum-topic-list = ', list)
+    const dispatch = useDispatch();
 
-    //useEffect(() => {
-    //    dispatch(ForumActions.setForumDataFromServerToStore);
-    //}, []);
+    const init_state = useSelector(ForumSelectors.topics);
+    const [list, setList] = useState(init_state);
+
+    useEffect(() => {
+        async function fetchData() {
+            const response:any = await getTopicsAll();
+            console.log('responce.rows in forum-topic-list = ', response.rows)
+            setList(response.rows);
+            dispatch(ForumActions.setTopicsFromServerToStore(response.rows));
+
+             }
+        fetchData();
+    }, []);
 
     return (
         <ul className="">
             {list.map(( data : any, index: number) => (
-                <ForumTopicItem key={index} topic_id={data.topic_id} user={data.user} subject={data.subject} user_id={data.user_id} comment_id={data.comment_id} id={data.id} created_at={data.created_at} comments={data.comments} updated_at={data.updated_at}/>
+                <ForumTopicItem key={index} topic={data}/>
+
             ))}
         </ul>
     );

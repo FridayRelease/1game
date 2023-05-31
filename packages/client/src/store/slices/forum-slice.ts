@@ -1,41 +1,48 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import {ITopic, IUserDTO} from "@/api/types";
-import {MockTopics} from "@/mock/mockTopics";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {RootState} from '../store';
+import {IComment, ITopic, IUser} from "../../api/types";
 import {Users} from "@/mock/mockUsers";
+import {mockComments} from "@/mock/mockComments";
 
 
 export interface IForumState {
-  serverData:string;
-  isLoaded:boolean;
-  forum: ITopic[] | any;
-  id:number | null;
-  friends:IUserDTO[];
+  isLoaded: boolean;
+  topics: ITopic[] | [];
+  comments: IComment[];
+  friends?: IUser[] | [];
+  topic_id: number | undefined;
 }
 
 const ForumState = {
-  serverData:'',
-  isLoaded:false,
-  forum : MockTopics,
-  id:1,
-  friends:Users
+  isLoaded: false,
+  topics: [],
+  comments: mockComments,
+  friends: Users,
+  id: 1
 }
 export const ForumSlice = createSlice({
   name: 'forum',
   initialState: ForumState,
   reducers: {
-    setForumDataFromServerToStore: (state, { payload }: PayloadAction<string>) => {
-      state.serverData = payload;
+    setTopicsFromServerToStore: (state, {payload}: PayloadAction<ITopic[]>) => {
+      //@ts-ignore
+      state.topics = payload;
       state.isLoaded = true;
     },
-    setPreparedDataToStore: (state, { payload }: PayloadAction<ITopic[]>) => {
-      state.forum = payload;
-    },
-    setActiveTopicIdToStore: (state, { payload }: PayloadAction<number>) => {
+    setCommentsFromServerToStore: (state, {payload}: PayloadAction<IComment[]>) => {
+      //@ts-ignore
+      state.comments = payload;
+      },
+    //addTopicToStore: (state, {payload}: PayloadAction<ITopic>) => {
+    //  state.topics.push(payload);
+    //},
+    setActiveTopicIdToStore: (state, {payload}: PayloadAction<number>) => {
+      //@ts-ignore
       state.id = payload;
     },
-    getFriends: state => {
-      return state;
+    setUsersFromServerToStore: (state, {payload}: PayloadAction<IUser[]>) => {
+      // @ts-ignore
+      state.friends = payload;
     },
   },
 
@@ -43,9 +50,10 @@ export const ForumSlice = createSlice({
 
 export const ForumSelectors = {
   all: (state: RootState) => state,
-  forum: (state: RootState) => state.forum.forum,
+  topics: (state: RootState) => state.forum.topics,
   id: (state: RootState) => state.forum.id,
-  friends:(state: RootState) => state.forum.friends,
+  friends: (state: RootState) => state.forum.friends,
+  comments: (state: RootState) => state.forum.comments,
 };
 
 
