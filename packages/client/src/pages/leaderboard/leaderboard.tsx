@@ -2,7 +2,7 @@ import { FC } from 'react';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import Logotype from '@/components/logotype';
 import { cn } from '@/utils/cn';
-import LeaderboardList from '@/components/leaderboard-list';
+import LeaderboardList from '@/features/leaderboard/components/leaderboard-list';
 import './leaderboard.scss';
 
 /**

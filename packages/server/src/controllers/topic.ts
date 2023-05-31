@@ -37,6 +37,10 @@ export const topicGet = async (req: Request, res: Response) => {
     const { count, rows } = await Topic.findAndCountAll({
       limit: limit,
       offset: offset * limit,
+      include: {
+        model: User,
+        attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+      },
       where: {
         subject: { [Op.like]: '%' + textSearch + '%' },
       },
@@ -57,11 +61,17 @@ export const topicRead = async (req: Request, res: Response) => {
     include: [
       {
         model: User,
-        attributes: ['first_name', 'last_name', 'display_name', 'email', 'avatar'],
+        attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
       },
       {
         model: Comment,
         attributes: ['id', 'message', 'user_id', 'topic_id', 'comment_id', 'created_at'],
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+          },
+        ],
       },
     ],
   });
@@ -103,7 +113,7 @@ export const topicDelete = async (req: Request<RequestWithId>, res: Response) =>
     });
 
     await topic.destroy();
-    return res.status(200).json(errorMessage('Topic deleted'));
+    return res.status(200).json({ message: 'Topic deleted' });
   } catch (error) {
     return res.status(500).json(errorMessage(error));
   }

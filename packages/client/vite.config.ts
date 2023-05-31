@@ -1,6 +1,7 @@
 import { defineConfig, UserConfigExport } from 'vite';
 import { fileURLToPath, URL } from 'url';
 import react from '@vitejs/plugin-react';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import svgr from 'vite-plugin-svgr';
 import * as path from 'path';
 import dotenv from 'dotenv';
@@ -9,6 +10,8 @@ dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   let config: UserConfigExport = {
+    base: './',
+    publicDir: false,
     plugins: [
       react(),
       svgr({
@@ -42,6 +45,17 @@ export default defineConfig(({ mode }) => {
       build: {
         outDir: 'dist/client',
       },
+      plugins: [
+        ...config.plugins,
+        viteStaticCopy({
+          targets: [
+            {
+              src: path.resolve(__dirname, './public') + '/[!.]*', // 1️⃣
+              dest: './assets', // 2️⃣
+            },
+          ],
+        }),
+      ],
     };
   }
 

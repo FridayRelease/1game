@@ -157,7 +157,7 @@ export const commentDelete = async (req: Request, res: Response) => {
     }
 
     if (comment) {
-      return res.status(204).json({ message: 'Comment deleted' });
+      return res.status(200).json({ message: 'Comment deleted' });
     }
 
     return res.status(404).json(errorMessage('Comment not found'));

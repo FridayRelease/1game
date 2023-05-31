@@ -1,7 +1,7 @@
 import { HttpClient } from './http-client';
-import { ILeaderboardAddUser, IQuery } from '@/api/types';
+import { ILeaderboardAddUser, IQuery, LeaderboardListDTO } from '@/api/types';
 
-export class LiderApi {
+export class LeaderApi {
   private http;
 
   constructor(url: string) {
@@ -14,6 +14,6 @@ export class LiderApi {
   };
   // получение своей таблицы лидеров - на самом деле только одной записи одного игрока
   getTeamLeaderboard = async (query: IQuery) => {
-    return await this.http.post(`/leaderboard/1game`, query);
+    return await this.http.post<LeaderboardListDTO[]>(`/leaderboard/1game`, query);
   };
 }
