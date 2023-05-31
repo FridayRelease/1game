@@ -33,9 +33,10 @@ export const ForumSlice = createSlice({
       //@ts-ignore
       state.comments = payload;
       },
-    //addTopicToStore: (state, {payload}: PayloadAction<ITopic>) => {
-    //  state.topics.push(payload);
-    //},
+    addTopicToStore: (state, {payload}: PayloadAction<ITopic>) => {
+      // @ts-ignore
+      state.topics.push(payload);
+    },
     setActiveTopicIdToStore: (state, {payload}: PayloadAction<number>) => {
       //@ts-ignore
       state.id = payload;

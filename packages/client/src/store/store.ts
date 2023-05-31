@@ -6,6 +6,7 @@ import { userReducer } from '@/features/authentication';
 import { leaderboardReducer } from '@/features/leaderboard';
 import { LoadingReducer } from './slices/loading-slice';
 import { themeReducer } from './slices/theme-slice';
+import { ForumReducer } from './slices/forum-slice'
 
 export interface SagaStore extends Store {
   rootSaga: Task;
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   loading: LoadingReducer,
   theme: themeReducer,
   leaderboard: leaderboardReducer,
+  forum:ForumReducer
 });
 
 export default function createReduxStore(initialState = {}) {
