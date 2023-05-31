@@ -47,7 +47,7 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
       where: {
         topic_id,
         comment_id: {
-          [Op.not]: null,
+          [Op.eq]: null,
         },
       },
     });
