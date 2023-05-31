@@ -1,7 +1,6 @@
 import { defineConfig, UserConfigExport } from 'vite';
 import { fileURLToPath, URL } from 'url';
 import react from '@vitejs/plugin-react';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import svgr from 'vite-plugin-svgr';
 import * as path from 'path';
 import dotenv from 'dotenv';
@@ -10,7 +9,7 @@ dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   let config: UserConfigExport = {
-    base: './',
+    base: 'assets',
     publicDir: false,
     plugins: [
       react(),
@@ -36,6 +35,7 @@ export default defineConfig(({ mode }) => {
   if (mode === 'client') {
     config = {
       ...config,
+      publicDir: 'public',
       server: {
         port: Number(process.env.CLIENT_PORT) || 3000,
       },
@@ -44,18 +44,27 @@ export default defineConfig(({ mode }) => {
       },
       build: {
         outDir: 'dist/client',
-      },
-      plugins: [
-        ...config.plugins,
-        viteStaticCopy({
-          targets: [
-            {
-              src: path.resolve(__dirname, './public') + '/[!.]*', // 1️⃣
-              dest: './assets', // 2️⃣
+        rollupOptions: {
+          output: {
+            chunkFileNames: 'js/[name]-[hash].js',
+            entryFileNames: 'js/[name]-[hash].js',
+
+            assetFileNames: ({ name }) => {
+              if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+                return 'img/[name]-[hash][extname]';
+              }
+
+              if (/\.css$/.test(name ?? '')) {
+                return 'css/[name]-[hash][extname]';
+              }
+
+              // default value
+              // ref: https://rollupjs.org/guide/en/#outputassetfilenames
+              return '[name]-[hash][extname]';
             },
-          ],
-        }),
-      ],
+          },
+        },
+      },
     };
   }
 

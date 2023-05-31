@@ -8,6 +8,6 @@ const staticMiddleware = () => {
   if (isDev()) {
     return () => undefined;
   }
-  return express.static(path.resolve(distPath, 'assets'));
+  return express.static(path.resolve(distPath));
 };
 export default staticMiddleware;
