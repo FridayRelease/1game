@@ -98,7 +98,7 @@ const fetchLevel = async (entityFactories: Record<string, EntityFactoryCallback>
 };
 
 const fetchFont = async () => {
-  const image = await gameApi.loadImage('/assets/img/fonts.png');
+  const image = await gameApi.loadImage('/img/fonts.png');
 
   const fontSprite = new SpriteSheet(image, 8, 8);
 

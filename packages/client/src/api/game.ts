@@ -4,7 +4,7 @@ import { ILevelDTO, IPatternDTO, ISoundSheetDTO, ISpriteSheetDTO } from './types
 export class GameApi {
   private http;
 
-  constructor(url: string) {
+  constructor(protected url: string) {
     this.http = new HttpClient(url);
   }
 
@@ -14,7 +14,7 @@ export class GameApi {
       image.addEventListener('load', () => {
         resolve(image);
       });
-      image.src = url;
+      image.src = this.url + url;
     });
   };
 

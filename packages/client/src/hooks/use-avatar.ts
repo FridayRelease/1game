@@ -5,7 +5,7 @@ const useAvatar = (url: string | null) => {
   const [avatar, setAvatar] = useState<string | null>(null);
 
   // нужно переписать с использованием апи
-  const src = `${import.meta.env.VITE_AUTH_API}/resources${url}`;
+  const src = `${import.meta.env.VITE_BASE_API}/resources${url}`;
 
   useEffect(() => {
     if (url) {
