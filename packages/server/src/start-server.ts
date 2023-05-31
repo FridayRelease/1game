@@ -13,6 +13,7 @@ import topicRoutes from './routes/topic';
 import userRoutes from './routes/user';
 import staticMiddleware from './modules/middlewares/static.middleware';
 import securityMiddleware from './modules/middlewares/security.middleware';
+import userConfigRoutes from './routes/user-config';
 
 async function startServer() {
   const app = express();
@@ -44,6 +45,7 @@ async function startServer() {
   userRoutes(app);
   topicRoutes(app);
   commentRoutes(app);
+  userConfigRoutes(app);
 
   const port = Number(process.env.SERVER_PORT) || 3001;
 

@@ -2,6 +2,7 @@ import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 import { User } from './models/user';
 import { Topic } from './models/topic';
 import { Comment } from './models/comment';
+import { UserConfig } from './models/user-config';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
 
@@ -17,7 +18,7 @@ export const initDB = async () => {
     };
 
     const sequelize = new Sequelize(sequelizeOptions);
-    sequelize.addModels([User, Topic, Comment]);
+    sequelize.addModels([User, Topic, Comment, UserConfig]);
 
     // Create or update tables.
     await sequelize.sync({ alter: true });

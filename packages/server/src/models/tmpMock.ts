@@ -583,6 +583,106 @@ const userUpdate = JSON.stringify({
 // curl -X DELETE -H "Content-Type: application/json" http://localhost:3001/api/v1/users/11
 const userDelete = JSON.stringify({ message: 'User deleted' });
 
+// Create UserConfig
+// app.post(`${v1}/user-configs`, [userConfigCreate]);
+// curl -X POST -H "Content-Type: application/json" -d '{"current_theme":"dark","user_id":2}' http://localhost:3001/api/v1/user-configs
+const userConfigCreate = JSON.stringify({ id: '3' });
+
+// Get all UserConfigs
+// app.get(`${v1}/user-configs`, [userConfigGet]);
+// curl -X GET -H "Content-Type: application/json" http://localhost:3001/api/v1/user-configs
+const userConfigAll = JSON.stringify([
+  {
+    id: 3,
+    current_theme: 'dark',
+    user_id: 2,
+    created_at: '2023-05-31T12:41:29.761Z',
+    updated_at: '2023-05-31T12:41:29.761Z',
+    user: {
+      id: 2,
+      first_name: 'David',
+      last_name: 'Joe',
+      display_name: null,
+      email: 'davidjoe@email.com',
+      avatar: null,
+    },
+  },
+  {
+    id: 1,
+    current_theme: 'ligth',
+    user_id: 1,
+    created_at: '2023-05-31T12:35:32.931Z',
+    updated_at: '2023-05-31T12:54:15.930Z',
+    user: {
+      id: 1,
+      first_name: 'John',
+      last_name: 'Doe',
+      display_name: null,
+      email: 'johndoe@email.com',
+      avatar: null,
+    },
+  },
+  {
+    id: 5,
+    current_theme: 'dark',
+    user_id: 9,
+    created_at: '2023-05-31T12:55:25.322Z',
+    updated_at: '2023-05-31T12:55:55.511Z',
+    user: {
+      id: 9,
+      first_name: 'Василий',
+      last_name: 'Пупкин',
+      display_name: 'Вася',
+      email: 'vasyapupkin@email.com',
+      avatar:
+        'https://ya-praktikum.tech/api/v2/resources/5651bc91-8189-4042-8f92-933c4b8f8415/b5833c66-ce21-446c-b6c9-dc500587f463_avatarki-dlia-vatsapa-49.webp',
+    },
+  },
+]);
+
+// Get UserConfig
+// app.get(`${v1}/user-configs/:id`, [userConfigRead]);
+// curl -X GET -H "Content-Type: application/json" http://localhost:3001/api/v1/user-configs/1
+const userConfigGETById = JSON.stringify({
+  id: 1,
+  current_theme: 'ligth',
+  user_id: 1,
+  created_at: '2023-05-31T12:35:32.931Z',
+  updated_at: '2023-05-31T12:54:15.930Z',
+  user: {
+    id: 1,
+    first_name: 'John',
+    last_name: 'Doe',
+    display_name: null,
+    email: 'johndoe@email.com',
+    avatar: null,
+  },
+});
+
+// Update UserConfig
+// app.put(`${v1}/user-configs/:id`, [userConfigUpdate]);
+// curl -X PUT -H "Content-Type: application/json" -d '{"current_theme":"light"}' http://localhost:3001/api/v1/user-configs/3
+const userConfigUpdate = JSON.stringify({
+  id: 3,
+  current_theme: 'light',
+  user_id: 2,
+  created_at: '2023-05-31T12:41:29.761Z',
+  updated_at: '2023-05-31T13:32:53.095Z',
+  user: {
+    id: 2,
+    first_name: 'David',
+    last_name: 'Joe',
+    display_name: null,
+    email: 'davidjoe@email.com',
+    avatar: null,
+  },
+});
+
+// Delete UserConfig
+// app.delete(`${v1}/user-configs/:id`, [userConfigDelete]);
+// curl -X DELETE -H "Content-Type: application/json" http://localhost:3001/api/v1/user-configs/5
+const userConfigDelete = JSON.stringify({ message: 'UserConfig deleted' });
+
 export {
   commentGETById,
   commentAllForTopicId,
@@ -599,6 +699,11 @@ export {
   userCreate,
   userUpdate,
   userDelete,
+  userConfigCreate,
+  userConfigAll,
+  userConfigGETById,
+  userConfigUpdate,
+  userConfigDelete,
 };
 
 /*
