@@ -43,7 +43,17 @@ export const getCommentsByTopicId = async (id: number) => {
     //return mockComments;
   }
 };
-
+// получаем с сервера Comments по ID Comment
+export const getCommentsById = async (id: number) => {
+  const arr = []
+  try {
+    const {data} = await forumApi.getCommentsById(id);
+    console.log(`Comments по  ${id} с Сервера получили = `, data);
+    return data;
+  } catch (e) {
+    console.log('Ошибка получения Comment по id Topic с Сервера', e);
+    }
+};
 // обновление Топика на сервере
 export const updateComment = async (id: number, data: string) => {
   try {

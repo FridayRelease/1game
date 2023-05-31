@@ -11,6 +11,7 @@ export const Modal= ()=>{
     //доделать
     async function createForum(used_id:number, text:string) {
         //setShow(false);
+
     }
 
     return(

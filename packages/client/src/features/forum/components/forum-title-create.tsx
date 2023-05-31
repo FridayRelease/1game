@@ -28,8 +28,8 @@ export const TitleCreateForum = () => {
                 <label className="red">Ф</label>
                 <label className="white">ОРУМ</label>
             </div>
-            <ButtonNew className="forum-button right" children={children} onClick={createTopic} />
-
+            <ButtonNew className="forum-button right" children={children} onClick={createTopic} /><br/>
+            {show === true ? <Modal key={'1'} /> :''}
         </div>
     );
 }

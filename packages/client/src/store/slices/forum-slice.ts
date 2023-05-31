@@ -10,7 +10,8 @@ export interface IForumState {
   topics: ITopic[] | [];
   comments: IComment[];
   friends?: IUser[] | [];
-  topic_id: number | undefined;
+  activeTopicId: number | undefined;
+  commentId:number;
 }
 
 const ForumState = {
@@ -18,7 +19,8 @@ const ForumState = {
   topics: [],
   comments: mockComments,
   friends: Users,
-  id: 1
+  activeTopicId: 1,
+  commentId:1
 }
 export const ForumSlice = createSlice({
   name: 'forum',
@@ -38,8 +40,10 @@ export const ForumSlice = createSlice({
       state.topics.push(payload);
     },
     setActiveTopicIdToStore: (state, {payload}: PayloadAction<number>) => {
-      //@ts-ignore
-      state.id = payload;
+      state.activeTopicId = payload;
+    },
+    setCommentIdToStore: (state, {payload}: PayloadAction<number>) => {
+      state.commentId = payload;
     },
     setUsersFromServerToStore: (state, {payload}: PayloadAction<IUser[]>) => {
       // @ts-ignore
@@ -52,7 +56,7 @@ export const ForumSlice = createSlice({
 export const ForumSelectors = {
   all: (state: RootState) => state,
   topics: (state: RootState) => state.forum.topics,
-  id: (state: RootState) => state.forum.id,
+  id: (state: RootState) => state.forum.activeTopicId,
   friends: (state: RootState) => state.forum.friends,
   comments: (state: RootState) => state.forum.comments,
 };
