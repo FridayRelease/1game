@@ -8,8 +8,22 @@ import type { RequestWithId } from 'request';
  */
 export const userCreate = async (req: Request, res: Response) => {
   try {
-    const user = await User.create(req.body);
-    return res.status(201).json({ id: user.dataValues.id.toString() });
+    console.log('req.body.email: ', req.body.email);
+    if (req.body.email) {
+      let user = await User.findOne({ where: { email: req.body.email } });
+      console.log('user: ', user);
+
+      // Если пользователь уже существует в базе (ищем его по email-у), то обновляем его.
+      if (user) {
+        console.log('user update... ');
+        await User.update(req.body, { where: { email: req.body.email } });
+        user = await User.findOne({ where: { email: req.body.email } });
+        return res.status(200).json(user);
+      }
+    }
+
+    const userCreate = await User.create(req.body);
+    return res.status(201).json({ id: userCreate.dataValues.id.toString() });
   } catch (error) {
     return res.status(200).json({ message: 'error' });
   }
