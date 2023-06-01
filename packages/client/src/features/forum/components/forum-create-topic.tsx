@@ -14,20 +14,23 @@ export const CreateTopic = () =>{
     //const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const today = new Date();
     const data:ITopicCreate = {
+        //id:5,
         subject:text,
         user_id:user.info!.id,
         created_at:today.toLocaleDateString("en-US"),
         updated_at:today.toLocaleDateString("en-US"),
       }
+      console.log('data before = ', data)
     const dispatch = useDispatch()
-    const onSubmit  = (e:FormEvent) =>  {
+    const onSubmit  = (e:FormEvent, data:ITopicCreate) =>  {//
         e.preventDefault();
         console.log('datas for create new topic = ', data)
-        const result = addTopicToServer(data);
-        //console.log('result of add topic to Server', result)
-             //dispatch(ForumActions.setTopicsFromServerToStore(data));
-
+        addToServer(data);
     };
+
+    async function addToServer(data:ITopicCreate) {
+        await addTopicToServer(data).then(res => console.log('res = ', res))
+    }
     function update(event:ChangeEvent<HTMLInputElement>) {
         setText(event.target.value)
     }
@@ -37,10 +40,11 @@ export const CreateTopic = () =>{
             <form onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="InputName">Создать Тему:</label>
-                    <input id="InputName" type="text" value={text} defaultValue={'Привет !'} onChange={event =>update(event) } />
+                    <input id="InputName" type="text" value={text}  onChange={event =>update(event) } />
                 </div>
-                <button type="submit">Submit</button>
+
             </form>
+            <button type="submit">Создать</button>
         </div>
 
     );

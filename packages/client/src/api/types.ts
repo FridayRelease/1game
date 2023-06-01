@@ -139,7 +139,7 @@ interface ISoundSheetDTO {
 }
 
 interface ITopicCreate{
-  id?:number,
+  id?:number|null|undefined,
   subject:string,
   user_id:number
   created_at:string;

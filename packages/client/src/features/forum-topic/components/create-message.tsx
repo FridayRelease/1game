@@ -42,7 +42,7 @@ export const CreateMessage = () => {
                 <form onSubmit={onSubmit}>
                     <div>
                         <label htmlFor="InputName1">Написать сообщение:</label>
-                        <input id="InputName1" type="text" defaultValue={'Привет !'} value={text} onChange={event => update(event)} />
+                        <input id="InputName1" type="text" value={text} onChange={event => update(event)} />
                     </div>
                     <button type="submit">Отправить</button>
                 </form>
