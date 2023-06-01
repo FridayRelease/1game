@@ -21,6 +21,11 @@ export default defineConfig(({ mode }) => {
         },
       }),
       VitePWA({
+        srcDir: 'src',
+        scope: './',
+        filename: 'sw.ts',
+        strategies: 'injectManifest',
+        registerType: 'autoUpdate',
         manifest: {
           name: 'Battle City',
           short_name: 'Battle City',
