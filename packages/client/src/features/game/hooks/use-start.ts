@@ -3,7 +3,7 @@ import { fetchFont, fetchLevel } from '@/controllers/game-controllers';
 import { RefObject, useState, useEffect, ReactEventHandler } from 'react';
 import { loadEntities } from '../loaders/enteties';
 import { setupKeyboard } from '../input';
-import { createDashboardLayer } from '../layers';
+import { createDashboardLayer, createLeaderboardLayer } from '../layers';
 import { createCollisionLayer } from '../layers/collision';
 import { createPlayerEnv } from '../player';
 import { SceneRunner } from '../scene-runner';
@@ -12,15 +12,13 @@ import { createPlayer, getPlayerTrait, Player } from '../traits/player';
 import { GameContext } from '../types';
 import { createColorLayer } from '../layers/color';
 import { Level } from '../level';
-import { useNavigate } from 'react-router-dom';
 import { createTextLayer } from '../layers/text';
 import TimedScene, { Scene } from '../timed-scene';
 import { createPlayerProgressLayer } from '../layers/player-progress';
-import { gameActions } from '../store/game-slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserDatasToServer, setUserDatasToStore } from '@/controllers/lider-controller';
-import { ILeaderboardAddUser } from '@/api/types';
 import { userSelectors } from '@/features/authentication/store/user-slice';
+import { leaderboardActions } from '@/features/leaderboard/store/leaderboard-slice';
+import { IPlayerInfo } from '@/api/types';
 
 const random = (arr: number[][]): number[] => {
   const rand = Math.floor(Math.random() * arr.length);
@@ -41,7 +39,6 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
 } {
   const [isStarted, setStart] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector(userSelectors.user);
 
   const timer = new Timer();
@@ -65,8 +62,8 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
     const input = setupKeyboard(tank);
     input.listenTo(window);
 
-    const gameOver = async (score?: number) => {
-      dispatch(gameActions.setScore(score || 0));
+    const gameOver = async (info: IPlayerInfo) => {
+      dispatch(leaderboardActions.updateScore(info));
 
       const waitScreen = new TimedScene();
       waitScreen.countDown = 2;
@@ -77,15 +74,14 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
 
       const loadScreen = new Scene();
       loadScreen.comp.push(createColorLayer('#757575'));
-      loadScreen.comp.push(createTextLayer(font, `dashboard with score, ${score}`));
+      loadScreen.comp.push(createLeaderboardLayer(font, info.enemies, info.score));
       sceneRunner.addScene(loadScreen);
       sceneRunner.next();
 
-      // добавить главное меню
       setTimeout(() => {
-        // пока перекидывает на страницу leaderboard
-        navigate('/leaderboard');
-      }, 1000);
+        timer.cancel();
+        setStart(false);
+      }, 3000);
     };
 
     const runLevel = async (name: string) => {
@@ -106,23 +102,8 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       level.events.on(Level.EVENT_TRIGGER, (type: string) => {
         if (type === 'gameOver') {
           const player = getPlayerTrait(level.entities);
-          //
-          const data = { name: player?.name, score: player?.score };
-          const info: ILeaderboardAddUser = {
-            data: data,
-            ratingFieldName: 'score',
-            teamName: '1game',
-          };
-          console.log('file use-start data {name, score} to server', data);
-          if (data.name !== undefined && data.score !== undefined) {
-            //@ts-ignore
-            setUserDatasToStore(data, dispatch); //запись в Store
-            console.log('Данные игрока и очки в Стор записали');
-          }
 
-          addUserDatasToServer(info); // Запись на Сервер
-          //
-          gameOver(player?.score);
+          gameOver({ enemies: player?.allEnemies || 0, name: player?.name, score: player?.score });
         }
 
         const trigger = level.triggers.get(type);

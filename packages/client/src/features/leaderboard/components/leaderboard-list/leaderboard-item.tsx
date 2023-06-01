@@ -1,7 +1,15 @@
-import Position from '../position';
+import Position from '../../../../components/position';
 import './leaderboard-list.scss';
 
-const LeaderboardItem = ({ position, item }: any) => {
+interface ILeaderboardItem {
+  position: number;
+  item: {
+    name: string;
+    score: number;
+  };
+}
+
+const LeaderboardItem = ({ position, item }: ILeaderboardItem) => {
   return (
     <li className="leaderboard__row" key={position}>
       <Position className="leaderboard__position" position={position} />

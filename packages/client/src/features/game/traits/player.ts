@@ -12,6 +12,7 @@ class Player extends Trait {
   enemiesCount: number;
   totalEnemies: number;
   name!: string;
+  allEnemies: number;
 
   constructor() {
     super(Traits.Player);
@@ -19,6 +20,7 @@ class Player extends Trait {
     this.lives = 3;
     this.enemiesCount = 0;
     this.totalEnemies = 0;
+    this.allEnemies = 0;
 
     this.events.on(Killable.EVENT_KILL, (entity: Entity) => {
       if (entity.type === EntityType.TANK) {
@@ -26,6 +28,7 @@ class Player extends Trait {
       } else if (entity.type === EntityType.ENEMY_TANK) {
         this.score += 100;
         this.enemiesCount += 1;
+        this.allEnemies += 1;
       }
     });
   }

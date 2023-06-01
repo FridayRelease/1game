@@ -9,7 +9,7 @@ import type { RequestWithId } from 'request';
 export const userCreate = async (req: Request, res: Response) => {
   try {
     const user = await User.create(req.body);
-    return res.status(201).send(user.dataValues.id.toString());
+    return res.status(201).json({ id: user.dataValues.id.toString() });
   } catch (error) {
     return res.status(200).json({ message: 'error' });
   }
@@ -65,7 +65,7 @@ export const userDelete = async (req: Request<RequestWithId>, res: Response) => 
     });
 
     if (user) {
-      return res.status(204).json({ message: 'User deleted' });
+      return res.status(200).json({ message: 'User deleted' });
     }
 
     return res.status(404).json({ message: 'error', error: 'User not found' });
