@@ -34,13 +34,15 @@ export const CreateMessage = () => {
             //dispatch(ForumActions.setTopicsFromServerToStore(data));
             //
         };
-
+    function update(event:ChangeEvent<HTMLInputElement>) {
+        setText(event.target.value)
+    }
         return(
             <div className={'create-comment'}>
                 <form onSubmit={onSubmit}>
                     <div>
                         <label htmlFor="InputName1">Написать сообщение:</label>
-                        <input id="InputName1" type="text" defaultValue={'Привет !'} value={text} onChange={event => setText(event.target.value)} />
+                        <input id="InputName1" type="text" defaultValue={'Привет !'} value={text} onChange={event => update(event)} />
                     </div>
                     <button type="submit">Отправить</button>
                 </form>

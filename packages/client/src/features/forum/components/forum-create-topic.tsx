@@ -28,13 +28,16 @@ export const CreateTopic = () =>{
              //dispatch(ForumActions.setTopicsFromServerToStore(data));
 
     };
+    function update(event:ChangeEvent<HTMLInputElement>) {
+        setText(event.target.value)
+    }
 
     return(
         <div className={'create-topic'}>
             <form onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="InputName">Создать Тему:</label>
-                    <input id="InputName" type="text" value={text} onChange={event => setText(event.target.value)} />
+                    <input id="InputName" type="text" value={text} defaultValue={'Привет !'} onChange={event =>update(event) } />
                 </div>
                 <button type="submit">Submit</button>
             </form>
