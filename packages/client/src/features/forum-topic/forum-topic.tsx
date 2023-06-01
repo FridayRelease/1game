@@ -1,18 +1,13 @@
 import './forum-topic.scss';
-import { useParams } from 'react-router-dom';
 import React, {FC, useEffect, useState} from 'react';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
-
-import TopicCommentList from "@/features/forum-topic/components/topic-comment-list";
 
 import {HeaderSeachLeft} from "@/features/forum-topic/components/header-seach-left";
 import {Friends} from "@/features/forum-topic/components/friends-left";
 import {TopicList} from "@/features/forum-topic/components/topic-list";
 import {HeaderUserRight} from "@/features/forum-topic/components/header-user-right";
-import {MessageSenderBottom} from "@/features/forum-topic/components/message-sender-bottom";
+import {CreateMessage} from "@/features/forum-topic/components/create-message";
 import TopicCommentList2 from "@/features/forum-topic/components/topic-comment-list2";
-import {useSelector} from "react-redux";
-import {ForumSelectors} from "@/store/slices/forum-slice";
 /**
  Страница одного Топика с Сообщениями
  @category page
@@ -30,7 +25,7 @@ const ForumTopic = () => {
             <div className="forum-topic-right column width60 border-blue">
                 <HeaderUserRight />
                 <TopicCommentList2/>
-                <MessageSenderBottom />
+                <CreateMessage />
             </div>
 
         </div>

@@ -139,12 +139,15 @@ interface ISoundSheetDTO {
 }
 
 interface ITopicCreate{
+  id?:number,
   subject:string,
   user_id:number
+  created_at:string;
+  updated_at:string;
 }
 
 interface ITopic{
-  id : number,
+  id? : number,
   subject:string,
   user_id : number,
   created_at:string,
@@ -169,11 +172,14 @@ interface IComment {
 }
 
 interface ICommentCreate{
-  id: number;
-  message: string;
+  id?: number;
+  message?: string;
   user_id: number;
   topic_id: number;
   comment_id: number | null;
+  created_at:string;
+  updated_at:string;
+  nested_comment_count?:number
 }
 
 export {

@@ -2,11 +2,9 @@ import './forum.scss';
 import {FC, useEffect, useState} from 'react';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import ForumTopicList from "@/features/forum/components/forum-topic-list";
-import ForumTopic from "@/features/forum-topic/forum-topic";
-import {getTopicsAll} from "@/controllers/forum-topic-controller";
-import {userFullInfo} from "@/controllers/user-controllers";
 import {HeaderUserForum} from "@/features/forum/components/forum-header-user";
-import {TitleCreateForum} from "@/features/forum/components/forum-title-create";
+import { TitleForum} from "@/features/forum/components/forum-title";
+import {CreateTopic} from "@/features/forum/components/forum-create-topic";
 /**
  Список чатов форума
  @category page
@@ -16,8 +14,9 @@ const Forum: FC = () => {
   return (
     <div className="forum column">
         <HeaderUserForum />
-        <TitleCreateForum />
+        <TitleForum />
         <ForumTopicList />
+        <CreateTopic />
     </div>
   );
 };

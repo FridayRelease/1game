@@ -17,7 +17,7 @@ export class ForumApi {
 
   //Создать Топик и работа с ним
   topicCreate = async (data: ITopicCreate) => {
-    return await this.http.post('/topics', data);
+    return await this.http.post('/topics/', data);
   };
   getTopicsAll = async () => {//topicGet - string
     return await this.http.get(`/topics/`);

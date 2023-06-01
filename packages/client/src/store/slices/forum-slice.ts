@@ -59,6 +59,7 @@ export const ForumSelectors = {
   id: (state: RootState) => state.forum.activeTopicId,
   friends: (state: RootState) => state.forum.friends,
   comments: (state: RootState) => state.forum.comments,
+  commentId:(state: RootState) => state.forum.commentId,
 };
 
 

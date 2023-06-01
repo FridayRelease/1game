@@ -21,8 +21,10 @@ const TopicCommentList2 = () => {
         //console.log('Comments list in topic-comment-list2 = ', response)
 
         const comments = await getCommentsById(commentId)
+        const arr = [comments]
+        console.log('comments = ', comments)
         //dispatch(ForumActions.setCommentsFromServerToStore(comments))
-        //setList(comments);
+        setList(arr);
     }
 
     if (id !==lastId){
@@ -40,7 +42,7 @@ const TopicCommentList2 = () => {
         <ul className="comment-list column">
             <div>
                 <h1 className='topic-list-title'>Сообщения </h1>
-                {'Comments key={list.id} children={list}/>'}
+                <Comments key={list.id} children={list}/>
             </div>
         </ul>
     );
