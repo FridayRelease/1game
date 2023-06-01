@@ -215,4 +215,11 @@ input.nosubmit {
 .forum-user-message{
   margin-bottom: 20px;
 }
+.create-comment{
+  display: flex;
+  flex-flow: row nowrap;
+  max-height: 200px;
+  height: auto;
+  background:#60606c;
+}
 
