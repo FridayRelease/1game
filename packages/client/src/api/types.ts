@@ -142,8 +142,8 @@ interface ITopicCreate{
   id?:number|null|undefined,
   subject:string,
   user_id:number
-  created_at:string;
-  updated_at:string;
+  created_at?:string;
+  updated_at?:string;
 }
 
 interface ITopic{
@@ -173,12 +173,12 @@ interface IComment {
 
 interface ICommentCreate{
   id?: number;
-  message?: string;
+  message: string;
   user_id: number;
   topic_id: number;
-  comment_id: number | null;
-  created_at:string;
-  updated_at:string;
+  comment_id?: number | string;
+  created_at?:string;
+  updated_at?:string;
   nested_comment_count?:number
 }
 

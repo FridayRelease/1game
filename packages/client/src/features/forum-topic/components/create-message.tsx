@@ -4,15 +4,17 @@ import {ICommentCreate, ITopicCreate,} from "@/api/types";
 import {useDispatch, useSelector} from "react-redux";
 import {userSelectors} from "@/features/authentication";
 import {addTopicToServer} from "@/controllers/forum-topic-controller";
-import {addCommentToServer} from "@/controllers/forum-comments-controller";
+import {addCommentToServer, getCommentsById} from "@/controllers/forum-comments-controller";
 import {ForumSelectors} from "@/store/slices/forum-slice";
 
 /**
  Компонент Страницы одного Топика с Сообщениями
  @category page
  */
-
-export const CreateMessage = () => {
+interface TypeCreateMessage{
+    commentId:number|string|undefined
+}
+export const CreateMessage = ({commentId}:TypeCreateMessage) => {
     const [text, setText] = useState('');
     const user = useSelector(userSelectors.user)
     //const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -20,37 +22,31 @@ export const CreateMessage = () => {
     const data: ICommentCreate = {
         message: text,
         user_id: user.info!.id,
-        comment_id: useSelector(ForumSelectors.commentId),
+        comment_id: commentId,//useSelector(ForumSelectors.commentId),
         topic_id: useSelector(ForumSelectors.id),
-        created_at: today.toLocaleDateString("en-US"),
-        updated_at: today.toLocaleDateString("en-US"),
-
-    }
+     }
     const dispatch = useDispatch()
-    const onSubmit = (e: FormEvent, data: ICommentCreate) => {//
+    const onSubmit = (e: FormEvent) => {//
         e.preventDefault();
-        console.log('datas for create new topic = ', data)
+        console.log('datas for create new comment = ', data)
         addToServer(data);
+        //@ts-ignore
+        getCommentsById(commentId!)
     };
 
     async function addToServer(data: ICommentCreate) {
         await addCommentToServer(data).then(res => console.log('res = ', res))
     }
 
-    function update(event: ChangeEvent<HTMLInputElement>) {
-        setText(event.target.value)
-    }
 
-    function update1(event: ChangeEvent<HTMLInputElement>) {
-        setText(event.target.value)
-    }
+
 
     return (
         <div className={'create-comment'}>
             <form onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="InputName1">Написать сообщение:</label>
-                    <input id="InputName1" type="text" value={text} onChange={event => update1(event)}/>
+                    <input id="InputName1" type="text" value={text} onChange={(event) => setText(event.target.value)}/>
                 </div>
                 <button type="submit">Отправить</button>
             </form>

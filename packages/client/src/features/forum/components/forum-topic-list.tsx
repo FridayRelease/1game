@@ -25,7 +25,7 @@ const ForumTopicList = () => {
 
              }
         fetchData();
-    }, []);
+    }, [init_state]);
 
     return (
         <ul className="">

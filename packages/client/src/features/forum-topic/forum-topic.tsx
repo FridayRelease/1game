@@ -25,7 +25,7 @@ const ForumTopic = () => {
             <div className="forum-topic-right column width60 border-blue">
                 <HeaderUserRight />
                 <TopicCommentList2/>
-                <CreateMessage />
+                <CreateMessage commentId={undefined} />
             </div>
 
         </div>
