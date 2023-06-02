@@ -1,56 +1,54 @@
-.friends{
+.friends {
   width: 100%;
   margin: auto;
 }
-.topic-list{
+.topic-list {
   width: 100%;
   margin: auto;
   height: 60%;
 }
-.header-search{
+.header-search {
   width: 100%;
   margin: auto;
   height: 50px;
 }
-.header-user{
+.header-user {
   width: 100%;
-  margin-top:20px ;
+  margin-top: 20px;
   height: 50px;
 }
-.border-blue{
+.border-blue {
   border: #151a84 solid 1px;
 }
-.comments{
+.comments {
   height: auto;
   min-height: 60px;
 }
-.comment{
+.comment {
   height: auto;
   min-height: 40px;
 }
-.comment-child{
+.comment-child {
   height: auto;
   min-height: 30px;
-  margin:30px;
+  margin: 30px;
 }
-.comment-list{
+.comment-list {
   min-height: 300px;
   margin-top: 30px;
 }
-.border-yellow{
-  border:yellow solid 1px;
+.border-yellow {
+  border: yellow solid 1px;
   border-radius: 20px;
 }
-.border-red{
-  border:red solid 1px;
+.border-red {
+  border: red solid 1px;
   border-radius: 20px;
 }
 
-.topic-list-title{
+.topic-list-title {
   text-align: center;
 }
-
-
 
 .forum-user-comp {
   max-width: 700px;
@@ -143,10 +141,9 @@ form {
   border: 1px solid currentColor;
   border-radius: 5px;
   margin: auto;
-  }
+}
 
-input[type="search"] {
-  border: none;
+input[type='search'] {
   background: transparent;
   margin: 0;
   padding: 7px 8px;
@@ -156,11 +153,11 @@ input[type="search"] {
   border-radius: inherit;
 }
 
-input[type="search"]::placeholder {
+input[type='search']::placeholder {
   color: #bbb;
 }
 
-button[type="submit"] {
+button[type='submit'] {
   text-indent: -999px;
   overflow: hidden;
   width: 40px;
@@ -168,17 +165,19 @@ button[type="submit"] {
   margin: 0;
   border: 1px solid transparent;
   border-radius: inherit;
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+  background: transparent
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+    no-repeat center;
   cursor: pointer;
   opacity: 0.7;
 }
 
-button[type="submit"]:hover {
+button[type='submit']:hover {
   opacity: 1;
 }
 
-button[type="submit"]:focus,
-input[type="search"]:focus {
+button[type='submit']:focus,
+input[type='search']:focus {
   box-shadow: 0 0 3px 0 #1183d6;
   border-color: #1183d6;
   outline: none;
@@ -193,7 +192,9 @@ input.nosubmit {
   border: 1px solid #555;
   width: 100%;
   padding: 9px 4px 9px 40px;
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+  background: transparent
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+    no-repeat 13px center;
 }
 .circle {
   width: 80px;
@@ -204,7 +205,7 @@ input.nosubmit {
   color: yellow;
   text-align: center;
   background: #000;
-  border:1px solid yellow;
+  border: 1px solid yellow;
 }
 .img-ring {
   width: 100%; /* or any custom size */
@@ -212,14 +213,13 @@ input.nosubmit {
   object-fit: cover;
   border-radius: 40px;
 }
-.forum-user-message{
+.forum-user-message {
   margin-bottom: 20px;
 }
-.create-comment{
+.create-comment {
   display: flex;
   flex-flow: row nowrap;
   max-height: 200px;
   height: auto;
-  background:#60606c;
+  background: #60606c;
 }
-

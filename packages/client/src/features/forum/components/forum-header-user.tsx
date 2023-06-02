@@ -1,32 +1,32 @@
-import {FC, useEffect, useState} from "react";
-import {userFullInfo} from "@/controllers/user-controllers";
+import { FC, useEffect, useState } from 'react';
+import { userFullInfo } from '@/controllers/user-controllers';
 import '../forum.scss';
+import {URL_RESOURCES} from "@/constant/url_resources";
 /**
  Header Страницы форума
  @category component
  */
 export const HeaderUserForum: FC = () => {
+  const [name, setName] = useState<string>('');
+  const [avatar, setAvatar] = useState<string>('');
+  useEffect(() => {
+    (async () => {
+      const res = await userFullInfo();
 
-    const [name, setName] = useState<any>('');
-    const [avatar, setAvatar] = useState<any>('');
-    useEffect(() => {
+      const name1 = res.display_name !== null ? res.display_name : res.first_name;
+      const avatar1 = res.avatar !== null ? `${URL_RESOURCES} + ${res.avatar}` : '';
+      setName(name1);
+      setAvatar(avatar1);
 
-        (async () => {
-            const res = await userFullInfo();
-            //console.log('user = ', res)
-            const name1 = res.display_name !== null ? res.display_name : res.first_name
-            const avatar1 = res.avatar !== null ? 'https://ya-praktikum.tech/api/v2/resources/' + res.avatar : ''
-            setName(name1);
-            setAvatar(avatar1);
-            //console.warn(res);
-        })();
-    }, []);
+    })();
+  }, []);
 
-    return (
-        <div className="forum-current-user row ">
-            <div className="current-user-img">
-                <img className="current-user-foto" src={avatar} alt="User"/>
-            </div>
-            <label className="label-user">{name}</label>
-        </div>);
-}
+  return (
+    <div className="forum-current-user row ">
+      <div className="current-user-img">
+        <img className="current-user-foto" src={avatar} alt="User" />
+      </div>
+      <label className="label-user">{name}</label>
+    </div>
+  );
+};

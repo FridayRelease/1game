@@ -16,7 +16,7 @@ const mockCommentsGETByIdTopic5 = JSON.stringify({
     created_at: '2023-05-24T11:31:21.229Z',
     updated_at: '2023-05-24T11:31:21.229Z',
   },
-  comments:null
+  comments: null,
   /*comments: [
     {
       id: 7,
@@ -122,10 +122,9 @@ const mockCommentsGETByIdTopic5 = JSON.stringify({
     },
   ],
   */
-},
-  );
+});
 
-export {mockCommentsGETByIdTopic5};
+export { mockCommentsGETByIdTopic5 };
 
 /*
 commentGETById - это пример строки json-a рекурсивных комментариев.

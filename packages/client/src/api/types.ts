@@ -30,7 +30,6 @@ interface IUser {
   avatar: string | null;
 }
 
-
 enum Status {
   SUCCESS = 200,
   BAD_REQUEST = 400,
@@ -138,24 +137,24 @@ interface ISoundSheetDTO {
   };
 }
 
-interface ITopicCreate{
-  id?:number|null|undefined,
-  subject:string,
-  user_id:number
-  created_at?:string;
-  updated_at?:string;
+interface ITopicCreate {
+  id?: number | null | undefined;
+  subject: string;
+  user_id: number;
+  created_at?: string;
+  updated_at?: string;
 }
 
-interface ITopic{
-  id? : number,
-  subject:string,
-  user_id : number,
-  created_at:string,
-  updated_at:string,
-  user?:IUser,
-  comment_id?: null | number,
-  topic_id?:  number,
-  comments?:[]|IComment[]|null,
+interface ITopic {
+  id?: number;
+  subject: string;
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+  user?: IUser;
+  comment_id?: null | number;
+  topic_id?: number;
+  comments?: IComment[] | null;
 }
 
 interface IComment {
@@ -166,20 +165,20 @@ interface IComment {
   comment_id: number | null;
   created_at: string;
   updated_at: string;
-  user:IUser;
-  nested_comment_count?:number;
-  comments?: IComment[] | [] |any;
+  user: IUser;
+  nested_comment_count?: number;
+  comments?: IComment[];
 }
 
-interface ICommentCreate{
+interface ICommentCreate {
   id?: number;
   message: string;
   user_id: number;
   topic_id: number;
-  comment_id?: number | string;
-  created_at?:string;
-  updated_at?:string;
-  nested_comment_count?:number
+  comment_id?: number;
+  created_at?: string;
+  updated_at?: string;
+  nested_comment_count?: number;
 }
 
 export {
@@ -200,5 +199,5 @@ export {
   type ITopic,
   type ITopicCreate,
   type IComment,
-  type ICommentCreate
+  type ICommentCreate,
 };

@@ -1,7 +1,7 @@
-import {forumApi} from "@/api";
-import {ITopic, ITopicCreate} from "@/api/types";
-import  {MockTopics} from "@/mock/mockTopics";
-import {Users} from "@/mock/mockUsers";
+import { forumApi } from '@/api';
+import { ITopicCreate } from '@/api/types';
+import { MockTopics } from '@/mock/mockTopics';
+import { Users } from '@/mock/mockUsers';
 
 //добавление Topic на сервер
 export const addTopicToServer = async (info: ITopicCreate) => {
@@ -19,7 +19,7 @@ export const getTopicsAll = async () => {
   try {
     const { data } = await forumApi.getTopicsAll();
 
-    console.log('All Topics с Cервера получены = ', data)
+    console.log('All Topics с Cервера получены = ', data);
     return data;
   } catch (e) {
     console.log('Ошибка получения списка Топиков c Сервера', e);
@@ -29,21 +29,20 @@ export const getTopicsAll = async () => {
 };
 
 // получаем с сервера Топики по ID
-export const getTopicById = async (id:number) => {
-  let data:any;
+export const getTopicById = async (id: number) => {
+
   try {
-    data  = await forumApi.getTopicById(id);
+    const data = await forumApi.getTopicById(id);
     console.log('Topic по Id с Сервера получили');
-    return data
+    return data;
   } catch (e) {
     console.log('Ошибка получения Топика по id с Сервера', e);
-    return MockTopics[id+1];
+    return MockTopics[id + 1];
   }
-
 };
 
 // обновление Топика на сервере
-export const updateTopic = async (id:number, data:string) => {
+export const updateTopic = async (id: number, data: string) => {
   try {
     await forumApi.updateTopic(id, data);
     console.log('Topic на Сервере обновили');
@@ -53,14 +52,12 @@ export const updateTopic = async (id:number, data:string) => {
 };
 
 // удаление Топика на сервере
-export const deleteTopic = async (id:number) => {
+export const deleteTopic = async (id: number) => {
   try {
     await forumApi.deleteTopic(id);
     console.log('Topic на Сервере удалили');
-
   } catch (e) {
     console.log('Ошибка удаления Топика на Сервере', e);
-
   }
 };
 
@@ -69,10 +66,9 @@ export const getUsers = async () => {
   try {
     const users = await forumApi.getUsers();
     console.log('Получили список Users с Сервера = ', users);
-    return users
+    return users;
   } catch (e) {
     console.log('Ошибка получения списка Users с Сервера', e);
-    return Users
+    return Users;
   }
 };
-

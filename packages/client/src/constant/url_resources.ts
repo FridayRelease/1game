@@ -1,0 +1,1 @@
+export const URL_RESOURCES = 'https://ya-praktikum.tech/api/v2/resources/';

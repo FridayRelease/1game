@@ -1,5 +1,5 @@
-import {MockTopics} from './mockTopics'
+import { MockTopics } from './mockTopics';
 
 export const mockTopicsString = JSON.stringify({
-  MockTopics
-})
+  MockTopics,
+});

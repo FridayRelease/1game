@@ -35,11 +35,8 @@
   font-size: 50px;
   line-height: 60px;
 }
-.red {
+label.red::first-letter {
   color: var(--main-bg-alert);
-}
-.white {
-  color: var(--main-color-text);
 }
 .forum-button {
   box-sizing: border-box;

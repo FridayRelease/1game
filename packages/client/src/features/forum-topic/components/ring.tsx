@@ -4,13 +4,13 @@ import './topic-comment.scss';
  @category page
  */
 
-export const Ring= ({avatar,  name }: any) => {
-    return (
-        <div className='ring column'>
-            <div className="circle">
-                <img className='img-ring' src={avatar} key={name}/>
-            </div>
-            <h6>{name}</h6>
-       </div>
-    );
-}
+export const Ring = ({ avatar, name }: any) => {
+  return (
+    <div className="ring column">
+      <div className="circle">
+        <img className="img-ring" src={avatar} key={name} alt={'avatar'} />
+      </div>
+      <h6>{name}</h6>
+    </div>
+  );
+};
