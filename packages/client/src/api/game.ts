@@ -37,6 +37,6 @@ export class GameApi {
   };
 
   loadLevel = async (name: string) => {
-    return await this.http.get<ILevelDTO>(`levels/${name}.json`).then(res => res.data);
+    return await this.http.get<ILevelDTO>(`/levels/${name}.json`).then(res => res.data);
   };
 }
