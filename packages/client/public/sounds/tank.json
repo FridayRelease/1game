@@ -1,17 +1,17 @@
 {
   "bonus": {
-    "url": "/audio/bonus.ogg"
+    "url": "audio/bonus.ogg"
   },
   "moving": {
-    "url": "/audio/moving.ogg"
+    "url": "audio/moving.ogg"
   },
   "idle": {
-    "url": "/audio/tank_idle.wav"
+    "url": "audio/tank_idle.wav"
   },
   "shoot": {
-    "url": "/audio/shoot.ogg"
+    "url": "audio/shoot.ogg"
   },
   "fexplosion": {
-    "url": "/audio/fexplosion.ogg"
+    "url": "audio/fexplosion.ogg"
   }
 }

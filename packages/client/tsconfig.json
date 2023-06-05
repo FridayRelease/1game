@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext", "es5", "es6"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker", "es5", "es6"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -29,6 +29,7 @@
   },
   "include": ["src"],
   "typeRoots": ["./node_modules/@types", "src/types"],
+  "types": ["vite/client", "vite-plugin-pwa/react", "vite-plugin-pwa/info"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "exclude": ["node_modules", "**/*.test.ts"]
 }

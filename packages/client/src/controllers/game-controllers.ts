@@ -41,7 +41,7 @@ const fetchMusicSheet = async (name: string) => {
   const musicPlayer = new MusicPlayer();
 
   for (const [name, track] of Object.entries(musicSheet)) {
-    musicPlayer.addTrack(name, track.url);
+    musicPlayer.addTrack(name, gameApi.getUrl(track.url));
   }
   return musicPlayer;
 };
@@ -98,7 +98,7 @@ const fetchLevel = async (entityFactories: Record<string, EntityFactoryCallback>
 };
 
 const fetchFont = async () => {
-  const image = await gameApi.loadImage('/assets/img/fonts.png');
+  const image = await gameApi.loadImage('img/fonts.png');
 
   const fontSprite = new SpriteSheet(image, 8, 8);
 
