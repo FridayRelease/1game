@@ -41,7 +41,7 @@ const fetchMusicSheet = async (name: string) => {
   const musicPlayer = new MusicPlayer();
 
   for (const [name, track] of Object.entries(musicSheet)) {
-    musicPlayer.addTrack(name, track.url);
+    musicPlayer.addTrack(name, gameApi.getUrl(track.url));
   }
   return musicPlayer;
 };

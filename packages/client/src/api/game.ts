@@ -8,6 +8,10 @@ export class GameApi {
     this.http = new HttpClient(url);
   }
 
+  getUrl = (uri: string) => {
+    return this.url + uri;
+  };
+
   loadImage = async (url: string): Promise<HTMLImageElement> => {
     return new Promise(resolve => {
       const image = new Image();
