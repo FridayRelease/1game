@@ -3,14 +3,14 @@ import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
 import { Provider } from 'react-redux';
 import App from './app';
-import createReduxStore, { RootState } from './store/store';
+import createReduxStore, { SagaStore } from './store/store';
 import { routes } from './router';
 import { matchRoutes } from 'react-router-dom';
 import { END } from 'redux-saga';
 import { userActions } from './features/authentication';
 import { themeActions } from './store/slices/theme-slice';
 
-const renderAppToString = (state: RootState, url: string) => {
+const renderAppToString = (state: SagaStore, url: string) => {
   return ReactDOMServer.renderToString(
     <React.StrictMode>
       <Provider store={state}>

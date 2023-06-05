@@ -2,7 +2,8 @@
   padding: 20px;
 
   &__label {
-    text-align: center;
+    justify-content: space-evenly;
+    display: flex;
   }
 
   &__link {

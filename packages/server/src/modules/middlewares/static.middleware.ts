@@ -8,6 +8,10 @@ const staticMiddleware = () => {
   if (isDev()) {
     return () => undefined;
   }
-  return express.static(path.resolve(distPath, 'assets'));
+  return express.static(path.resolve(distPath), {
+    setHeaders: res => {
+      res.setHeader('Service-Worker-Allowed', '/');
+    },
+  });
 };
 export default staticMiddleware;
