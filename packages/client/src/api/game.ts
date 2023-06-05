@@ -27,20 +27,20 @@ export class GameApi {
   };
 
   loadAudioSheet = async (name: string) => {
-    return await this.http.get<ISoundSheetDTO>(`/sounds/${name}.json`).then(res => res.data);
+    return await this.http.get<ISoundSheetDTO>(`sounds/${name}.json`).then(res => res.data);
   };
 
   loadSprites = async (name: string) => {
     // Получить информацию о пользователе
-    return await this.http.get<ISpriteSheetDTO>(`/sprites/${name}.json`).then(res => res.data);
+    return await this.http.get<ISpriteSheetDTO>(`sprites/${name}.json`).then(res => res.data);
   };
 
   loadPatterns = async (name: string) => {
     // Получить информацию о пользователе
-    return await this.http.get<IPatternDTO>(`/sprites/patterns/${name}.json`).then(res => res.data);
+    return await this.http.get<IPatternDTO>(`sprites/patterns/${name}.json`).then(res => res.data);
   };
 
   loadLevel = async (name: string) => {
-    return await this.http.get<ILevelDTO>(`/levels/${name}.json`).then(res => res.data);
+    return await this.http.get<ILevelDTO>(`levels/${name}.json`).then(res => res.data);
   };
 }
