@@ -2,7 +2,6 @@ import { createServer as createViteServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import bodyParser from 'body-parser';
 import express from 'express';
-import * as path from 'path';
 import cookieParser from 'cookie-parser';
 
 import { isDev } from './constants/env';
@@ -13,6 +12,7 @@ import topicRoutes from './routes/topic';
 import userRoutes from './routes/user';
 import staticMiddleware from './modules/middlewares/static.middleware';
 import securityMiddleware from './modules/middlewares/security.middleware';
+import { srcPath } from './constants/path';
 
 async function startServer() {
   const app = express();
@@ -21,7 +21,6 @@ async function startServer() {
 
   // VITE SERVER
   let vite: ViteDevServer | undefined;
-  const srcPath = path.dirname(require.resolve('client/index.html'));
 
   if (isDev()) {
     vite = await createViteServer({
