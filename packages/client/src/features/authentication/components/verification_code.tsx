@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react';
-import './o-auth.styles.scss';
 import { useSearchParams } from 'react-router-dom';
 import { oauthApi } from '@/api';
 

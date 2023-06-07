@@ -12,7 +12,7 @@ import Logotype from '@/components/logotype';
 import './login.scss';
 import { cn } from '@/utils/cn';
 import { MainUrl } from '@/constant/router';
-import OAuth from '@/components/o-auth-panel';
+import { OAuth } from '@/features/authentication/components';
 
 /**
  * Страница аутентификации пользователя

@@ -26,7 +26,7 @@ import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
 import Page404 from './pages/page-404';
-import VerificationCode from './components/o-auth-panel/verification_code';
+import { VerificationCode } from './features/authentication/components';
 
 export const routes: RouteObject[] = [
   {
