@@ -27,7 +27,7 @@ interface IUserUpdatePasswordRequest {
 
 interface IOAuthRequest {
   redirect_uri: string;
-  code: string;
+  code: string | null;
 }
 
 interface IOAuthGetCodeRequest {

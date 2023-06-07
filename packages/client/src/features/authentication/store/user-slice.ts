@@ -47,22 +47,6 @@ export const userSlice = createSlice({
     ) => {
       state.info = null;
     },
-
-    oauthYandexGetServiceId: (
-      state,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      { payload }: PayloadAction<string>
-    ) => {
-     state.code = payload
-    },
-
-    oauthYandexGetUser: (
-      state,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      { payload }: PayloadAction<NavigateSagaProps>
-    ) => {
-      console.log(state);
-    },
   },
 });
 

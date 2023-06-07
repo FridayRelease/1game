@@ -1,48 +1,30 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Icon from '@/components/icon';
 import { Icons } from '@/components/icon/icon';
-import './o-auth.styles.scss'
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions, userSelectors } from '@/features/authentication';
-import { IOAuthGetCodeRequest, IOAuthRequest } from '@/types/user';
-import { useNavigate } from 'react-router-dom';
+import './o-auth.styles.scss';
+import { Link } from 'react-router-dom';
+import { oauthApi } from '@/api';
 
 const OAuth: FC = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userState = useSelector(userSelectors.user);
-
-  const requestGetServiceId = {
-    redirect_uri: 'http://localhost:3000',
-  } as IOAuthGetCodeRequest;
-
-  const requestGetUser = {
-    redirect_uri: 'http://localhost:3000',
-    code: userState.code,
-  } as IOAuthRequest;
-
-  const authYandex = () => {
-    dispatch(
-      userActions.oauthYandexGetUser({
-        props: requestGetUser,
-        navigate,
-      })
-    );
-  }
+  const [serviceId, setId] = useState<string>();
 
   useEffect(() => {
-    dispatch(
-      userActions.oauthYandexGetServiceId({
-        props: requestGetServiceId
-      })
-    );
-  }, [])
+    (async () => {
+      const { service_id } = await oauthApi.getAppId(import.meta.env.VITE_OAUTH_REDIRECT_URI);
+      setId(service_id);
+    })();
+  }, []);
 
   return (
     <div className="content-box oauth">
-      <div className="oauth__button" onClick={authYandex}>
-        <Icon type={Icons.Yandex} className="oauth__brand-logo"  />
-      </div>
+      <Link
+        className="oauth__button"
+        to={`${import.meta.env.VITE_OAUTH_API}?response_type=code&client_id=${serviceId}&redirect_uri=${
+          import.meta.env.VITE_OAUTH_REDIRECT_URI
+        }
+`}>
+        <Icon type={Icons.Yandex} className="oauth__brand-logo" />
+      </Link>
     </div>
   );
 };

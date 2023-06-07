@@ -9,14 +9,14 @@ class OAuth {
   }
 
   public async getAppId(redirect_id: string) {
-    return await this.http.get(`/oauth/yandex/service-id?redirect_uri=${redirect_id}`)
+    return await this.http
+      .get<{ service_id: string }>(`/oauth/yandex/service-id?redirect_uri=${redirect_id}`)
+      .then(res => res.data);
   }
 
   public async getServiceInfo(data: IOAuthRequest) {
-    return await this.http.post('/oauth/yandex', data)
+    return await this.http.post('/oauth/yandex', data);
   }
 }
 
-export {
-  OAuth
-}
+export { OAuth };
