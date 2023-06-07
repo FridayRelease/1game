@@ -19,12 +19,14 @@ import {
   ForumUrl,
   LeaderboardUrl,
   Page404Url,
+  VerificationCodeUrl,
 } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Forum from '@/features/forum/forum';
 import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
 import Page404 from './pages/page-404';
+import { VerificationCode } from './features/authentication/components';
 
 export const routes: RouteObject[] = [
   {
@@ -112,5 +114,13 @@ export const routes: RouteObject[] = [
   {
     path: Page404Url,
     element: <Page404 />,
+  },
+  {
+    path: VerificationCodeUrl,
+    element: (
+      <ErrorBoundary>
+        <VerificationCode />
+      </ErrorBoundary>
+    ),
   },
 ];

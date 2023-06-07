@@ -25,9 +25,20 @@ interface IUserUpdatePasswordRequest {
   newPassword: string;
 }
 
+interface IOAuthRequest {
+  redirect_uri: string;
+  code: string | null;
+}
+
+interface IOAuthGetCodeRequest {
+  redirect_uri: string;
+}
+
 export {
   type IUserSigninRequest,
   type IUserSignupRequest,
   type IUserUpdateDataRequest,
   type IUserUpdatePasswordRequest,
+  type IOAuthRequest,
+  type IOAuthGetCodeRequest,
 };
