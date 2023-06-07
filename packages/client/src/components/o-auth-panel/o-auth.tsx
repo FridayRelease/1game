@@ -19,7 +19,7 @@ const OAuth: FC = () => {
     <div className="content-box oauth">
       <Link
         className="oauth__button"
-        to={`${import.meta.env.VITE_OAUTH_API}?response_type=code&client_id=${serviceId}&redirect_uri=${
+        to={`${import.meta.env.VITE_OAUTH_LOGIN_URL}?response_type=code&client_id=${serviceId}&redirect_uri=${
           import.meta.env.VITE_OAUTH_REDIRECT_URI
         }
 `}>
