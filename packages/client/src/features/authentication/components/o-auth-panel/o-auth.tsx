@@ -24,6 +24,7 @@ const OAuth: FC = () => {
         }
 `}>
         <Icon type={Icons.Yandex} className="oauth__brand-logo" />
+        Войти с Яндекс ID
       </Link>
     </div>
   );
