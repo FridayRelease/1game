@@ -127,6 +127,22 @@ interface ISoundSheetDTO {
   };
 }
 
+type ForumTopicDTO = {
+  id: number;
+  subject: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
+  user: IUserDTO;
+};
+
+type ForumTopicsDTO = {
+  count: number;
+  elementCount: number;
+  offset: number;
+  rows: ForumTopicDTO[];
+};
+
 export {
   type ISoundSheetDTO,
   type ErrorResponse,
@@ -141,4 +157,6 @@ export {
   type ILevelDTO,
   type IPatternDTO,
   type ITriggersDTO,
+  type ForumTopicDTO,
+  type ForumTopicsDTO,
 };

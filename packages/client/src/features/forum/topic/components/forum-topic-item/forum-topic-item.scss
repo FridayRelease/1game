@@ -1,0 +1,33 @@
+.forum-topic-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  gap: 10px 15px;
+  border: var(--base-bg-600) solid 1px;
+  border-radius: 30px;
+  background: var(--base-bg-900);
+  padding: 10px 20px;
+  margin: 10px 0;
+
+  &__subject {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 100%;
+  }
+
+  &__user {
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--base-bg-200);
+  }
+
+  &__date {
+    font-family: var(--main-font-family);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--base-bg-200);
+  }
+}

@@ -21,10 +21,9 @@ import {
   Page404Url,
 } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
-import Forum from '@/features/forum/forum';
-import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
 import Page404 from './pages/page-404';
+import ForumTopic from './features/forum/topic/forum-topic';
 
 export const routes: RouteObject[] = [
   {
@@ -88,17 +87,11 @@ export const routes: RouteObject[] = [
   {
     path: ForumUrl,
     element: (
-      <ErrorBoundary>
-        <Forum />
-      </ErrorBoundary>
-    ),
-  },
-  {
-    path: `${ForumUrl}/:id`,
-    element: (
-      <ErrorBoundary>
-        <ForumUser />
-      </ErrorBoundary>
+      <RequireAuth>
+        <ErrorBoundary>
+          <ForumTopic />
+        </ErrorBoundary>
+      </RequireAuth>
     ),
   },
   {
