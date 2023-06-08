@@ -9,6 +9,4 @@ interface IUser {
   avatar: string;
 }
 
-export {
-  type IUser
-}
+export { type IUser };
