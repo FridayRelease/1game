@@ -7,6 +7,7 @@ export enum Icons {
   Forum = 'forum',
   Logout = 'logout',
   Yandex = 'yandex',
+  Fullscreen = 'fullscreen',
 }
 
 const Icon = ({ type, className, fill = 'none', stroke = 'none' }: IconProps) => {

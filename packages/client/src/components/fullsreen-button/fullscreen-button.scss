@@ -1,0 +1,18 @@
+$hover: rgba(#fff, .1);
+
+.full-screen {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background: $hover;
+  }
+
+  &--active {
+    background: $hover;
+  }
+}

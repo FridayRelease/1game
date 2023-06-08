@@ -2,6 +2,7 @@ import ToggleTheme from '@/components/toggle-theme';
 import React, { ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 import './layoutMain.scss';
+import FullscreenButton from '@/components/fullsreen-button/fullscreen-button';
 
 /**
  * HOC основного лейаута
@@ -24,6 +25,8 @@ function withLayoutMain<T extends object>(Component: ComponentType<T>) {
           <a href="https://practicum.yandex.ru/middle-frontend/" className="layout-main__link">
             yandex 23
           </a>
+          /
+          <FullscreenButton />
         </p>
         <ToggleTheme />
         <div className="layout-main__content">
