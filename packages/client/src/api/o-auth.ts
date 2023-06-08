@@ -1,5 +1,6 @@
 import { HttpClient } from '@/api/http-client';
 import { IOAuthRequest } from '@/types/user';
+import { IOAuthYandexResponse, StatusResponse } from './types';
 
 class OAuth {
   private http;
@@ -9,13 +10,11 @@ class OAuth {
   }
 
   public async getAppId(redirect_id: string) {
-    return await this.http
-      .get<{ service_id: string }>(`/oauth/yandex/service-id?redirect_uri=${redirect_id}`)
-      .then(res => res.data);
+    return await this.http.get<IOAuthYandexResponse>(`/oauth/yandex/service-id?redirect_uri=${redirect_id}`);
   }
 
   public async getServiceInfo(data: IOAuthRequest) {
-    return await this.http.post('/oauth/yandex', data);
+    return await this.http.post<StatusResponse>('/oauth/yandex', data);
   }
 }
 

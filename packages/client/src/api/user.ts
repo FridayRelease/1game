@@ -5,7 +5,7 @@ import {
   IUserUpdatePasswordRequest,
 } from '@/types/user';
 import { HttpClient } from './http-client';
-import { IUserDTO, SignUpResponseDTO } from '@/api/types';
+import { IUserDTO, SignUpResponseDTO, StatusResponse } from '@/api/types';
 
 export class UserApi {
   private http;
@@ -26,7 +26,7 @@ export class UserApi {
 
   async signout() {
     // Выход
-    return await this.http.post('/auth/logout');
+    return await this.http.post<StatusResponse>('/auth/logout');
   }
 
   updateData = async (data: IUserUpdateDataRequest) => {
