@@ -5,7 +5,7 @@ import { COOKIE_AUTH_NAME, UUID } from '../../constants/cookie';
 const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const authCookie = req.cookies[COOKIE_AUTH_NAME];
-    const uuid = req.cookies?.uuid;
+    const uuid = req.cookies[UUID];
 
     if (!authCookie || !uuid) {
       res.status(401).clearCookie(COOKIE_AUTH_NAME).clearCookie(UUID).json({ error: 'authenticate error' });

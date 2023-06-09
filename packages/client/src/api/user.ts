@@ -52,4 +52,8 @@ export class UserApi {
       },
     });
   };
+
+  getUsers = async () => {
+    return await this.http.get<IUserDTO>('/users', {});
+  };
 }

@@ -1,16 +1,19 @@
-import express from 'express';
-import type { Express } from 'express';
 import { topicCreate, topicRead, topicGet, topicUpdate, topicDelete } from '../controllers/topic';
-import { v1 } from '../constants/api';
+import { Router } from 'express';
+import { authMiddleware } from '../modules';
 
-const topicRoutes = function (app: Express) {
-  app.use(express.json());
+const userRoutes = function () {
+  const routerTopics = Router();
 
-  app.post(`${v1}/topics`, [topicCreate]);
-  app.get(`${v1}/topics`, [topicGet]);
-  app.get(`${v1}/topics/:id`, [topicRead]);
-  app.put(`${v1}/topics/:id`, [topicUpdate]);
-  app.delete(`${v1}/topics/:id`, [topicDelete]);
+  routerTopics.use(authMiddleware);
+
+  routerTopics.post('/topics', [topicCreate]);
+  routerTopics.get('/topics', [topicGet]);
+  routerTopics.get('/topics/:id', [topicRead]);
+  routerTopics.put('/topics/:id', [topicUpdate]);
+  routerTopics.delete('/topics/:id', [topicDelete]);
+
+  return routerTopics;
 };
 
-export default topicRoutes;
+export default userRoutes;
