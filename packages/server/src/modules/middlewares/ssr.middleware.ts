@@ -3,6 +3,7 @@ import type { ViteDevServer } from 'vite';
 import * as path from 'path';
 import * as fs from 'fs';
 import { isDev } from '../../constants/env';
+import { distPath, ssrClientPath, srcPath } from '../../constants/path';
 
 interface IResponse {
   error: string;
@@ -20,10 +21,6 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
   const cookie = req.headers.cookie;
   const vite = req.app.locals.settings.vite as ViteDevServer;
 
-  const distPath = path.dirname(require.resolve('client/dist/client/index.html'));
-  const srcPath = path.dirname(require.resolve('client/index.html'));
-  const ssrClientPath = require.resolve('client/dist/ssr/entry-ssr.cjs');
-
   const url = req.originalUrl;
 
   try {
@@ -31,12 +28,12 @@ async function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     let render: (url: string, callback: (response: IResponse) => void, cookie?: string) => Promise<void>;
 
     if (!isDev()) {
-      template = fs.readFileSync(path.resolve(distPath, 'index.html'), 'utf-8');
-      render = (await import(ssrClientPath)).render;
+      template = fs.readFileSync(path.resolve(distPath(), 'index.html'), 'utf-8');
+      render = (await import(ssrClientPath())).render;
     } else {
-      template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8');
+      template = fs.readFileSync(path.resolve(srcPath(), 'index.html'), 'utf-8');
       template = await vite!.transformIndexHtml(url, template);
-      render = (await vite!.ssrLoadModule(path.resolve(srcPath, './src/entry-ssr.tsx'))).render;
+      render = (await vite!.ssrLoadModule(path.resolve(srcPath(), './src/entry-ssr.tsx'))).render;
     }
 
     render(
