@@ -3,4 +3,9 @@ interface ITopicCreateRequest {
   user_id: number;
 }
 
-export { type ITopicCreateRequest };
+interface ITopicUpdateRequest {
+  id: number;
+  subject: string;
+}
+
+export { type ITopicCreateRequest, type ITopicUpdateRequest };

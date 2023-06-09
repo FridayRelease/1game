@@ -1,7 +1,7 @@
-import { create, getTopicList } from '@/controllers/forum-topic-controller';
+import { create, getTopicList, remove, update } from '@/controllers/forum-topic-controller';
 import { errorActions } from '@/store/slices/error-slice';
 import { LoadingActions } from '@/store/slices/loading-slice';
-import { ITopicCreateRequest } from '@/types/forum';
+import { ITopicCreateRequest, ITopicUpdateRequest } from '@/types/forum';
 import { call, Effect, put, takeEvery } from 'redux-saga/effects';
 import { forumTopicActions } from './forum-topic-slice';
 import { ForumTopicsResponseInfo } from './types';
@@ -44,7 +44,49 @@ function* createTopicsSaga({ payload }: Effect<string, ITopicCreateRequest>) {
   }
 }
 
+function* updateTopicsSaga({ payload }: Effect<string, ITopicUpdateRequest>) {
+  yield put(LoadingActions.setIsLoading(true));
+
+  try {
+    yield call(update, payload);
+
+    const topics: ForumTopicsResponseInfo = yield call(getTopicList);
+    yield put(forumTopicActions.setTopics(topics));
+  } catch (error: any) {
+    yield put(
+      errorActions.setError({
+        title: error.response.data.error.name,
+        description: error.response.data.error.parent.detail,
+      })
+    );
+  } finally {
+    yield put(LoadingActions.setIsLoading(false));
+  }
+}
+
+function* deleteTopicsSaga({ payload }: Effect<string, number>) {
+  yield put(LoadingActions.setIsLoading(true));
+
+  try {
+    yield call(remove, payload);
+
+    const topics: ForumTopicsResponseInfo = yield call(getTopicList);
+    yield put(forumTopicActions.setTopics(topics));
+  } catch (error: any) {
+    yield put(
+      errorActions.setError({
+        title: error.response.data.error.name,
+        description: error.response.data.error.parent.detail,
+      })
+    );
+  } finally {
+    yield put(LoadingActions.setIsLoading(false));
+  }
+}
+
 export default function* forumTopicSaga() {
   yield takeEvery('forum-topic/topic', topicsSaga);
   yield takeEvery('forum-topic/create', createTopicsSaga);
+  yield takeEvery('forum-topic/update', updateTopicsSaga);
+  yield takeEvery('forum-topic/delete', deleteTopicsSaga);
 }

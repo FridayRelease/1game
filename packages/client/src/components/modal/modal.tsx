@@ -6,7 +6,7 @@ import './modal.scss';
 const Modal = ({ handleClose, isShow, children }: ModalProps) => {
   const defineClassName = isShow ? 'display-block' : 'display-none';
 
-  return (
+  return isShow ? (
     <div className={cn('modal', defineClassName)}>
       <section className="modal__main">
         <div className="modal__button-wrapper">
@@ -17,6 +17,8 @@ const Modal = ({ handleClose, isShow, children }: ModalProps) => {
         {children}
       </section>
     </div>
+  ) : (
+    <></>
   );
 };
 

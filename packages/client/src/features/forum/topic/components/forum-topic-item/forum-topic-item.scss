@@ -16,18 +16,38 @@
     flex: 100%;
   }
 
-  &__user {
+  &__additional {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 1;
     font-weight: 300;
     font-size: 16px;
     color: var(--base-bg-200);
   }
 
-  &__date {
-    font-family: var(--main-font-family);
-    font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 19px;
-    color: var(--base-bg-200);
+  &__action {
+    display: flex;
+    gap: 15px;
+    align-items: center;
   }
+
+  &__button.button {
+    font-size: 14px;
+    padding: 2px;
+    min-height: auto;
+  }
+
+  &__info {
+    justify-self: right;
+  }
+}
+
+.button__change {
+  background-color: transparent;
+  color: var(--primary-bg-300);
+}
+
+.button__remove {
+  background-color: transparent;
+  color: var(--main-bg-alert);
 }

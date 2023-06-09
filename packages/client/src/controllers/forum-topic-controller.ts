@@ -1,5 +1,5 @@
 import { forumTopicAPI } from '@/api';
-import { ITopicCreateRequest } from '@/types/forum';
+import { ITopicCreateRequest, ITopicUpdateRequest } from '@/types/forum';
 
 const getTopicList = async () => {
   const response = await forumTopicAPI.topicList();
@@ -14,7 +14,28 @@ const create = async (topicData: ITopicCreateRequest) => {
     return response.data;
   }
 
-  throw new Error('Произошла ошибка при авторизации');
+  throw new Error('Произошла ошибка при создании топика');
 };
 
-export { getTopicList, create };
+const update = async (topicData: ITopicUpdateRequest) => {
+  const { id, ...data } = topicData;
+  const response = await forumTopicAPI.topicUpdate(id, data);
+
+  if (response.status === 200) {
+    return response.data;
+  }
+
+  throw new Error('Произошла ошибка при изменении топика');
+};
+
+const remove = async (id: number) => {
+  const response = await forumTopicAPI.topicDelete(id);
+
+  if (response.status === 200) {
+    return response.data;
+  }
+
+  throw new Error('Произошла ошибка при удалении топика');
+};
+
+export { getTopicList, create, remove, update };

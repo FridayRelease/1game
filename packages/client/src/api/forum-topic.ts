@@ -1,6 +1,6 @@
 import { HttpClient } from './http-client';
 import { ForumTopicDTO, ForumTopicsDTO } from '@/api/types';
-import { ITopicCreateRequest } from '@/types/forum';
+import { ITopicCreateRequest, ITopicUpdateRequest } from '@/types/forum';
 
 export class ForumTopicApi {
   private http;
@@ -15,5 +15,13 @@ export class ForumTopicApi {
 
   topicCreate = async (data: ITopicCreateRequest) => {
     return await this.http.post<ForumTopicDTO>('topics', data);
+  };
+
+  topicUpdate = async (id: number, data: Omit<ITopicUpdateRequest, 'id'>) => {
+    return await this.http.put<ForumTopicDTO>(`topics/${id}`, data);
+  };
+
+  topicDelete = async (id: number) => {
+    return await this.http.delete<{ message: string }>(`topics/${id}`);
   };
 }
