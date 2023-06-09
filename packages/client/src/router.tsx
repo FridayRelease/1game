@@ -24,6 +24,7 @@ import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
 import Leaderboard from './pages/leaderboard';
 import Page404 from './pages/page-404';
 import ForumTopic from './features/forum/topic/forum-topic';
+import ForumTopicDetailed from './features/forum/topic/components/forum-topic-detailed';
 
 export const routes: RouteObject[] = [
   {
@@ -94,6 +95,18 @@ export const routes: RouteObject[] = [
       </RequireAuth>
     ),
   },
+
+  {
+    path: `${ForumUrl}/:id`,
+    element: (
+      <RequireAuth>
+        <ErrorBoundary>
+          <ForumTopicDetailed />
+        </ErrorBoundary>
+      </RequireAuth>
+    ),
+  },
+
   {
     path: LeaderboardUrl,
     element: (

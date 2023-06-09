@@ -5,6 +5,7 @@ import { userSelectors } from '@/features/authentication';
 import { cn } from '@/utils/cn';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { forumTopicActions } from '../../store';
 import ForumTopicUpdate from '../forum-topic-update';
 import './forum-topic-item.scss';
@@ -24,7 +25,11 @@ const ForumTopicItem = ({ topic }: { topic: ForumTopicDTO }) => {
 
   return (
     <li className="forum-topic-item">
-      <div className="forum-topic-item__subject">{subject}</div>
+      <div className="forum-topic-item__subject">
+        <Link to={`/forum/${id}`} className="login-form__registration">
+          {subject}
+        </Link>
+      </div>
       <div className="forum-topic-item__additional">
         <div className="forum-topic-item__action">
           {authUser.info!.id === user.id ? (
