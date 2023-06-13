@@ -3,7 +3,7 @@ import Button from '@/components/button/button';
 import Modal from '@/components/modal';
 import { userSelectors } from '@/features/authentication';
 import { cn } from '@/utils/cn';
-import React from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { forumTopicActions } from '../../store';
@@ -15,7 +15,7 @@ const ForumTopicItem = ({ topic }: { topic: ForumTopicDTO }) => {
   const dispatch = useDispatch();
   const authUser = useSelector(userSelectors.user);
 
-  const [isShow, setIsShow] = React.useState(false);
+  const [isShow, setIsShow] = useState(false);
   const setShow = () => setIsShow(true);
   const setNotShow = () => setIsShow(false);
 

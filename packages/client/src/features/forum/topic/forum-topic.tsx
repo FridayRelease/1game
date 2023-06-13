@@ -1,5 +1,5 @@
 import './forum-topic.scss';
-import React from 'react';
+import { useState } from 'react';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import { useSelector } from 'react-redux';
 import { userSelectors } from '@/features/authentication';
@@ -12,7 +12,7 @@ const ForumTopic = () => {
   const user = useSelector(userSelectors.user);
   const avatar = `${import.meta.env.VITE_BASE_API}/resources${user.info?.avatar}`;
 
-  const [isShow, setIsShow] = React.useState(false);
+  const [isShow, setIsShow] = useState(false);
   const setShow = () => setIsShow(true);
   const setNotShow = () => setIsShow(false);
 
