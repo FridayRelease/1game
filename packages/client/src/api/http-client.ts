@@ -19,8 +19,8 @@ export class HttpClient {
     return this.axios.get<T>(url, config);
   }
 
-  public post<T>(url: string, data?: AllowedData) {
-    return this.axios.post<T>(url, data);
+  public post<T>(url: string, data?: AllowedData, config?: AxiosRequestConfig) {
+    return this.axios.post<T>(url, data, config);
   }
 
   public put<T>(url: string, data: AllowedData) {

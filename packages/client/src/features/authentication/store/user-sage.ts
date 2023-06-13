@@ -1,11 +1,13 @@
 import { errorActions } from '@/store/slices/error-slice';
 import { LoadingActions } from '@/store/slices/loading-slice';
-import { IUserSigninRequest, IUserSignupRequest } from '@/types/user';
+import { IOAuthGetCodeRequest, IOAuthRequest, IUserSigninRequest, IUserSignupRequest } from '@/types/user';
 import { userActions } from './user-slice';
 import { Effect, takeEvery, put, call, takeLatest, cancel } from 'redux-saga/effects';
 import { signin, signup, userFullInfo } from '@/controllers/user-controllers';
+import { getServiceIDInfo, getServiceInfo } from '@/controllers/oauth-controller';
 import { UserResponseInfo, NavigateSagaProps, PropsWithNavigator } from './types';
 import { LoginUrl, MainUrl } from '@/constant/router';
+import { IOAuthYandexResponse } from '@/api/types';
 
 function* userInfoSaga({ payload }: Effect<string, string | undefined>) {
   try {
@@ -85,9 +87,44 @@ function* signoutSaga({ payload }: Effect<string, NavigateSagaProps>) {
   yield payload.navigate(LoginUrl);
 }
 
+function* oauthYandexGetServiceId({ payload }: Effect<string, PropsWithNavigator<IOAuthGetCodeRequest>>) {
+  const { props } = payload;
+
+  yield put(LoadingActions.setIsLoading(true));
+
+  try {
+    const obj: IOAuthYandexResponse = yield call(getServiceIDInfo, props.redirect_uri);
+
+    yield put(userActions.oauthYandexGetServiceId(obj?.service_id));
+
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.setIsLoading(false));
+  }
+}
+
+function* oauthYandexGetUser({ payload }: Effect<string, PropsWithNavigator<IOAuthRequest>>) {
+  const { props } = payload;
+
+  yield put(LoadingActions.setIsLoading(true));
+
+  try {
+    const obj: unknown = yield call(getServiceInfo, props);
+    console.log(obj);
+
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.setIsLoading(false));
+  }
+}
+
 export default function* userSaga() {
   yield takeLatest('user/auth', userInfoSaga);
   yield takeEvery('user/signup', signupSage);
   yield takeEvery('user/signin', signinSage);
+  yield takeEvery('user/oauthYandexGetServiceId', oauthYandexGetServiceId);
+  yield takeEvery('user/oauthYandexGetUser', oauthYandexGetUser);
   yield takeEvery(userActions.signout.type, signoutSaga);
 }

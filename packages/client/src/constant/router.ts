@@ -11,3 +11,4 @@ export const GameoverUrl = generatePath('/gameover');
 export const Forum = generatePath('/forum');
 export const LeaderboardUrl = generatePath('/leaderboard');
 export const Page404Url = generatePath('/404');
+export const VerificationCodeUrl = generatePath('/verification_code');

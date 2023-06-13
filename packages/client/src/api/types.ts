@@ -127,6 +127,10 @@ interface ISoundSheetDTO {
   };
 }
 
+interface IOAuthYandexResponse {
+  service_id: string;
+}
+
 type ForumTopicDTO = {
   id: number;
   subject: string;
@@ -157,6 +161,7 @@ export {
   type ILevelDTO,
   type IPatternDTO,
   type ITriggersDTO,
+  type IOAuthYandexResponse,
   type ForumTopicDTO,
   type ForumTopicsDTO,
 };

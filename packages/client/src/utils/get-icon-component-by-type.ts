@@ -2,6 +2,7 @@ import { ReactComponent as IconProfile } from '@/assets/images/icons/profile.svg
 import { ReactComponent as IconTrophy } from '@/assets/images/icons/trophy.svg';
 import { ReactComponent as IconForum } from '@/assets/images/icons/forum.svg';
 import { ReactComponent as IconLogout } from '@/assets/images/icons/logout.svg';
+import { ReactComponent as IconYandex } from '@/assets/images/icons/yandex.svg';
 import { IconComponentType } from '@/components/icon/types';
 import { Icons } from '@/components/icon/icon';
 
@@ -24,6 +25,9 @@ export const getIconComponentByType = (type: Icons) => {
       break;
     case Icons.Logout:
       iconComponent = IconLogout;
+      break;
+    case Icons.Yandex:
+      iconComponent = IconYandex;
       break;
     default:
       exhaustiveCheck(type);
