@@ -1,10 +1,10 @@
-import { create, getTopicList, remove, update } from '@/controllers/forum-topic-controller';
+import { create, getTopicList, read, remove, update } from '@/controllers/forum-topic-controller';
 import { errorActions } from '@/store/slices/error-slice';
 import { LoadingActions } from '@/store/slices/loading-slice';
 import { ITopicCreateRequest, ITopicUpdateRequest } from '@/types/forum';
 import { call, Effect, put, takeEvery } from 'redux-saga/effects';
 import { forumTopicActions } from './forum-topic-slice';
-import { ForumTopicsResponseInfo } from './types';
+import { ForumTopicResponseInfo, ForumTopicsResponseInfo } from './types';
 
 function* topicsSaga() {
   try {
@@ -32,6 +32,25 @@ function* createTopicsSaga({ payload }: Effect<string, ITopicCreateRequest>) {
 
     const topics: ForumTopicsResponseInfo = yield call(getTopicList);
     yield put(forumTopicActions.setTopics(topics));
+  } catch (error: any) {
+    yield put(
+      errorActions.setError({
+        title: error.response.data.error.name,
+        description: error.response.data.error.parent.detail,
+      })
+    );
+  } finally {
+    yield put(LoadingActions.setIsLoading(false));
+  }
+}
+
+function* readTopicsSaga({ payload }: Effect<string, number>) {
+  yield put(LoadingActions.setIsLoading(true));
+
+  try {
+    const topic: ForumTopicResponseInfo = yield call(read, payload);
+
+    yield put(forumTopicActions.setTopic(topic));
   } catch (error: any) {
     yield put(
       errorActions.setError({
@@ -87,6 +106,7 @@ function* deleteTopicsSaga({ payload }: Effect<string, number>) {
 export default function* forumTopicSaga() {
   yield takeEvery('forum-topic/topic', topicsSaga);
   yield takeEvery('forum-topic/create', createTopicsSaga);
+  yield takeEvery('forum-topic/read', readTopicsSaga);
   yield takeEvery('forum-topic/update', updateTopicsSaga);
   yield takeEvery('forum-topic/delete', deleteTopicsSaga);
 }

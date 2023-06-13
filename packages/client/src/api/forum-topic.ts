@@ -17,6 +17,10 @@ export class ForumTopicApi {
     return await this.http.post<ForumTopicDTO>('topics', data);
   };
 
+  topicRead = async (id: number) => {
+    return await this.http.get<ForumTopicDTO>(`topics/${id}`);
+  };
+
   topicUpdate = async (id: number, data: Omit<ITopicUpdateRequest, 'id'>) => {
     return await this.http.put<ForumTopicDTO>(`topics/${id}`, data);
   };

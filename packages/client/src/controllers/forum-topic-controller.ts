@@ -17,6 +17,16 @@ const create = async (topicData: ITopicCreateRequest) => {
   throw new Error('Произошла ошибка при создании топика');
 };
 
+const read = async (id: number) => {
+  const response = await forumTopicAPI.topicRead(id);
+
+  if (response.status === 200) {
+    return response.data;
+  }
+
+  throw new Error('Произошла ошибка при получении указанного топика');
+};
+
 const update = async (topicData: ITopicUpdateRequest) => {
   const { id, ...data } = topicData;
   const response = await forumTopicAPI.topicUpdate(id, data);
@@ -38,4 +48,4 @@ const remove = async (id: number) => {
   throw new Error('Произошла ошибка при удалении топика');
 };
 
-export { getTopicList, create, remove, update };
+export { getTopicList, create, read, remove, update };

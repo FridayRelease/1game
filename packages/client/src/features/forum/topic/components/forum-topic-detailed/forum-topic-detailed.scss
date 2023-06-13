@@ -1,4 +1,26 @@
 .forum-topic-detailed {
-  color: red;
-  font-size: 40px;
+  &__header {
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__author {
+    font-size: 18px;
+  }
+
+  &__date {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  &__subject {
+    word-break: break-word;
+  }
+
+  &__hr {
+    border: 1px solid var(--main-bg-alert);
+  }
 }

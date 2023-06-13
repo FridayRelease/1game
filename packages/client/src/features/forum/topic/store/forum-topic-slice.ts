@@ -28,6 +28,11 @@ export const forumTopicSlice = createSlice({
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    read: (state, { payload }: PayloadAction<number>) => {
+      return state;
+    },
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     update: (state, { payload }: PayloadAction<ITopicUpdateRequest>) => {
       return state;
     },
