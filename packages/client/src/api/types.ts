@@ -147,6 +147,20 @@ type ForumTopicsDTO = {
   rows: ForumTopicDTO[];
 };
 
+type ForumCommentDTO = {
+  id: number;
+  message: string;
+  user_id: number;
+  topic_id: number;
+  comment_id: number;
+  created_at: string;
+  updated_at: string;
+  nested_comment_count: number;
+  comments?: ForumCommentsDTO;
+};
+
+type ForumCommentsDTO = ForumCommentDTO[];
+
 export {
   type ISoundSheetDTO,
   type ErrorResponse,
@@ -164,4 +178,6 @@ export {
   type IOAuthYandexResponse,
   type ForumTopicDTO,
   type ForumTopicsDTO,
+  type ForumCommentDTO,
+  type ForumCommentsDTO,
 };

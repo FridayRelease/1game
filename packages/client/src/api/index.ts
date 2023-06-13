@@ -2,6 +2,7 @@ import { GameApi } from './game';
 import { UserApi } from './user';
 import { LeaderApi } from '@/api/leader';
 import { ForumTopicApi } from './forum-topic';
+import { ForumCommentApi } from './forum-comment';
 import { OAuth } from './oAuth';
 
 const assetsApi =
@@ -12,5 +13,6 @@ const gameApi = new GameApi(assetsApi);
 const leaderApi = new LeaderApi(import.meta.env.VITE_BASE_API || '/');
 const oauthApi = new OAuth(import.meta.env.VITE_BASE_API || '/api/v2/');
 const forumTopicAPI = new ForumTopicApi('/api/v1/');
+const forumCommentAPI = new ForumCommentApi('/api/v1/');
 
-export { userApi, gameApi, leaderApi, oauthApi, forumTopicAPI };
+export { userApi, gameApi, leaderApi, oauthApi, forumTopicAPI, forumCommentAPI };

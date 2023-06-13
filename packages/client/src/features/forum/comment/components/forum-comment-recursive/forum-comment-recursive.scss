@@ -1,0 +1,11 @@
+.forum-comment-recursive {
+  &__message-wrapper {
+    padding: 20px 0 0 10px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+  }
+}
