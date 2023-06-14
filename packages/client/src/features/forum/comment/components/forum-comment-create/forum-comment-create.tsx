@@ -11,8 +11,6 @@ import { ICommentCreateRequest } from '@/types/forum';
 import { ForumTopicDTO, ForumCommentDTO } from '@/api/types';
 
 const ForumCommentCreate = ({ topic, comment = undefined }: { topic: ForumTopicDTO; comment?: ForumCommentDTO }) => {
-  console.log('comment: ', comment);
-
   const user = useSelector(userSelectors.user);
   const { error } = useSelector(errorSelectors.all);
   const dispatch = useDispatch();
