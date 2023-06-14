@@ -50,6 +50,8 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
           [Op.eq]: null,
         },
       },
+      include: User,
+      order: [['created_at', 'ASC']],
     });
 
     const recursiveComments = await Promise.all(
@@ -155,7 +157,11 @@ export const commentDelete = async (req: Request, res: Response) => {
 
 // Получаем все комментарии на комментарии
 export const expandSubcomments = async (comment: IComment, comment_id: number) => {
-  const childrenComments = await Comment.findAll({ where: { comment_id: comment_id }, include: User });
+  const childrenComments = await Comment.findAll({
+    where: { comment_id: comment_id },
+    include: User,
+    order: [['created_at', 'ASC']],
+  });
 
   if (childrenComments.length === 0) {
     return comment;
