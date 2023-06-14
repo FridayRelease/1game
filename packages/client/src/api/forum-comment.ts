@@ -17,7 +17,7 @@ export class ForumCommentApi {
     return await this.http.post<ForumCommentDTO>('comments', data);
   };
 
-  commentUpdate = async (id: number, data: Omit<ICommentUpdateRequest, 'id'>) => {
+  commentUpdate = async (id: number, data: Omit<ICommentUpdateRequest, 'id' | 'topic_id'>) => {
     return await this.http.put<ForumCommentDTO>(`comments/${id}`, data);
   };
 

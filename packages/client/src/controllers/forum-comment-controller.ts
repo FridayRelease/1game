@@ -17,7 +17,7 @@ const create = async (commentData: ICommentCreateRequest) => {
   throw new Error('Произошла ошибка при создании комментария');
 };
 
-const update = async (commentData: ICommentUpdateRequest) => {
+const update = async (commentData: Omit<ICommentUpdateRequest, 'topic_id'>) => {
   const { id, ...data } = commentData;
   const response = await forumCommentAPI.commentUpdate(id, data);
 

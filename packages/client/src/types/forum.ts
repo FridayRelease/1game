@@ -18,6 +18,7 @@ interface ICommentCreateRequest {
 interface ICommentUpdateRequest {
   id: number;
   message: string;
+  topic_id: number;
 }
 
 interface ICommentDeleteRequest {

@@ -8,4 +8,18 @@
     gap: 10px;
     font-size: 14px;
   }
+
+  &__author {
+    font-size: 14px;
+    color: var(--primary-bg-300);
+  }
+
+  &__date {
+    font-size: 12px;
+    color: var(--primary-bg-300);
+  }
+
+  &__message {
+    font-size: 20px;
+  }
 }

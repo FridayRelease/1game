@@ -157,6 +157,7 @@ type ForumCommentDTO = {
   updated_at: string;
   nested_comment_count: number;
   comments?: ForumCommentsDTO;
+  user: Omit<IUserDTO, 'login' | 'phone'>;
 };
 
 type ForumCommentsDTO = ForumCommentDTO[];

@@ -21,7 +21,7 @@ const ForumCommentUpdate = ({ comment }: { comment: ForumCommentDTO }) => {
   const onSubmitForm = async (event: FormEvent) => {
     event.preventDefault();
 
-    const data: ICommentUpdateRequest = { id: comment.id, message: values.message };
+    const data: ICommentUpdateRequest = { id: comment.id, message: values.message, topic_id: comment.topic_id };
     dispatch(forumCommentActions.update(data));
   };
 
