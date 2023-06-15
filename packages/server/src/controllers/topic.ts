@@ -23,7 +23,7 @@ export const topicCreate = async (req: Request, res: Response) => {
 export const topicGet = async (req: Request, res: Response) => {
   try {
     const queryParams = req.query as unknown as IQueryPagination;
-    const { limit = 10, offset = 0, textSearch = '' } = queryParams;
+    const { limit = 100, offset = 0, textSearch = '' } = queryParams;
 
     if (Number(queryParams.limit) === 0) {
       const topics = await Topic.findAll({
@@ -39,7 +39,7 @@ export const topicGet = async (req: Request, res: Response) => {
       offset: offset * limit,
       include: {
         model: User,
-        attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+        attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
       },
       where: {
         subject: { [Op.like]: '%' + textSearch + '%' },
@@ -61,7 +61,7 @@ export const topicRead = async (req: Request, res: Response) => {
     include: [
       {
         model: User,
-        attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+        attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
       },
       {
         model: Comment,
@@ -69,7 +69,7 @@ export const topicRead = async (req: Request, res: Response) => {
         include: [
           {
             model: User,
-            attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+            attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
           },
         ],
       },

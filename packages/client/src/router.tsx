@@ -22,11 +22,11 @@ import {
   VerificationCodeUrl,
 } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
-import Forum from '@/features/forum/forum';
-import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
 import Page404 from './pages/page-404';
 import { VerificationCode } from './features/authentication/components';
+import ForumTopic from './features/forum/topic/forum-topic';
+import ForumTopicDetailed from './features/forum/topic/components/forum-topic-detailed';
 
 export const routes: RouteObject[] = [
   {
@@ -90,19 +90,25 @@ export const routes: RouteObject[] = [
   {
     path: ForumUrl,
     element: (
-      <ErrorBoundary>
-        <Forum />
-      </ErrorBoundary>
+      <RequireAuth>
+        <ErrorBoundary>
+          <ForumTopic />
+        </ErrorBoundary>
+      </RequireAuth>
     ),
   },
+
   {
     path: `${ForumUrl}/:id`,
     element: (
-      <ErrorBoundary>
-        <ForumUser />
-      </ErrorBoundary>
+      <RequireAuth>
+        <ErrorBoundary>
+          <ForumTopicDetailed />
+        </ErrorBoundary>
+      </RequireAuth>
     ),
   },
+
   {
     path: LeaderboardUrl,
     element: (

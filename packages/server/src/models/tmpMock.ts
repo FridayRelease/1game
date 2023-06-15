@@ -12,7 +12,7 @@ const commentGETById = JSON.stringify({
   user: {
     id: 2,
     first_name: 'David',
-    last_name: 'Joe',
+    second_name: 'Joe',
     email: 'davidjoe@email.com',
     display_name: null,
     avatar: null,
@@ -31,7 +31,7 @@ const commentGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         email: 'davidjoe@email.com',
         display_name: null,
         avatar: null,
@@ -50,7 +50,7 @@ const commentGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         email: 'davidjoe@email.com',
         display_name: null,
         avatar: null,
@@ -69,7 +69,7 @@ const commentGETById = JSON.stringify({
           user: {
             id: 2,
             first_name: 'David',
-            last_name: 'Joe',
+            second_name: 'Joe',
             email: 'davidjoe@email.com',
             display_name: null,
             avatar: null,
@@ -88,7 +88,7 @@ const commentGETById = JSON.stringify({
           user: {
             id: 2,
             first_name: 'David',
-            last_name: 'Joe',
+            second_name: 'Joe',
             email: 'davidjoe@email.com',
             display_name: null,
             avatar: null,
@@ -107,7 +107,7 @@ const commentGETById = JSON.stringify({
           user: {
             id: 1,
             first_name: 'John',
-            last_name: 'Doe',
+            second_name: 'Doe',
             email: 'johndoe@email.com',
             display_name: null,
             avatar: null,
@@ -128,7 +128,7 @@ const commentGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         email: 'davidjoe@email.com',
         display_name: null,
         avatar: null,
@@ -251,7 +251,7 @@ const topicGETById = JSON.stringify({
   user: {
     id: 2,
     first_name: 'David',
-    last_name: 'Joe',
+    second_name: 'Joe',
     display_name: null,
     email: 'davidjoe@email.com',
     avatar: null,
@@ -267,7 +267,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -283,7 +283,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -299,7 +299,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -315,7 +315,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -331,7 +331,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -347,7 +347,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -363,7 +363,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -379,7 +379,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -395,7 +395,7 @@ const topicGETById = JSON.stringify({
       user: {
         id: 1,
         first_name: 'John',
-        last_name: 'Doe',
+        second_name: 'Doe',
         display_name: null,
         email: 'johndoe@email.com',
         avatar: null,
@@ -419,7 +419,7 @@ const topicAll = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -434,7 +434,7 @@ const topicAll = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -449,7 +449,7 @@ const topicAll = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -464,7 +464,7 @@ const topicAll = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -479,7 +479,7 @@ const topicAll = JSON.stringify({
       user: {
         id: 2,
         first_name: 'David',
-        last_name: 'Joe',
+        second_name: 'Joe',
         display_name: null,
         email: 'davidjoe@email.com',
         avatar: null,
@@ -523,7 +523,7 @@ const topicDelete = JSON.stringify({ message: 'Topic deleted' });
 const userGETById = JSON.stringify({
   id: 1,
   first_name: 'John',
-  last_name: 'Doe',
+  second_name: 'Doe',
   email: 'johndoe@email.com',
   display_name: null,
   avatar: null,
@@ -538,7 +538,7 @@ const userAll = JSON.stringify([
   {
     id: 1,
     first_name: 'John',
-    last_name: 'Doe',
+    second_name: 'Doe',
     email: 'johndoe@email.com',
     display_name: null,
     avatar: null,
@@ -548,7 +548,7 @@ const userAll = JSON.stringify([
   {
     id: 2,
     first_name: 'David',
-    last_name: 'Joe',
+    second_name: 'Joe',
     email: 'davidjoe@email.com',
     display_name: null,
     avatar: null,
@@ -560,16 +560,16 @@ const userAll = JSON.stringify([
 // Create User
 // app.post(`${v1}/users`, [userCreate]);
 // eslint-disable-next-line max-len
-// curl -X POST -H "Content-Type: application/json" -d '{"first_name":"Василий","last_name":"Пупкин","email":"vasyapupkin@email.com","avatar":"https://ya-praktikum.tech/api/v2/resources/5651bc91-8189-4042-8f92-933c4b8f8415/b5833c66-ce21-446c-b6c9-dc500587f463_avatarki-dlia-vatsapa-49.webp","display_name":"Вася"}' http://localhost:3001/api/v1/users
+// curl -X POST -H "Content-Type: application/json" -d '{"first_name":"Василий","second_name":"Пупкин","email":"vasyapupkin@email.com","avatar":"https://ya-praktikum.tech/api/v2/resources/5651bc91-8189-4042-8f92-933c4b8f8415/b5833c66-ce21-446c-b6c9-dc500587f463_avatarki-dlia-vatsapa-49.webp","display_name":"Вася"}' http://localhost:3001/api/v1/users
 const userCreate = JSON.stringify({ id: '9' });
 
 // Update User
 // app.put(`${v1}/users/:id`, [userUpdate]);
-// curl -X PUT -H "Content-Type: application/json" -d '{"last_name":"Pupkin","display_name":"Васяныч"}' http://localhost:3001/api/v1/users/11
+// curl -X PUT -H "Content-Type: application/json" -d '{"second_name":"Pupkin","display_name":"Васяныч"}' http://localhost:3001/api/v1/users/11
 const userUpdate = JSON.stringify({
   id: 11,
   first_name: 'Василий',
-  last_name: 'Pupkin',
+  second_name: 'Pupkin',
   email: 'vasyapupkin2@email.com',
   display_name: 'Васяныч',
   avatar:
@@ -608,7 +608,7 @@ commentGETById - это пример строки json-a рекурсивных 
 Так данные выглядят в БД:
 
 postgres=# select * from users;
- id | first_name | last_name |       email        |         created_at         |         updated_at         | display_name | avatar 
+ id | first_name | second_name |       email        |         created_at         |         updated_at         | display_name | avatar 
 ----+------------+-----------+--------------------+----------------------------+----------------------------+--------------+--------
   1 | John       | Doe       | johndoe@email.com  | 2023-05-24 11:27:52.729+00 | 2023-05-24 11:27:52.729+00 |              | 
   2 | David      | Joe       | davidjoe@email.com | 2023-05-24 11:31:21.229+00 | 2023-05-24 11:31:21.229+00 |              | 

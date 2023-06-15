@@ -1,0 +1,25 @@
+.forum-comment-recursive {
+  &__message-wrapper {
+    padding: 20px 0 0 10px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  &__author {
+    font-size: 14px;
+    color: var(--primary-bg-300);
+  }
+
+  &__date {
+    font-size: 12px;
+    color: var(--primary-bg-300);
+  }
+
+  &__message {
+    font-size: 20px;
+  }
+}

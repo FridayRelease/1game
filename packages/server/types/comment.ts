@@ -12,6 +12,4 @@ interface IComment {
   comments?: IComment[];
 }
 
-export {
-  type IComment
-}
+export { type IComment };

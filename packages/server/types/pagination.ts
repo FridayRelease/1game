@@ -5,6 +5,4 @@ interface IResponseWithPaginate<T> {
   elementCount: number;
 }
 
-export {
-  type IResponseWithPaginate
-}
+export { type IResponseWithPaginate };
