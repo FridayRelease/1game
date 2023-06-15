@@ -1,23 +1,26 @@
-import {useEffect, useState} from 'react';
-import {getTopicsAll} from '@/controllers/forum-topic-controller';
+import './topic-comment.scss';
+
 import ForumTopicItem from '@/features/forum/components/forum-topic-item';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {ForumActions, ForumSelectors} from '@/store/slices/forum-slice';
 import {Loading} from "@/features/forum/components/loading";
+import {useEffect, useState} from "react";
+import {getTopicsAll} from "@/controllers/forum-topic-controller";
 
 /**
- Компонент форума cо списком Топиков
- @category component
+ Компонент Страницы одного Топика с Сообщениями
+ @category page
  */
-const ForumTopicList = () => {
+export const TopicListLeft = () => {
+
     const dispatch = useDispatch();
     const [list, setList] = useState([]);
     const requireTopicUpdate = useSelector(ForumSelectors.requireTopicUpdate);
 
     async function fetchData() {
         getTopicsAll()
-            // @ts-ignore
+            //@ts-ignore
             .then(result => (setList(result.rows)));
         dispatch(ForumActions.setTopicUpdate(false));
     }
@@ -30,17 +33,17 @@ const ForumTopicList = () => {
     {
         if (list.length > 0) {
             return (
-                <ul className="">
-                    {list.map((data: any, index: number) => (
-                        <ForumTopicItem key={index} topic={data}/>
-                    ))}
-                </ul>
-            )
+                <div className="topic-list column">
+                    <ul className="">
+                        {list.map((data: any, index: number) => (
+                            <ForumTopicItem key={index} topic={data}/>
+                        ))}
+                    </ul>
+                </div>
+            );
         } else {
             return (<Loading/>)
         }
 
     }
 }
-
-export default ForumTopicList;

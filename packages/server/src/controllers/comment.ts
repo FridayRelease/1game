@@ -3,7 +3,7 @@ import { User } from '../models/user';
 import { Comment } from '../models/comment';
 import type { IComment } from 'comment';
 import { errorMessage } from '../../utils/messageHelper';
-import { Op } from 'sequelize';
+//import { Op } from 'sequelize';
 
 /**
  * Пример запроса
@@ -26,11 +26,11 @@ export const commentCreate = async (req: Request, res: Response) => {
       }
 
       const updateObj = {
-        nested_comment_count: findParentComment?.nested_comment_count + 1,
+        nested_comment_count: findParentComment?.nested_comment_count + 1
       };
 
       await Comment.update(updateObj, {
-        where: { id: comment_id },
+        where: { id: comment_id }
       });
     }
 
@@ -46,10 +46,11 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
     const comments = await Comment.findAll({
       where: {
         topic_id,
-        comment_id: {
-          [Op.eq]: null,
-        },
-      },
+        //закоментировал, чтобы получать все комментарии
+        //comment_id: {
+        //  [Op.eq]: number
+        //}
+      }
     });
 
     if (topic_id) {
@@ -104,7 +105,7 @@ export const commentUpdate = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const commentUpdated = await Comment.update(req.body, {
-      where: { id },
+      where: { id }
     });
 
     if (commentUpdated) {
@@ -133,11 +134,11 @@ export const commentDelete = async (req: Request, res: Response) => {
       }
 
       const updateObj = {
-        nested_comment_count: findParentComment?.nested_comment_count - 1,
+        nested_comment_count: findParentComment?.nested_comment_count - 1
       };
 
       await Comment.update(updateObj, {
-        where: { id: comment?.comment_id },
+        where: { id: comment?.comment_id }
       });
     }
 
@@ -148,8 +149,8 @@ export const commentDelete = async (req: Request, res: Response) => {
     if (comment.comment_id === null) {
       await Comment.destroy({
         where: {
-          comment_id: comment.id,
-        },
+          comment_id: comment.id
+        }
       });
       await comment.destroy();
     } else {

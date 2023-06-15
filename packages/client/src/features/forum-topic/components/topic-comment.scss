@@ -1,3 +1,7 @@
+.forum-comments-page{
+  width: 100%;
+  height: auto;
+}
 .friends {
   width: 100%;
   margin: auto;
@@ -41,9 +45,20 @@
   border: yellow solid 1px;
   border-radius: 20px;
 }
+.border-grey {
+  border: grey solid 1px;
+  border-radius: 20px;
+}
 .border-red {
   border: red solid 1px;
   border-radius: 20px;
+}
+.button-delete{
+  border: black 1px solid;
+  border-radius: 10px;
+  margin: auto;
+  width: max-content;
+  float: right;
 }
 
 .topic-list-title {
@@ -135,10 +150,9 @@ font {
 
 form {
   width: 80%;
-  color: #555;
   display: flex;
   padding: 2px;
-  border: 1px solid currentColor;
+  border: 1px solid darkgrey;
   border-radius: 5px;
   margin: auto;
 }
@@ -221,5 +235,4 @@ input.nosubmit {
   flex-flow: row nowrap;
   max-height: 200px;
   height: auto;
-  background: #60606c;
 }

@@ -7,7 +7,7 @@ import { Users } from '@/mock/mockUsers';
 export const addTopicToServer = async (info: ITopicCreate) => {
   try {
     const { data } = await forumApi.topicCreate(info);
-    console.log('Topic на Сервер записали');
+    console.log('Topic на Сервер записали, data = ', data);
     return data;
   } catch (e) {
     console.log('Ошибка записи Topic на Сервер', e);

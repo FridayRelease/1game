@@ -1,38 +1,40 @@
-import {  FormEvent,  useState } from 'react';
-import { ITopicCreate } from '@/api/types';
-import { addTopicToServer } from '@/controllers/forum-topic-controller';
-import {useSelector } from 'react-redux';
-import { userSelectors } from '@/features/authentication';
+import {FormEvent, useState} from 'react';
+import {ITopicCreate} from '@/api/types';
+import {addTopicToServer, getTopicsAll} from '@/controllers/forum-topic-controller';
+import {useDispatch, useSelector} from 'react-redux';
+import {userSelectors} from '@/features/authentication';
+import {ForumActions, ForumReducer} from "@/store/slices/forum-slice";
 
 export const CreateTopic = () => {
-  const [text, setText] = useState('');
-  const user = useSelector(userSelectors.user);
+    const dispatch = useDispatch()
 
- const data: ITopicCreate = {
-    subject: text,
-    user_id: user.info!.id,
-  };
-   const onSubmit = (e: FormEvent) => {
+    const [text, setText] = useState('');
+    const user = useSelector(userSelectors.user);
 
-    e.preventDefault();
-    console.log('e.target = ', e.target);
+    const data: ITopicCreate = {
+        subject: text,
+        user_id: user.info!.id,
+    };
+    const onSubmit = (e: FormEvent) => {
 
-    addToServer(data);
-  };
+        e.preventDefault();
 
-  async function addToServer(data: ITopicCreate) {
-    await addTopicToServer(data).then(res => console.log('res = ', res));
-  }
+        addTopicToServer(data)
+            .then(data => getTopicsAll())// @ts-ignore
+            .then(result => dispatch(ForumActions.setAllTopicsToStore(result)))
+            .then(res => dispatch(ForumActions.setTopicUpdate(true)));
 
-  return (
-    <div className={'create-topic'}>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="InputName">Создать Тему:</label>
-          <input id="InputName" type="text" value={text} onChange={event => setText(event.target.value)} />
+    };
+
+    return (
+        <div className={'create-topic'}>
+            <form onSubmit={onSubmit}>
+                <div>
+                    <label htmlFor="InputName">Создать Тему:</label>
+                    <input id="InputName" type="text" value={text} onChange={event => setText(event.target.value)}/>
+                </div>
+            </form>
+            <button type="submit">Создать</button>
         </div>
-      </form>
-      <button type="submit">Создать</button>
-    </div>
-  );
+    );
 };

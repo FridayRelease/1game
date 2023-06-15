@@ -1,21 +1,61 @@
 import './topic-comment.scss';
-import TopicCommentItem from '@/features/forum-topic/components/topic-comment-item';
-import { useSelector } from 'react-redux';
-import { ForumSelectors } from '@/store/slices/forum-slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { ForumActions, ForumSelectors } from '@/store/slices/forum-slice';
+import { Comments } from '@/features/forum-topic/components/comments';
+
+import { useEffect, useState } from 'react';
+
+import {  getCommentsByTopicId } from '@/controllers/forum-comments-controller';
+
+import { Loading } from '@/features/forum/components/loading';
+
+import { NoComments } from '@/features/forum-topic/components/no-comments';
+import { arrayToObject } from '@/utils/array-to-object1';
 
 const TopicCommentList = () => {
-  const list = useSelector(ForumSelectors.topics);
-  const id = useSelector(ForumSelectors.id);
-  //@ts-ignore
-  const topicById = list.map(li => li.topic_id === id);
+  const dispatch = useDispatch();
+  const [list, setList] = useState([]);
+  const requireCommentUpdate = useSelector(ForumSelectors.requireCommentUpdate);
+  const topicId = useSelector(ForumSelectors.topicId);
+  const noComments = useSelector(ForumSelectors.noComments);
 
-  return (
-    <ul className="comment-list column">
-      {topicById.map((data: any, index: number) => (
-        <TopicCommentItem key={index} comment={data} />
-      ))}
-    </ul>
-  );
-};
+  async function fetchData() {
+
+    const response: any = await getCommentsByTopicId(topicId);
+    if (response.length > 0) {
+      dispatch(ForumActions.setNoComments(false));
+      dispatch(ForumActions.setCommentUpdate(false));
+      const comments = arrayToObject(response);
+      //@ts-ignore
+      setList(comments)
+    } else {
+      dispatch(ForumActions.setNoComments(true));
+    }
+  }
+
+
+useEffect(() => {
+  fetchData();
+}, [topicId, requireCommentUpdate]);
+
+{
+  if (noComments) {
+    return <NoComments />;
+  } else if (list.length > 0) {
+    return (
+      <ul className='comment-list column'>
+        <div>
+          <h1 className='topic-list-title'>Сообщения </h1>
+          <Comments children={list} />
+        </div>
+      </ul>
+    );
+  } else {
+    return (<Loading />);
+  }
+
+}
+}
+;
 
 export default TopicCommentList;

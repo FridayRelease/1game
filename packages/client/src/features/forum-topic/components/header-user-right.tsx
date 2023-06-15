@@ -1,7 +1,6 @@
 import './topic-comment.scss';
 import { FC, useEffect, useState } from 'react';
 import { userFullInfo } from '@/controllers/user-controllers';
-import foto from '@/mock/currentUser.jpg';
 import {URL_RESOURCES} from "@/constant/url_resources";
 
 /**
@@ -14,9 +13,9 @@ export const HeaderUserRight: FC = () => {
   useEffect(() => {
     (async () => {
       const res = await userFullInfo();
-      //console.log('user = ', res)
+
       const name1 = res.display_name || res.first_name;
-      const avatar1 = res.avatar !== null ? `${URL_RESOURCES}+ ${res.avatar}`  : foto;
+      const avatar1 = res.avatar !== null ? `${URL_RESOURCES}`+ `${res.avatar}`  : '';
       setName(name1);
       setAvatar(avatar1);
 

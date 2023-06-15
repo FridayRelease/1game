@@ -8,6 +8,8 @@ export class ForumApi {
     this.http = new HttpClient(url);
   }
 
+  async resources(img: string) { return await this.http.get('/resources/${img}'); }
+
   //Создать Топик и работа с ним
   topicCreate = async (data: ITopicCreate) => {
     return await this.http.post('/topics/', data);

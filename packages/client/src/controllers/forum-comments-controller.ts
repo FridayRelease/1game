@@ -69,7 +69,4 @@ export const deleteComment = async (id: number) => {
   }
 };
 
-// запиcь данных в Store
-//export const setForumDatasToStore = (data: ITopic[], dispatch: Dispatch<AnyAction>) => {
-//  dispatch(ForumActions.setForumDatasFromServer(data));
-//}
+

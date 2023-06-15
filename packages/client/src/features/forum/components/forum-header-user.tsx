@@ -14,7 +14,7 @@ export const HeaderUserForum: FC = () => {
       const res = await userFullInfo();
 
       const name1 = res.display_name !== null ? res.display_name : res.first_name;
-      const avatar1 = res.avatar !== null ? `${URL_RESOURCES} + ${res.avatar}` : '';
+      const avatar1 = res.avatar !== null ? `${URL_RESOURCES}` + `${res.avatar}` : '';
       setName(name1);
       setAvatar(avatar1);
 
