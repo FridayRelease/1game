@@ -11,7 +11,7 @@ dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   let config: UserConfigExport = {
-    base: 'assets',
+    base: '/assets',
     publicDir: false,
     plugins: [
       react(),

@@ -1,0 +1,53 @@
+.forum-topic-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  gap: 10px 15px;
+  border: var(--base-bg-600) solid 1px;
+  border-radius: 30px;
+  background: var(--base-bg-900);
+  padding: 10px 20px;
+  margin: 10px 0;
+
+  &__subject {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 100%;
+  }
+
+  &__additional {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 1;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--base-bg-200);
+  }
+
+  &__action {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  &__button.button {
+    font-size: 14px;
+    padding: 2px;
+    min-height: auto;
+  }
+
+  &__info {
+    justify-self: right;
+  }
+}
+
+.button__change {
+  background-color: transparent;
+  color: var(--primary-bg-300);
+}
+
+.button__remove {
+  background-color: transparent;
+  color: var(--main-bg-alert);
+}

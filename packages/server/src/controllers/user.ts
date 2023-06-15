@@ -21,7 +21,7 @@ export const createOrUpdate = async (info: Record<string, string>) => {
 
 /**
  * Пример запроса
- * curl -X POST -H "Content-Type: application/json" -d '{"first_name":"John","last_name":"Doe","email":"johndoe@email.com"}' http://localhost:3001/api/v1/users
+ * curl -X POST -H "Content-Type: application/json" -d '{"first_name":"John","second_name":"Doe","email":"johndoe@email.com"}' http://localhost:3001/api/v1/users
  */
 export const userCreate = async (req: Request, res: Response) => {
   try {

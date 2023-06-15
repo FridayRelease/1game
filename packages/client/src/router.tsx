@@ -19,8 +19,6 @@ import {
   VerificationCodeUrl,
 } from './constant/router';
 import ErrorBoundary from '@/features/error-boundary/ErrorBoundary';
-import Forum from '@/features/forum/forum';
-import ForumUser from '@/features/forum-user/forum-user';
 import Leaderboard from './pages/leaderboard';
 import Page404 from './pages/page-404';
 import LoginPage from './pages/login';
@@ -28,6 +26,8 @@ import SignupPage from './pages/signup';
 import VerificationCodePage from './pages/verification-code/verification-code-page';
 import Home from './pages/home';
 import { RedirectToMain } from './features/authentication';
+import ForumTopic from './features/forum/topic/forum-topic';
+import ForumTopicDetailed from './features/forum/topic/components/forum-topic-detailed';
 
 export const routes: RouteObject[] = [
   {
@@ -99,19 +99,25 @@ export const routes: RouteObject[] = [
   {
     path: ForumUrl,
     element: (
-      <ErrorBoundary>
-        <Forum />
-      </ErrorBoundary>
+      <RequireAuth>
+        <ErrorBoundary>
+          <ForumTopic />
+        </ErrorBoundary>
+      </RequireAuth>
     ),
   },
+
   {
     path: `${ForumUrl}/:id`,
     element: (
-      <ErrorBoundary>
-        <ForumUser />
-      </ErrorBoundary>
+      <RequireAuth>
+        <ErrorBoundary>
+          <ForumTopicDetailed />
+        </ErrorBoundary>
+      </RequireAuth>
     ),
   },
+
   {
     path: LeaderboardUrl,
     element: (

@@ -13,7 +13,4 @@ const getServiceIDInfo = async (redirect_id: string) => {
   return response.data;
 };
 
-export {
-  getServiceInfo,
-  getServiceIDInfo
-}
+export { getServiceInfo, getServiceIDInfo };
