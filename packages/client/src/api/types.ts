@@ -131,6 +131,37 @@ interface IOAuthYandexResponse {
   service_id: string;
 }
 
+type ForumTopicDTO = {
+  id: number;
+  subject: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
+  user: IUserDTO;
+};
+
+type ForumTopicsDTO = {
+  count: number;
+  elementCount: number;
+  offset: number;
+  rows: ForumTopicDTO[];
+};
+
+type ForumCommentDTO = {
+  id: number;
+  message: string;
+  user_id: number;
+  topic_id: number;
+  comment_id: number;
+  created_at: string;
+  updated_at: string;
+  nested_comment_count: number;
+  comments?: ForumCommentsDTO;
+  user: Omit<IUserDTO, 'login' | 'phone'>;
+};
+
+type ForumCommentsDTO = ForumCommentDTO[];
+
 export {
   type ISoundSheetDTO,
   type ErrorResponse,
@@ -146,4 +177,8 @@ export {
   type IPatternDTO,
   type ITriggersDTO,
   type IOAuthYandexResponse,
+  type ForumTopicDTO,
+  type ForumTopicsDTO,
+  type ForumCommentDTO,
+  type ForumCommentsDTO,
 };

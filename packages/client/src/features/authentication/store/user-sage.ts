@@ -96,7 +96,6 @@ function* oauthYandexGetServiceId({ payload }: Effect<string, PropsWithNavigator
     const obj: IOAuthYandexResponse = yield call(getServiceIDInfo, props.redirect_uri);
 
     yield put(userActions.oauthYandexGetServiceId(obj?.service_id));
-
   } catch (error) {
     console.log(error);
   } finally {
@@ -112,7 +111,6 @@ function* oauthYandexGetUser({ payload }: Effect<string, PropsWithNavigator<IOAu
   try {
     const obj: unknown = yield call(getServiceInfo, props);
     console.log(obj);
-
   } catch (error) {
     console.log(error);
   } finally {
