@@ -8,6 +8,7 @@ export const createOrUpdate = async (info: Record<string, string>) => {
 
     // Если пользователь уже существует в базе (ищем его по email-у), то возвращаем его.
     if (user) {
+      await User.update(info, { where: { email: info.email } });
       user = await User.findOne({ where: { email: info.email } });
       return user;
     }
