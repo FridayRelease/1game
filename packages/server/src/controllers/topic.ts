@@ -4,8 +4,9 @@ import { Topic } from '../models/topic';
 import { Comment } from '../models/comment';
 import type { IQueryPagination, RequestWithId } from 'request';
 import { errorMessage } from '../../utils/messageHelper';
+import { Op, fn, col } from 'sequelize';
 import { paginateResponse } from '../../utils/data';
-import { Op } from 'sequelize';
+import { Reaction } from '../models/reaction';
 
 /**
  * Пример запроса
@@ -25,6 +26,9 @@ export const topicGet = async (req: Request, res: Response) => {
     const queryParams = req.query as unknown as IQueryPagination;
     const { limit = 10, offset = 0, textSearch = '' } = queryParams;
 
+    // const userId = req.headers.cookie?.split('; ').find(item => item.includes('uuid'));
+    // const id = userId ? userId.split('=')[1] : undefined;
+
     if (Number(queryParams.limit) === 0) {
       const topics = await Topic.findAll({
         where: {
@@ -37,16 +41,41 @@ export const topicGet = async (req: Request, res: Response) => {
     const { count, rows } = await Topic.findAndCountAll({
       limit: limit,
       offset: offset * limit,
-      include: {
-        model: User,
-        attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
-      },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+        }
+      ],
       where: {
         subject: { [Op.like]: '%' + textSearch + '%' },
       },
+      order: [
+        ['id', 'ASC']
+      ]
     });
 
-    return res.status(200).json(paginateResponse(count, rows, offset, limit));
+
+    const newMessages = [];
+
+    for (const row of rows) {
+      const obj = {...row.dataValues}
+      const reactionRows = await Reaction.findAll({
+        where: {
+          topic_id: row.id,
+        },
+        attributes: ['reaction_id', [fn('COUNT', col('*')), 'count']],
+        group: ['reaction_id'],
+      });
+
+      obj.reactions = reactionRows
+        .filter(item => item.dataValues.reaction_id)
+        .map(item => ({ ...item.dataValues, count: Number(item.dataValues.count)}))
+
+      newMessages.push(obj)
+    }
+
+    return res.status(200).json(paginateResponse(count, newMessages, offset, limit));
   } catch (error) {
     return res.status(500).json(errorMessage(error));
   }

@@ -2,13 +2,15 @@
 import { Table, Column, Model, BelongsTo, HasMany } from 'sequelize-typescript';
 import { Comment } from './comment';
 import { User } from './user';
+import { Reaction } from './reaction';
 
 @Table({
   tableName: 'topics',
   createdAt: 'created_at',
   updatedAt: 'updated_at',
 })
-export class Topic extends Model {
+
+class Topic extends Model {
   @Column
   subject!: string;
 
@@ -21,4 +23,9 @@ export class Topic extends Model {
     foreignKey: 'topic_id',
   })
   comments?: Comment[];
+
+  @HasMany(() => Reaction, "topic_id")
+  reaction: Reaction[] | undefined;
 }
+
+export { Topic }

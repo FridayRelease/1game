@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest .",
-    "seed": "sequelize db:seed:all"
+    "seed": "sequelize db:seed:all",
+    "seed:undo": "sequelize db:seed:undo:all"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.3",
