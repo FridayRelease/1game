@@ -1,19 +1,19 @@
-import { LoginUrl } from '@/constant/router';
+import { MainUrl } from '@/constant/router';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks';
 
-function RequireAuth({ children }: { children: JSX.Element }) {
+function RedirectToMain({ children }: { children: JSX.Element }) {
   const isAuth = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate(LoginUrl);
+    if (isAuth) {
+      navigate(MainUrl);
     }
   }, [isAuth]);
 
-  return isAuth ? children : null;
+  return !isAuth ? children : null;
 }
 
-export { RequireAuth };
+export { RedirectToMain };

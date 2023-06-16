@@ -27,11 +27,12 @@ export const userSlice = createSlice({
     signup: (
       state,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      { payload }: PayloadAction<PropsWithNavigator<IUserSignupRequest>>
+      { payload }: PayloadAction<IUserSignupRequest>
     ) => {
       return state;
     },
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     signin: (state, { payload }: PayloadAction<IUserSigninRequest>) => {
       return state;
     },
@@ -40,11 +41,7 @@ export const userSlice = createSlice({
       state.info = payload;
     },
 
-    signout: (
-      state,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      { payload }: PayloadAction<NavigateSagaProps>
-    ) => {
+    signout: state => {
       state.info = null;
     },
   },

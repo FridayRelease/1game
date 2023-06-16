@@ -1,24 +1,21 @@
 import { FC, useCallback } from 'react';
-import { userSelectors } from '@/features/authentication';
+import { userActions, userSelectors } from '@/features/authentication';
 import { useDispatch, useSelector } from 'react-redux';
 import Logotype from '@/components/logotype';
 import { cn } from '@/utils/cn';
 import './home.scss';
-import { useNavigate } from 'react-router-dom';
 import { ForumUrl, GameUrl, LeaderboardUrl, ProfileUrl } from '@/constant/router';
 import withLayoutMain from '@/layout/layoutMain/layoutMain';
 import { Icons } from '@/components/icon/icon';
 import { LinkType } from '@/types/link';
-import { signout } from '@/controllers/user-controllers';
 import MenuItem from '@/features/home';
 
 const Home: FC = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(userSelectors.user);
 
   const onClick = useCallback(() => {
-    signout(navigate, dispatch);
+    dispatch(userActions.signout());
   }, []);
 
   const links: LinkType[] = [

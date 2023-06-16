@@ -1,5 +1,4 @@
 import { FC, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { useForm, userActions } from '@/features/authentication';
@@ -18,7 +17,6 @@ import { IUserSignupRequest } from '@/types/user';
  */
 const Signup: FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { values, hasError, onChangeForm, getFieldProps, onBlurInput } = useForm({
     initValues,
@@ -27,7 +25,7 @@ const Signup: FC = () => {
 
   const onSubmitForm = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(userActions.signup({ props: values as IUserSignupRequest, navigate }));
+    dispatch(userActions.signup(values as IUserSignupRequest));
   };
 
   return (
