@@ -32,4 +32,8 @@ export class HttpClient {
 
     return this.axios.put<T>(url, data, options);
   }
+
+  public delete<T>(url: string) {
+    return this.axios.delete<T>(url);
+  }
 }

@@ -9,7 +9,4 @@ interface IQueryPagination {
   user_id?: number;
 }
 
-export {
-  type RequestWithId,
-  type IQueryPagination
-}
+export { type RequestWithId, type IQueryPagination };

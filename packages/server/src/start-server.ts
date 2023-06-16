@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 
 import { isDev } from './constants/env';
 import { ssrMiddleware, proxyMiddleware } from './modules';
-import { v2 } from './constants/api';
+import { v1, v2 } from './constants/api';
 import commentRoutes from './routes/comment';
 import topicRoutes from './routes/topic';
 import userRoutes from './routes/user';
@@ -26,7 +26,7 @@ async function startServer() {
   if (isDev()) {
     vite = await createViteServer({
       server: { middlewareMode: true },
-      root: srcPath,
+      root: srcPath(),
       appType: 'custom',
     });
 
@@ -41,10 +41,10 @@ async function startServer() {
   app.use(ssrMiddleware);
 
   // * ENDPOINTS
-  userRoutes(app);
-  topicRoutes(app);
-  commentRoutes(app);
-  reactionRoutes(app);
+  app.use(v1, userRoutes());
+  app.use(v1, topicRoutes());
+  app.use(v1, commentRoutes());
+  app.use(v1, reactionRoutes());
 
   const port = Number(process.env.SERVER_PORT) || 3001;
 

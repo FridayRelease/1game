@@ -1,19 +1,14 @@
 import type { IResponseWithPaginate } from 'pagination';
 import type { Reaction } from '../src/models/reaction';
 
-const paginateResponse = <T>(
-  count: number,
-  rows: Array<T>,
-  offset = 0,
-  limit = 0
-): IResponseWithPaginate<T> => {
+const paginateResponse = <T>(count: number, rows: Array<T>, offset = 0, limit = 0): IResponseWithPaginate<T> => {
   return {
     count,
     rows,
     offset: offset * limit,
-    elementCount: rows.length
-  }
-}
+    elementCount: rows.length,
+  };
+};
 
 type ExtendReaction = Omit<Reaction, 'user'> & { user_id: number }
 
@@ -39,7 +34,4 @@ const groupingReaction = (reactions: Array<ExtendReaction>, user_id?: number) =>
   return newObject;
 }
 
-export {
-  paginateResponse,
-  groupingReaction
-}
+export { paginateResponse, groupingReaction }

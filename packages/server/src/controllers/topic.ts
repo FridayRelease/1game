@@ -4,7 +4,7 @@ import { Topic } from '../models/topic';
 import { Comment } from '../models/comment';
 import type { IQueryPagination, RequestWithId } from 'request';
 import { errorMessage } from '../../utils/messageHelper';
-import { Op} from 'sequelize';
+import { Op } from 'sequelize';
 import { groupingReaction, paginateResponse } from '../../utils/data';
 import { Reaction } from '../models/reaction';
 import { ReactionType } from '../models/reaction-type';
@@ -26,7 +26,7 @@ export const topicCreate = async (req: Request, res: Response) => {
 export const topicGet = async (req: Request, res: Response) => {
   try {
     const queryParams = req.query as unknown as IQueryPagination;
-    const { limit = 10, offset = 0, textSearch = '', user_id } = queryParams;
+    const { limit = 100, offset = 0, textSearch = '', user_id } = queryParams;
     const config: Record<string, number> = {};
     const newTopicArray = [];
 
@@ -41,13 +41,12 @@ export const topicGet = async (req: Request, res: Response) => {
       config.offset = offset * limit;
     }
 
-
     const { count, rows } = await Topic.findAndCountAll({
       ...config,
       include: [
         {
           model: User,
-          attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+          attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
         }
       ],
       where: {
@@ -93,7 +92,7 @@ export const topicRead = async (req: Request, res: Response) => {
     include: [
       {
         model: User,
-        attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+        attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
       },
       {
         model: Comment,
@@ -101,7 +100,7 @@ export const topicRead = async (req: Request, res: Response) => {
         include: [
           {
             model: User,
-            attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+            attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
           },
         ],
       },
