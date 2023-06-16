@@ -119,18 +119,14 @@ const updateAvatar = async (file: File, dispatch: Dispatch<AnyAction>) => {
   return request(req, error, dispatch);
 };
 
-const signout = (navigate: NavigateFunction, dispatch: Dispatch<AnyAction>) => {
-  const req = async () => {
-    await userApi.signout();
-    dispatch(userActions.signout({ navigate }));
-  };
+const signout = async () => {
+  const { data } = await userApi.signout();
 
-  const error = {
-    title: 'Что-то пошло не так...',
-    description: 'Попробуйте разлогиниться ещё раз',
-  };
+  if (data === 'OK') {
+    return data;
+  }
 
-  return request(req, error, dispatch);
+  throw new Error('Что-то пошло не так...');
 };
 
 export { signup, userFullInfo, signin, updateProfileData, updatePassword, updateAvatar, signout };

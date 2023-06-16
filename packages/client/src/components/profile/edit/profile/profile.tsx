@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserAvatar from '@/components/user-avatar';
 import Menu from '@/components/profile/menu';
-import useForm from '@/features/authentication/hooks/use-validate';
+import { useForm } from '@/features/authentication';
 import Input from '@/components/input/input';
 import { MenuState, MenuType } from '@/components/profile/menu/menu.interface';
 import AvatarForm from '@/components/profile/avatar-form';

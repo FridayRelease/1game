@@ -2,6 +2,24 @@ import type { Request, Response } from 'express';
 import { User } from '../models/user';
 import type { RequestWithId } from 'request';
 
+export const createOrUpdate = async (info: Record<string, string>) => {
+  if (info.email) {
+    let user = await User.findOne({ where: { email: info.email } });
+
+    // Если пользователь уже существует в базе (ищем его по email-у), то возвращаем его.
+    if (user) {
+      await User.update(info, { where: { email: info.email } });
+      user = await User.findOne({ where: { email: info.email } });
+      return user;
+    }
+    const userCreate = await User.create(info);
+
+    return { id: userCreate.dataValues.id.toString() };
+  }
+
+  throw new Error('нет email');
+};
+
 /**
  * Пример запроса
  * curl -X POST -H "Content-Type: application/json" -d '{"first_name":"John","second_name":"Doe","email":"johndoe@email.com"}' http://localhost:3001/api/v1/users

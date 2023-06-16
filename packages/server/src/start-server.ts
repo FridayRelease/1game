@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 
 import { isDev } from './constants/env';
 import { ssrMiddleware, proxyMiddleware } from './modules';
-import { v2 } from './constants/api';
+import { v1, v2 } from './constants/api';
 import commentRoutes from './routes/comment';
 import topicRoutes from './routes/topic';
 import userRoutes from './routes/user';
@@ -40,9 +40,9 @@ async function startServer() {
   app.use(ssrMiddleware);
 
   // * ENDPOINTS
-  userRoutes(app);
-  topicRoutes(app);
-  commentRoutes(app);
+  app.use(v1, userRoutes());
+  app.use(v1, topicRoutes());
+  app.use(v1, commentRoutes());
 
   const port = Number(process.env.SERVER_PORT) || 3001;
 

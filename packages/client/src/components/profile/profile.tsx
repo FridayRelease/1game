@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserAvatar from '@/components/user-avatar';
 import Button from '@/components/button/button';
-import { userSelectors } from '@/features/authentication';
+import { userActions, userSelectors } from '@/features/authentication';
 import { IUserDTO } from '@/api/types';
-import { signout } from '@/controllers/user-controllers';
 import useResetState from '@/hooks/use-reset-state';
 import { IMenuData, IMenuItem } from './profile.interface';
 import Menu from './menu';
@@ -47,7 +46,7 @@ const Profile: FC = () => {
   ];
 
   const onClick = useCallback(() => {
-    signout(navigate, dispatch);
+    dispatch(userActions.signout());
   }, []);
 
   return (
