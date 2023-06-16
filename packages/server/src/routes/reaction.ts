@@ -7,7 +7,7 @@ const reactionRoutes = function (app: Express) {
   app.use(express.json());
 
   app.post(`${v1}/reaction`, [reactionCreate]);
-  app.put(`${v1}/reaction`, [reactionUpdate]);
+  app.put(`${v1}/reaction/:id`, [reactionUpdate]);
   app.delete(`${v1}/reaction`, [reactionDelete]);
 };
 

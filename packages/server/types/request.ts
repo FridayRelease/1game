@@ -6,6 +6,7 @@ interface IQueryPagination {
   limit: number;
   offset: number;
   textSearch?: string;
+  user_id?: number;
 }
 
 export {

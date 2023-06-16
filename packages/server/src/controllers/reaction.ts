@@ -33,10 +33,16 @@ export const reactionUpdate = async (req: Request, res: Response) => {
 
 export const reactionDelete = async (req: Request, res: Response) => {
   try {
-    const topic = await Reaction.destroy();
+    const { id } = req.params;
+    const reaction = await Reaction.findByPk(id);
 
-    console.log(req.body);
-    return res.status(201).json(topic);
+    if (!reaction) {
+      return res.status(404).json(errorMessage(MESSAGE.RECORD_NOT_FOUND));
+    }
+
+    await reaction.destroy();
+
+    return res.status(200).json(reaction);
   } catch (error) {
     return res.status(500).json(errorMessage(error));
   }
