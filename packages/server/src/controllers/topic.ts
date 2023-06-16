@@ -167,7 +167,7 @@ export const topicReadReactions = async (req: Request, res: Response) => {
     include: [
       {
         model: User,
-        attributes: ['id', 'first_name', 'last_name', 'display_name', 'email', 'avatar'],
+        attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
       },
       {
         model: ReactionType

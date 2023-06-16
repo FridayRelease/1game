@@ -1,14 +1,18 @@
-import express from 'express';
-import type { Express } from 'express';
+import { Router } from 'express';
 import { reactionCreate, reactionDelete, reactionUpdate } from '../controllers/reaction';
 import { v1 } from '../constants/api';
+import { authMiddleware } from '../modules';
 
-const reactionRoutes = function (app: Express) {
-  app.use(express.json());
+const reactionRoutes = function () {
+  const routerUser = Router();
 
-  app.post(`${v1}/reaction`, [reactionCreate]);
-  app.put(`${v1}/reaction/:id`, [reactionUpdate]);
-  app.delete(`${v1}/reaction`, [reactionDelete]);
+  routerUser.use(authMiddleware);
+
+  routerUser.post(`${v1}/reaction`, [reactionCreate]);
+  routerUser.put(`${v1}/reaction/:id`, [reactionUpdate]);
+  routerUser.delete(`${v1}/reaction`, [reactionDelete]);
+
+  return routerUser;
 };
 
 export default reactionRoutes;

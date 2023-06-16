@@ -12,7 +12,7 @@ const userRoutes = function () {
   routerTopics.get('/topics/:id', [topicRead]);
   routerTopics.put('/topics/:id', [topicUpdate]);
   routerTopics.delete('/topics/:id', [topicDelete]);
-  routerTopics.delete('/topics/:id/reactions', [topicReadReactions]);
+  routerTopics.post('/topics/:id/reactions', [topicReadReactions]);
 
   return routerTopics;
 };
