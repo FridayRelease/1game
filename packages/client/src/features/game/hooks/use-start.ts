@@ -16,7 +16,7 @@ import { createTextLayer } from '../layers/text';
 import TimedScene, { Scene } from '../timed-scene';
 import { createPlayerProgressLayer } from '../layers/player-progress';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelectors } from '@/features/authentication/store/user-slice';
+import { userSelectors } from '@/features/authentication';
 import { leaderboardActions } from '@/features/leaderboard/store/leaderboard-slice';
 import { IPlayerInfo } from '@/api/types';
 

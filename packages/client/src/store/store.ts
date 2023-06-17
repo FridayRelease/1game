@@ -6,6 +6,8 @@ import { userReducer } from '@/features/authentication';
 import { leaderboardReducer } from '@/features/leaderboard';
 import { LoadingReducer } from './slices/loading-slice';
 import { themeReducer } from './slices/theme-slice';
+import { forumTopicReducer } from '@/features/forum/topic/store';
+import { forumCommentReducer } from '@/features/forum/comment/store';
 import { configReducer } from './slices/config-slice';
 
 export interface SagaStore extends Store {
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   config: configReducer,
   leaderboard: leaderboardReducer,
+  'forum-topic': forumTopicReducer,
+  'forum-comment': forumCommentReducer,
 });
 
 export default function createReduxStore(initialState = {}) {

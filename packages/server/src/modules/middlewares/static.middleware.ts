@@ -8,7 +8,9 @@ const staticMiddleware = () => {
   if (isDev()) {
     return () => undefined;
   }
-  return express.static(path.resolve(distPath), {
+  console.warn(path.resolve(distPath()));
+
+  return express.static(path.resolve(distPath()), {
     setHeaders: res => {
       res.setHeader('Service-Worker-Allowed', '/');
     },

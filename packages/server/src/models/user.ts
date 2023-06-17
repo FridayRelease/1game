@@ -9,11 +9,11 @@ import { Topic } from './topic';
   updatedAt: 'updated_at',
 })
 export class User extends Model {
-  @Column({ })
+  @Column({})
   first_name!: string;
 
   @Column
-  last_name!: string;
+  second_name!: string;
 
   @Column
   email!: string;

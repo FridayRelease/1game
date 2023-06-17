@@ -34,7 +34,7 @@ export const commentCreate = async (req: Request, res: Response) => {
       });
     }
 
-    return res.status(200).json(comment.dataValues);
+    return res.status(201).json(comment.dataValues);
   } catch (error) {
     return res.status(500).json({ message: 'error', error: error });
   }
@@ -50,10 +50,20 @@ export const commentGet = async (req: Request<{ topic_id: number }>, res: Respon
           [Op.eq]: null,
         },
       },
+      include: User,
+      order: [['created_at', 'ASC']],
     });
 
+    const recursiveComments = await Promise.all(
+      comments.map(async comment => {
+        const jsonComment = comment.toJSON();
+        const result = await expandSubcomments(jsonComment, comment.id);
+        return result;
+      })
+    );
+
     if (topic_id) {
-      return res.status(200).json(comments);
+      return res.status(200).json(recursiveComments);
     }
 
     return res.status(200).json({ message: 'error', error: 'topic not found' });
@@ -74,27 +84,6 @@ export const commentRead = async (req: Request, res: Response) => {
     res.send('comment is not found');
     return;
   }
-
-  // Получаем все комментарии на комментарии
-  const expandSubcomments = async (comment: IComment, comment_id: number) => {
-    const childrenComments = await Comment.findAll({ where: { comment_id: comment_id }, include: User });
-
-    if (childrenComments.length === 0) {
-      return comment;
-    }
-
-    if (!comment.comments) {
-      comment.comments = [];
-    }
-
-    for (let i = 0; i < childrenComments.length; i++) {
-      const childrenComment = childrenComments[i].toJSON();
-
-      comment.comments.push(await expandSubcomments(childrenComment, childrenComment.id));
-    }
-
-    return comment;
-  };
 
   const result = await expandSubcomments(comment, Number(req.params.id));
   res.send(result);
@@ -164,4 +153,29 @@ export const commentDelete = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(500).json(errorMessage(error));
   }
+};
+
+// Получаем все комментарии на комментарии
+export const expandSubcomments = async (comment: IComment, comment_id: number) => {
+  const childrenComments = await Comment.findAll({
+    where: { comment_id: comment_id },
+    include: User,
+    order: [['created_at', 'ASC']],
+  });
+
+  if (childrenComments.length === 0) {
+    return comment;
+  }
+
+  if (!comment.comments) {
+    comment.comments = [];
+  }
+
+  for (let i = 0; i < childrenComments.length; i++) {
+    const childrenComment = childrenComments[i].toJSON();
+
+    comment.comments.push(await expandSubcomments(childrenComment, childrenComment.id));
+  }
+
+  return comment;
 };

@@ -8,7 +8,4 @@ interface IQueryPagination {
   textSearch?: string;
 }
 
-export {
-  type RequestWithId,
-  type IQueryPagination
-}
+export { type RequestWithId, type IQueryPagination };

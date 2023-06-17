@@ -13,7 +13,7 @@ export const initDB = async () => {
       username: POSTGRES_USER,
       password: POSTGRES_PASSWORD,
       database: POSTGRES_DB,
-      dialect: 'postgres'
+      dialect: 'postgres',
     };
 
     const sequelize = new Sequelize(sequelizeOptions);

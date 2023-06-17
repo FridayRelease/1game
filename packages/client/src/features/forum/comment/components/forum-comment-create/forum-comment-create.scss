@@ -1,0 +1,36 @@
+.forum-comment-create {
+  &__title {
+    text-align: center;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: 14px;
+    color: var(--base-bg-300);
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__button-wrapper {
+    margin: 20px 0 10px;
+    text-align: center;
+  }
+
+  &__button {
+    border: 1px solid var(--main-color-text);
+    border-radius: 20px;
+  }
+
+  &__error {
+    margin: 10px 0 0 0;
+    font-size: 15px;
+    line-height: 20px;
+    color: var(--main-bg-alert);
+  }
+}

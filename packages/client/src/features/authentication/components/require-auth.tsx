@@ -11,7 +11,7 @@ function RequireAuth({ children }: { children: JSX.Element }) {
     if (!isAuth) {
       navigate(LoginUrl);
     }
-  }, []);
+  }, [isAuth]);
 
   return isAuth ? children : null;
 }
