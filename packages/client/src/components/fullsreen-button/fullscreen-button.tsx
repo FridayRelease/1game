@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useFullscreen from '@/hooks/use-fullscreen';
 import Icon, { Icons } from '@/components/icon/icon';
 import './fullscreen-button.scss';
 import { cn } from '@/utils/cn';
+import { useDispatch, useSelector } from 'react-redux';
+import { configActions, configSelectors } from '@/store/slices/config-slice';
 
 const FullscreenButton = () => {
-  const [isFullscreen, setFullscreen] = useState(false);
+  const isFullscreen = useSelector(configSelectors.isFullScreen);
+  const dispatch = useDispatch();
   const { activateFullscreen, deactivateFullscreen } = useFullscreen();
 
   const onChangeFullscreen = () => {
-    if (isFullscreen) {
-      deactivateFullscreen(setFullscreen)
+    dispatch(configActions.setTheme(!isFullscreen.value))
+    if (isFullscreen.value) {
+      deactivateFullscreen()
     } else {
-      activateFullscreen(setFullscreen)
+      activateFullscreen()
     }
   }
 
   return (
     <span
-      className={cn('full-screen', { 'full-screen--active': isFullscreen })}
+      className={cn('full-screen', { 'full-screen--active': isFullscreen.value })}
       onClick={onChangeFullscreen}
     >
-      <Icon type={Icons.Fullscreen} className="full-screen__logo" stroke={isFullscreen ? `var(--main-bg-alert)` : 'white'} />
+      <Icon type={Icons.Fullscreen} className="full-screen__logo" stroke={isFullscreen.value ? `var(--main-bg-alert)` : 'white'} />
       Полноэкранный режим
     </span>
   )

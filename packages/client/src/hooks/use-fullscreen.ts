@@ -1,19 +1,15 @@
-type anotherFunction = (isActive: boolean) => void;
-
 const useFullscreen = () => {
 
-  const activateFullscreen = (changeStateFunc: anotherFunction) => {
+  const activateFullscreen = () => {
     console.log(document.fullscreenElement);
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
-      changeStateFunc(true)
     }
   };
 
-  const deactivateFullscreen = (changeStateFunc: anotherFunction) => {
+  const deactivateFullscreen = () => {
     if (document.exitFullscreen) {
       document.exitFullscreen();
-      changeStateFunc(false)
     }
   };
 
