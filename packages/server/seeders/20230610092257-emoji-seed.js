@@ -6,21 +6,15 @@ module.exports = {
     await queryInterface.bulkInsert('reactions_type', [
       {
         name: 'smile',
-        emoji: '&#128515',
-        created_at: new Date(),
-        updated_at: new Date(),
+        emoji: '&#128515'
       },
       {
         name: 'angry',
-        emoji: '&#128515',
-        created_at: new Date(),
-        updated_at: new Date(),
+        emoji: '&#128515'
       },
       {
         name: 'questions',
-        emoji: '&#128515',
-        created_at: new Date(),
-        updated_at: new Date(),
+        emoji: '&#128515'
       }
     ], {});
   },

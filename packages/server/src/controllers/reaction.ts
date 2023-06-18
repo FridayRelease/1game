@@ -5,8 +5,8 @@ import { MESSAGE } from '../constants/message';
 
 export const reactionCreate = async (req: Request, res: Response) => {
   try {
-    const topic = await Reaction.create(req.body);
-    return res.status(201).json(topic.dataValues);
+    const reaction = await Reaction.create(req.body);
+    return res.status(201).json(reaction.dataValues);
   } catch (error) {
     return res.status(500).json(errorMessage(error));
   }
@@ -16,13 +16,13 @@ export const reactionUpdate = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const topicUpdated = await Reaction.update(req.body, {
+    const reactionUpdated = await Reaction.update(req.body, {
       where: { id },
     });
 
-    if (topicUpdated) {
-      const topic = await Reaction.findByPk(id);
-      return res.status(200).json(topic);
+    if (reactionUpdated) {
+      const reaction = await Reaction.findByPk(id);
+      return res.status(200).json(reaction);
     }
 
     return res.status(500).json(errorMessage(MESSAGE.FAILED_UPDATE));

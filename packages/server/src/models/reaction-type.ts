@@ -2,9 +2,7 @@
 import { Table, Column, Model } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'reactions_type',
-  createdAt: 'created_at',
-  updatedAt: 'updated_at',
+  tableName: 'reactions_type'
 })
 export class ReactionType extends Model {
   @Column

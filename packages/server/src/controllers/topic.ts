@@ -30,9 +30,6 @@ export const topicGet = async (req: Request, res: Response) => {
     const config: Record<string, number> = {};
     const newTopicArray = [];
 
-    // const userId = req.headers.cookie?.split('; ').find(item => item.includes('uuid'));
-    // const id = userId ? userId.split('=')[1] : undefined;
-
     if (Number(queryParams.limit) !== 0) {
       config.limit = Number(queryParams.limit);
     }
@@ -73,7 +70,6 @@ export const topicGet = async (req: Request, res: Response) => {
         .map(item => ({ ...item.dataValues, count: Number(item.dataValues.count)}));
 
       obj.reactions = groupingReaction(reactions, Number(user_id))
-
       newTopicArray.push(obj)
     }
 
