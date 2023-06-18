@@ -1,9 +1,14 @@
 name: Push to GitHub Container Registry
 
+# on:
+#   pull_request:
+#     branches:
+#       - develop
+
 on:
-  pull_request:
+  push:
     branches:
-      - develop
+      - feature/fr-83
 
 jobs:
   build-and-push:
