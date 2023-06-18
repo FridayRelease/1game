@@ -4,8 +4,11 @@ import { Topic } from '../models/topic';
 import { Comment } from '../models/comment';
 import type { IQueryPagination, RequestWithId } from 'request';
 import { errorMessage } from '../../utils/messageHelper';
-import { paginateResponse } from '../../utils/data';
 import { Op } from 'sequelize';
+import { groupingReaction, paginateResponse } from '../../utils/data';
+import { Reaction } from '../models/reaction';
+import { ReactionType } from '../models/reaction-type';
+import { MESSAGE } from '../constants/message';
 
 /**
  * Пример запроса
@@ -23,30 +26,54 @@ export const topicCreate = async (req: Request, res: Response) => {
 export const topicGet = async (req: Request, res: Response) => {
   try {
     const queryParams = req.query as unknown as IQueryPagination;
-    const { limit = 100, offset = 0, textSearch = '' } = queryParams;
+    const { limit = 100, offset = 0, textSearch = '', user_id } = queryParams;
+    const config: Record<string, number> = {};
+    const newTopicArray = [];
 
-    if (Number(queryParams.limit) === 0) {
-      const topics = await Topic.findAll({
-        where: {
-          subject: { [Op.like]: '%' + textSearch + '%' },
-        },
-      });
-      return res.status(200).json(paginateResponse(topics.length, topics, offset, limit));
+    if (Number(queryParams.limit) !== 0) {
+      config.limit = Number(queryParams.limit);
+    }
+
+    if (queryParams.offset) {
+      config.offset = offset * limit;
     }
 
     const { count, rows } = await Topic.findAndCountAll({
-      limit: limit,
-      offset: offset * limit,
-      include: {
-        model: User,
-        attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
-      },
+      ...config,
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
+        }
+      ],
       where: {
         subject: { [Op.like]: '%' + textSearch + '%' },
       },
+      order: [
+        ['id', 'ASC']
+      ]
     });
 
-    return res.status(200).json(paginateResponse(count, rows, offset, limit));
+    for (const row of rows) {
+      const obj = {...row.dataValues}
+      const reactionRows = await Reaction.findAll({
+        include: [{
+          model: ReactionType
+        }],
+        where: {
+          topic_id: row.id,
+        }
+      });
+
+      const reactions = reactionRows
+        .filter(item => item.dataValues.reaction_id)
+        .map(item => ({ ...item.dataValues, count: Number(item.dataValues.count)}));
+
+      obj.reactions = groupingReaction(reactions, Number(user_id))
+      newTopicArray.push(obj)
+    }
+
+    return res.status(200).json(paginateResponse(count, newTopicArray, offset, limit));
   } catch (error) {
     return res.status(500).json(errorMessage(error));
   }
@@ -111,10 +138,47 @@ export const topicDelete = async (req: Request<RequestWithId>, res: Response) =>
         topic_id: topic?.id,
       },
     });
+    await Reaction.destroy({
+      where: {
+        topic_id: topic?.id,
+      },
+    });
 
     await topic.destroy();
     return res.status(200).json({ message: 'Topic deleted' });
   } catch (error) {
     return res.status(500).json(errorMessage(error));
   }
+};
+
+export const topicReadReactions = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { user_id } = req.body;
+
+  if (!id) {
+    res.status(500).json(errorMessage(MESSAGE.ID_NOT_PASSED));
+  }
+
+  const reaction = await Reaction.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'first_name', 'second_name', 'display_name', 'email', 'avatar'],
+      },
+      {
+        model: ReactionType
+      }
+    ],
+    where: {
+      topic_id: id
+    }
+  });
+
+  const reactions = reaction
+    .filter(item => item.dataValues.reaction_id)
+    .map(item => ({ ...item.dataValues, count: Number(item.dataValues.count)}));
+
+  const mergeArray = groupingReaction(reactions, Number(user_id));
+
+  return res.status(200).json(mergeArray)
 };

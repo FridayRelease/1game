@@ -1,4 +1,4 @@
-import { topicCreate, topicRead, topicGet, topicUpdate, topicDelete } from '../controllers/topic';
+import { topicCreate, topicRead, topicGet, topicUpdate, topicDelete, topicReadReactions } from '../controllers/topic';
 import { Router } from 'express';
 import { authMiddleware } from '../modules';
 
@@ -12,6 +12,7 @@ const userRoutes = function () {
   routerTopics.get('/topics/:id', [topicRead]);
   routerTopics.put('/topics/:id', [topicUpdate]);
   routerTopics.delete('/topics/:id', [topicDelete]);
+  routerTopics.post('/topics/:id/reactions', [topicReadReactions]);
 
   return routerTopics;
 };

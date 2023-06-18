@@ -13,6 +13,7 @@ import userRoutes from './routes/user';
 import staticMiddleware from './modules/middlewares/static.middleware';
 import securityMiddleware from './modules/middlewares/security.middleware';
 import { srcPath } from './constants/path';
+import reactionRoutes from './routes/reaction';
 
 async function startServer() {
   const app = express();
@@ -43,6 +44,7 @@ async function startServer() {
   app.use(v1, userRoutes());
   app.use(v1, topicRoutes());
   app.use(v1, commentRoutes());
+  app.use(v1, reactionRoutes());
 
   const port = Number(process.env.SERVER_PORT) || 3001;
 

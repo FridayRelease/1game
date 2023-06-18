@@ -55,6 +55,8 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('comments');
+    await queryInterface.dropTable('comments', {
+      cascade: true
+    });
   },
 };
