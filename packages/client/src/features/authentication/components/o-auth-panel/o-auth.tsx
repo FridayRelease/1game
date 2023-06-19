@@ -14,7 +14,9 @@ const OAuth: FC = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { service_id } = await getServiceIDInfo(import.meta.env.VITE_OAUTH_REDIRECT_URI || '/verification_code');
+        const { service_id } = await getServiceIDInfo(
+          import.meta.env.VITE_OAUTH_REDIRECT_URI || 'https://fr-vm-1game.ya-praktikum.tech/verification_code'
+        );
         setId(service_id);
       } catch (error) {
         if (error instanceof Error) {
@@ -37,7 +39,7 @@ const OAuth: FC = () => {
           to={`${
             import.meta.env.VITE_OAUTH_LOGIN_URL || 'https://oauth.yandex.ru/authorize'
           }?response_type=code&client_id=${serviceId}&redirect_uri=${
-            import.meta.env.VITE_OAUTH_REDIRECT_URI || '/verification_code'
+            import.meta.env.VITE_OAUTH_REDIRECT_URI || 'https://fr-vm-1game.ya-praktikum.tech/verification_code'
           }
 `}>
           <Icon type={Icons.Yandex} className="oauth__brand-logo" />
