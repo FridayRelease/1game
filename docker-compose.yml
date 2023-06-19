@@ -1,16 +1,25 @@
 version: '3.9'
 
 services:
-  webserver:
-    image: nginx:latest
+  nginx:
+    image: nginx:${NGINX_VERSION}
     ports:
-      - 80:80
-      - 443:443
-    restart: always
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
-      - ./ssl/www:/var/www/ssl/:ro
-      #!!! точнить
+      - ${NGINX_CONF_DIR}:/etc/nginx/conf
+      - ${CERTBOT_CONF_DIR}:/etc/letsencrypt
+      - ${CERTBOT_WWW_DIR}:/var/www/certbot
+      - ${SITES_DIR}:/server/dist
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+     image: certbot/certbot
+     volumes:
+       - ${CERTBOT_CONF_DIR}:/etc/letsencrypt
+       - ${CERTBOT_WWW_DIR}:/var/www/certbot
+     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
   client:
     container_name: prakticum-client
     image: prakticum-client
