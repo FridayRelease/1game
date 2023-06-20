@@ -10,8 +10,12 @@ import { IUserDTO, SignUpResponseDTO, StatusResponse } from '@/api/types';
 export class UserApi {
   private http;
 
-  constructor(url: string) {
+  constructor(protected url: string) {
     this.http = new HttpClient(url);
+  }
+
+  get currentUrl() {
+    return this.url;
   }
 
   signin = async (data: IUserSigninRequest) => {

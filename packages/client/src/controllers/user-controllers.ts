@@ -27,6 +27,7 @@ const request = async (req: () => Promise<void>, error: IErrorState, dispatch: D
 };
 
 const userFullInfo = async (cookie?: string) => {
+  console.warn({ currentUrl: userApi.currentUrl });
   const user = await userApi.userInfo(cookie);
 
   return user.data;
