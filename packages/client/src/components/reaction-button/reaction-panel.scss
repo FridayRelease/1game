@@ -1,0 +1,35 @@
+.reaction-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  &__icon {
+    padding: 8px;
+    border: 1px solid #505050;
+    border-radius: 10px;
+    width: 40px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__icon-add {
+    width: 20px;
+  }
+
+  &__add-new {
+    display: flex;
+    gap: 10px;
+    background: #505050;
+    padding: 4px;
+    border-radius: 10px;
+
+    .reaction-button {
+      padding: 5px 10px;
+      font-size: 18px;
+    }
+  }
+}

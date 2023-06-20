@@ -30,9 +30,9 @@ export const topicGet = async (req: Request, res: Response) => {
     const config: Record<string, number> = {};
     const newTopicArray = [];
 
-    if (Number(queryParams.limit) !== 0) {
-      config.limit = Number(queryParams.limit);
-    }
+    // if (Number(queryParams.limit) !== 0) {
+    //   config.limit = Number(queryParams.limit);
+    // }
 
     if (queryParams.offset) {
       config.offset = offset * limit;

@@ -3,6 +3,7 @@ import { ReactComponent as IconTrophy } from '@/assets/images/icons/trophy.svg';
 import { ReactComponent as IconForum } from '@/assets/images/icons/forum.svg';
 import { ReactComponent as IconLogout } from '@/assets/images/icons/logout.svg';
 import { ReactComponent as IconYandex } from '@/assets/images/icons/yandex.svg';
+import { ReactComponent as AddReaction } from '@/assets/images/icons/add_reaction.svg';
 import { IconComponentType } from '@/components/icon/types';
 import { Icons } from '@/components/icon/icon';
 
@@ -28,6 +29,9 @@ export const getIconComponentByType = (type: Icons) => {
       break;
     case Icons.Yandex:
       iconComponent = IconYandex;
+      break;
+    case Icons.AddReaction:
+      iconComponent = AddReaction;
       break;
     default:
       exhaustiveCheck(type);

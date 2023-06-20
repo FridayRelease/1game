@@ -3,15 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('reactions', [
-      {
-        topic_id: 1,
-        user_id: 1,
-        reaction_id: 1,
-        created_at: new Date(),
-        updated_at: new Date()
-      }
-    ], {});
+    await queryInterface.bulkInsert('reactions', [{}], {});
   },
 
   async down (queryInterface, Sequelize) {

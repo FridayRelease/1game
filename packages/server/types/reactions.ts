@@ -6,6 +6,7 @@ interface ObjectReaction {
   count: number;
   hasCurrentUserReacted: boolean;
   emoji: string;
+  id: number;
 }
 
 export {

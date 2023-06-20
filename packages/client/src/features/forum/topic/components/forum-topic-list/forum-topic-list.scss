@@ -1,4 +1,7 @@
 .forum-topic-list {
   list-style-type: none;
   margin: 10px 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0 10px;
 }

@@ -7,6 +7,7 @@ export enum Icons {
   Forum = 'forum',
   Logout = 'logout',
   Yandex = 'yandex',
+  AddReaction = 'add-reaction',
 }
 
 const Icon = ({ type, className, fill = 'none', stroke = 'none' }: IconProps) => {

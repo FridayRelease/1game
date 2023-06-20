@@ -1,8 +1,8 @@
 import { forumTopicAPI } from '@/api';
 import { ITopicCreateRequest, ITopicUpdateRequest } from '@/types/forum';
 
-const getTopicList = async () => {
-  const response = await forumTopicAPI.topicList();
+const getTopicList = async (user_id?: number) => {
+  const response = await forumTopicAPI.topicList(user_id);
 
   return response.data;
 };

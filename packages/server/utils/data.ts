@@ -24,7 +24,8 @@ const groupingReaction = (reactions: Array<ExtendReaction>, user_id?: number) =>
       newObject[reaction.reaction.name] = {
         count: 1,
         hasCurrentUserReacted: reaction.user_id === user_id,
-        emoji: reaction.reaction.emoji
+        emoji: reaction.reaction.emoji,
+        id: reaction.id,
       }
     }
   }

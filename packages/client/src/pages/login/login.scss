@@ -28,7 +28,9 @@
     color: var(--main-color-text);
     text-decoration: none;
     display: inline-block;
-    margin-top: 10px;
+    font-size: 24px;
+    white-space: break-spaces;
+    margin: 10px 0 20px 0;
 
     &:hover {
       color: var(--main-color-text);

@@ -9,7 +9,10 @@ export class ForumTopicApi {
     this.http = new HttpClient(url);
   }
 
-  topicList = async () => {
+  topicList = async (user_id: number | undefined) => {
+    if (user_id) {
+      return await this.http.get<ForumTopicDTO>(`topics?user_id=${user_id}`);
+    }
     return await this.http.get<ForumTopicsDTO>('topics');
   };
 
@@ -18,6 +21,7 @@ export class ForumTopicApi {
   };
 
   topicRead = async (id: number) => {
+
     return await this.http.get<ForumTopicDTO>(`topics/${id}`);
   };
 

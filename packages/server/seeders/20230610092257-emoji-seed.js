@@ -6,15 +6,31 @@ module.exports = {
     await queryInterface.bulkInsert('reactions_type', [
       {
         name: 'smile',
-        emoji: '&#128515'
+        emoji: '0x1F602'
       },
       {
         name: 'angry',
-        emoji: '&#128515'
+        emoji: '0x1F608'
+      },
+      {
+        name: 'screaming',
+        emoji: '0x1F631'
       },
       {
         name: 'questions',
-        emoji: '&#128515'
+        emoji: '0xDE09'
+      },
+      {
+        name: 'like',
+        emoji: '0x2764'
+      },
+      {
+        name: 'magic',
+        emoji: '0x2728'
+      },
+      {
+        name: 'clown',
+        emoji: '0x1F921'
       }
     ], {});
   },

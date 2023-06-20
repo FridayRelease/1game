@@ -9,9 +9,10 @@ import { Link } from 'react-router-dom';
 import { forumTopicActions } from '../../store';
 import ForumTopicUpdate from '../forum-topic-update';
 import './forum-topic-item.scss';
+import ReactionButton from '@/components/reaction-button';
 
 const ForumTopicItem = ({ topic }: { topic: ForumTopicDTO }) => {
-  const { id, subject, user, created_at } = topic;
+  const { id, subject, user, created_at, reactions } = topic;
   const dispatch = useDispatch();
   const authUser = useSelector(userSelectors.user);
 
@@ -60,12 +61,12 @@ const ForumTopicItem = ({ topic }: { topic: ForumTopicDTO }) => {
             <></>
           )}
         </div>
-
-        <div className="forum-topic-item__info">
-          <div className="forum-topic-item__user">{user.first_name}</div>
-          <div className="forum-topic-item__date">{created_at}</div>
-        </div>
       </div>
+      <div className="forum-topic-item__info">
+        <div className="forum-topic-item__user">{user.first_name}</div>
+        <div className="forum-topic-item__date">{created_at}</div>
+      </div>
+      <ReactionButton reaction={reactions} />
     </li>
   );
 };

@@ -131,6 +131,12 @@ interface IOAuthYandexResponse {
   service_id: string;
 }
 
+type ReactionDTO = {
+  count: number;
+  hasCurrentUserReacted: boolean;
+  emoji: string;
+}
+
 type ForumTopicDTO = {
   id: number;
   subject: string;
@@ -138,6 +144,7 @@ type ForumTopicDTO = {
   created_at: string;
   updated_at: string;
   user: IUserDTO;
+  reactions: Record<string, ReactionDTO>
 };
 
 type ForumTopicsDTO = {
