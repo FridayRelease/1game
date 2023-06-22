@@ -12,7 +12,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 RUN yarn lerna bootstrap
-COPY /app/.env.sample /app/.env
+COPY .env.sample .env
 RUN yarn build
 
 FROM node:$NODE_VERSION-buster-slim as production
