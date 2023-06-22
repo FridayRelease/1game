@@ -18,8 +18,7 @@ const VerificationCode: FC = () => {
         const code = searchParams.get('code');
         const res = await getServiceInfo({
           code,
-          redirect_uri:
-            import.meta.env.VITE_OAUTH_REDIRECT_URI || 'https://fr-vm-1game.ya-praktikum.tech/verification_code',
+          redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URI || '/verification_code',
         });
 
         if (res === 'OK') {
