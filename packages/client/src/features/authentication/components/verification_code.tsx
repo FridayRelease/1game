@@ -16,10 +16,7 @@ const VerificationCode: FC = () => {
       try {
         dispatch(errorActions.resetError());
         const code = searchParams.get('code');
-        const res = await getServiceInfo({
-          code,
-          redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URI || '/verification_code',
-        });
+        const res = await getServiceInfo({ code, redirect_uri: import.meta.env.VITE_OAUTH_REDIRECT_URI });
 
         if (res === 'OK') {
           dispatch(userActions.auth());

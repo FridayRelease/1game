@@ -10,7 +10,7 @@ import ForumTopicCreate from './components/forum-topic-create';
 
 const ForumTopic = () => {
   const user = useSelector(userSelectors.user);
-  const avatar = `${import.meta.env.VITE_BASE_API || '/api/v2'}/resources${user.info?.avatar}`;
+  const avatar = `${import.meta.env.VITE_BASE_API}/resources${user.info?.avatar}`;
 
   const [isShow, setIsShow] = useState(false);
   const setShow = () => setIsShow(true);

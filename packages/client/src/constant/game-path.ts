@@ -1,9 +1,7 @@
 // необходимые urls для игры
 
 const assetsApi =
-  process.env.NODE_ENV === 'development'
-    ? import.meta.env.VITE_DEV_ASSETS_API || '/assets/public/'
-    : import.meta.env.VITE_ASSETS_API || '/assets/';
+  process.env.NODE_ENV === 'development' ? import.meta.env.VITE_DEV_ASSETS_API : import.meta.env.VITE_ASSETS_API;
 
 const paths = [
   `${assetsApi}levels/1-1.json`,

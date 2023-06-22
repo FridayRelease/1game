@@ -14,7 +14,7 @@ const OAuth: FC = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { service_id } = await getServiceIDInfo(import.meta.env.VITE_OAUTH_REDIRECT_URI || '/verification_code');
+        const { service_id } = await getServiceIDInfo(import.meta.env.VITE_OAUTH_REDIRECT_URI);
         setId(service_id);
       } catch (error) {
         if (error instanceof Error) {
@@ -34,10 +34,8 @@ const OAuth: FC = () => {
       {serviceId ? (
         <Link
           className="oauth__button"
-          to={`${
-            import.meta.env.VITE_OAUTH_LOGIN_URL || 'https://oauth.yandex.ru/authorize'
-          }?response_type=code&client_id=${serviceId}&redirect_uri=${
-            import.meta.env.VITE_OAUTH_REDIRECT_URI || '/verification_code'
+          to={`${import.meta.env.VITE_OAUTH_LOGIN_URL}?response_type=code&client_id=${serviceId}&redirect_uri=${
+            import.meta.env.VITE_OAUTH_REDIRECT_URI
           }
 `}>
           <Icon type={Icons.Yandex} className="oauth__brand-logo" />
