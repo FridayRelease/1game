@@ -10,7 +10,6 @@ function* userInfoSaga({ payload }: Effect<string, string | undefined>) {
   try {
     yield put(LoadingActions.setIsLoading(true));
 
-    console.warn('payload (cookie): ', payload);
     const user: UserResponseInfo = yield call(userFullInfo, payload);
 
     yield put(userActions.setUser(user));
