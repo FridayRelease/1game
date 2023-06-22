@@ -1,4 +1,4 @@
-import { useRef, memo, useEffect } from 'react';
+import { useRef, memo } from 'react';
 import StartGame from './components/start-game';
 import { useStart } from './hooks';
 
