@@ -41,6 +41,8 @@ jobs:
 
       - name: Build and push server image
         uses: docker/build-push-action@v4
+        env:
+          VITE_BASE_API: ${{ vars.VITE_BASE_API }}
         with:
           context: .
           file: Dockerfile.server

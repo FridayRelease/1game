@@ -10,7 +10,7 @@ const assetsApi =
     ? import.meta.env.VITE_DEV_ASSETS_API || '/assets/public/'
     : import.meta.env.VITE_ASSETS_API || '/assets/';
 
-const userApi = new UserApi(import.meta.env.VITE_BASE_API || 'https://fr-vm-1game.ya-praktikum.tech/api/v2/');
+const userApi = new UserApi(import.meta.env.VITE_BASE_API);
 const gameApi = new GameApi(assetsApi);
 const leaderApi = new LeaderApi(import.meta.env.VITE_BASE_API || '/api/v2/');
 const oauthApi = new OAuth(import.meta.env.VITE_BASE_API || '/api/v2/');
