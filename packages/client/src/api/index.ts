@@ -10,7 +10,7 @@ const assetsApi =
 
 const userApi = new UserApi(import.meta.env.VITE_BASE_API || '/api/v2/');
 const gameApi = new GameApi(assetsApi);
-const leaderApi = new LeaderApi(import.meta.env.VITE_BASE_API || '/');
+const leaderApi = new LeaderApi(import.meta.env.VITE_BASE_API || '/api/v2/');
 const oauthApi = new OAuth(import.meta.env.VITE_BASE_API || '/api/v2/');
 const forumTopicAPI = new ForumTopicApi('/api/v1/');
 const forumCommentAPI = new ForumCommentApi('/api/v1/');
