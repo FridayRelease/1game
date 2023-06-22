@@ -133,7 +133,7 @@ function useStart(canvasRef: RefObject<HTMLCanvasElement>): {
       waitScreen.comp.push(createPlayerProgressLayer(font, level));
       sceneRunner.addScene(waitScreen);
 
-      level.comp.push(createCollisionLayer(level));
+      // level.comp.push(createCollisionLayer(level));
       level.comp.push(createDashboardLayer(font, level));
       sceneRunner.addScene(level);
 
