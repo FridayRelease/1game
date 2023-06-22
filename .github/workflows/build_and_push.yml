@@ -42,7 +42,17 @@ jobs:
       - name: Build and push server image
         uses: docker/build-push-action@v4
         env:
-          VITE_BASE_API: ${{ vars.VITE_BASE_API }}
+          VITE_BASE_API: ${{ secrets.VITE_BASE_API }}
+          SERVER_PORT: 3001
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          POSTGRES_PORT: 5432
+          VITE_ASSETS_API: https://fr-vm-1game.ya-praktikum.tech/assets/
+          VITE_DEV_ASSETS_API: https://fr-vm-1game.ya-praktikum.tech/assets/public/
+          VITE_YANDEX_API: https://ya-praktikum.tech/api/v2/
+          VITE_OAUTH_REDIRECT_URI: https://fr-vm-1game.ya-praktikum.tech/verification_code
+          VITE_OAUTH_LOGIN_URL: https://oauth.yandex.ru/authorize
         with:
           context: .
           file: Dockerfile.server
