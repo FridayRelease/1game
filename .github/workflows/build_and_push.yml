@@ -1,14 +1,9 @@
 name: Push to GitHub Container Registry
 
-# on:
-#   pull_request:
-#     branches:
-#       - develop
-
 on:
   push:
     branches:
-      - feature/fr-83
+      - main
 
 jobs:
   build-and-push:
@@ -31,28 +26,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Build and push client image
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: .
-      #     file: Dockerfile.client
-      #     push: true
-      #     tags: ghcr.io/${{ env.OWNER_LC }}/${{ github.event.repository.name }}/client:${{ github.sha }}
-
       - name: Build and push server image
         uses: docker/build-push-action@v4
-        env:
-          VITE_BASE_API: ${{ secrets.VITE_BASE_API }}
-          SERVER_PORT: 3001
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-          POSTGRES_PORT: 5432
-          VITE_ASSETS_API: https://fr-vm-1game.ya-praktikum.tech/assets/
-          VITE_DEV_ASSETS_API: https://fr-vm-1game.ya-praktikum.tech/assets/public/
-          VITE_YANDEX_API: https://ya-praktikum.tech/api/v2/
-          VITE_OAUTH_REDIRECT_URI: https://fr-vm-1game.ya-praktikum.tech/verification_code
-          VITE_OAUTH_LOGIN_URL: https://oauth.yandex.ru/authorize
         with:
           context: .
           file: Dockerfile.server
